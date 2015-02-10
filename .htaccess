@@ -1,1 +1,1 @@
-RewriteRule ^news/(.+)$ /blog/$1 [QSA,L,NC]
+RewriteRule ^Slim-Website/news/(.+)$ /Slim-Website/blog/$1 [QSA,L,NC]
