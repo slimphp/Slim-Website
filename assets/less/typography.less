@@ -1,0 +1,40 @@
+.brandonLight{
+    font-family: "brandon-grotesque";
+    font-weight: 300;
+    font-style: normal;
+}
+.brandonBold{
+    font-family: "brandon-grotesque";
+    font-weight: 700;
+    font-style: normal;
+}
+
+html, body{
+    font-size: 16px;
+    line-height: @baseline;
+}
+
+h1, h2, h3, h4, h5{
+    .brandonLight;
+}
+
+a{
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+.divider{
+    border-top: 1px solid #CCC;
+    margin-bottom: 0;
+    margin-top: @baseline;
+    text-align: center;
+
+    span{
+        background: white;
+        display: inline-block;
+        padding: 0 @baseline;
+        position: relative;
+        top: -@baseline;
+    }
+}

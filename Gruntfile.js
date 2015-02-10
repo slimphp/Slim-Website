@@ -6,11 +6,14 @@ module.exports = function(grunt) {
         // Watch
         watch: {
             js: {
-                files: ['scripts/src/**/*.js'],
+                files: ['assets/scripts/src/**/*.js'],
                 tasks: ['concat', 'uglify']
             },
             less: {
-                files: ['less/**/*.less'],
+                files: [
+                    'assets/less/**/*.less',
+                    'assets/bootstrap/less/**/*.less'
+                ],
                 tasks: ['less']
             }
         },
@@ -24,7 +27,10 @@ module.exports = function(grunt) {
                     ieCompat: true
                 },
                 files: {
-                    "css/all.css": "less/all.less"
+                    "assets/css/all.css": [
+                        "assets/bootstrap/less/bootstrap.less",
+                        "assets/less/all.less"
+                    ]
                 }
             }
         },
@@ -33,7 +39,10 @@ module.exports = function(grunt) {
         concat: {
             production: {
                 files : {
-                    "scripts/build/production.js": "scripts/src/**/*.js"
+                    "assets/scripts/build/production.js": [
+                        "assets/scripts/src/**/*.js",
+                        "assets/bootstrap/js/**/*.js"
+                    ]
                 }
             }
         },
@@ -47,7 +56,7 @@ module.exports = function(grunt) {
                     drop_console: true
                 },
                 files: {
-                    "scripts/build/production.min.js": "scripts/build/production.js"
+                    "assets/scripts/build/production.min.js": "assets/scripts/build/production.js"
                 }
             }
         }

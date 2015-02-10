@@ -1,0 +1,27 @@
+{% include header.html %}
+
+{% include nav.html %}
+
+<article class="section note">
+    <header class="note-header">
+        <time class="note-publish-datetime">{{ page.date | date: "%b %d, %Y" }}</time>
+        <h1 class="note-title">{{ page.title }}</h1>
+    </header>
+
+    {{ content }}
+
+    <footer class="note-footer well">
+        <h3 class="share-title">Share with your friends!</h3>
+        <div class="share">
+            <a href="https://twitter.com/intent/tweet?text={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;via=slimphp" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}"><i class="fa fa-facebook-official" target="_blank"></i></a>
+            <a href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" target="_blank"><i class="fa fa-google-plus"></i></a>
+        </div>
+    </footer>
+</article>
+
+<div class="center">
+    <a class="btn btn-primary btn-lg" href="/blog">Return to Blog</a>
+</div>
+
+{% include footer.html %}
