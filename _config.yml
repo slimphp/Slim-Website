@@ -4,3 +4,5 @@ title: Slim Framework
 url: http://www.slimframework.com
 urlBasePath:
 include: [.htaccess]
+gems:
+  - jekyll-sitemap

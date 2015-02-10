@@ -1,5 +1,7 @@
 ---
 title: Moving Forward
+description: The next version of the Slim Framework will provide namespaces and PSR-2 compliance
+layout: post
 ---
 
 The next version of the Slim Framework will introduce PHP [namespaces](http://us3.php.net/manual/language.namespaces.php) and [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) compliance. Because this is a large departure from the past, I will tag this version “2.0” when it is released (soon).

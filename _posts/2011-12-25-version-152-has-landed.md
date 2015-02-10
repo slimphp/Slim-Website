@@ -1,5 +1,7 @@
 ---
 title: Version 1.5.2 has landed
+description: Version 1.5.2 of the Slim Framework has been released
+layout: post
 ---
 
 The Slim Framework v1.5.2 introduces a new architecture. Several other features have changed and improved. This is a large update and is currently considered beta. Use this version at your own risk. It will remain in the develop branch until users have had sufficient time to vet the new version with their applications.

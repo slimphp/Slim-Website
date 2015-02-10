@@ -1,5 +1,7 @@
 ---
 title: Slim Framework Moves to Pagoda Box
+description: The Slim Framework for PHP 5 website is now hosted by Pagoda Box, a scalable and flexible PHP PaaS
+layout: post
 ---
 
 The Slim Framework website is now hosted with [Pagoda Box](http://pagodabox.com/). I’m super excited about the move. If you haven’t heard already, Pagoda Box is a PHP PaaS that provides a very flexible and scalable architecture for your PHP applications.

@@ -1,5 +1,7 @@
 ---
 title: The Slim Framework Application Lifecycle
+description: Learn about the Slim Framework application life-cycle
+layout: post
 ---
 
 The essence of a web application is simple: it receives an HTTP request; it invokes the appropriate code; and it returns an HTTP response. The Slim Framework makes it dead simple to build and launch small web applications and APIs by hiding the prerequisite application underpinnings beneath a simple, easy-to-use interface. But for those interested in the low-level details, here’s what a Slim application’s lifecycle looks like from start to finish.

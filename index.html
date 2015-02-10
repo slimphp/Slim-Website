@@ -9,9 +9,9 @@ title: Slim Framework
             Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
         </p>
         <pre class="language-php"><code>&lt;?php
-$app = new \Slim\App();
-$app-&gt;get('/hello', function ($request, $response) {
-    echo 'Hello world!';
+$app = new \Slim\Slim();
+$app-&gt;get('/hello/:name', function ($name) {
+    echo "Hello, $name";
 });
 $app-&gt;run();</code></pre>
     </div>

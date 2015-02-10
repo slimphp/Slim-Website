@@ -4,17 +4,34 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-        <title>Slim Framework</title>
+        <title>{% if page %}{{ page.title }} - {% endif %}Slim Framework</title>
+        <meta name="description" content="{{ page.description|strip_html }}"/>
+        <meta name="robots" content="index, follow"/>
+        <meta property="og:title" content="{{ page.title }}"/>
+        <meta property="og:site_name" content="{{ site.title }}"/>
+        <meta property="og:url" content="{{ site.url }}{{ page.url }}"/>
+        <meta property="og:description" content="{{ page.description }}"/>
+        <meta property="og:type" content="website"/>
         <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-        <link rel="stylesheet" href="{{ site.urlBasePath }}/assets/css/all.css"/>
-        <link rel="shortcut icon" href="{{ site.urlBasePath }}/images/favicon.ico"/>
+        <link rel="stylesheet" href="/assets/css/all.css"/>
+        <link rel="shortcut icon" href="/images/favicon.ico"/>
         <script src="//use.typekit.net/yjz4fyo.js"></script>
         <script>try{Typekit.load();}catch(e){}</script>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-19430723-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
     </head>
     <body>
         <div class="wrapper">
             <div class="container-fluid">
                 <header class="site-header">
-                    <div class="site-title"><a href="{{ site.baseUrlPath }}/">Slim</a></div>
+                    <div class="site-title"><a href="/">Slim</a></div>
                     <div class="site-slogan">a micro framework for PHP</div>
                 </header>
