@@ -1,11 +1,11 @@
                 <footer class="site-footer">
-                    <a href="http://slimframework.com">Slim Framework</a> created and maintained by <a href="https://joshlockhart.com">Josh Lockhart</a>
+                    <a href="{{ site.url }}">{{ site.title }}</a> created and maintained by <a href="https://joshlockhart.com">Josh Lockhart</a>
                 </footer>
             </div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="/assets/scripts/build/production.min.js"></script>
+        <script src="{{ site.urlBasePath }}/assets/scripts/build/production.min.js"></script>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 </html>
