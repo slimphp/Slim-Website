@@ -34,7 +34,7 @@ Version 3, however, treats the request and response objects as _value objects_. 
 
 The HTTP request and response objects are _immutable_, too. You must use the appropriate `withStatus()`, `withHeader()`, `withBody()`, etc. request and response object methods to create and return a new request or response object with the specified changes. You can read more about the new interface in the PSR-7 documentation at <https://github.com/php-fig/fig-standards/blob/master/proposed/http-message.md>.
 
-This also makes it possible to use third-party middleware with the Slim Framework. For example, perhaps you find PSR-7 middleware designed for another framework. However, by virtual of using PSR-7 interfaces, that middleware is also compatible with Slim.
+This also makes it possible to use third-party middleware with the Slim Framework. For example, perhaps you find PSR-7 middleware designed for another framework. However, by virtue of using PSR-7 interfaces, that middleware is also compatible with Slim.
 
 Slim's PSR-7 changes may sound complicated, but they're actually pretty simple. I'll provide more in-depth information soon in the new documentation. You can read more about PSR-7 at:
 
@@ -82,3 +82,7 @@ This branch name change has not happened yet, but it will before the 3.0 release
 ### Road map
 
 I will soon establish a new Road Map on the project's GitHub wiki. I will announce this as soon as it is avialable.
+
+### Unit tests
+
+Currently, many unit tests in the `develop` branch are broken. I've been moving fast lately and breaking things (I mean, _it is_ the develop branch). These tests will be fixed soon.
