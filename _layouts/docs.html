@@ -9,16 +9,18 @@
         <div class="row">
             <div class="col-md-3">
                 {% for section in page.docs %}
-                <h3>{{ section.title }}</h3>
-                <ul>
-                    {% for item in section.items %}
-                    <li><a href="{{ item[0] | replace:'.md','.html' }}">{{ item[1] }}</a></li>
-                    {% endfor %}
-                </ul>
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ section.title }}</div>
+                    <div class="list-group">
+                        {% for item in section.items %}
+                        <a class="list-group-item" href="{{ item[0] | replace:'.md','.html' }}">{{ item[1] }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
                 {% endfor %}
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-8" style="padding-left: 2em">
                 <h1 class="page-header">{{ page.title }}</h1>
                 {{ content }}
             </div>
