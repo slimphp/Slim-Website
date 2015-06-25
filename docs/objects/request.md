@@ -4,78 +4,98 @@ title: Request
 
 A Request object encapsulates the HTTP request data derived from the Environment object. You use the Request object to inspect the current HTTP request's method, headers, and body. Typically, you are provided a PSR-7 Request object (e.g., in middleware or an application route).
 
-    <?php
-    $app = new \Slim\App;
-    $app->get('/foo', function ($request, $response) {
-        // Use the provided `$request` object
-    });
-    $app->run();
+{% highlight php %}
+<?php
+$app = new \Slim\App;
+$app->get('/foo', function ($request, $response) {
+    // Use the provided `$request` object
+});
+$app->run();
+{% endhighlight %}
 
 However, you can fetch a _new_ Request object from the application container like this:
 
-    $newRequest = $app->request;
+{% highlight php %}
+$newRequest = $app->request;
+{% endhighlight %}
 
 ## Request Method
 
 You can inspect the current HTTP request method with the Request object's `getMethod()` method. This returns a string value equal to `GET`, `POST`, `PUT`, `DELETE`, `HEAD`, `OPTIONS`, or `PATCH`.
 
-    $method = $request->getMethod();
+{% highlight php %}
+$method = $request->getMethod();
+{% endhighlight %}
 
 ### GET Method
 
 You can detect HTTP `GET` requests with the Request object's `isGet()` method.
 
-    if ($request->isGet()) {
-        // Do something
-    }
+{% highlight php %}
+if ($request->isGet()) {
+    // Do something
+}
+{% endhighlight %}
 
 ### POST Method
 
 You can detect HTTP `POST` requests with the Request object's `isPost()` method.
 
-    if ($request->isPost()) {
-        // Do something
-    }
+{% highlight php %}
+if ($request->isPost()) {
+    // Do something
+}
+{% endhighlight %}
 
 ### PUT Method
 
 You can detect HTTP `PUT` requests with the Request object's `isPut()` method.
 
-    if ($request->isPut()) {
-        // Do something
-    }
+{% highlight php %}
+if ($request->isPut()) {
+    // Do something
+}
+{% endhighlight %}
 
 ### DELETE Method
 
 You can detect HTTP `DELETE` requests with the Request object's `isDelete()` method.
 
-    if ($request->isDelete()) {
-        // Do something
-    }
+{% highlight php %}
+if ($request->isDelete()) {
+    // Do something
+}
+{% endhighlight %}
 
 ### HEAD Method
 
 You can detect HTTP `HEAD` requests with the Request object's `isHead()` method.
 
-    if ($request->isHead()) {
-        // Do something
-    }
+{% highlight php %}
+if ($request->isHead()) {
+    // Do something
+}
+{% endhighlight %}
 
 ### OPTIONS Method
 
 You can detect HTTP `OPTIONS` requests with the Request object's `isOptions()` method.
 
-    if ($request->isOptions()) {
-        // Do something
-    }
+{% highlight php %}
+if ($request->isOptions()) {
+    // Do something
+}
+{% endhighlight %}
 
 ### PATCH Method
 
 You can detect HTTP `PATCH` requests with the Request object's `isPatch()` method.
 
-    if ($request->isPatch()) {
-        // Do something
-    }
+{% highlight php %}
+if ($request->isPatch()) {
+    // Do something
+}
+{% endhighlight %}
 
 ### Method Override
 
@@ -85,36 +105,44 @@ There are two ways to override the HTTP request method. You can override the HTT
 
 Include a `_METHOD` parameter in a `POST` request body. You must use the `application/x-www-form-urlencoded` content type.
 
-    POST /path HTTP/1.1
-    Host: example.com
-    Content-type: application/x-www-form-urlencoded
-    Content-length: 22
+{% highlight text %}
+POST /path HTTP/1.1
+Host: example.com
+Content-type: application/x-www-form-urlencoded
+Content-length: 22
 
-    data=value&_METHOD=PUT
+data=value&_METHOD=PUT
+{% endhighlight %}
 
 #### With a header
 
 You may also include the `X-HTTP-Method-Override` header in the HTTP request. You can use any content type.
 
-    POST /path HTTP/1.1
-    Host: example.com
-    Content-type: application/json
-    Content-length: 16
-    X-HTTP-Method-Override: PUT
+{% highlight text %}
+POST /path HTTP/1.1
+Host: example.com
+Content-type: application/json
+Content-length: 16
+X-HTTP-Method-Override: PUT
 
-    {"data":"value"}
+{"data":"value"}
+{% endhighlight %}
 
 ## Request URL
 
 In accordance with the PSR-7 standard, you can inspect the Request URI by fetching the Uri instance from the Request object.
 
-    $uri = $request->getUri();
+{% highlight php %}
+$uri = $request->getUri();
+{% endhighlight %}
 
 ### Scheme
 
 You can fetch the HTTP request scheme (e.g., HTTP or HTTPS) with the Uri object's `getScheme()` method.
 
-    $scheme = $uri->getScheme();
+{% highlight php %}
+$scheme = $uri->getScheme();
+{% endhighlight %}
 
 ### Host
 

@@ -18,35 +18,41 @@ Different frameworks use middleware differently. Slim adds middleware as concent
 
 When you run the Slim application, the Request and Response objects traverse the middleware structure from the outside in. They first enter the outer-most middleware, then the next outer-most middleware, (and so on), until they ultimately arrive at the Slim application itself. After the Slim application dispatches the appropriate route, the resultant Response object exits the Slim application and traverses the middleware structure from the inside out. Ultimately, a final Response object exits the outer-most middleware, is serialized into a raw HTTP response, and is returned to the HTTP client. Here's a diagram that hopefully illustrates the middleware process flow:
 
-![Middleware flow](/images/middleware.png 'Middleware')
+<div style="padding: 2em 0; text-align: center">
+    <img src="/docs/images/middleware.png" alt="Middleware architecture" style="max-width: 80%;"/>
+</div>
 
 ## How do I write middleware?
 
 Middleware is a callable that accepts three arguments: a Request object, a Response object, and the next middleware. Each middleware **MUST** return an instance of `\Psr\Http\Message\ResponseInterface`. This example middleware is a Closure.
 
-    <?php
-    function ($request, $response, $next) {
+{% highlight php %}
+<?php
+function ($request, $response, $next) {
+    $response->write('BEFORE');
+    $response = $next($request, $response);
+    $response->write('AFTER');
+
+    return $response;
+};
+{% endhighlight %}
+
+This example middleware is an invokable class that implements the magic `__invoke()` method.
+
+{% highlight php %}
+<?php
+class ExampleMiddleware
+{
+    public function __invoke($request, $response, $next)
+    {
         $response->write('BEFORE');
         $response = $next($request, $response);
         $response->write('AFTER');
 
         return $response;
-    };
-
-This example middleware is an invokable class that implements the magic `__invoke()` method.
-
-    <?php
-    class ExampleMiddleware
-    {
-        public function __invoke($request, $response, $next)
-        {
-            $response->write('BEFORE');
-            $response = $next($request, $response);
-            $response->write('AFTER');
-
-            return $response;
-        }
     }
+}
+{% endhighlight %}
 
 ## How do I add middleware?
 
@@ -56,22 +62,24 @@ You may add middleware to a Slim application or to an individual Slim applicatio
 
 Application middleware is invoked for every HTTP request. Add application middleware with the Slim application instance's `add()` method. This example adds the Closure middleware example above:
 
-    <?php
-    $app = new \Slim\App();
+{% highlight php %}
+<?php
+$app = new \Slim\App();
 
-    $app->add(function ($request, $response, $next) {
-        $response->write('BEFORE');
-        $response = $next($request, $response);
-        $response->write('AFTER');
+$app->add(function ($request, $response, $next) {
+    $response->write('BEFORE');
+    $response = $next($request, $response);
+    $response->write('AFTER');
 
-        return $response;
-    });
+    return $response;
+});
 
-    $app->get('/', function ($req, $res, $args) {
-        echo ' Hello ';
-    });
+$app->get('/', function ($req, $res, $args) {
+    echo ' Hello ';
+});
 
-    $app->run();
+$app->run();
+{% endhighlight %}
 
 This would output this HTTP response body:
 
@@ -81,22 +89,24 @@ This would output this HTTP response body:
 
 Route middleware is invoked _only if_ its route matches the current HTTP request method and URI. Route middleware is specified immediately after you invoke any of the Slim application's routing methods (e.g., `get()` or `post()`). Each routing method returns an instance of `\Slim\Route`, and this class provides the same middleware interface as the Slim application instance. Add middleware to a Route with the Route instance's `add()` method. This example adds the Closure middleware example above:
 
-    <?php
-    $app = new \Slim\App();
+{% highlight php %}
+<?php
+$app = new \Slim\App();
 
-    $mw = function ($request, $response, $next) {
-        $response->write('BEFORE');
-        $response = $next($request, $response);
-        $response->write('AFTER');
+$mw = function ($request, $response, $next) {
+    $response->write('BEFORE');
+    $response = $next($request, $response);
+    $response->write('AFTER');
 
-        return $response;
-    });
+    return $response;
+});
 
-    $app->get('/', function ($req, $res, $args) {
-        echo ' Hello ';
-    })->add($mw);
+$app->get('/', function ($req, $res, $args) {
+    echo ' Hello ';
+})->add($mw);
 
-    $app->run();
+$app->run();
+{% endhighlight %}
 
 This would output this HTTP response body:
 
