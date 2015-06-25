@@ -1,9 +1,6 @@
 ---
-layout: default
 title: Response
 ---
-
-# The Response Object
 
 The Response object encapsulates the HTTP response returned by the Slim application. You use the Response object to set the HTTP response status, headers, and body that are ultimately returned to the HTTP client.
 

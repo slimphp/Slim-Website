@@ -1,9 +1,8 @@
 ---
-layout: default
 title: Dependency Injection
 ---
 
-# Container
+## Container
 
 Slim uses a dependency injection container to prepare, manage, and inject dependencies. Slim supports any container that implements the [Container-Interop](https://github.com/container-interop/container-interop) interface. You may use Slim's built-in container (based on [Pimple](http://pimple.sensiolabs.org/)), or you may use one of the many third-party Container-Interop containers like [Acclimate](https://github.com/jeremeamia/acclimate-container) or [PHP-DI](http://php-di.org/).
 
@@ -29,7 +28,7 @@ However, you can also implicitly fetch objects from the application container li
 
 Slim uses magic `__get()` and `__isset()` methods that delegate to the application container for all properties that do not already exist on the application instance.
 
-# Required services
+## Required services
 
 Your container MUST implement these required services. If you use Slim's built-in container, these are provided for you. If you choose a third-party container, you must define these required services on your own.
 

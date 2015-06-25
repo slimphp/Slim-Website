@@ -1,9 +1,6 @@
 ---
-layout: default
 title: Templates
 ---
-
-# Overview
 
 A Slim Framework application's view _is the HTTP response_. If you
 want to send content to the HTTP client, you must write the appropriate
@@ -48,7 +45,7 @@ $app->get('/user/{id:\d+}', function ($request, $response, $args) {
 });
 ```
 
-# Templates
+## Templates
 
 The Slim Framework does not provide a built-in templating system.
 Instead, you may generate output using third-party template-related tools most
@@ -61,21 +58,21 @@ Some great third-party tools for generating templated output include:
 * [league/plates](http://platesphp.com/)
 * [slim/twig-view](https://github.com/slimphp/Twig-View)
 
-## The slim/twig-view component
+### The slim/twig-view component
 
 The Slim Framework does provide an optional, standalone
 component named [slim/twig-view](https://github.com/slimphp/Twig-View). This
 standalone component is a Pimple service that provides a [Twig](http://twig.sensiolabs.org/)
 templating system for your Slim application.
 
-### Install with Composer
+#### Install with Composer
 
 First, install the [slim/twig-view](https://github.com/slimphp/Twig-View) component
 with Composer. Execute this bash command in your project's root directory.
 
     composer require slim/twig-view
 
-### Register the view service
+#### Register the view service
 
 The `slim/twig-view` component must be registerd with the Slim application
 _before_ you invoke your application's `run()` method.
@@ -103,7 +100,7 @@ or absolute path to the filesystem directory that contains your
 Twig templates. The constructor's second argument is an associative
 array of [Twig environment settings](http://twig.sensiolabs.org/doc/api.html#environment-options).
 
-### Use the view service
+#### Use the view service
 
 After you register the `slim/twig-view` component, you can access the view
 anywhere in your Slim application with `$app['view']`. This

@@ -1,9 +1,6 @@
 ---
-layout: default
 title: Router
 ---
-
-# The Router Object
 
 The Slim Framework's router is built on top of the [nikic/fastroute](https://github.com/nikic/FastRoute) component, and it is remarkably fast and stable. 
 

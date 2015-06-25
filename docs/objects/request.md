@@ -1,9 +1,6 @@
 ---
-layout: default
 title: Request
 ---
-
-# The Request Object
 
 A Request object encapsulates the HTTP request data derived from the Environment object. You use the Request object to inspect the current HTTP request's method, headers, and body. Typically, you are provided a PSR-7 Request object (e.g., in middleware or an application route).
 

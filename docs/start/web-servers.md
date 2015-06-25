@@ -1,9 +1,8 @@
 ---
-layout: default
 title: Web Servers
 ---
 
-# Apache configuration
+## Apache configuration
 
 Ensure the `.htaccess` and `index.php` files are in the same public-accessible directory. The `.htaccess` file
 should contain this code:
@@ -17,7 +16,7 @@ Additionally, make sure your virtual host is configured with the `AllowOverride`
 
     AllowOverride All
 
-# Nginx configuration
+## Nginx configuration
 
 The nginx configuration file should contain this code (along with other settings you may need) in your `location` block:
 
@@ -25,7 +24,7 @@ The nginx configuration file should contain this code (along with other settings
 
 This assumes that Slim's `index.php` is in the root folder of your project (www root).
 
-# HipHop Virtual Machine
+## HipHop Virtual Machine
 
 Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the `SourceRoot` setting to point to your Slim app's document root directory.
 
@@ -50,7 +49,7 @@ Your HipHop Virtual Machine configuration file should contain this code (along w
         }
     }
 
-# IIS
+## IIS
 
 Ensure the `Web.config` and `index.php` files are in the same public-accessible directory. The `Web.config` file should contain this code:
 
@@ -74,7 +73,7 @@ Ensure the `Web.config` and `index.php` files are in the same public-accessible 
 </configuration>
 ```
 
-# lighttpd
+## lighttpd
 
 Your lighttpd configuration file should contain this code (along with other settings you may need). This code requires lighttpd >= 1.4.24.
 

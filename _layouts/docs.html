@@ -1,11 +1,29 @@
 {% include header.html %}
-<div class="wrapper">
+<div class="wrapper" style="width: 80%">
     <div class="container-fluid">
         <header class="site-header">
             <div class="site-title"><a href="/">Slim</a></div>
             <div class="site-slogan">a micro framework for PHP</div>
         </header>
-        {{ content }}
+
+        <div class="row">
+            <div class="col-md-3">
+                {% for section in page.docs %}
+                <h3>{{ section.title }}</h3>
+                <ul>
+                    {% for item in section.items %}
+                    <li><a href="{{ item[0] | replace:'.md','.html' }}">{{ item[1] }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-9">
+                <h1 class="page-header">{{ page.title }}</h1>
+                {{ content }}
+            </div>
+        </div>
+
         <footer class="site-footer">
             <p>
                 Created by <a href="http://joshlockhart.com">Josh Lockhart</a>
