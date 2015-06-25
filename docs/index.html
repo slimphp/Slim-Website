@@ -1,0 +1,50 @@
+---
+layout: default
+title: Documentation
+toc:
+  - title: Get Started
+    items:
+      - [/docs/start/installation.md, Installation]
+      - [/docs/start/web-servers.md, Web Servers]
+  - title: Concepts
+    items:
+      - [/docs/concepts/objects.md, Objects]
+      - [/docs/concepts/di.md, Dependency Injection]
+      - [/docs/concepts/middleware.md, Middleware]
+      - [/docs/concepts/value-objects.md, PSR-7]
+  - title: Objects
+    items:
+      - [/docs/objects/request.md, Request]
+      - [/docs/objects/response.md, Response]
+      - [/docs/objects/router.md, Router]
+      - [/docs/objects/environment.md, Environment]
+  - title: Features
+    items:
+      - [/docs/features/templates.md, Templates]
+      - [/docs/features/caching.md, Caching]
+  - title: Error Handling
+    items:
+      - [/docs/handlers/error.md, 500 Server Error]
+      - [/docs/handlers/not-found.md, 404 Not Found]
+      - [/docs/handlers/not-allowed.md, 405 Not Allowed]
+  - title: Contributing
+    items:
+      - [docs/contributors/strategy.md, Branching Strategy]
+---
+
+{% include nav.html %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Documentation</h1>
+
+        {% for section in page.toc %}
+        <h3>{{ section.title }}</h3>
+        <ul>
+            {% for item in section.items %}
+            <li><a href="{{ item[0] | replace:'.md','.html' }}">{{ item[1] }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+</div>
