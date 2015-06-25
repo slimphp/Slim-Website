@@ -1,27 +1,46 @@
 {% include header.html %}
 
-{% include nav.html %}
+<div class="wrapper">
+    <div class="container-fluid">
+        <article class="section note">
+            <header class="note-header">
+                <time class="note-publish-datetime">{{ page.date | date: "%b %d, %Y" }}</time>
+                <h1 class="note-title">{{ page.title }}</h1>
+            </header>
 
-<article class="section note">
-    <header class="note-header">
-        <time class="note-publish-datetime">{{ page.date | date: "%b %d, %Y" }}</time>
-        <h1 class="note-title">{{ page.title }}</h1>
-    </header>
+            {{ content }}
 
-    {{ content }}
+            <footer class="note-footer well">
+                <h3 class="share-title">Share with your friends!</h3>
+                <div class="share">
+                    <a href="https://twitter.com/intent/tweet?text={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;via=slimphp" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}"><i class="fa fa-facebook-official" target="_blank"></i></a>
+                    <a href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" target="_blank"><i class="fa fa-google-plus"></i></a>
+                </div>
+            </footer>
+        </article>
 
-    <footer class="note-footer well">
-        <h3 class="share-title">Share with your friends!</h3>
-        <div class="share">
-            <a href="https://twitter.com/intent/tweet?text={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;via=slimphp" target="_blank"><i class="fa fa-twitter"></i></a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}"><i class="fa fa-facebook-official" target="_blank"></i></a>
-            <a href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" target="_blank"><i class="fa fa-google-plus"></i></a>
+        <div class="center">
+            <a class="btn btn-primary btn-lg" href="/blog">Return to Blog</a>
         </div>
-    </footer>
-</article>
 
-<div class="center">
-    <a class="btn btn-primary btn-lg" href="/blog">Return to Blog</a>
+        <footer class="site-footer">
+            <p>
+                Created by <a href="http://joshlockhart.com">Josh Lockhart</a>
+            </p>
+            <p>
+                Maintained by <a href="http://joshlockhart.com">Josh Lockhart</a>,
+                <a href="http://www.silentworks.co.uk">Andrew Smith</a>,
+                and <a href="https://github.com/codeguy/Slim/graphs/contributors">contributors</a>
+            </p>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin: 0; padding-top: 20px">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="9YRVXHRZT6H3L">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+        </footer>
+    </div>
 </div>
 
 {% include footer.html %}

@@ -14,7 +14,7 @@
         <meta property="og:type" content="website"/>
         <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
         <link rel="stylesheet" href="/assets/css/all.css"/>
-        <link rel="shortcut icon" href="/assets/images/logo-256.png"/>
+        <link rel="shortcut icon" href="/assets/images/logo-small.png"/>
         <script src="//use.typekit.net/yjz4fyo.js"></script>
         <script>try{Typekit.load();}catch(e){}</script>
         <script>
@@ -28,4 +28,28 @@
             })();
         </script>
     </head>
-    <body>
+    <body style="padding-top: 5em">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="/assets/images/logo-small.png" height="20px" alt="Slim"/></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li{% if page.url contains "/blog" %} class="active"{% endif %}><a href="/blog">Blog</a></li>
+                        <li><a href="http://docs.slimframework.com/" target="_blank">User Guide</a></li>
+                        <li><a href="http://help.slimframework.com/" target="_blank">Support</a></li>
+                        <li{% if page.url contains "/contribute" %} class="active"{% endif %}><a href="/contribute">Contribute</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
