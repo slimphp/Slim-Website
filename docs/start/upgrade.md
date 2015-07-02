@@ -2,6 +2,10 @@
 title: Upgrade Guide
 ---
 
+If you are upgrading from version 2 to version 3, these are the signifcant changes tha
+you need to be aware of.
+
+
 # Removal of Stop/Halt
 Slim Core has removed Stop/Halt. 
 In your applications, you should transition to using the withStatusCode() and withBody()
