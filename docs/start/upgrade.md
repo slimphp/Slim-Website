@@ -8,7 +8,7 @@ you need to be aware of.
 
 # Removal of Stop/Halt
 Slim Core has removed Stop/Halt.
-In your applications, you should transition to using the withStatusCode() and withBody()
+In your applications, you should transition to using the withStatus() and withBody()
 
 Example In Slim 2.x:
 
