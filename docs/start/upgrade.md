@@ -11,10 +11,13 @@ Slim Core has removed Stop/Halt.
 In your applications, you should transition to using the withStatusCode() and withBody()
 
 Example In Slim 2.x:
+
 ```php
 $app->get(‘/’, function () {  $app->halt(400, ‘Bad Request’); });
 ```
+
 And now in Slim 3.x:
+
 ```php
 $app->get(‘/’, function ($req, $res, $args) { return $res->withStatus(400)->withBody(“Bad Request”); });
 ```
@@ -30,6 +33,7 @@ In Slim v2.x one would use the helper function $app->redirect(); to trigger a re
 In Slim v3.x one can do the same with using the Response class like so.
 
 Example:
+
 ```php
 $app->get(‘/’, function ($req, $res, $args) {
     return $res->withStatus(301)->withHeader(“Location”, “yournewuri”);
@@ -60,6 +64,7 @@ Slim v3.0 requires php 5.4+
 
 # Route Callbacks
 In v3.0 we have adopted a new callback signature
+
 ```php
 $app->get('/', function (\Psr\Http\Message\ServerRequestInterface $request,
 \Psr\Http\Message\ResponseInterface $response, $args) {
@@ -73,4 +78,7 @@ Slim now utilizes a new more powerful router ( https://github.com/nikic/FastRout
 # Route Middleware
 The syntax for adding route middleware has changed slightly.
 In v3.0:
-```php $app->get(…)->add($mw2)->add($mw1); ```
+
+```php
+php $app->get(…)->add($mw2)->add($mw1);
+```
