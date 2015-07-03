@@ -91,3 +91,6 @@ In v3.0:
 {% highlight php %}
 php $app->get(…)->add($mw2)->add($mw1);
 {% endhighlight %}
+
+# HTTP Caching
+In Slim v3 we have removed the HTTP-Caching into its own module Slim\Http\Cache ( https://github.com/slimphp/Slim-HttpCache )
