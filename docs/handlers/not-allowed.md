@@ -12,7 +12,7 @@ Each Slim Framework application has a default Not Allowed handler. This handler 
 
 A Slim Framework application's Not Allowed handler is a Pimple service. You can substitute your own Not Allowed handler by defining a custom Pimple factory method with the application container.
 
-```php
+{% highlight php %}
 // Create Slim
 $app = new \Slim\App();
 // get the app's di-container
@@ -25,7 +25,8 @@ $c['notAllowedHandler'] = function ($c) {
             ->withHeader('Content-type', 'text/html')
             ->write('Method must be one of: ' . implode(', ', $methods));
 };
-```
+{% endhighlight %}
+
 > **N.B** Check out [Not Found](/docs/handlers/not-found.html) docs for pre-slim creation method using a new instance of `\Slim\Container`
 
 In this example, we define a new `notAllowedHandler` factory that returns a callable. The returned callable accepts three arguments:
