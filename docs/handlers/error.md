@@ -17,7 +17,8 @@ A Slim Framework application's error handler is a Pimple service. You can substi
 There are two ways to inject handlers
 
 ### Pre App
-```php
+
+{% highlight php %}
 $c = new \Slim\Container();
 $c['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
@@ -27,10 +28,11 @@ $c['errorHandler'] = function ($c) {
     };
 };
 $app = new \Slim\App($c);
-```
+{% endhighlight %}
 
 ### Post App
-```php
+
+{% highlight php %}
 $app = new \Slim\App();
 $c = $app->getContainer();
 $c['errorHandler'] = function ($c) {
@@ -40,7 +42,8 @@ $c['errorHandler'] = function ($c) {
                              ->write('Something went wrong!');
     };
 };
-```
+{% endhighlight %}
+
 In this example, we define a new `errorHandler` factory that returns a callable. The returned callable accepts three arguments:
 
 1. A `\Psr\Http\Message\RequestInterface` instance
