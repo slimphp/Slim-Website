@@ -148,35 +148,47 @@ $scheme = $uri->getScheme();
 
 You can fetch the HTTP request's host (e.g., example.com) with the Uri object's `getHost()` method.
 
-    $host = $uri->getHost();
+{% highlight php %}
+$host = $uri->getHost();
+{% endhighlight %}
 
 ### Port
 
 You can fetch the HTTP request's port number (e.g., 443) with the Uri object's `getPort()` method.
 
-    $port = $uri->getPort();
+{% highlight php %}
+$port = $uri->getPort();
+{% endhighlight %}
 
 ### URL Path
 
 You can fetch the HTTP request's path (relative to the physical directory in which your Slim application is installed) with the Uri object's `getPath()` method. This method returns a string that is matched against your Slim application routes.
 
-    $path = $uri->getPath();
+{% highlight php %}
+$path = $uri->getPath();
+{% endhighlight %}
 
 ### URL Base Path
 
 You can fetch the HTTP request's physical base path (relative to the document root) with the Uri object's `getBasePath()` method. This will be an empty string unless the Slim application is installed in a physical subdirectory beneath your document root.
 
-    $basePath = $uri->getBasePath();
+{% highlight php %}
+$basePath = $uri->getBasePath();
+{% endhighlight %}
 
 ### Query String
 
 You can fetch the HTTP request's raw query string (without the leading "?") with the Uri object's `getQuery()` method. This method returns an empty string if no query string is present in the current HTTP request.
 
-    $queryString = $uri->getQuery();
+{% highlight php %}
+$queryString = $uri->getQuery();
+{% endhighlight %}
 
 You may also fetch an associative array of query string parameters with the Request object's `getQueryParams()` method. This method returns an empty array if no query string is present.
 
-    $queryParams = $request->getQueryParams();
+{% highlight php %}
+$queryParams = $request->getQueryParams();
+{% endhighlight %}
 
 ## Request Headers
 
@@ -186,28 +198,36 @@ You can inspect the current HTTP request's headers with numerous methods on the 
 
 You can fetch an associative array of all headers with the Request object's `getHeaders()` method. The result is an associative array whose keys are header names and whose values are themselves an array of string values for their respective header name.
 
-    $headers = $request->getHeaders();
-    foreach ($headers as $name => $values) {
-        echo $name . ": " . implode(", ", $values);
-    }
+{% highlight php %}
+$headers = $request->getHeaders();
+foreach ($headers as $name => $values) {
+    echo $name . ": " . implode(", ", $values);
+}
+{% endhighlight %}
 
 ### Detect Header
 
 You can test for the presence of a header with the Request object's `hasHeader($name)` method.
 
-    if ($request->hasHeader('Accept')) {
-        // Do something
-    }
+{% highlight php %}
+if ($request->hasHeader('Accept')) {
+    // Do something
+}
+{% endhighlight %}
 
 ### Fetch Single Header
 
 You can fetch a single header's value(s) with the Request object's `getHeader($name)` method. This returns an array of strings for the given header name.
 
-    $headerValues = $request->getHeader('Accept');
+{% highlight php %}
+$headerValues = $request->getHeader('Accept');
+{% endhighlight %}
 
 You may also fetch a comma-concatenation of a given header's value(s) with the Request object's `getHeaderLine($name)` method. Unlike the `getHeader($name)` method that returns an array, this method returns a string and concatenates multiple header values into a single string separated by commas.
 
-    $headerValueString = $request->getHeaderLine('Accept');
+{% highlight php %}
+$headerValueString = $request->getHeaderLine('Accept');
+{% endhighlight %}
 
 ## Request Cookies
 
@@ -237,40 +257,54 @@ The Request object provides additional methods to inspect the HTTP request metad
 
 You can detect AJAX/XHR requests with the Request object's `isAjax()` and `isXhr()` methods. Both methods do the same thing, so choose only one. These methods detect the presence of the `X-Requested-With` HTTP request header and ensure its value is `XMLHttpRequest`. These methods also return `true` if the `isajax` parameter is provided in the HTTP request query string or body.
 
-    if ($request->isAjax()) {
-        // Do something
-    }
+{% highlight php %}
+if ($request->isAjax()) {
+    // Do something
+}
+{% endhighlight %}
 
 ### Content Type
 
 You can fetch the HTTP request content type with the Request object's `getContentType()` method. This returns the `Content-Type` header's full value as provided by the HTTP client.
 
-    $contentType = $request->getContentType();
+{% highlight php %}
+$contentType = $request->getContentType();
+{% endhighlight %}
 
 ### Media Type
 
 You may not want the complete `Content-Type` header. What if, instead, you only want the media type? You can fetch the HTTP request media type with the Request object's `getMediaType()` method.
 
-    $mediaType = $request->getMediaType();
+{% highlight php %}
+$mediaType = $request->getMediaType();
+{% endhighlight %}
 
 You can fetch the appended media type parameters as an associative array with the Request object's `getMediaTypeParams()` method.
 
-    $mediaParams = $request->getMediaTypeParams();
+{% highlight php %}
+$mediaParams = $request->getMediaTypeParams();
+{% endhighlight %}
 
 ### Character Set
 
 One of the most common media type parameters is the HTTP request character set. The Request object provides a dedicated method to retrieve this media type parameter.
 
-    $charset = $request->getContentCharset();
+{% highlight php %}
+$charset = $request->getContentCharset();
+{% endhighlight %}
 
 ### Content Length
 
 You can fetch the HTTP request content length with the Request object's `getContentLength()` method.
 
-    $length = $request->getContentLength();
+{% highlight php %}
+$length = $request->getContentLength();
+{% endhighlight %}
 
 ### IP Address
 
 You can fetch the HTTP request's source IP address with the Request object's `getIp()` method. This method respects the `X-Forwarded-For` header if present.
 
-    $ip = $request->getIp();
+{% highlight php %}
+$ip = $request->getIp();
+{% endhighlight %}
