@@ -10,21 +10,27 @@ Slim uses a dependency injection container to prepare, manage, and inject depend
 
 You must inject the container instance into the Slim application constructor.
 
-    $app = new \Slim\App(new \Slim\Container);
+{% highlight php %}
+$app = new \Slim\App(new \Slim\Container);
+{% endhighlight %}
 
 Afterwards, you can fetch objects from your container explicitly or implicitly.
 You can fetch an explicit reference to the container instance from within a Slim application route like this:
 
-    $app->get('/foo', function ($req, $res, $args) {
-        $container = $this->getContainer();
-        $foo = $container->get('foo');
-    });
+{% highlight php %}
+$app->get('/foo', function ($req, $res, $args) {
+    $container = $this->getContainer();
+    $foo = $container->get('foo');
+});
+{% endhighlight %}
 
 However, you can also implicitly fetch objects from the application container like this:
 
-    $app->get('/foo', function ($req, $res, $args) {
-        $foo = $this->foo;
-    });
+{% highlight php %}
+$app->get('/foo', function ($req, $res, $args) {
+    $foo = $this->foo;
+});
+{% endhighlight %}
 
 Slim uses magic `__get()` and `__isset()` methods that delegate to the application container for all properties that do not already exist on the application instance.
 

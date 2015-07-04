@@ -6,8 +6,7 @@ In version 3 of Slim the HTTP Caching function has been moved out of core into i
 
 You can get it by this composer magic.
 
-`composer require slim/http-cache`
-
+    composer require slim/slim
 
 #Usage
 

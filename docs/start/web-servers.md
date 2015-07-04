@@ -53,7 +53,7 @@ Your HipHop Virtual Machine configuration file should contain this code (along w
 
 Ensure the `Web.config` and `index.php` files are in the same public-accessible directory. The `Web.config` file should contain this code:
 
-```xml
+{% highlight xml %}
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <system.webServer>
@@ -71,7 +71,7 @@ Ensure the `Web.config` and `index.php` files are in the same public-accessible 
         </rewrite>
     </system.webServer>
 </configuration>
-```
+{% endhighlight %}
 
 ## lighttpd
 
