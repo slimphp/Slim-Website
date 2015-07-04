@@ -71,4 +71,4 @@ $env = \Slim\Environment::mock([
     'CONTENT_TYPE' => 'application/json;charset=utf8',
     'CONTENT_LENGTH' => 15
 ]);
-{% endhilight %}
+{% endhighlight %}
