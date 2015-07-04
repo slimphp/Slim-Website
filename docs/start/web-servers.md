@@ -7,20 +7,26 @@ title: Web Servers
 Ensure the `.htaccess` and `index.php` files are in the same public-accessible directory. The `.htaccess` file
 should contain this code:
 
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^ index.php [QSA,L]
+{% highlight text %}
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+{% endhighlight %}
 
 Additionally, make sure your virtual host is configured with the `AllowOverride` option so that the `.htaccess` rewrite rules can be used:
 
-    AllowOverride All
+{% highlight text %}
+AllowOverride All
+{% endhighlight %}
 
 ## Nginx configuration
 
 The nginx configuration file should contain this code (along with other settings you may need) in your `location` block:
 
-    try_files $uri $uri/ /index.php?$args;
+{% highlight text %}
+try_files $uri $uri/ /index.php?$args;
+{% endhighlight %}
 
 This assumes that Slim's `index.php` is in the root folder of your project (www root).
 
@@ -28,26 +34,28 @@ This assumes that Slim's `index.php` is in the root folder of your project (www 
 
 Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the `SourceRoot` setting to point to your Slim app's document root directory.
 
-    Server {
-        SourceRoot = /path/to/public/directory
-    }
+{% highlight text %}
+Server {
+    SourceRoot = /path/to/public/directory
+}
 
-    ServerVariables {
-        SCRIPT_NAME = /index.php
-    }
+ServerVariables {
+    SCRIPT_NAME = /index.php
+}
 
-    VirtualHost {
-        * {
-            Pattern = .*
-            RewriteRules {
-                    * {
-                            pattern = ^(.*)$
-                            to = index.php/$1
-                            qsa = true
-                    }
-            }
+VirtualHost {
+    * {
+        Pattern = .*
+        RewriteRules {
+                * {
+                        pattern = ^(.*)$
+                        to = index.php/$1
+                        qsa = true
+                }
         }
     }
+}
+{% endhighlight %}
 
 ## IIS
 
@@ -77,6 +85,8 @@ Ensure the `Web.config` and `index.php` files are in the same public-accessible 
 
 Your lighttpd configuration file should contain this code (along with other settings you may need). This code requires lighttpd >= 1.4.24.
 
-    url.rewrite-if-not-file = ("(.*)" => "/index.php/$0")
+{% highlight text %}
+url.rewrite-if-not-file = ("(.*)" => "/index.php/$0")
+{% endhighlight %}
 
 This assumes that Slim's `index.php` is in the root folder of your project (www root).
