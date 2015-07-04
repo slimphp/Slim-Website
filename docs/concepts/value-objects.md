@@ -20,11 +20,11 @@ Value objects have a small inherent overhead becaue they must be cloned when the
 
 You cannot modify a value object. You can, however, request a copy of a value object that contains your desired changes. Slim's Request and Response objects implement the PSR-7 message interfaces. These interfaces provide methods that have the `with` prefix, and you can invoke these methods to _clone_ value objects and apply updated properties. For example, the Response object has a `withHeader($name, $value)` method that returns a cloned value object with a new HTTP header.
 
-```php
+{% highlight php %}
 $newResponse = $oldResponse->withHeader(
     'Content-Type',
     'application/json'
 );
-```
+{% endhighlight %}
 
 Refer to the [PSR-7 documentation](http://www.php-fig.org/psr/psr-7/) for more information about these methods.

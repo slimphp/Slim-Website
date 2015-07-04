@@ -15,16 +15,20 @@ The preferred installation method is [Composer](https://getcomposer.org/). Navig
 
 Next, require the Composer autoloader into your PHP script.
 
-    <?php
-    require 'vendor/autoload.php';
+{% highlight php %}
+<?php
+require 'vendor/autoload.php';
+{% endhighlight %}
 
 ## Install Manually
 
 You can install the Slim Framework without Composer. Download the Slim Framework files into your project directory. Next, require the `Slim/Autoloader.php` file into your PHP script and invoke its static `register()` method.
 
-    <?php
-    require 'Slim/Autoloader.php';
-    \Slim\Autoloader::register();
+{% highlight php %}
+<?php
+require 'Slim/Autoloader.php';
+\Slim\Autoloader::register();
+{% endhighlight %}
 
 If you install Slim manually, you are responsible for installing and autoloading these third-party dependencies:
 

@@ -16,12 +16,12 @@ application's `get()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->get('/books/{id}', function ($request, $response, $args) {
     // Show book identified by $args['id']
 });
-```
+{% endhighlight %}
 
 ### POST Route
 
@@ -31,12 +31,12 @@ application's `post()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->post('/books', function ($request, $response, $args) {
     // Create new book
 });
-```
+{% endhighlight %}
 
 ### PUT Route
 
@@ -46,12 +46,12 @@ application's `put()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->put('/books/{id}', function ($request, $response, $args) {
     // Update book identified by $args['id']
 });
-```
+{% endhighlight %}
 
 ### DELETE Route
 
@@ -61,12 +61,12 @@ application's `delete()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->delete('/books/{id}', function ($request, $response, $args) {
     // Delete book identified by $args['id']
 });
-```
+{% endhighlight %}
 
 ### OPTIONS Route
 
@@ -76,12 +76,12 @@ application's `options()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->options('/books/{id}', function ($request, $response, $args) {
     // Return response headers
 });
-```
+{% endhighlight %}
 
 ### PATCH Route
 
@@ -91,12 +91,12 @@ application's `patch()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->patch('/books/{id}', function ($request, $response, $args) {
     // Apply changes to book identified by $args['id']
 });
-```
+{% endhighlight %}
 
 ### Custom Route
 
@@ -106,12 +106,12 @@ You can add a route that handles multiple HTTP request methods with the Slim app
 2. The route pattern (with optional named placeholders)
 3. The route callback
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->map(['GET', 'POST'], '/books', function ($request, $response, $args) {
     // Create new book or list all books
 });
-```
+{% endhighlight %}
 
 ## Route callbacks
 
@@ -132,7 +132,7 @@ There are two ways you can write content to the HTTP response. First, you can si
 
 If you use a `Closure` instance as the route callback, the closure's state is bound to the `\Slim\App` instance. This means you can access the `\Slim\App` object from inside the route callback with `$this`. Becaues the `\Slim\App` is itself an instance of `\Pimple\Container`, you can quickly access any registered Pimple services from inside the Closure callback like this:
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->get('/hello/{name}', function ($request, $response, $args) {
     // Use app HTTP cookie service
@@ -141,7 +141,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
         'expires' => '7 days'
     ]);
 });
-```
+{% endhighlight %}
 
 ## Route placeholders
 
@@ -151,44 +151,44 @@ Each routing method described above accepts a URL pattern that is matched agains
 
 A route pattern placeholder starts with a `{`, followed by the placeholder name, ending with a `}`. This is an example placeholder named `name`:
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->get('/hello/{name}', function ($request, $response, $args) {
     echo "Hello, " . $args['name'];
 });
-```
+{% endhighlight %}
 
 ### Regular expression matching
 
 By default the place holders are written inside `{}` and can accept any
 values. However, placeholders can also require the HTTP request URI to match a particular regular expression. If the current HTTP request URI does not match a placeholder regular expression, the route is not invoked. This is an example placeholder named `id` that requires a digit.
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->get('/users/{id:[0-9]+}', function ($request, $response, $args) {
     // Find user identified by $args['id']
 });
-```
+{% endhighlight %}
 
 ## Route names
 
 Application route's can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the router's `urlFor()` method. Each routing method described above returns a `\Slim\Route` object, and this object exposes a `setName()` method.
 
-```php
+{% highlight php %}
 $app = new \Slim\App();
 $app->get('/hello/{name}', function ($request, $response, $args) {
     echo "Hello, " . $args['name'];
 })->setName('hello');
-```
+{% endhighlight %}
 
 You can generate a URL for this named route with the application router's `urlFor()`  method.
 
-```php
+{% highlight php %}
 echo $app['router']->urlFor('hello', [
     'name' => 'Josh'
 ]);
 // Outputs "/hello/Josh"
-```
+{% endhighlight %}
 
 The router's `urlFor()` method accepts two arguments:
 
