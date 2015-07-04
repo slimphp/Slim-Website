@@ -14,15 +14,35 @@ This is _probably_ not appropriate for production applications. You are strongly
 
 A Slim Framework application's error handler is a Pimple service. You can substitute your own error handler by defining a custom Pimple factory method with the application container.
 
-```php
-$app['errorHandler'] = function ($c) {
+There are two ways to inject handlers
+
+### Pre App
+
+{% highlight php %}
+$c = new \Slim\Container();
+$c['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
         return $c['response']->withStatus(500)
                              ->withHeader('Content-Type', 'text/html')
                              ->write('Something went wrong!');
     };
 };
-```
+$app = new \Slim\App($c);
+{% endhighlight %}
+
+### Post App
+
+{% highlight php %}
+$app = new \Slim\App();
+$c = $app->getContainer();
+$c['errorHandler'] = function ($c) {
+    return function ($request, $response, $exception) use ($c) {
+        return $c['response']->withStatus(500)
+                             ->withHeader('Content-Type', 'text/html')
+                             ->write('Something went wrong!');
+    };
+};
+{% endhighlight %}
 
 In this example, we define a new `errorHandler` factory that returns a callable. The returned callable accepts three arguments:
 
