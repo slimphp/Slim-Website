@@ -15,7 +15,7 @@ You can write directly to the Slim application's Response object
 using the Response object's `write()` method. This is an example
 scenario inside a Slim application route:
 
-```php
+{% highlight php %}
 $app->get('/user/{id:\d+}', function ($request, $response, $args) {
     $response->write(sprintf(
         'You are viewing user with ID: %s',
@@ -24,7 +24,7 @@ $app->get('/user/{id:\d+}', function ($request, $response, $args) {
 
     return $response;
 });
-```
+{% endhighlight %}
 
 We write a message directly to the Response object, and we return the
 response object from the route callback routine when ready.
@@ -36,14 +36,14 @@ by the current output buffer will be appended to the Response
 object's body after the route callback routine completes. This example
 demonstrates this scenario inside a Slim application route:
 
-```php
+{% highlight php %}
 $app->get('/user/{id:\d+}', function ($request, $response, $args) {
     echo sprintf(
         'You are viewing user with ID: %s',
         $args['id']
     );
 });
-```
+{% endhighlight %}
 
 ## Templates
 
@@ -77,7 +77,7 @@ with Composer. Execute this bash command in your project's root directory.
 The `slim/twig-view` component must be registerd with the Slim application
 _before_ you invoke your application's `run()` method.
 
-```php
+{% highlight php %}
 // Create Slim app
 $app = new \Slim\App();
 
@@ -93,7 +93,7 @@ $container->register(new \Slim\Views\Twig('path/to/templates', [
 
 // Run app
 $app->run();
-```
+{% endhighlight %}
 
 The `\Slim\Views\Twig` constructor's first argument is the relative
 or absolute path to the filesystem directory that contains your
@@ -107,7 +107,7 @@ anywhere in your Slim application with `$app['view']`. This
 example demonstrates how to render a template with the Twig View
 service.
 
-```php
+{% highlight php %}
 // Create Slim app
 $app = new \Slim\App();
 
@@ -128,7 +128,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 
 // Run app
 $app->run();
-```
+{% endhighlight %}
 
 ### The url_for() method
 
@@ -144,7 +144,7 @@ The second argument's keys should correspond to the selected route's pattern
 placeholders. This is an example Twig template that draws a link URL
 for the "profile" named route shown in the example Slim application above.
 
-```
+{% highlight liquid %}
 {% raw %}
 {% extends "layout.html" %}
 
@@ -155,4 +155,4 @@ for the "profile" named route shown in the example Slim application above.
 </ul>
 {% endblock %}
 {% endraw %}
-```
+{% endhighlight %}
