@@ -12,13 +12,17 @@ Whereever you are within a Slim application (e.g. a middleware layer, a route ca
 
 The Response object has a numeric HTTP status code. The default status code is `200`. You can fetch the status code with the Response object's `getStatusCode()` method.
 
-    <?php
-    $status = $response->getStatusCode();
+{% highlight php %}
+<?php
+$status = $response->getStatusCode();
+{% endhighlight %}
 
 If you need to change a Response object's status code, you must request a new Response object that has the new status code with the Response object's `withStatus($code)` method.
 
-    <?php
-    $newResponse = $oldResponse->withStatus(404);
+{% highlight php %}
+<?php
+$newResponse = $oldResponse->withStatus(404);
+{% endhighlight %}
 
 ## Response Headers
 
@@ -28,84 +32,104 @@ The Response object manages a collection of headers that will be returned to the
 
 You can fetch an associative array of HTTP response headers with the Response object's `getHeaders()` method. This returns an associative array whose keys are header names. The array's values are single dimensional arrays that contain one or more string values associated with each header name. This is an example data structure potentially returned by the Response object's `getHeaders()` method.
 
-    [
-        'Allow' => [
-            'GET',
-            'HEAD',
-            'DELETE'
-        ]
+{% highlight text %}
+[
+    'Allow' => [
+        'GET',
+        'HEAD',
+        'DELETE'
     ]
+]
+{% endhighlight %}
 
 This example demonstrates how to fetch and iterate the Response object's headers.
 
-    <?php
-    // Iterate response headers
-    foreach ($response->getHeaders() as $name => $values) {
-        echo $name, PHP_EOL;
-        foreach ($values as $value) {
-            echo $value, PHP_EOL;
-        }
+{% highlight php %}
+<?php
+// Iterate response headers
+foreach ($response->getHeaders() as $name => $values) {
+    echo $name, PHP_EOL;
+    foreach ($values as $value) {
+        echo $value, PHP_EOL;
     }
+}
+{% endhighlight %}
 
 ### Detect Header
 
 You can detect the presence of an HTTP header with the Response object's `hasHeader($name)` method. This method returns `true` or `false`.
 
-    <?php
-    if ($response->hasHeader('Allow') === true) {
-        // Do something
-    }
+{% highlight php %}
+<?php
+if ($response->hasHeader('Allow') === true) {
+    // Do something
+}
+{% endhighlight %}
 
 ### Get Header
 
 You can fetch a single HTTP response header with the Response object's `getHeader($name)` method.
 
-    <?php
-    $headerValue = $response->getHeader('Allow');
+{% highlight php %}
+<?php
+$headerValue = $response->getHeader('Allow');
+{% endhighlight %}
 
 This returns a string value. The returned string is a comma-concatenated string containing all values associated with the header name. For example, `$response->getHeader('Allow')` may return this string value:
 
-    "GET,HEAD,DELETE"
+{% highlight text %}
+"GET,HEAD,DELETE"
+{% endhighlight %}
 
 Use the Response object's `getHeaderLines($name)` method to return the single-dimensional array associated with a given header name. 
 
-    <?php
-    $headerValue = $response->getHeaderLines('Allow');
+{% highlight php %}
+<?php
+$headerValue = $response->getHeaderLines('Allow');
+{% endhighlight %}
 
 This code may return this single-dimensional array:
 
-    [
-        'GET',
-        'HEAD',
-        'DELETE'
-    ]
+{% highlight text %}
+[
+    'GET',
+    'HEAD',
+    'DELETE'
+]
+{% endhighlight %}
 
 ### Set Header
 
 You can set a new header value with the Response object's `withHeader($name, $value)` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that has the new header value. **This method is destructive**, and it _replaces_ any existing header values that are associated with the same header name.
 
-    <?php
-    $newResponse = $oldResponse->withHeader(
-        'Content-type',
-        'application/json'
-    );
+{% highlight php %}
+<?php
+$newResponse = $oldResponse->withHeader(
+    'Content-type',
+    'application/json'
+);
+{% endhighlight %}
 
 ### Add Header
 
 You can add a new header value with the Response object's `withAddedHeader($name, $value)` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that has the added header value. **This method is non-destructive**, and it _appends_ the new header value to any existing header values that are `associated with the same header name.
 
-    <?php
-    $newResponse = $oldResponse->withAddedHeader(
-        'Content-type',
-        'application/json'
-    );
+{% highlight php %}
+<?php
+$newResponse = $oldResponse->withAddedHeader(
+    'Content-type',
+    'application/json'
+);
+{% endhighlight %}
 
 ### Remove Header
 
 You can remove a header with the Response object's `withoutHeader($name)` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that does not have the specified header.
 
-    <?php
-    $newResponse = $oldResponse->withoutHeader('Allow');
+{% highlight php %}
+<?php
+$newResponse = $oldResponse->withoutHeader('Allow');
+{% endhighlight %}
 
 ## Response Cookies
 
@@ -137,47 +161,57 @@ Fortunately, you don't have to define these settings every time you set a new co
 
 You can fetch an associative array of HTTP response cookies with the Response object's `getCookies()` method. This returns an associative array whose keys are cookie names. The array's values are single dimensional arrays that contain the properties listed above. This is an example data structure potentially returned by the Response object's `getCookies()` method.
 
-    [
-        'user' => [
-            'value' => 'Bob',
-            'expires' => '2 days',
-            'path' => '/',
-            'domain' => 'example.com',
-            'secure' => true,
-            'httponly' => true
-        ]
+{% highlight text %}
+[
+    'user' => [
+        'value' => 'Bob',
+        'expires' => '2 days',
+        'path' => '/',
+        'domain' => 'example.com',
+        'secure' => true,
+        'httponly' => true
     ]
+]
+{% endhighlight %}
 
 ### Detect Cookie
 
 You can detect the presence of an HTTP cookie with the Response object's `hasCookie($name)` method. This method returns `true` or `false`.
 
-    <?php
-    if ($response->hasCookie('user') === true) {
-        // Do something
-    }
+{% highlight php %}
+<?php
+if ($response->hasCookie('user') === true) {
+    // Do something
+}
+{% endhighlight %}
 
 ### Set Cookie
 
 You can set a new cookie with the Response object's `withCookie($name, $value)` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that has the new cookie.
 
-    <?php
-    $newResponse = $oldResponse->withCookie('user', 'Bob');
+{% highlight php %}
+<?php
+$newResponse = $oldResponse->withCookie('user', 'Bob');
+{% endhighlight %}
 
 This example creates a new cookie whose name is "user". The cookie's _value_ property is "Bob". Its other properties assume the default values provided during application instantiation. However, you _can_ override the default cookie properties by passing an associative array as the second argument to the `withCookie()` method. This array should contain only the properties different from the default cookie properties.
 
-    <?php
-    $newResponse = $oldResponse->withCookie('user', [
-        'value' => 'Bob',
-        'expires' => '7 days'
-    ]);
+{% highlight php %}
+<?php
+$newResponse = $oldResponse->withCookie('user', [
+    'value' => 'Bob',
+    'expires' => '7 days'
+]);
+{% endhighlight %}
 
 ### Remove Cookie
 
 You can remove a cookie with the Response object's `withoutCookie($name)` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that does not have the specified cookie.
 
-    <?php
-    $newResponse = $oldResponse->withoutCookie('user');
+{% highlight php %}
+<?php
+$newResponse = $oldResponse->withoutCookie('user');
+{% endhighlight %}
 
 Technically, this method _sets_ a new cookie whose value is empty and whose expiration date is in the past. This prompts the HTTP client to invalidate and destroy its local copy of the cookie.
 
@@ -189,21 +223,27 @@ The Response object's body is a streamable object that implements the [\Psr\Http
 
 You can get the Response object body with the `getBody()` method.
 
-    <?php
-    $body = $response->getBody();
+{% highlight php %}
+<?php
+$body = $response->getBody();
+{% endhighlight %}
 
 ### Write Body
 
 You can write to the Response object's body with the Response object's `write()` method. This method is a simple proxy to the Body object's `write()` method and is available as a convenience.
 
-    <?php
-    $response->write('New content');
+{% highlight php %}
+<?php
+$response->write('New content');
+{% endhighlight %}
 
 ### Set Body
 
 You can _replace_ the Response object's body with the Response object's `withBody()` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that uses the new Body. This method's argument MUST be an instance of `\Psr\Http\Message\StreamableInterface`.
 
-    <?php
-    $newResponse = $oldResponse->withBody(
-        new Body(fopen('s3://bucket/key', 'r'));
-    );
+{% highlight php %}
+<?php
+$newResponse = $oldResponse->withBody(
+    new Body(fopen('s3://bucket/key', 'r'));
+);
+{% endhighlight %}
