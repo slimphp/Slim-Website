@@ -41,7 +41,8 @@ defaults:
             - [/docs/handlers/not-allowed.md, 405 Not Allowed]
         - title: Contributing
           items:
-            - [docs/contributors/strategy.md, Branching Strategy]
+            - [/docs/contributors/strategy.md, Branching Strategy]
+            - [/docs/contributors/guidelines.html, Guidelines]
   -
     scope:
       path: "docs"
