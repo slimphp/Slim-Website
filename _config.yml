@@ -34,6 +34,8 @@ defaults:
           items:
             - [/docs/features/templates.md, Templates]
             - [/docs/features/caching.md, HTTP Caching]
+            - [/docs/features/csrf.md, CSRF Protection]
+            - [/docs/features/flash.md, Flash Messages]
         - title: Error Handling
           items:
             - [/docs/handlers/error.md, 500 Server Error]
