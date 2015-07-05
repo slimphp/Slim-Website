@@ -33,7 +33,7 @@ defaults:
         - title: Features
           items:
             - [/docs/features/templates.md, Templates]
-            - [/docs/features/caching.md, Caching]
+            - [/docs/features/caching.md, HTTP Caching]
         - title: Error Handling
           items:
             - [/docs/handlers/error.md, 500 Server Error]
