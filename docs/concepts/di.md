@@ -53,6 +53,9 @@ response
 router
 :   Instance of `\Slim\Interfaces\RouterInterface`.
 
+foundHandler
+:   Instance of `\Slim\Interfaces\InvocationStrategyInterface`.
+
 errorHandler
 :   Callable invoked if application error. The callable **MUST** return an instance of `\Psr\Http\Message\ResponseInterface` and accept three arguments:
 
