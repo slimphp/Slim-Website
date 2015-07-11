@@ -132,7 +132,7 @@ There are two ways you can write content to the HTTP response. First, you can si
 
 ### Closure binding
 
-If you use a `Closure` instance as the route callback, the closure's state is bound to the `\Slim\App` instance. This means you can access the `\Slim\App` object from inside the route callback with `$this`. Because the `\Slim\App` is itself an instance of `\Pimple\Container`, you can quickly access any registered Pimple services from inside the Closure callback like this:
+If you use a `Closure` instance as the route callback, the closure's state is bound to the `\Slim\App` instance. This means you can access the `\Slim\App` object from inside the route callback with `$this`. Because the `\Slim\App` is itself composes the DI container, you can quickly access any services registered with the DI container from inside the Closure callback like this:
 
 {% highlight php %}
 $app = new \Slim\App();
