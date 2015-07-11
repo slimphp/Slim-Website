@@ -192,7 +192,7 @@ $app->get('/users/{id:[0-9]+}', function ($request, $response, $args) {
 
 ## Route names
 
-Application route's can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the router's `urlFor()` method. Each routing method described above returns a `\Slim\Route` object, and this object exposes a `setName()` method.
+Application route's can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the router's `pathFor()` method. Each routing method described above returns a `\Slim\Route` object, and this object exposes a `setName()` method.
 
 {% highlight php %}
 $app = new \Slim\App();
@@ -201,16 +201,16 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 })->setName('hello');
 {% endhighlight %}
 
-You can generate a URL for this named route with the application router's `urlFor()`  method.
+You can generate a URL for this named route with the application router's `pathFor()`  method.
 
 {% highlight php %}
-echo $app['router']->urlFor('hello', [
+echo $app['router']->pathFor('hello', [
     'name' => 'Josh'
 ]);
 // Outputs "/hello/Josh"
 {% endhighlight %}
 
-The router's `urlFor()` method accepts two arguments:
+The router's `pathFor()` method accepts two arguments:
 
 1. The route name
 2. Associative array of route pattern placeholders and replacement values
