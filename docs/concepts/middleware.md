@@ -66,46 +66,6 @@ To use this class as a middleware, please use `->add( new ExampleMiddleware() );
 $subject->add( new ExampleMiddleware() );
 {% endhighlight %}
 
-#### Abstract class helper for invokable middleware
-
-The following abstract class allows for simple separation of before and after logic in invokable middleware.
-
-{% highlight php %}
-<?php
-abstract class AbstractMiddlewareInvokable
-{
-    abstract protected function _before($request, &$response);
-
-    abstract protected function _after($request, &$response);
-
-    public function __invoke($request, $response, $next)
-    {
-        $this->_before($request,$response);
-        $response = $next($request, $response);
-        $this->_after($request,$response);
-
-        return $response;
-    }
-}
-
-Using this class as a base; Invokable classes like the following can then be defined
-
-{% highlight php %}
-<?php
-class ExampleMiddleware extends AbstractMiddlewareInvokable
-{
-    protected function _before($request, &$response)
-    {
-        $response->write('BEFORE');
-    }
-
-    protected function _after($request, &$response)
-    {
-        $response->write('AFTER');
-    }
-}
-{% endhighlight %}
-
 ## How do I add middleware?
 
 You may add middleware to a Slim application or to an individual Slim application route. Both scenarios accept the same middleware and implement the same middleware interface.
