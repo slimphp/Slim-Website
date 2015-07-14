@@ -25,7 +25,7 @@ AllowOverride All
 The nginx configuration file should contain this code (along with other settings you may need) in your `location` block:
 
 {% highlight text %}
-try_files $uri $uri/ /index.php?$args;
+try_files $uri $uri/ /index.php?$query_string;
 {% endhighlight %}
 
 This assumes that Slim's `index.php` is in the root folder of your project (www root).
