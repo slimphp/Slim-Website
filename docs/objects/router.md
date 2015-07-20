@@ -156,8 +156,8 @@ $c['foundHandler'] = function() {
 };
 
 $app = new \Slim\App($c);
-$app->get('/hello/{name}', function ($req, $res, $name) {
-    return $res->write($name);
+$app->get('/hello/{name}', function ($request, $response, $name) {
+    return $response->write($name);
 });
 {% endhighlight %}
 
