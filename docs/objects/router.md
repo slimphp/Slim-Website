@@ -115,7 +115,7 @@ $app->map(['GET', 'POST'], '/books', function ($request, $response, $args) {
 
 ## Route callbacks
 
-Each routing method described above accepts a callback routine as its final argument. This argument can be any PHP callable, and it accepts three arguments.
+Each routing method described above accepts a callback routine as its final argument. This argument can be any PHP callable, and by default it accepts three arguments.
 
 **Request**
 : The first argument is a `Psr\Http\Message\RequestInterface` object that represents the current HTTP request.
@@ -126,22 +126,42 @@ Each routing method described above accepts a callback routine as its final argu
 **Arguments**
 : The third argument is an associative array that contains values for the current route's named placeholders.
 
+### Writing content to the response
+
 There are two ways you can write content to the HTTP response. First, you can simply `echo()` content from the route callback. This content will be appended to the current HTTP response object. Second, you can return a `Psr\Http\Message\ResponseInterface` object.
 
 ### Closure binding
 
-If you use a `Closure` instance as the route callback, the closure's state is bound to the `\Slim\App` instance. This means you can access the `\Slim\App` object from inside the route callback with `$this`. Becaues the `\Slim\App` is itself an instance of `\Pimple\Container`, you can quickly access any registered Pimple services from inside the Closure callback like this:
+If you use a `Closure` instance as the route callback, the closure's state is bound to the `\Slim\App` instance. This means you can access the `\Slim\App` object from inside the route callback with `$this`. Because the `\Slim\App` itself composes the DI container, you can quickly access any services registered with the DI container from inside the Closure callback like this:
 
 {% highlight php %}
 $app = new \Slim\App();
 $app->get('/hello/{name}', function ($request, $response, $args) {
     // Use app HTTP cookie service
-    $this['cookies']->set('name', [
+    $this->cookies->set('name', [
         'name' => $args['name'],
         'expires' => '7 days'
     ]);
 });
 {% endhighlight %}
+
+### Route strategies
+
+The route callback signature is determined by a route strategy. By default, Slim expects route callbacks to accept the request, response, and an array of route placeholder arguments. This is called the RequestResponse strategy. However, you can change the expected route callback signature by simply using a different strategy. As an example, Slim provides an alternative strategy called RequestResponseArgs that accepts request and response, plus each route placeholder as a separate argument. Here is an example of using this alternative strategy; simply replace the `foundHandler` dependency provided by the default `\Slim\Container`:
+
+{% highlight php %}
+$c = new \Slim\Container();
+$c['foundHandler'] = function() {
+    return new \Slim\Handlers\Strategies\RequestResponseArgs();
+};
+
+$app = new \Slim\App($c);
+$app->get('/hello/{name}', function ($request, $response, $name) {
+    return $response->write($name);
+});
+{% endhighlight %}
+
+You can provide your own route strategy by implementing the `\Slim\Interfaces\InvocationStrategyInterface`.
 
 ## Route placeholders
 
@@ -160,7 +180,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 
 ### Regular expression matching
 
-By default the place holders are written inside `{}` and can accept any
+By default the placeholders are written inside `{}` and can accept any
 values. However, placeholders can also require the HTTP request URI to match a particular regular expression. If the current HTTP request URI does not match a placeholder regular expression, the route is not invoked. This is an example placeholder named `id` that requires a digit.
 
 {% highlight php %}
@@ -172,7 +192,7 @@ $app->get('/users/{id:[0-9]+}', function ($request, $response, $args) {
 
 ## Route names
 
-Application route's can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the router's `urlFor()` method. Each routing method described above returns a `\Slim\Route` object, and this object exposes a `setName()` method.
+Application route's can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the router's `pathFor()` method. Each routing method described above returns a `\Slim\Route` object, and this object exposes a `setName()` method.
 
 {% highlight php %}
 $app = new \Slim\App();
@@ -181,16 +201,36 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 })->setName('hello');
 {% endhighlight %}
 
-You can generate a URL for this named route with the application router's `urlFor()`  method.
+You can generate a URL for this named route with the application router's `pathFor()`  method.
 
 {% highlight php %}
-echo $app['router']->urlFor('hello', [
+echo $app['router']->pathFor('hello', [
     'name' => 'Josh'
 ]);
 // Outputs "/hello/Josh"
 {% endhighlight %}
 
-The router's `urlFor()` method accepts two arguments:
+The router's `pathFor()` method accepts two arguments:
 
 1. The route name
 2. Associative array of route pattern placeholders and replacement values
+
+## Route groups
+
+To help organize routes into logical groups, the `\Slim\App` also provides a `group()` method. Each group's route pattern is prepended to the routes or groups contained within it, and any placeholder arguments in the group pattern are ultimately made available to the nested routes:
+ 
+{% highlight php %}
+$app = new \Slim\App();
+$app->group('/users/{id:[0-9]+}', function () {
+    $app->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
+        // Find, delete, patch or replace user identified by $args['id']
+    })->setName('user');
+    $app->get('/reset-password', function ($request, $response, $args) {
+        // Reset the password for user identified by $args['id']
+    })->setName('user-password-reset');
+});
+{% endhighlight %}
+
+## Route middleware
+
+You can also attach middleware to any route or route group. [Learn more](/docs/concepts/middleware.html).
