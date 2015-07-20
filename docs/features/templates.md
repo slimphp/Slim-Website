@@ -130,11 +130,11 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 $app->run();
 {% endhighlight %}
 
-### The url_for() method
+### The path_for() method
 
-The `slim/twig-view` component exposes a custom `url_for()` function
+The `slim/twig-view` component exposes a custom `path_for()` function
 to your Twig templates. You can use this function to generate complete
-URLs to any named route in your Slim application. The `url_for()`
+URLs to any named route in your Slim application. The `path_for()`
 function accepts two arguments:
 
 1. A route name
@@ -151,7 +151,7 @@ for the "profile" named route shown in the example Slim application above.
 {% block body %}
 <h1>User List</h1>
 <ul>
-    <li><a href="{{ url_for('profile', { 'name': 'josh' }) }}">Josh</a></li>
+    <li><a href="{{ path_for('profile', { 'name': 'josh' }) }}">Josh</a></li>
 </ul>
 {% endblock %}
 {% endraw %}
