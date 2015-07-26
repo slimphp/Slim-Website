@@ -38,7 +38,7 @@ demonstrates this scenario inside a Slim application route:
 
 {% highlight php %}
 $app->get('/user/{id:\d+}', function ($request, $response, $args) {
-    echo sprintf(
+    printf(
         'You are viewing user with ID: %s',
         $args['id']
     );
