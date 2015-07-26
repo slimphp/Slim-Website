@@ -14,7 +14,7 @@ This is _probably_ not appropriate for production applications. You are strongly
 
 A Slim Framework application's error handler is a Pimple service. You can substitute your own error handler by defining a custom Pimple factory method with the application container.
 
-There are two ways to inject handlers
+There are two ways to inject handlers:
 
 ### Pre App
 
