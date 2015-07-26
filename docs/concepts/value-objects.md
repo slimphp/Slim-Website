@@ -12,9 +12,9 @@ Slim provides a built-in PSR-7 implementation. However, you are free to substitu
 
 In accordance with PSR-7, a Slim application's Request and Response objects are [_immutable value objects_](http://en.wikipedia.org/wiki/Value_object). They can be "changed" only by requesting a cloned version that has updated property values.
 
-A Slim application starts with an initial Request and Response object pair. These objects are passed into each application middleware layer, and each middleware layer is free to use these objects as it deems fit. If Slim used object references, each middleware layer could never be certain of its own Request and Response objects' state if further interior middleware can update the same object references. Instead, Slim uses immutable value objects—each middleware's Request and Response objects always remain the same, and they cannot be changed by other middleware. If a middleware wants to modify the Request or Response object, it must create a _cloned_ version with updated properties.
+A Slim application starts with an initial Request and Response object pair. These objects are passed into each application middleware layer, and each middleware layer is free to use these objects as it deems fit. If Slim used object references, each middleware layer could never be certain of its own Request and Response objects' state, if further interior middleware can update the same object references. Instead, Slim uses immutable value objects—each middleware's Request and Response objects always remain the same, and they cannot be changed by other middleware. If a middleware wants to modify the Request or Response object, it must create a _cloned_ version with updated properties.
 
-Value objects have a small inherent overhead becaue they must be cloned when their properties are updated. This overhead is minimal and does not affect application performance in any meaningful way.
+Value objects have a small inherent overhead because they must be cloned when their properties are updated. This overhead is minimal and does not affect application performance in any meaningful way.
 
 ## How to change value objects
 
