@@ -29,9 +29,9 @@ Middleware is a callable that accepts three arguments: a Request object, a Respo
 {% highlight php %}
 <?php
 function ($request, $response, $next) {
-    $response->write('BEFORE');
+    $response->getBody()->write('BEFORE');
     $response = $next($request, $response);
-    $response->write('AFTER');
+    $response->getBody()->write('AFTER');
 
     return $response;
 };
@@ -45,9 +45,9 @@ class ExampleMiddleware
 {
     public function __invoke($request, $response, $next)
     {
-        $response->write('BEFORE');
+        $response->getBody()->write('BEFORE');
         $response = $next($request, $response);
-        $response->write('AFTER');
+        $response->getBody()->write('AFTER');
 
         return $response;
     }
@@ -67,9 +67,9 @@ Application middleware is invoked for every HTTP request. Add application middle
 $app = new \Slim\App();
 
 $app->add(function ($request, $response, $next) {
-    $response->write('BEFORE');
+    $response->getBody()->write('BEFORE');
     $response = $next($request, $response);
-    $response->write('AFTER');
+    $response->getBody()->write('AFTER'); 
 
     return $response;
 });
@@ -94,9 +94,9 @@ Route middleware is invoked _only if_ its route matches the current HTTP request
 $app = new \Slim\App();
 
 $mw = function ($request, $response, $next) {
-    $response->write('BEFORE');
+    $response->getBody()->write('BEFORE');
     $response = $next($request, $response);
-    $response->write('AFTER');
+    $response->getBody()->write('AFTER');
 
     return $response;
 });
