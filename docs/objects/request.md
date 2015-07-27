@@ -246,7 +246,7 @@ The Request object's `getBody()` method returns a `\Psr\Http\Message\StreamInter
 You may also fetch a parsed representation of the HTTP request body using the Request object's `getParsedBody()` method. This method works for `application/json`, `application/xml`, and `application/x-www-form-urlencoded` HTTP requests. You should use this method for reasonably sized HTTP request bodies when building applications that consume JSON or XML data.
 
 * JSON requests are converted into a PHP object with `json_decode($httpInput)`.
-* XML requests are converted into a `SimpleXMLElement` with `simplexml_load_string($httpInput)`. 
+* XML requests are converted into a `SimpleXMLElement` with `simplexml_load_string($httpInput)`.
 * Form-encoded requests are converted into a PHP array with `parse_str($httpInput)`.
 
 ## Request Helpers
@@ -303,7 +303,7 @@ $length = $request->getContentLength();
 
 ### IP Address
 
-You can fetch the HTTP request's source IP address with the Request object's `getIp()` method. This method respects the `X-Forwarded-For` header if present.
+You can fetch the HTTP request's source IP address with the Request object's `getIp()` method. This method respects the `X-Forwarded-For` header, if present.
 
 {% highlight php %}
 $ip = $request->getIp();
