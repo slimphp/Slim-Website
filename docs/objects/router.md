@@ -222,7 +222,7 @@ To help organize routes into logical groups, the `\Slim\App` also provides a `gr
 {% highlight php %}
 $app = new \Slim\App();
 $app->group('/users/{id:[0-9]+}', function () {
-    this->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
+    $this->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
         // Find, delete, patch or replace user identified by $args['id']
     })->setName('user');
     $this->get('/reset-password', function ($request, $response, $args) {
