@@ -5,6 +5,7 @@ url: http://www.slimframework.com
 slim_website_repo: https://github.com/slimphp/Slim-Website/tree/gh-pages/
 urlBasePath:
 include: [.htaccess]
+exclude: [node_modules]
 gems:
   - jekyll-sitemap
 defaults:
