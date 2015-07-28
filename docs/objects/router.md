@@ -222,14 +222,16 @@ To help organize routes into logical groups, the `\Slim\App` also provides a `gr
 {% highlight php %}
 $app = new \Slim\App();
 $app->group('/users/{id:[0-9]+}', function () {
-    $app->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
+    this->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
         // Find, delete, patch or replace user identified by $args['id']
     })->setName('user');
-    $app->get('/reset-password', function ($request, $response, $args) {
+    $this->get('/reset-password', function ($request, $response, $args) {
         // Reset the password for user identified by $args['id']
     })->setName('user-password-reset');
 });
 {% endhighlight %}
+
+Note inside the group closure, `$this` is used instead of `$app`. Slim binds the closure to the application instance for you, just like it is the case with route callbacks.
 
 ## Route middleware
 
