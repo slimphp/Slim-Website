@@ -6,7 +6,7 @@ The Response object encapsulates the HTTP response returned by the Slim applicat
 
 The Response object is a _value object_, and it is immutable. You can never change a given Response object, but you can create a cloned Response object with new property values using any of the Response object's `with*()` methods.
 
-Whereever you are within a Slim application (e.g. a middleware layer, a route callable, or a Not Found handler), you will be given the latest Request and Response objects.
+Wherever you are within a Slim application (e.g. a middleware layer, a route callable, or a Not Found handler), you will be given the latest Request and Response objects.
 
 ## Response Status
 
@@ -81,7 +81,7 @@ This returns a string value. The returned string is a comma-concatenated string 
 "GET,HEAD,DELETE"
 {% endhighlight %}
 
-Use the Response object's `getHeaderLines($name)` method to return the single-dimensional array associated with a given header name. 
+Use the Response object's `getHeaderLines($name)` method to return the single-dimensional array associated with a given header name.
 
 {% highlight php %}
 <?php
