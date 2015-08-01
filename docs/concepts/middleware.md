@@ -24,7 +24,11 @@ When you run the Slim application, the Request and Response objects traverse the
 
 ## How do I write middleware?
 
-Middleware is a callable that accepts three arguments: a Request object, a Response object, and the next middleware. Each middleware **MUST** return an instance of `\Psr\Http\Message\ResponseInterface`. This example middleware is a Closure.
+Middleware is a callable that accepts three arguments: a Request object, a Response object, and the next middleware. Each middleware **MUST** return an instance of `\Psr\Http\Message\ResponseInterface`. 
+
+### Closure middleware example.
+
+This example middleware is a Closure.
 
 {% highlight php %}
 <?php
@@ -36,6 +40,8 @@ function ($request, $response, $next) {
     return $response;
 };
 {% endhighlight %}
+
+### Invokable class middleware example
 
 This example middleware is an invokable class that implements the magic `__invoke()` method.
 
@@ -54,13 +60,19 @@ class ExampleMiddleware
 }
 {% endhighlight %}
 
+To use this class as a middleware, please use `->add( new ExampleMiddleware() );` function chain after the `$app`, `Route`,  or `group()`, which in the code below, any one of these, could represent $subject.
+
+{% highlight php %}
+$subject->add( new ExampleMiddleware() );
+{% endhighlight %}
+
 ## How do I add middleware?
 
 You may add middleware to a Slim application or to an individual Slim application route. Both scenarios accept the same middleware and implement the same middleware interface.
 
 ### Application middleware
 
-Application middleware is invoked for every HTTP request. Add application middleware with the Slim application instance's `add()` method. This example adds the Closure middleware example above:
+Application middleware is invoked for every *incoming* HTTP request. Add application middleware with the Slim application instance's `add()` method. This example adds the Closure middleware example above:
 
 {% highlight php %}
 <?php
@@ -111,3 +123,49 @@ $app->run();
 This would output this HTTP response body:
 
     BEFORE Hello AFTER
+
+### Group Middleware
+
+In addition to the overall application, and standard routes being able to accept middleware, the `group()` multi-route definition functionality, also allows individual routes internally. Route group middleware is invoked _only if_ its route matches one of the defined HTTP request methods and URIs from the group. To add middleware within the callback, and entire-group middleware to be set by chaining `add()` after the `group()` method.
+
+Sample Application, making use of callback middleware on a group of url-handlers 
+{% highlight php %}
+<?php
+
+require_once __DIR__.'/vendor/autoload.php';
+
+$app = new \Slim\App();
+
+$app->get('/', function ($request, $response) {
+    return $response->write('Hello World');
+});
+
+$app->group('/utils', function () use ($app) {
+    $app->get('/date', function ($request, $response) {
+        return $response->write(date('Y-m-d H:i:s'));
+    });
+    $app->get('/time', function ($request, $response) {
+        return $response->write(time());
+    });
+})->add(function ($request, $response, $next) {
+    $response->write('It is now ');
+    $response = $next($request, $response);
+    $response->write('. Enjoy!');
+
+    return $response;
+});
+{% endhighlight %}
+
+When calling the `/utils/date` method, this would output a string similar to the below
+
+    It is now 2015-07-06 03:11:01. Enjoy!
+
+visiting `/utils/time` would output a string similar to the below
+
+    It is now 1436148762. Enjoy!
+
+but visiting `/` *(domain-root)*, would be expected to generate the following output as no middleware has been assigned
+
+    Hello World
+
+Obviously there are more useful examples of middleware and both class-based, and simple anonymous function-based middleware, are also supported at the application, route and group level. The reasons for each will be a mixture of personal preference, and utility / code quality.
