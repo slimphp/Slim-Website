@@ -204,7 +204,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 You can generate a URL for this named route with the application router's `pathFor()`  method.
 
 {% highlight php %}
-echo $app['router']->pathFor('hello', [
+echo $app->getContainer()->get('router')->pathFor('hello', [
     'name' => 'Josh'
 ]);
 // Outputs "/hello/Josh"
