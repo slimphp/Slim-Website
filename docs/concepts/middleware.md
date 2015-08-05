@@ -33,9 +33,9 @@ This example middleware is a Closure.
 {% highlight php %}
 <?php
 function ($request, $response, $next) {
-    $response->write('BEFORE');
+    $response->getBody()->write('BEFORE');
     $response = $next($request, $response);
-    $response->write('AFTER');
+    $response->getBody()->write('AFTER');
 
     return $response;
 };
@@ -51,9 +51,9 @@ class ExampleMiddleware
 {
     public function __invoke($request, $response, $next)
     {
-        $response->write('BEFORE');
+        $response->getBody()->write('BEFORE');
         $response = $next($request, $response);
-        $response->write('AFTER');
+        $response->getBody()->write('AFTER');
 
         return $response;
     }
@@ -79,9 +79,9 @@ Application middleware is invoked for every *incoming* HTTP request. Add applica
 $app = new \Slim\App();
 
 $app->add(function ($request, $response, $next) {
-    $response->write('BEFORE');
+    $response->getBody()->write('BEFORE');
     $response = $next($request, $response);
-    $response->write('AFTER');
+    $response->getBody()->write('AFTER');
 
     return $response;
 });
@@ -106,9 +106,9 @@ Route middleware is invoked _only if_ its route matches the current HTTP request
 $app = new \Slim\App();
 
 $mw = function ($request, $response, $next) {
-    $response->write('BEFORE');
+    $response->getBody()->write('BEFORE');
     $response = $next($request, $response);
-    $response->write('AFTER');
+    $response->getBody()->write('AFTER');
 
     return $response;
 });
@@ -137,20 +137,20 @@ require_once __DIR__.'/vendor/autoload.php';
 $app = new \Slim\App();
 
 $app->get('/', function ($request, $response) {
-    return $response->write('Hello World');
+    return $response->getBody()->write('Hello World');
 });
 
 $app->group('/utils', function () use ($app) {
     $app->get('/date', function ($request, $response) {
-        return $response->write(date('Y-m-d H:i:s'));
+        return $response->getBody()->write(date('Y-m-d H:i:s'));
     });
     $app->get('/time', function ($request, $response) {
-        return $response->write(time());
+        return $response->getBody()->write(time());
     });
 })->add(function ($request, $response, $next) {
-    $response->write('It is now ');
+    $response->getBody()->write('It is now ');
     $response = $next($request, $response);
-    $response->write('. Enjoy!');
+    $response->getBody()->write('. Enjoy!');
 
     return $response;
 });
