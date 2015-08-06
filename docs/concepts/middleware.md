@@ -99,7 +99,7 @@ $mw = function ($request, $response, $next) {
     $response->getBody()->write('AFTER');
 
     return $response;
-});
+};
 
 $app->get('/', function ($req, $res, $args) {
     echo ' Hello ';
