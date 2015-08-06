@@ -20,7 +20,7 @@ And now in Slim 3.x:
 
 {% highlight php %}
 $app->get('/', function ($req, $res, $args) {
-    return $res->withStatus(400)->withBody("Bad Request");
+    return $res->withStatus(400)->write('Bad Request');
 });
 {% endhighlight %}
 
