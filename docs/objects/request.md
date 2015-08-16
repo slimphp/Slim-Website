@@ -160,48 +160,65 @@ methods to inspect the HTTP request's URL parts:
     in the document root's top-most directory.
 </div>
 
-## Request Headers
+## The Request Headers
 
-You can inspect the current HTTP request's headers with numerous methods on the Request object.
+Every HTTP request has headers. These are metadata that describe the HTTP
+request but are not visible reflected in the request's body. Slim's PSR 7
+Request object provides several methods to inspect its headers.
 
-### All Headers
+### Get All Headers
 
-You can fetch an associative array of all headers with the Request object's `getHeaders()` method. The result is an associative array whose keys are header names and whose values are themselves an array of string values for their respective header name.
+You can fetch all HTTP request headers an associative array with the PSR 7
+Request object's `getHeaders()` method. The resultant associative array's keys
+are the header names and its values are themselves a numeric array of string
+values for their respective header name.
 
+<figure>
 {% highlight php %}
 $headers = $request->getHeaders();
 foreach ($headers as $name => $values) {
     echo $name . ": " . implode(", ", $values);
 }
 {% endhighlight %}
+<figcaption>Figure 5: Fetch and iterate all HTTP request headers as an associative array.</figcaption>
+</figure>
+
+### Get One Header
+
+You can get a single header's value(s) with the PSR 7 Request object's `getHeader($name)` method. This returns an array of values for the given header name. Remember, _a single
+HTTP header may have more than one value!_
+
+<figure>
+{% highlight php %}
+$headerValueArray = $request->getHeader('Accept');
+{% endhighlight %}
+<figcaption>Figure 6: Get values for a specific HTTP header.</figcaption>
+</figure>
+
+You may also fetch a comma-separated string with all values for a given header
+with the PSR 7 Request object's `getHeaderLine($name)` method. Unlike the
+`getHeader($name)` method, this method returns a comma-separated string.
+
+<figure>
+{% highlight php %}
+$headerValueString = $request->getHeaderLine('Accept');
+{% endhighlight %}
+<figcaption>Figure 7: Get single header's values as comma-separated string.</figcaption>
+</figure>
 
 ### Detect Header
 
-You can test for the presence of a header with the Request object's `hasHeader($name)` method.
+You can test for the presence of a header with the PSR 7 Request object's
+`hasHeader($name)` method.
 
+<figure>
 {% highlight php %}
 if ($request->hasHeader('Accept')) {
     // Do something
 }
 {% endhighlight %}
-
-### Fetch Single Header
-
-You can fetch a single header's value(s) with the Request object's `getHeader($name)` method. This returns an array of strings for the given header name.
-
-{% highlight php %}
-$headerValues = $request->getHeader('Accept');
-{% endhighlight %}
-
-You may also fetch a comma-concatenation of a given header's value(s) with the Request object's `getHeaderLine($name)` method. Unlike the `getHeader($name)` method that returns an array, this method returns a string and concatenates multiple header values into a single string separated by commas.
-
-{% highlight php %}
-$headerValueString = $request->getHeaderLine('Accept');
-{% endhighlight %}
-
-## Request Cookies
-
-You can fetch the HTTP request's cookie data as an associative array with the Request object's `getCookieParams()` method. This is rudimentary, but it adheres to the PSR-7 interface. We are currently working on a better interface to inspect and manage HTTP cookies.
+<figcaption>Figure 6: Detect presence of a specific HTTP request header.</figcaption>
+</figure>
 
 ## Request Body
 
