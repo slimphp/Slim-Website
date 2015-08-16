@@ -2,10 +2,15 @@
 title: Web Servers
 ---
 
+It is typical to use the front-controller pattern to funnel appropriate HTTP
+requests received by your web server to a single PHP file. The instructions
+below explain how to tell your web server to send HTTP requests to your PHP
+front-controller file.
+
 ## Apache configuration
 
-Ensure the `.htaccess` and `index.php` files are in the same public-accessible directory. The `.htaccess` file
-should contain this code:
+Ensure your `.htaccess` and `index.php` files are in the same
+public-accessible directory. The `.htaccess` file should contain this code:
 
 {% highlight text %}
 RewriteEngine On
@@ -14,7 +19,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
 {% endhighlight %}
 
-Additionally, make sure your virtual host is configured with the `AllowOverride` option so that the `.htaccess` rewrite rules can be used:
+Make sure your Apache virtual host is configured with the `AllowOverride` option
+so that the `.htaccess` rewrite rules can be used:
 
 {% highlight text %}
 AllowOverride All
@@ -22,13 +28,37 @@ AllowOverride All
 
 ## Nginx configuration
 
-The nginx configuration file should contain this code (along with other settings you may need) in your `location` block:
+This is an example Nginx virtual host configuration for the domain `example.com`.
+It listens for inbound HTTP connections on port 80. It assumes a PHP-FPM server
+is running on port 9000. You should update the `server_name`, `error_log`,
+`access_log`, and `root` directives with your own values. The `root` directive
+is the path to your application's public document root directory; your Slim app's
+`index.php` front-controller file should be in this directory.
 
 {% highlight text %}
-try_files $uri $uri/ /index.php?$args;
-{% endhighlight %}
+server {
+    listen 80;
+    server_name example.com;
+    index index.php;
+    error_log /path/to/example.error.log;
+    access_log /path/to/example.access.log;
+    root /path/to/public;
 
-This assumes that Slim's `index.php` is in the root folder of your project (www root).
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location ~ \.php {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_NAME $fastcgi_script_name;
+        fastcgi_index index.php;
+        fastcgi_pass 127.0.0.1:9000;
+    }
+}
+{% endhighlight %}
 
 ## HipHop Virtual Machine
 
