@@ -24,8 +24,8 @@ defaults:
           items:
             - [/docs/concepts/objects.md, Objects]
             - [/docs/concepts/di.md, Dependency Container]
+            - [/docs/concepts/value-objects.md, PSR 7]
             - [/docs/concepts/middleware.md, Middleware]
-            - [/docs/concepts/value-objects.md, PSR-7]
         - title: Objects
           items:
             - [/docs/objects/request.md, Request]
