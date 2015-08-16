@@ -66,7 +66,8 @@ container for all properties that do not already exist on the application instan
 Your container MUST implement these required services. If you use Slim's built-in container, these are provided for you. If you choose a third-party container, you must define these required services on your own.
 
 settings
-:   Associative array of application settings, including keys `cookieLifetime`, `cookiePath`, `cookieDomain`, `cookieSecure`, `cookieHttpOnly`, `httpVersion`, and `responseChunkSize`.
+:   Associative array of application settings, including keys `httpVersion`, `outputBuffering`,
+    `responseChunkSize` and `determineRouteBeforeAppMiddleware`.
 
 environment
 :   Instance of `\Slim\Interfaces\Http\EnvironmentInterface`.
