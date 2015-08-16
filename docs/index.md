@@ -31,7 +31,7 @@ _and understand_ its source code in an afternoon.
 Slim is designed to play well with other PHP components, too. You can register
 additional first-party components such as [Slim-Csrf][csrf], [Slim-HttpCache][httpcache],
 or [Slim-Flash][flash] that build upon Slim's default functionality. It's also
-easy to integrate third-components found on [Packagist](https://packagist.org/).
+easy to integrate third-party components found on [Packagist](https://packagist.org/).
 
 ## Front controller pattern
 
