@@ -123,67 +123,42 @@ X-Http-Method-Override: PUT
 You can fetch the _original_ (non-overridden) HTTP method with the PSR 7 Request
 object's method named `getOriginalMethod()`.
 
-## Request URL
+## The Request URI
 
-In accordance with the PSR-7 standard, you can inspect the Request URI by fetching the Uri instance from the Request object.
+Every HTTP request has a URI that identifies the requested application
+resource. The HTTP request URI has several parts:
+
+* Scheme (e.g. `http` or `https`)
+* Host (e.g. `example.com`)
+* Port (e.g. `80` or `443`)
+* Path (e.g. `/users/1`)
+* Query string (e.g. `sort=created&dir=asc`)
+
+You can fetch the PSR 7 Request object's URI with its `getUri()` method:
 
 {% highlight php %}
 $uri = $request->getUri();
 {% endhighlight %}
 
-### Scheme
+The PSR 7 Request object's URI is itself an object that provides the following
+methods to inspect the HTTP request's URL parts:
 
-You can fetch the HTTP request scheme (e.g., HTTP or HTTPS) with the Uri object's `getScheme()` method.
+* `getScheme()`
+* `getHost()`
+* `getPort()`
+* `getPath()`
+* `getBasePath()`
+* `getQuery()` <small>(returns string)</small>
+* `getQueryParams()` <small>(returns associative array)</small>
 
-{% highlight php %}
-$scheme = $uri->getScheme();
-{% endhighlight %}
-
-### Host
-
-You can fetch the HTTP request's host (e.g., example.com) with the Uri object's `getHost()` method.
-
-{% highlight php %}
-$host = $uri->getHost();
-{% endhighlight %}
-
-### Port
-
-You can fetch the HTTP request's port number (e.g., 443) with the Uri object's `getPort()` method.
-
-{% highlight php %}
-$port = $uri->getPort();
-{% endhighlight %}
-
-### URL Path
-
-You can fetch the HTTP request's path (relative to the physical directory in which your Slim application is installed) with the Uri object's `getPath()` method. This method returns a string that is matched against your Slim application routes.
-
-{% highlight php %}
-$path = $uri->getPath();
-{% endhighlight %}
-
-### URL Base Path
-
-You can fetch the HTTP request's physical base path (relative to the document root) with the Uri object's `getBasePath()` method. This will be an empty string unless the Slim application is installed in a physical subdirectory beneath your document root.
-
-{% highlight php %}
-$basePath = $uri->getBasePath();
-{% endhighlight %}
-
-### Query String
-
-You can fetch the HTTP request's raw query string (without the leading "?") with the Uri object's `getQuery()` method. This method returns an empty string if no query string is present in the current HTTP request.
-
-{% highlight php %}
-$queryString = $uri->getQuery();
-{% endhighlight %}
-
-You may also fetch an associative array of query string parameters with the Request object's `getQueryParams()` method. This method returns an empty array if no query string is present.
-
-{% highlight php %}
-$queryParams = $request->getQueryParams();
-{% endhighlight %}
+<div class="alert alert-info">
+    <div><strong>Base Path</strong></div>
+    If your Slim application's front-controller lives in a physical subdirectory
+    beneath your document root directory, you can fetch the HTTP request's physical
+    base path (relative to the document root) with the Uri object's <code>getBasePath()</code>
+    method. This will be an empty string if the Slim application is installed
+    in the document root's top-most directory.
+</div>
 
 ## Request Headers
 
