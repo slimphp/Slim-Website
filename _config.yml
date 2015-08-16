@@ -23,7 +23,7 @@ defaults:
         - title: Concepts
           items:
             - [/docs/concepts/objects.md, Objects]
-            - [/docs/concepts/di.md, Dependency Injection]
+            - [/docs/concepts/di.md, Dependency Container]
             - [/docs/concepts/middleware.md, Middleware]
             - [/docs/concepts/value-objects.md, PSR-7]
         - title: Objects
