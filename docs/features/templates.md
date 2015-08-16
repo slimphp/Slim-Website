@@ -84,10 +84,17 @@ $app = new \Slim\App();
 // Get DI Container
 $container = $app->getContainer();
 
-// Register Twig View service
-$container->register(new \Slim\Views\Twig('path/to/templates', [
+// Instantiate and add Slim specific extension
+$view = new \Slim\Views\Twig('path/to/templates', [
     'cache' => 'path/to/cache'
-]));
+]);
+$view->addExtension(new Slim\Views\TwigExtension(
+    $container->get('router'),
+    $container->get('request')->getUri()
+));
+
+// Register Twig View helper
+$container->register($view);
 
 // Define your routes here...
 
@@ -114,10 +121,17 @@ $app = new \Slim\App();
 // Get DI Container
 $container = $app->getContainer();
 
-// Register Twig View helper
-$app->register(new \Slim\Views\Twig('path/to/templates', [
+// Instantiate and add Slim specific extension
+$view = new \Slim\Views\Twig('path/to/templates', [
     'cache' => 'path/to/cache'
-]));
+]);
+$view->addExtension(new Slim\Views\TwigExtension(
+    $container->get('router'),
+    $container->get('request')->getUri()
+));
+
+// Register Twig View helper
+$container->register($view);
 
 // Define named route
 $app->get('/hello/{name}', function ($request, $response, $args) {
@@ -130,11 +144,12 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 $app->run();
 {% endhighlight %}
 
-### The url_for() method
+### The path__for() method
 
-The `slim/twig-view` component exposes a custom `url_for()` function
-to your Twig templates. You can use this function to generate complete
-URLs to any named route in your Slim application. The `url_for()`
+The `slim/twig-view` component exposes a custom `path_for()` function
+to your Twig templates. You can use this function in conjuction with
+another function `base_url()` to generate complete
+URLs to any named route in your Slim application. The `path_for()`
 function accepts two arguments:
 
 1. A route name
@@ -151,7 +166,7 @@ for the "profile" named route shown in the example Slim application above.
 {% block body %}
 <h1>User List</h1>
 <ul>
-    <li><a href="{{ url_for('profile', { 'name': 'josh' }) }}">Josh</a></li>
+    <li><a href="{{ base_url() }}{{ path_for('profile', { 'name': 'josh' }) }}">Josh</a></li>
 </ul>
 {% endblock %}
 {% endraw %}
