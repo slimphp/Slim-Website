@@ -5,17 +5,32 @@ title: Installation
 ## System Requirements
 
 * Web server with URL rewriting
-* PHP 5.4.0 or newer
+* PHP 5.5 or newer
 
-## Install with Composer
+## How to Install Slim
 
-The preferred installation method is [Composer](https://getcomposer.org/). Navigate into your project directory and execute the following bash command. This command downloads the Slim Framework and its third-party dependencies into your project's `vendor/` directory.
+We recommend you install Slim with [Composer](https://getcomposer.org/).
+Navigate into your project's root directory and execute the bash command
+shown below. This command downloads the Slim Framework and its third-party
+dependencies into your project's `vendor/` directory.
 
-    composer require slim/slim
+{% highlight bash %}
+composer require slim/slim
+{% endhighlight %}
 
-Next, require the Composer autoloader into your PHP script.
+Require the Composer autoloader into your PHP script, and you are ready
+to start using Slim.
 
 {% highlight php %}
 <?php
 require 'vendor/autoload.php';
+{% endhighlight %}
+
+## How to Install Composer
+
+Don't have Composer? It's easy to install. The following bash command
+downloads Composer and moves it into your `/usr/local/bin` directory.
+
+{% highlight bash %}
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 {% endhighlight %}
