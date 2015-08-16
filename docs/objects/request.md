@@ -2,109 +2,96 @@
 title: Request
 ---
 
-A Request object encapsulates the HTTP request data derived from the Environment object. You use the Request object to inspect the current HTTP request's method, headers, and body. Typically, you are provided a PSR-7 Request object (e.g., in middleware or an application route).
+Your Slim app's routes and middleware are given a PSR 7 request object that
+represents the current HTTP request received by your web server. The request
+object implements the [PSR 7 ServerRequestInterface][psr7] with which you can
+inspect and manipulate the HTTP request method, headers, and body.
 
+[psr7]: http://www.php-fig.org/psr/psr-7/#3-2-1-psr-http-message-serverrequestinterface
+
+## How to get the Request object
+
+The PSR 7 request object is injected into your Slim application routes as the
+first argument to the route callback like this:
+
+<figure>
 {% highlight php %}
 <?php
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+
 $app = new \Slim\App;
-$app->get('/foo', function ($request, $response) {
-    // Use the provided `$request` object
+$app->get('/foo', function (ServerRequestInterface $request, ResponseInterface $response) {
+    // Use the PSR 7 $request object
+
+    return $response;
 });
 $app->run();
 {% endhighlight %}
+<figcaption>Figure 1: Inject PSR 7 request into application route callback.</figcaption>
+</figure>
 
-However, you can fetch a _new_ Request object from the application container like this:
+The PSR 7 request object is injected into your Slim application _middleware_
+as the first argument of the middleware callable like this:
 
+<figure>
 {% highlight php %}
-$newRequest = $app->request;
+<?php
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+
+$app = new \Slim\App;
+$app->add(function (ServerRequestInterface $request, ResponseInterface $response, callable $next) {
+    // Use the PSR 7 $request object
+
+    return $next($request, $response);
+});
+// Define app routes...
+$app->run();
 {% endhighlight %}
+<figcaption>Figure 2: Inject PSR 7 request into application middleware.</figcaption>
+</figure>
 
-## Request Method
+## The Request Method
 
-You can inspect the current HTTP request method with the Request object's `getMethod()` method. This returns a string value equal to `GET`, `POST`, `PUT`, `DELETE`, `HEAD`, `OPTIONS`, or `PATCH`.
+Every HTTP request has a method that is typically one of:
+
+* GET
+* POST
+* PUT
+* DELETE
+* HEAD
+* PATCH
+* OPTIONS
+
+You can inspect the HTTP request's method with the Request object method
+appropriately named `getMethod()`.
 
 {% highlight php %}
 $method = $request->getMethod();
 {% endhighlight %}
 
-### GET Method
+Because this is a common task, Slim's
+built-in PSR 7 implementation also provides these proprietary methods that return
+`true` or `false`.
 
-You can detect HTTP `GET` requests with the Request object's `isGet()` method.
+* `$request->isGet()`
+* `$request->isPost()`
+* `$request->isPut()`
+* `$request->isDelete()`
+* `$request->isHead()`
+* `$request->isPatch()`
+* `$request->isOptions()`
 
-{% highlight php %}
-if ($request->isGet()) {
-    // Do something
-}
-{% endhighlight %}
+It is possible to fake or _override_ the HTTP request method. This is
+useful if, for example, you need to mimic a `PUT` request using a traditional
+web browser that only supports `GET` or `POST` requests.
 
-### POST Method
+There are two ways to override the HTTP request method. You can include a
+`_METHOD` parameter in a `POST` request's body. The HTTP request must use the
+`application/x-www-form-urlencoded` content type.
 
-You can detect HTTP `POST` requests with the Request object's `isPost()` method.
-
-{% highlight php %}
-if ($request->isPost()) {
-    // Do something
-}
-{% endhighlight %}
-
-### PUT Method
-
-You can detect HTTP `PUT` requests with the Request object's `isPut()` method.
-
-{% highlight php %}
-if ($request->isPut()) {
-    // Do something
-}
-{% endhighlight %}
-
-### DELETE Method
-
-You can detect HTTP `DELETE` requests with the Request object's `isDelete()` method.
-
-{% highlight php %}
-if ($request->isDelete()) {
-    // Do something
-}
-{% endhighlight %}
-
-### HEAD Method
-
-You can detect HTTP `HEAD` requests with the Request object's `isHead()` method.
-
-{% highlight php %}
-if ($request->isHead()) {
-    // Do something
-}
-{% endhighlight %}
-
-### OPTIONS Method
-
-You can detect HTTP `OPTIONS` requests with the Request object's `isOptions()` method.
-
-{% highlight php %}
-if ($request->isOptions()) {
-    // Do something
-}
-{% endhighlight %}
-
-### PATCH Method
-
-You can detect HTTP `PATCH` requests with the Request object's `isPatch()` method.
-
-{% highlight php %}
-if ($request->isPatch()) {
-    // Do something
-}
-{% endhighlight %}
-
-### Method Override
-
-There are two ways to override the HTTP request method. You can override the HTTP request method using the `_METHOD` parameter, or you can send a custom `X-HTTP-Method-Override` header. This is particularly useful if, for example, you need to mimic a `PUT` request using a traditional web browser that only supports `POST` requests. You can always fetch the _original_ (non-overridden) HTTP method with the Request object's `getOriginalMethod()` method.
-
-#### With a body parameter
-
-Include a `_METHOD` parameter in a `POST` request body. You must use the `application/x-www-form-urlencoded` content type.
-
+<figure>
 {% highlight text %}
 POST /path HTTP/1.1
 Host: example.com
@@ -113,20 +100,28 @@ Content-length: 22
 
 data=value&_METHOD=PUT
 {% endhighlight %}
+<figcaption>Figure 3: Override HTTP method with _METHOD parameter.</figcaption>
+</figure>
 
-#### With a header
+You can also override the HTTP request method with a custom
+`X-Http-Method-Override` HTTP request header. This works with any HTTP request
+content type.
 
-You may also include the `X-HTTP-Method-Override` header in the HTTP request. You can use any content type.
-
+<figure>
 {% highlight text %}
 POST /path HTTP/1.1
 Host: example.com
 Content-type: application/json
 Content-length: 16
-X-HTTP-Method-Override: PUT
+X-Http-Method-Override: PUT
 
 {"data":"value"}
 {% endhighlight %}
+<figcaption>Figure 4: Override HTTP method with X-Http-Method-Override header.</figcaption>
+</figure>
+
+You can fetch the _original_ (non-overridden) HTTP method with the PSR 7 Request
+object's method named `getOriginalMethod()`.
 
 ## Request URL
 
