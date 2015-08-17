@@ -85,9 +85,19 @@ $app = new \Slim\App();
 $container = $app->getContainer();
 
 // Register Twig View service
-$container->register(new \Slim\Views\Twig('path/to/templates', [
-    'cache' => 'path/to/cache'
-]));
+$container['view'] = function ($c) {
+    $view = new \Slim\Views\Twig('path/to/templates', [
+        'cache' => 'path/to/cache'
+    ]);
+
+    // Instantiate and add Slim specific extension
+    $view->addExtension(new Slim\Views\TwigExtension(
+        $c['router'],
+        $c['request']->getUri()
+    ));
+
+    return $view;
+};
 
 // Define your routes here...
 
@@ -103,8 +113,8 @@ array of [Twig environment settings](http://twig.sensiolabs.org/doc/api.html#env
 #### Use the view service
 
 After you register the `slim/twig-view` component, you can access the view
-anywhere in your Slim application with `$app['view']`. This
-example demonstrates how to render a template with the Twig View
+anywhere in your Slim application with `$app->view` or in a route `Closure` with `$this->view`. 
+This example demonstrates how to render a template with the Twig View
 service.
 
 {% highlight php %}
@@ -115,13 +125,23 @@ $app = new \Slim\App();
 $container = $app->getContainer();
 
 // Register Twig View helper
-$app->register(new \Slim\Views\Twig('path/to/templates', [
-    'cache' => 'path/to/cache'
-]));
+$container['view'] = function ($c) {
+    $view = new \Slim\Views\Twig('path/to/templates', [
+        'cache' => 'path/to/cache'
+    ]);
+
+    // Instantiate and add Slim specific extension
+    $view->addExtension(new Slim\Views\TwigExtension(
+        $c['router'],
+        $c['request']->getUri()
+    ));
+
+    return $view;
+};
 
 // Define named route
 $app->get('/hello/{name}', function ($request, $response, $args) {
-    $this['view']->render('profile.html', [
+    $this->view->render($response, 'profile.html', [
         'name' => $args['name']
     ]);
 })->setName('profile');
@@ -130,11 +150,11 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 $app->run();
 {% endhighlight %}
 
-### The url_for() method
+### The path_for() method
 
-The `slim/twig-view` component exposes a custom `url_for()` function
+The `slim/twig-view` component exposes a custom `path_for()` function
 to your Twig templates. You can use this function to generate complete
-URLs to any named route in your Slim application. The `url_for()`
+URLs to any named route in your Slim application. The `path_for()`
 function accepts two arguments:
 
 1. A route name
@@ -151,7 +171,7 @@ for the "profile" named route shown in the example Slim application above.
 {% block body %}
 <h1>User List</h1>
 <ul>
-    <li><a href="{{ url_for('profile', { 'name': 'josh' }) }}">Josh</a></li>
+    <li><a href="{{ path_for('profile', { 'name': 'josh' }) }}">Josh</a></li>
 </ul>
 {% endblock %}
 {% endraw %}
