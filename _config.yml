@@ -17,6 +17,7 @@ defaults:
       docs:
         - title: Get Started
           items:
+            - [/docs, Home]
             - [/docs/start/installation.md, Installation]
             - [/docs/start/upgrade.md, Upgrade Guide]
             - [/docs/start/web-servers.md, Web Servers]
