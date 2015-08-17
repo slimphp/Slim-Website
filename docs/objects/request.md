@@ -163,12 +163,12 @@ methods to inspect the HTTP request's URL parts:
 ## The Request Headers
 
 Every HTTP request has headers. These are metadata that describe the HTTP
-request but are not visible reflected in the request's body. Slim's PSR 7
+request but are not visible in the request's body. Slim's PSR 7
 Request object provides several methods to inspect its headers.
 
 ### Get All Headers
 
-You can fetch all HTTP request headers an associative array with the PSR 7
+You can fetch all HTTP request headers as an associative array with the PSR 7
 Request object's `getHeaders()` method. The resultant associative array's keys
 are the header names and its values are themselves a numeric array of string
 values for their respective header name.

@@ -2,220 +2,206 @@
 title: Response
 ---
 
-The Response object encapsulates the HTTP response returned by the Slim application. You use the Response object to set the HTTP response status, headers, and body that are ultimately returned to the HTTP client.
+Your Slim app's routes and middleware are given a PSR 7 response object that
+represents the current HTTP response to be returned to the client. The response
+object implements the [PSR 7 ResponseInterface][psr7] with which you can
+inspect and manipulate the HTTP response status, headers, and body.
 
-The Response object is a _value object_, and it is immutable. You can never change a given Response object, but you can create a cloned Response object with new property values using any of the Response object's `with*()` methods.
+[psr7]: http://www.php-fig.org/psr/psr-7/#3-2-1-psr-http-message-responseinterface
 
-Wherever you are within a Slim application (e.g. a middleware layer, a route callable, or a Not Found handler), you will be given the latest Request and Response objects.
+## How to get the Response object
 
-## Response Status
+The PSR 7 response object is injected into your Slim application routes as the
+second argument to the route callback like this:
 
-The Response object has a numeric HTTP status code. The default status code is `200`. You can fetch the status code with the Response object's `getStatusCode()` method.
-
+<figure>
 {% highlight php %}
 <?php
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+
+$app = new \Slim\App;
+$app->get('/foo', function (ServerRequestInterface $request, ResponseInterface $response) {
+    // Use the PSR 7 $response object
+
+    return $response;
+});
+$app->run();
+{% endhighlight %}
+<figcaption>Figure 1: Inject PSR 7 response into application route callback.</figcaption>
+</figure>
+
+The PSR 7 response object is injected into your Slim application _middleware_
+as the second argument of the middleware callable like this:
+
+<figure>
+{% highlight php %}
+<?php
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+
+$app = new \Slim\App;
+$app->add(function (ServerRequestInterface $request, ResponseInterface $response, callable $next) {
+    // Use the PSR 7 $response object
+
+    return $next($request, $response);
+});
+// Define app routes...
+$app->run();
+{% endhighlight %}
+<figcaption>Figure 2: Inject PSR 7 response into application middleware.</figcaption>
+</figure>
+
+## The Response Status
+
+Every HTTP response has a numeric [status code][statuscodes]. The status code
+identifies the _type_ of HTTP response to be returned to the client. The PSR 7
+Response object's default status code is `200` (OK). You can get the PSR 7
+Response object's status code with the `getStatusCode()` method like this.
+
+[statuscodes]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+
+<figure>
+{% highlight php %}
 $status = $response->getStatusCode();
 {% endhighlight %}
+<figcaption>Figure 3: Get response status code.</figcaption>
+</figure>
 
-If you need to change a Response object's status code, you must request a new Response object that has the new status code with the Response object's `withStatus($code)` method.
+You can copy a PSR 7 Response object and assign a new status code like this:
 
+<figure>
 {% highlight php %}
-<?php
-$newResponse = $oldResponse->withStatus(404);
+$newResponse = $response->withStatus(302);
 {% endhighlight %}
+<figcaption>Figure 4: Create response with new status code.</figcaption>
+</figure>
 
-## Response Headers
+## The Response Headers
 
-The Response object manages a collection of headers that will be returned to the HTTP client. Each Response object provides the following methods to curate its collection of HTTP headers. Remember, the Response object is immutable, and you must use the appropriate `with*()` methods to fetch a _new_ Response object with modified headers.
+Every HTTP response has headers. These are metadata that describe the HTTP
+response but are not visible in the response's body. Slim's PSR 7
+Response object provides several methods to inspect and manipulate its headers.
 
 ### Get All Headers
 
-You can fetch an associative array of HTTP response headers with the Response object's `getHeaders()` method. This returns an associative array whose keys are header names. The array's values are single dimensional arrays that contain one or more string values associated with each header name. This is an example data structure potentially returned by the Response object's `getHeaders()` method.
+You can fetch all HTTP response headers as an associative array with the PSR 7
+Response object's `getHeaders()` method. The resultant associative array's keys
+are the header names and its values are themselves a numeric array of string
+values for their respective header name.
 
-{% highlight text %}
-[
-    'Allow' => [
-        'GET',
-        'HEAD',
-        'DELETE'
-    ]
-]
-{% endhighlight %}
-
-This example demonstrates how to fetch and iterate the Response object's headers.
-
+<figure>
 {% highlight php %}
-<?php
-// Iterate response headers
-foreach ($response->getHeaders() as $name => $values) {
-    echo $name, PHP_EOL;
-    foreach ($values as $value) {
-        echo $value, PHP_EOL;
-    }
+$headers = $response->getHeaders();
+foreach ($headers as $name => $values) {
+    echo $name . ": " . implode(", ", $values);
 }
 {% endhighlight %}
+<figcaption>Figure 5: Fetch and iterate all HTTP response headers as an associative array.</figcaption>
+</figure>
+
+### Get One Header
+
+You can get a single header's value(s) with the PSR 7 Response object's
+`getHeader($name)` method. This returns an array of values for the given header
+name. Remember, _a single HTTP header may have more than one value!_
+
+<figure>
+{% highlight php %}
+$headerValueArray = $response->getHeader('Vary');
+{% endhighlight %}
+<figcaption>Figure 6: Get values for a specific HTTP header.</figcaption>
+</figure>
+
+You may also fetch a comma-separated string with all values for a given header
+with the PSR 7 Response object's `getHeaderLine($name)` method. Unlike the
+`getHeader($name)` method, this method returns a comma-separated string.
+
+<figure>
+{% highlight php %}
+$headerValueString = $response->getHeaderLine('Vary');
+{% endhighlight %}
+<figcaption>Figure 7: Get single header's values as comma-separated string.</figcaption>
+</figure>
 
 ### Detect Header
 
-You can detect the presence of an HTTP header with the Response object's `hasHeader($name)` method. This method returns `true` or `false`.
+You can test for the presence of a header with the PSR 7 Response object's
+`hasHeader($name)` method.
 
+<figure>
 {% highlight php %}
-<?php
-if ($response->hasHeader('Allow') === true) {
+if ($response->hasHeader('Vary')) {
     // Do something
 }
 {% endhighlight %}
-
-### Get Header
-
-You can fetch a single HTTP response header with the Response object's `getHeader($name)` method.
-
-{% highlight php %}
-<?php
-$headerValue = $response->getHeader('Allow');
-{% endhighlight %}
-
-This returns a string value. The returned string is a comma-concatenated string containing all values associated with the header name. For example, `$response->getHeader('Allow')` may return this string value:
-
-{% highlight text %}
-"GET,HEAD,DELETE"
-{% endhighlight %}
-
-Use the Response object's `getHeaderLines($name)` method to return the single-dimensional array associated with a given header name.
-
-{% highlight php %}
-<?php
-$headerValue = $response->getHeaderLines('Allow');
-{% endhighlight %}
-
-This code may return this single-dimensional array:
-
-{% highlight text %}
-[
-    'GET',
-    'HEAD',
-    'DELETE'
-]
-{% endhighlight %}
+<figcaption>Figure 8: Detect presence of a specific HTTP header.</figcaption>
+</figure>
 
 ### Set Header
 
-You can set a new header value with the Response object's `withHeader($name, $value)` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that has the new header value. **This method is destructive**, and it _replaces_ any existing header values that are associated with the same header name.
+You can set a header value with the PSR 7 Response object's
+`withHeader($name, $value)` method.
 
+<figure>
 {% highlight php %}
-<?php
-$newResponse = $oldResponse->withHeader(
-    'Content-type',
-    'application/json'
-);
+$newResponse = $oldResponse->withHeader('Content-type', 'application/json');
 {% endhighlight %}
+<figcaption>Figure 9: Set HTTP header</figcaption>
+</figure>
 
-### Add Header
+<div class="alert alert-info">
+    <div><strong>Reminder</strong></div>
+    <div>
+        The Response object is immutable. This method returns a <em>copy</em> of
+        the Response object that has the new header value. <strong>This method is
+        destructive</strong>, and it <em>replaces</em> existing header
+        values already associated with the same header name.
+    </div>
+</div>
 
-You can add a new header value with the Response object's `withAddedHeader($name, $value)` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that has the added header value. **This method is non-destructive**, and it _appends_ the new header value to any existing header values that are `associated with the same header name.
+### Append Header
 
+You can append a header value with the PSR 7 Response object's
+`withAddedHeader($name, $value)` method.
+
+<figure>
 {% highlight php %}
-<?php
-$newResponse = $oldResponse->withAddedHeader(
-    'Content-type',
-    'application/json'
-);
+$newResponse = $oldResponse->withAddedHeader('Allow', 'PUT');
 {% endhighlight %}
+<figcaption>Figure 10: Append HTTP header</figcaption>
+</figure>
+
+<div class="alert alert-info">
+    <div><strong>Reminder</strong></div>
+    <div>
+        Unlike the <code>withHeader()</code> method, this method <em>appends</em>
+        the new value to the set of values that already exist for the same header
+        name. The Response object is immutable. This method returns a
+        <em>copy</em> of the Response object that has the appended header value.
+    </div>
+</div>
 
 ### Remove Header
 
-You can remove a header with the Response object's `withoutHeader($name)` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that does not have the specified header.
+You can remove a header with the Response object's `withoutHeader($name)` method.
 
+<figure>
 {% highlight php %}
-<?php
 $newResponse = $oldResponse->withoutHeader('Allow');
 {% endhighlight %}
+<figcaption>Figure 11: Remove HTTP header</figcaption>
+</figure>
 
-## Response Cookies
+<div class="alert alert-info">
+    <div><strong>Reminder</strong></div>
+    <div>
+        The Response object is immutable. This method returns a <em>copy</em>
+        of the Response object that has the appended header value.
+    </div>
+</div>
 
-The Response object manages a collection of cookies that will be serialized into the response header and returned to the HTTP client. Each Response object provides the following methods to curate its collection of HTTP cookies. Remember, the Response object is immutable, and you must use the appropriate `with*()` methods to fetch a _new_ Response object with modified cookies.
-
-Unlike Response headers, Response cookies have a name that is associated with a fixed set of properties. Specifically, each Response cookie always has these exact properties:
-
-value
-:   A string.
-
-expires
-:   An integer unix timestamp, or a string to be converted with `strtotime()`.
-
-path
-:   Absolute URI path string beneath which the cookie is valid.
-
-domain
-:   Domain name string beneath which the cookie is valid.
-
-secure
-:   Is this cookie transmitted over HTTPS only?
-
-httponly
-:   Is this cookie transmitted via HTTP protocol only?
-
-Fortunately, you don't have to define these settings every time you set a new cookie. Instead, you define the default cookie settings when you instantiate a Slim application. Then you simply pass the desired cookie value when you set a new Response cookie. Look for examples below.
-
-### Get All Cookies
-
-You can fetch an associative array of HTTP response cookies with the Response object's `getCookies()` method. This returns an associative array whose keys are cookie names. The array's values are single dimensional arrays that contain the properties listed above. This is an example data structure potentially returned by the Response object's `getCookies()` method.
-
-{% highlight text %}
-[
-    'user' => [
-        'value' => 'Bob',
-        'expires' => '2 days',
-        'path' => '/',
-        'domain' => 'example.com',
-        'secure' => true,
-        'httponly' => true
-    ]
-]
-{% endhighlight %}
-
-### Detect Cookie
-
-You can detect the presence of an HTTP cookie with the Response object's `hasCookie($name)` method. This method returns `true` or `false`.
-
-{% highlight php %}
-<?php
-if ($response->hasCookie('user') === true) {
-    // Do something
-}
-{% endhighlight %}
-
-### Set Cookie
-
-You can set a new cookie with the Response object's `withCookie($name, $value)` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that has the new cookie.
-
-{% highlight php %}
-<?php
-$newResponse = $oldResponse->withCookie('user', 'Bob');
-{% endhighlight %}
-
-This example creates a new cookie whose name is "user". The cookie's _value_ property is "Bob". Its other properties assume the default values provided during application instantiation. However, you _can_ override the default cookie properties by passing an associative array as the second argument to the `withCookie()` method. This array should contain only the properties different from the default cookie properties.
-
-{% highlight php %}
-<?php
-$newResponse = $oldResponse->withCookie('user', [
-    'value' => 'Bob',
-    'expires' => '7 days'
-]);
-{% endhighlight %}
-
-### Remove Cookie
-
-You can remove a cookie with the Response object's `withoutCookie($name)` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that does not have the specified cookie.
-
-{% highlight php %}
-<?php
-$newResponse = $oldResponse->withoutCookie('user');
-{% endhighlight %}
-
-Technically, this method _sets_ a new cookie whose value is empty and whose expiration date is in the past. This prompts the HTTP client to invalidate and destroy its local copy of the cookie.
-
-## Response Body
+## The Response Body
 
 The Response object's body is a streamable object that implements the [\Psr\Http\Message\StreamableInterface](https://github.com/php-fig/fig-standards/blob/master/proposed/http-message.md#34-psrhttpmessagestreamableinterface) interface. This makes it possible to deliver content that may not otherwise fit into available system memory. By default, the Response object body opens a readable, writable, and seekable handle to `php://temp`. However, you can point the Response object's body to _any_ valid PHP resource handle. Think about that for a second. You can point the Response object's body to a local filesystem file, to a remote file hosted on Amazon S3, to a remote API, or to the output of a local system process.
 
