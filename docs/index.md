@@ -13,7 +13,9 @@ routine, and returns an HTTP response. That's it.
 
 Slim is an ideal tool to create APIs that consume, repurpose, or publish data. Slim is also
 a great tool for rapid prototyping. Heck, you can even build full-featured web
-applications with user interfaces.
+applications with user interfaces. More importantly, Slim is super fast
+and has very little code. In fact, you can read and understand its source code
+in only an afternoon!
 
 > At its core, Slim
 is a dispatcher that receives an HTTP request, invokes an appropriate callback
@@ -23,8 +25,35 @@ You don't always need a kitchen-sink solution like [Symfony][symfony] or [Larave
 These are great tools, for sure. But they are often overkill. Instead, Slim
 provides only a minimal set of tools that do what you need and nothing else.
 
-Slim does not have a lot of code, and that means you can easily read
-_and understand_ its source code in an afternoon.
+## How does it work?
+
+First, you need a web server like Nginx or Apache. You should [configure
+your web server](/docs/start/web-servers.html) so that it sends all appropriate
+requests to one "front-controller" PHP file. You instantiate and run your Slim
+app in this PHP file.
+
+A Slim app contains routes that respond to specific HTTP requests. Each route
+invokes a callback and returns an HTTP response. To get started, you first
+instantiate and configure the Slim application. Next, you define your application
+routes. Finally, you run the Slim application. It's that easy. Here's an
+example application:
+
+<figure>
+{% highlight php %}
+<?php
+// Create and configure Slim app
+$app = new \Slim\App;
+
+// Define app routes
+$app->get('/hello/{name}', function ($request, $response, $args) {
+    return $response->write("Hello " . $args['name']);
+});
+
+// Run app
+$app->run();
+{% endhighlight %}
+<figcaption>Figure 1: Example Slim application</figcaption>
+</figure>
 
 ## Bring your own components
 
@@ -32,12 +61,6 @@ Slim is designed to play well with other PHP components, too. You can register
 additional first-party components such as [Slim-Csrf][csrf], [Slim-HttpCache][httpcache],
 or [Slim-Flash][flash] that build upon Slim's default functionality. It's also
 easy to integrate third-party components found on [Packagist](https://packagist.org/).
-
-## Front controller pattern
-
-It is typical to use the front-controller pattern to funnel appropriate HTTP requests
-received by your web server to a single PHP file. This PHP file is where
-you instantiate, configure, and run your Slim app.
 
 ## How to read this documentation
 
