@@ -203,33 +203,68 @@ $newResponse = $oldResponse->withoutHeader('Allow');
 
 ## The Response Body
 
-The Response object's body is a streamable object that implements the [\Psr\Http\Message\StreamableInterface](https://github.com/php-fig/fig-standards/blob/master/proposed/http-message.md#34-psrhttpmessagestreamableinterface) interface. This makes it possible to deliver content that may not otherwise fit into available system memory. By default, the Response object body opens a readable, writable, and seekable handle to `php://temp`. However, you can point the Response object's body to _any_ valid PHP resource handle. Think about that for a second. You can point the Response object's body to a local filesystem file, to a remote file hosted on Amazon S3, to a remote API, or to the output of a local system process.
+An HTTP response typically has a body. Slim provides a PSR 7 Response object
+with which you can inspect and manipulate the eventual HTTP response's body.
 
-### Get Body
+Just like the PSR 7 Request object, the PSR 7 Response object implements
+the body as an instance of `\Psr\Http\Message\StreamInterface`. You can get
+the HTTP response body `StreamInterface` instance with the PSR 7 Response
+object's `getBody()` method. The `getBody()` method is preferable if the
+outgoing HTTP response length is unknown or too large for available memory.
 
-You can get the Response object body with the `getBody()` method.
-
+<figure>
 {% highlight php %}
-<?php
 $body = $response->getBody();
 {% endhighlight %}
+<figcaption>Figure 12: Get HTTP response body</figcaption>
+</figure>
 
-### Write Body
+The resultant `\Psr\Http\Message\StreamInterface` instance provides the following
+methods to read from, iterate, and write to its underlying PHP `resource`.
 
-You can write to the Response object's body with the Response object's `write()` method. This method is a simple proxy to the Body object's `write()` method and is available as a convenience.
+* `getSize()`
+* `tell()`
+* `eof()`
+* `isSeekable()`
+* `seek()`
+* `rewind()`
+* `isWritable()`
+* `write($string)`
+* `isReadable()`
+* `read($length)`
+* `getContents()`
+* `getMetadata($key = null)`
 
+Most often, you'll need to write to the PSR 7 Response object. You can write
+content to the `StreamInterface` instance with its `write()` method like this:
+
+<figure>
 {% highlight php %}
-<?php
-$response->write('New content');
+$body = $response->getBody();
+$body->write('Hello');
 {% endhighlight %}
+<figcaption>Figure 13: Write content to the HTTP response body</figcaption>
+</figure>
 
-### Set Body
+You can also _replace_ the PSR 7 Response object's body with an entirely new
+`StreamInterface` instance. This is particularly useful when you want to pipe
+content from a remote destination (e.g. the filesystem or a remote API) into
+the HTTP response. You can replace the PSR 7 Response object's body with
+its `withBody(StreamInterface $body)` method. Its argument **MUST** be an
+instance of `\Psr\Http\Message\StreamInterface`.
 
-You can _replace_ the Response object's body with the Response object's `withBody()` method. Remember, the Response object is immutable. This method returns a new _copy_ of the Response object that uses the new Body. This method's argument MUST be an instance of `\Psr\Http\Message\StreamableInterface`.
-
+<figure>
 {% highlight php %}
-<?php
-$newResponse = $oldResponse->withBody(
-    new Body(fopen('s3://bucket/key', 'r'));
-);
+$newStream = new \GuzzleHttp\Psr7\LazyOpenStream('/path/to/file', 'r');
+$newResponse = $oldResponse->withBody($newStream);
 {% endhighlight %}
+<figcaption>Figure 13: Replace the HTTP response body</figcaption>
+</figure>
+
+<div class="alert alert-info">
+    <div><strong>Reminder</strong></div>
+    <div>
+        The Response object is immutable. This method returns a <em>copy</em>
+        of the Response object that contains the new body.
+    </div>
+</div>
