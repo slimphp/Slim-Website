@@ -2,7 +2,7 @@
 title: Router
 ---
 
-The Slim Framework's router is built on top of the [nikic/fastroute](https://github.com/nikic/FastRoute) component, and it is remarkably fast and stable. 
+The Slim Framework's router is built on top of the [nikic/fastroute](https://github.com/nikic/FastRoute) component, and it is remarkably fast and stable.
 
 ## How to create routes
 
@@ -145,7 +145,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 });
 {% endhighlight %}
 
-### Route strategies
+## Route strategies
 
 The route callback signature is determined by a route strategy. By default, Slim expects route callbacks to accept the request, response, and an array of route placeholder arguments. This is called the RequestResponse strategy. However, you can change the expected route callback signature by simply using a different strategy. As an example, Slim provides an alternative strategy called RequestResponseArgs that accepts request and response, plus each route placeholder as a separate argument. Here is an example of using this alternative strategy; simply replace the `foundHandler` dependency provided by the default `\Slim\Container`:
 
@@ -218,7 +218,7 @@ The router's `pathFor()` method accepts two arguments:
 ## Route groups
 
 To help organize routes into logical groups, the `\Slim\App` also provides a `group()` method. Each group's route pattern is prepended to the routes or groups contained within it, and any placeholder arguments in the group pattern are ultimately made available to the nested routes:
- 
+
 {% highlight php %}
 $app = new \Slim\App();
 $app->group('/users/{id:[0-9]+}', function () {
