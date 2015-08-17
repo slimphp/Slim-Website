@@ -2,7 +2,7 @@
 title: Upgrade Guide
 ---
 
-If you are upgrading from version 2 to version 3, these are the signifcant changes tha
+If you are upgrading from version 2 to version 3, these are the significant changes that
 you need to be aware of.
 
 
@@ -66,7 +66,7 @@ In v3.0 cookies has been removed from core and moved to a separate component. Se
 In v3.0 we have removed the dependency for crypto in core.
 
 # PHP Version
-Slim v3.0 requires PHP 5.4+
+Slim v3.0 requires PHP 5.5+
 
 # Route Callbacks
 In v3.0 we have adopted a new callback signature:
