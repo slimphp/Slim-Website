@@ -33,7 +33,7 @@ $app = new \Slim\App($c);
 
 In this example, we define a new `notFoundHandler` factory that returns a callable. The returned callable accepts two arguments:
 
-1. A `\Psr\Http\Message\RequestInterface` instance
+1. A `\Psr\Http\Message\ServerRequestInterface` instance
 2. A `\Psr\Http\Message\ResponseInterface` instance
 
 The callable **MUST** return an appropriate `\Psr\Http\Message\ResponseInterface` instance.

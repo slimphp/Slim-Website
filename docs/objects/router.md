@@ -118,7 +118,7 @@ $app->map(['GET', 'POST'], '/books', function ($request, $response, $args) {
 Each routing method described above accepts a callback routine as its final argument. This argument can be any PHP callable, and by default it accepts three arguments.
 
 **Request**
-: The first argument is a `Psr\Http\Message\RequestInterface` object that represents the current HTTP request.
+: The first argument is a `Psr\Http\Message\ServerRequestInterface` object that represents the current HTTP request.
 
 **Response**
 : The second argument is a `Psr\Http\Message\ResponseInterface` object that represents the current HTTP response.
