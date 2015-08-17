@@ -55,6 +55,17 @@ $app->run();
 <figcaption>Figure 1: Example Slim application</figcaption>
 </figure>
 
+## Request and response
+
+When you build a Slim app, you are often working directly with Request
+and Response objects. These objects represent the actual HTTP request received
+by the web server and the eventual HTTP response returned to the client.
+
+Every Slim app route is given the current Request and Response objects as arguments
+to its callback routine. These objects implement the popular [PSR 7](/docs/concepts/value-objects.html) interfaces. The Slim app route can inspect
+or the manipulate these objects as necessary. Ultimately, each Slim app route
+**MUST** return a PSR 7 Response object.
+
 ## Bring your own components
 
 Slim is designed to play well with other PHP components, too. You can register
