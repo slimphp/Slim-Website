@@ -220,19 +220,35 @@ if ($request->hasHeader('Accept')) {
 <figcaption>Figure 8: Detect presence of a specific HTTP request header.</figcaption>
 </figure>
 
-## Request Body
+## The Request Body
 
-Every HTTP request has a body. Slim's PSR 7 Request object represents the HTTP
-request body as an instance of `\Psr\Http\Message\StreamInterface`. You can get
-the HTTP request body with the PSR 7 Request object's `getBody()` method. The
-`getBody()` method is preferable if the incoming HTTP request size is unknown
-or too large for available memory.
+Every HTTP request has a body. If you are building a Slim application that
+consumes JSON or XML data, you can use the PSR 7 Request object's
+`getParsedBody()` method to parse the HTTP request body into a native PHP format.
+Slim can parse JSON, XML, and URL-encoded data out of the box.
+
+<figure>
+{% highlight php %}
+$parsedBody = $request->getParsedBody();
+{% endhighlight %}
+<figcaption>Figure 9: Parse HTTP request body into native PHP format</figcaption>
+</figure>
+
+* JSON requests are converted into a PHP object with `json_decode($input)`.
+* XML requests are converted into a `SimpleXMLElement` with `simplexml_load_string($input)`.
+* URL-encoded requests are converted into a PHP array with `parse_str($input)`.
+
+Technically speaking, Slim's PSR 7 Request object represents the HTTP request
+body as an instance of `\Psr\Http\Message\StreamInterface`. You can get
+the HTTP request body `StreamInterface` instance with the PSR 7 Request object's
+`getBody()` method. The `getBody()` method is preferable if the incoming HTTP
+request size is unknown or too large for available memory.
 
 <figure>
 {% highlight php %}
 $body = $request->getBody();
 {% endhighlight %}
-<figcaption>Figure 9: Get HTTP request body</figcaption>
+<figcaption>Figure 10: Get HTTP request body</figcaption>
 </figure>
 
 The resultant `\Psr\Http\Message\StreamInterface` instance provides the following
@@ -251,32 +267,30 @@ methods to read and iterate its underlying PHP `resource`.
 * `getContents()`
 * `getMetadata($key = null)`
 
-If you are building a Slim application that consumes JSON or XML data, you
-can use the PSR 7 Request object's `getParsedBody()` method to parse the HTTP
-request body into a native PHP format. Slim can parse JSON, XML, and URL-encoded
-data out of the box.
-
-<figure>
-{% highlight php %}
-$parsedBody = $request->getParsedBody();
-{% endhighlight %}
-<figcaption>Figure 10: Parse HTTP request body into native PHP format</figcaption>
-</figure>
-
-* JSON requests are converted into a PHP object with `json_decode($input)`.
-* XML requests are converted into a `SimpleXMLElement` with `simplexml_load_string($input)`.
-* URL-encoded requests are converted into a PHP array with `parse_str($input)`.
-
 ## Request Helpers
 
-The Request object provides additional methods to inspect the HTTP request metadata (e.g., content type, charset, length, and IP address).
+Slim's PSR 7 Request implementation provides these additional proprietary methods
+to help you further inspect the HTTP request.
 
 ### Detect AJAX / XHR requests
 
 You can detect AJAX/XHR requests with the Request object's `isAjax()` and `isXhr()` methods. Both methods do the same thing, so choose only one. These methods detect the presence of the `X-Requested-With` HTTP request header and ensure its value is `XMLHttpRequest`. These methods also return `true` if the `isajax` parameter is provided in the HTTP request query string or body.
 
+<figure>
+{% highlight text %}
+POST /path HTTP/1.1
+Host: example.com
+Content-type: application/x-www-form-urlencoded
+Content-length: 7
+X-Requested-With: XMLHttpRequest
+
+foo=bar
+{% endhighlight %}
+<figcaption>Figure 11: Example XHR request.</figcaption>
+</figure>
+
 {% highlight php %}
-if ($request->isAjax()) {
+if ($request->isXhr()) {
     // Do something
 }
 {% endhighlight %}
