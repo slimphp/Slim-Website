@@ -86,9 +86,17 @@ $container = $app->getContainer();
 
 // Register Twig View service
 $container['view'] = function () {
-    return new \Slim\Views\Twig('path/to/templates', [
+    $view = new \Slim\Views\Twig('path/to/templates', [
         'cache' => 'path/to/cache'
     ]);
+
+    // Instantiate and add Slim specific extension
+    $view->addExtension(new Slim\Views\TwigExtension(
+        $c['router'],
+        $c['request']->getUri()
+    ));
+
+    return $view;
 };
 
 // Define your routes here...
@@ -118,9 +126,17 @@ $container = $app->getContainer();
 
 // Register Twig View helper
 $container['view'] = function () {
-    return new \Slim\Views\Twig('path/to/templates', [
+    $view = new \Slim\Views\Twig('path/to/templates', [
         'cache' => 'path/to/cache'
     ]);
+
+    // Instantiate and add Slim specific extension
+    $view->addExtension(new Slim\Views\TwigExtension(
+        $c['router'],
+        $c['request']->getUri()
+    ));
+
+    return $view;
 };
 
 // Define named route
