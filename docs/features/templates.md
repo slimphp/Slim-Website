@@ -85,7 +85,7 @@ $app = new \Slim\App();
 $container = $app->getContainer();
 
 // Register Twig View service
-$container['view'] = function () {
+$container['view'] = function ($c) {
     $view = new \Slim\Views\Twig('path/to/templates', [
         'cache' => 'path/to/cache'
     ]);
@@ -125,7 +125,7 @@ $app = new \Slim\App();
 $container = $app->getContainer();
 
 // Register Twig View helper
-$container['view'] = function () {
+$container['view'] = function ($c) {
     $view = new \Slim\Views\Twig('path/to/templates', [
         'cache' => 'path/to/cache'
     ]);
