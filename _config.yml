@@ -26,10 +26,21 @@ defaults:
             - [/docs/concepts/value-objects.md, PSR 7]
             - [/docs/concepts/middleware.md, Middleware]
             - [/docs/concepts/di.md, Dependency Container]
+        - title: The Request
+          items:
+            - [/docs/objects/request.md, Overview]
+            - [/docs/objects/request.md#the-request-method, Method]
+            - [/docs/objects/request.md#the-request-headers, Headers]
+            - [/docs/objects/request.md#the-request-body, Body]
+            - [/docs/objects/request.md#request-helpers, Helpers]
+        - title: The Response
+          items:
+            - [/docs/objects/response.md, Overview]
+            - [/docs/objects/response.md#the-response-status, Status]
+            - [/docs/objects/response.md#the-response-headers, Headers]
+            - [/docs/objects/response.md#the-response-body, Body]
         - title: Objects
           items:
-            - [/docs/objects/request.md, Request]
-            - [/docs/objects/response.md, Response]
             - [/docs/objects/router.md, Router]
             - [/docs/objects/environment.md, Environment]
         - title: Features
