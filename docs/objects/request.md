@@ -272,9 +272,12 @@ methods to read and iterate its underlying PHP `resource`.
 Slim's PSR 7 Request implementation provides these additional proprietary methods
 to help you further inspect the HTTP request.
 
-### Detect AJAX / XHR requests
+### Detect XHR requests
 
-You can detect AJAX/XHR requests with the Request object's `isAjax()` and `isXhr()` methods. Both methods do the same thing, so choose only one. These methods detect the presence of the `X-Requested-With` HTTP request header and ensure its value is `XMLHttpRequest`. These methods also return `true` if the `isajax` parameter is provided in the HTTP request query string or body.
+You can detect XHR requests with the Request object's `isXhr()` methods. This
+method detects the presence of the `X-Requested-With` HTTP request header and
+ensures its value is `XMLHttpRequest`. This methods also returns `true` if the
+`isajax` parameter is provided in the HTTP request query string or body.
 
 <figure>
 {% highlight text %}
