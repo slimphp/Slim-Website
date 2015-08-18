@@ -276,8 +276,7 @@ to help you further inspect the HTTP request.
 
 You can detect XHR requests with the Request object's `isXhr()` method. This
 method detects the presence of the `X-Requested-With` HTTP request header and
-ensures its value is `XMLHttpRequest`. This methods also returns `true` if the
-`isajax` parameter is provided in the HTTP request query string or body.
+ensures its value is `XMLHttpRequest`.
 
 <figure>
 {% highlight text %}
