@@ -31,7 +31,7 @@ $c['notAllowedHandler'] = function ($c) {
 
 In this example, we define a new `notAllowedHandler` factory that returns a callable. The returned callable accepts three arguments:
 
-1. A `\Psr\Http\Message\RequestInterface` instance
+1. A `\Psr\Http\Message\ServerRequestInterface` instance
 2. A `\Psr\Http\Message\ResponseInterface` instance
 3. A numeric array of allowed HTTP method names
 
