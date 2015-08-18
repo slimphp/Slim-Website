@@ -44,10 +44,10 @@ defaults:
             - [/docs/objects/router.md, Overview]
             - [/docs/objects/router.md#how-to-create-routes, Create Routes]
             - [/docs/objects/router.md#route-callbacks, Callbacks]
+            - [/docs/objects/router.md#route-strategies, Strategies]
             - [/docs/objects/router.md#route-placeholders, Placeholders]
             - [/docs/objects/router.md#route-names, Names]
             - [/docs/objects/router.md#route-groups, Groups]
-            - [/docs/objects/router.md#route-strategies, Strategies]
             - [/docs/objects/router.md#route-middleware, Middleware]
         - title: Error Handling
           items:
