@@ -57,7 +57,10 @@ The callable **MUST** return a new `\Psr\Http\Message\ResponseInterface` instanc
 To completely disable Slim's error handling, simply remove the error handler from the container:
 
 {% highlight php %}
-unset($app->getContainer()['errorHandler']);
+$container = new Slim\Container();
+$container['errorHandler'] = null;
+
+$app = new Slim\App($container);
 {% endhighlight %}
 
 You are now responsible for handling any exceptions that occur in your application as they will not be handled by Slim.
