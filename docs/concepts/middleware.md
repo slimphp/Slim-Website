@@ -60,7 +60,7 @@ class ExampleMiddleware
 }
 {% endhighlight %}
 
-To use this class as a middleware, please use `->add( new ExampleMiddleware() );` function chain after the `$app`, `Route`,  or `group()`, which in the code below, any one of these, could represent $subject.
+To use this class as a middleware, you can use `->add( new ExampleMiddleware() );` function chain after the `$app`, `Route`,  or `group()`, which in the code below, any one of these, could represent $subject.
 
 {% highlight php %}
 $subject->add( new ExampleMiddleware() );
@@ -68,7 +68,7 @@ $subject->add( new ExampleMiddleware() );
 
 ## How do I add middleware?
 
-You may add middleware to a Slim application or to an individual Slim application route. Both scenarios accept the same middleware and implement the same middleware interface.
+You may add middleware to a Slim application, to an individual Slim application route or to a route group. All scenarios accept the same middleware and implement the same middleware interface.
 
 ### Application middleware
 
@@ -168,4 +168,3 @@ but visiting `/` *(domain-root)*, would be expected to generate the following ou
 
     Hello World
 
-Obviously there are more useful examples of middleware and both class-based, and simple anonymous function-based middleware, are also supported at the application, route and group level. The reasons for each will be a mixture of personal preference, and utility / code quality.
