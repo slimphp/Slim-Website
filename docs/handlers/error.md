@@ -51,3 +51,13 @@ In this example, we define a new `errorHandler` factory that returns a callable.
 3. A `\Exception` instance
 
 The callable **MUST** return a new `\Psr\Http\Message\ResponseInterface` instance as is appropriate for the given exception.
+
+### Disabling
+
+To completely disable Slim's error handling, simply remove the error handler from the container:
+
+{% highlight php %}
+unset($app->getContainer()['errorHandler']);
+{% endhighlight %}
+
+You are now responsible for handling any exceptions that occur in your application as they will not be handled by Slim.
