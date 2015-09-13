@@ -63,7 +63,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
     return $this->view->render($response, 'profile.html', [
         'name' => $args['name']
     ]);
-})->name('profile');
+})->setName('profile');
 
 // Run app
 $app->run();
