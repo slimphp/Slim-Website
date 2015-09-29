@@ -6,9 +6,21 @@ Things go wrong. You can't predict errors, but you can anticipate them. Each Sli
 
 ## Default error handler
 
-The default error handler is very basic. It sets the Response status code to `500`, it sets the Response content type to `text/html`, and it appends error diagnostic information to the Response body.
+The default error handler is very basic. It sets the Response status code to `500`, it sets the Response content type to `text/html`, and appends a generic error message into the Response body.
 
 This is _probably_ not appropriate for production applications. You are strongly encouraged to implement your own Slim application error handler.
+
+The default error handler can also include detailed error diagnostic information. To enable this you need to set the `displayErrorDetails` setting to true:
+
+{% highlight php %}
+$configuration = [
+    'settings' => [
+        'displayErrorDetails' => true,
+    ],
+];
+$c = new \Slim\Container($configuration);
+$app = new \Slim\App($c);
+{% endhighlight %}
 
 ## Custom error handler
 
