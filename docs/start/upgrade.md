@@ -92,5 +92,23 @@ In v3.0:
 php $app->get(…)->add($mw2)->add($mw1);
 {% endhighlight %}
 
+# urlFor() is now pathfor() in the router
+
+`urlFor()` has been renamed `pathFor()` and can be found in the `router` object:
+
+{% highlight php %}
+
+$router = $app->router;
+
+$app->get('/', function ($request, $response, $args) use ($router) {
+    $url = $router->pathFor('home');
+    $response->write("<a href='$url'>Home</a>");
+    return $response;
+})->setName('home');
+{% endhighlight %}
+
+Also, `pathFor()` is base path aware.
+
+
 # HTTP Caching
 In Slim v3 we have removed the HTTP-Caching into its own module Slim\Http\Cache ( https://github.com/slimphp/Slim-HttpCache )
