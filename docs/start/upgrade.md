@@ -28,7 +28,7 @@ $app->get('/', function ($req, $res, $args) {
 Slim v3 no longer has the concept of hooks. Hooks were removed as they duplicate the functionality already present in middlewares. You should be able to easily convert your Hook code into Middleware code.
 
 # Removal HTTP Cache
-Slim v3 no longer ships with HTTP Cache methods in core. It has been moved to its own separate repo. (https://github.com/slimphp/Slim-HttpCache )
+In Slim v3 we have removed the HTTP-Caching into its own module Slim\Http\Cache ( https://github.com/slimphp/Slim-HttpCache )
 
 # Changed Redirect
 In Slim v2.x one would use the helper function $app->redirect(); to trigger a redirect request.
@@ -108,7 +108,3 @@ $app->get('/', function ($request, $response, $args) use ($router) {
 {% endhighlight %}
 
 Also, `pathFor()` is base path aware.
-
-
-# HTTP Caching
-In Slim v3 we have removed the HTTP-Caching into its own module Slim\Http\Cache ( https://github.com/slimphp/Slim-HttpCache )
