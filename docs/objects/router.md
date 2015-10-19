@@ -226,6 +226,7 @@ $app->group('/users/{id:[0-9]+}', function () {
         // Find, delete, patch or replace user identified by $args['id']
     })->setName('user');
     $this->get('/reset-password', function ($request, $response, $args) {
+        // Route for /users/{id:[0-9]+}/reset-password
         // Reset the password for user identified by $args['id']
     })->setName('user-password-reset');
 });
