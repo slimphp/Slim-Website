@@ -50,6 +50,8 @@ $container['view'] = function ($c) {
 <figcaption>Figure 2: Register slim/twig-view component with container.</figcaption>
 </figure>
 
+Note : "cache" could be set to false to disable it, see also 'auto_reload' option, usefull in development environnement. For more information, see [Twig environment options](http://twig.sensiolabs.org/api/master/Twig_Environment.html#method___construct) 
+
 Now you can use the `slim/twig-view` component service inside an app route
 to render a template and write it to a PSR 7 Response object like this:
 
