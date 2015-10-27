@@ -24,7 +24,7 @@ middleware. You should add both to your application like this:
 // Register service provider with the container
 $container = new \Slim\Container;
 $container['cache'] = function () {
-    new \Slim\HttpCache\CacheProvider();
+    return new \Slim\HttpCache\CacheProvider();
 };
 
 // Add middleware to the application
