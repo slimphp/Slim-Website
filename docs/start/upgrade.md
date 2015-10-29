@@ -57,7 +57,7 @@ Execution
 Application middleware is executed as Last In First Executed (LIFE)
 
 # Flash Messages
-In v3.0 the concept of flash messages has been removed. There currently is no planned feature for this, but could likely be a part of the Cookies package.
+Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/features/flash.html) package.
 
 # Cookies
 In v3.0 cookies has been removed from core and moved to a separate component. See (https://github.com/slimphp/Slim-Http-Cookies)
