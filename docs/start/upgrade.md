@@ -97,3 +97,60 @@ $app->get('/', function ($request, $response, $args) {
 {% endhighlight %}
 
 Also, `pathFor()` is base path aware.
+
+# Container and DI ... Constructing
+Slim uses Pimple as a Dependency Injection Container
+
+{% highlight php %}
+
+//index.php
+$app = new Slim\App(
+    new \Slim\Container(
+        include "../config/container.config.php"
+    )
+);
+
+//Slim will grab the Home class from the container defined below and execute its index method
+//If the class is not defined in the container Slim will still contruct it and pass the container as the first arugment to the constructor!
+$app->get('/', Home::class . ':index');
+
+
+//In container.config.php
+return [
+    "settings" => [
+        'viewTemplatesDirectory' => "../templates",
+    ],
+    'twig' => [
+        'title' => '',
+        'description' => '',
+        'author' => ''
+    ],
+    'view' => function ($c) {
+        $view = new Twig(
+            $c['settings']['viewTemplatesDirectory'],
+            [
+                'cache' => false //"../cache"
+            ]
+        );
+
+        // Instantiate and add Slim specific extension
+        $view->addExtension(
+            new TwigExtension(
+                $c['router'],
+                $c['request']->getUri()
+            )
+        );
+
+        foreach ($c['twig'] as $name => $value) {
+            $view->getEnvironment()->addGlobal($name, $value);
+        }
+
+        return $view;
+    },
+    Home::class => function ($c) {
+        return new Home($c['view']);
+    }
+];
+
+{% endhighlight %}
+
