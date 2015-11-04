@@ -5,10 +5,8 @@ title: Upgrade Guide
 If you are upgrading from version 2 to version 3, these are the significant changes that
 you need to be aware of.
 
-
-# Removal of Stop/Halt
-Slim Core has removed Stop/Halt.
-In your applications, you should transition to using the withStatus() and withBody()
+# New PHP version
+`"php": ">=5.5.0"`
 
 # Changed Signature of Route Functions
 In Slim 2.x:
@@ -30,6 +28,10 @@ Slim v3 no longer has the concept of hooks. Hooks were removed as they duplicate
 
 # Removal HTTP Cache
 In Slim v3 we have removed the HTTP-Caching into its own module Slim\Http\Cache ( https://github.com/slimphp/Slim-HttpCache )
+
+# Removal of Stop/Halt
+Slim Core has removed Stop/Halt.
+In your applications, you should transition to using the withStatus() and withBody()
 
 # Changed Redirect
 In Slim v2.x one would use the helper function $app->redirect(); to trigger a redirect request.
@@ -116,6 +118,7 @@ $app->get('/', Home::class . ':index');
 
 
 //In container.config.php
+// We are using the SlimTwig here
 return [
     "settings" => [
         'viewTemplatesDirectory' => "../templates",
@@ -154,3 +157,5 @@ return [
 
 {% endhighlight %}
 
+# PSR-7 Objects
+//To Do
