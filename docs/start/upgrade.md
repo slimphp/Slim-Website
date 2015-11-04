@@ -8,14 +8,7 @@ you need to be aware of.
 # New PHP version
 `"php": ">=5.5.0"`
 
-# Changed Signature of Route Functions
-In Slim 2.x:
-
-{% highlight php %}
-$app->get('/', function () {  $app->halt(400, 'Bad Request'); });
-{% endhighlight %}
-
-In Slim 3.x:
+# New Route Function Signature
 
 {% highlight php %}
 $app->get('/', function (Request $req,  Response $res, $args = []) {
