@@ -10,16 +10,17 @@ you need to be aware of.
 Slim Core has removed Stop/Halt.
 In your applications, you should transition to using the withStatus() and withBody()
 
-Example In Slim 2.x:
+# Changed Signature of Route Functions
+In Slim 2.x:
 
 {% highlight php %}
 $app->get('/', function () {  $app->halt(400, 'Bad Request'); });
 {% endhighlight %}
 
-And now in Slim 3.x:
+In Slim 3.x:
 
 {% highlight php %}
-$app->get('/', function ($req, $res, $args) {
+$app->get('/', function (Request $req,  Response $res, $args = []) {
     return $res->withStatus(400)->write('Bad Request');
 });
 {% endhighlight %}
@@ -49,11 +50,15 @@ The middleware signature has changed from a class to a function
 New signature:
 
 {% highlight php %}
-$app->add(function ($req, $res, $next) {});
+$app->add(function (Request $req,  Response $res, $next) {
+    //Do stuff before passing a long
+    $newRespose = $next($req, $res);
+    //Do Stuff after route is rendered
+    return $newResponse; //continue
+});
 {% endhighlight %}
 
-Execution
------
+# Middleware Execution
 Application middleware is executed as Last In First Executed (LIFE)
 
 # Flash Messages
@@ -67,19 +72,6 @@ In v3.0 we have removed the dependency for crypto in core.
 
 # PHP Version
 Slim v3.0 requires PHP 5.5+
-
-# Route Callbacks
-In v3.0 we have adopted a new callback signature:
-
-{% highlight php %}
-$app->get('/', function (
-    \Psr\Http\Message\ServerRequestInterface $request,
-    \Psr\Http\Message\ResponseInterface $response,
-    array $args = null) {
-
-    //do stuff!
-});
-{% endhighlight %}
 
 # New Router
 Slim now utilizes a new, more powerful router ( https://github.com/nikic/FastRoute )!
@@ -97,11 +89,8 @@ php $app->get(…)->add($mw2)->add($mw1);
 `urlFor()` has been renamed `pathFor()` and can be found in the `router` object:
 
 {% highlight php %}
-
-$router = $app->router;
-
-$app->get('/', function ($request, $response, $args) use ($router) {
-    $url = $router->pathFor('home');
+$app->get('/', function ($request, $response, $args) {
+    $url = $this->router->pathFor('home');
     $response->write("<a href='$url'>Home</a>");
     return $response;
 })->setName('home');
