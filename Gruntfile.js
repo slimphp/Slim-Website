@@ -51,7 +51,7 @@ module.exports = function(grunt) {
         uglify: {
             production: {
                 options: {
-                    compress: true,
+                    compress: {},
                     preserveComments: false,
                     drop_console: true
                 },

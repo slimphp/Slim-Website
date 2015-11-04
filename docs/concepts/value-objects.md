@@ -1,30 +1,67 @@
 ---
-title: PSR7 and Value Objects
+title: PSR 7 and Value Objects
 ---
 
-## PSR-7
+Slim supports [PSR-7](https://github.com/php-fig/http-message) interfaces for
+its Request and Response objects. This makes Slim flexible because it can
+use _any_ PSR-7 implementation. For example, a Slim application
+route does not _have_ to return an instance of `\Slim\Http\Response`. It could,
+for example, return an instance of `\GuzzleHttp\Psr7\CachingStream` or any instance
+returned by the `\GuzzleHttp\Psr7\stream_for()` function.
 
-Slim supports [PSR-7](https://github.com/php-fig/http-message) interfaces for its HTTP message objects. A Slim application container's `request` and `response` services **MUST** return an instance of `\Psr\Http\Message\RequestInterface` and `\Psr\Http\Message\ResponseInterface`, respectively.
-
-Slim provides a built-in PSR-7 implementation. However, you are free to substitute a third-party implementation. Simply override the Slim application container's `request` and `response` services and return an object that implements the appropriate PSR-7 interface.
+Slim provides its own PSR-7 implementation so that it works out of the box. However,
+you are free to replace Slim's default PSR 7 objects with a third-party implementation.
+Just override the application container's `request` and `response` services so
+they return an instance of `\Psr\Http\Message\ServerRequestInterface` and
+`\Psr\Http\Message\ResponseInterface`, respectively.
 
 ## Value objects
 
-In accordance with PSR-7, a Slim application's Request and Response objects are [_immutable value objects_](http://en.wikipedia.org/wiki/Value_object). They can be "changed" only by requesting a cloned version that has updated property values.
+Slim's Request and Response objects are [_immutable value objects_](http://en.wikipedia.org/wiki/Value_object).
+They can be "changed" only by requesting a cloned version that has updated
+property values. Value objects have a nominal overhead because they must be
+cloned when their properties are updated. This overhead does not affect
+performance in any meaningful way.
 
-A Slim application starts with an initial Request and Response object pair. These objects are passed into each application middleware layer, and each middleware layer is free to use these objects as it deems fit. If Slim used object references, each middleware layer could never be certain of its own Request and Response objects' state if further interior middleware can update the same object references. Instead, Slim uses immutable value objects—each middleware's Request and Response objects always remain the same, and they cannot be changed by other middleware. If a middleware wants to modify the Request or Response object, it must create a _cloned_ version with updated properties.
+You can request a copy of a value object by invoking any of its PSR 7
+interface methods (these methods typically have a `with` prefix). For example,
+a PSR 7 Response object has a `withHeader($name, $value)` method that returns a
+cloned value object with the new HTTP header.
 
-Value objects have a small inherent overhead becaue they must be cloned when their properties are updated. This overhead is minimal and does not affect application performance in any meaningful way.
+{% highlight php %}
+<?php
+$app = new \Slim\App;
+$app->get('/foo', function ($req, $res, $args) {
+    return $res->withHeader(
+        'Content-Type',
+        'application/json'
+    );
+});
+$app->run();
+{% endhighlight %}
 
-## How to change value objects
+The PSR 7 interface provides these methods to transform Request and Response
+objects:
 
-You cannot modify a value object. You can, however, request a copy of a value object that contains your desired changes. Slim's Request and Response objects implement the PSR-7 message interfaces. These interfaces provide methods that have the `with` prefix, and you can invoke these methods to _clone_ value objects and apply updated properties. For example, the Response object has a `withHeader($name, $value)` method that returns a cloned value object with a new HTTP header.
+* `withProtocolVersion($version)`
+* `withHeader($name, $value)`
+* `withAddedHeader($name, $value)`
+* `withoutHeader($name)`
+* `withBody(StreamInterface $body)`
 
-```php
-$newResponse = $oldResponse->withHeader(
-    'Content-Type',
-    'application/json'
-);
-```
+The PSR 7 interface provides these methods to transform Request objects:
+
+* `withMethod($method)`
+* `withUri(UriInterface $uri, $preserveHost = false)`
+* `withCookieParams(array $cookies)`
+* `withQueryParams(array $query)`
+* `withUploadedFiles(array $uploadedFiles)`
+* `withParsedBody($data)`
+* `withAttribute($name, $value)`
+* `withoutAttribute($name)`
+
+The PSR 7 interface provides these methods to transform Response objects:
+
+* `withStatus($code, $reasonPhrase = '')`
 
 Refer to the [PSR-7 documentation](http://www.php-fig.org/psr/psr-7/) for more information about these methods.

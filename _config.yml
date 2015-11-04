@@ -2,8 +2,10 @@ highlighter: pygments
 timezone: America/New_York
 title: Slim Framework
 url: http://www.slimframework.com
+slim_website_repo: https://github.com/slimphp/Slim-Website/tree/gh-pages/
 urlBasePath:
 include: [.htaccess]
+exclude: [node_modules]
 gems:
   - jekyll-sitemap
 defaults:
@@ -15,33 +17,54 @@ defaults:
       docs:
         - title: Get Started
           items:
+            - [/docs, Home]
             - [/docs/start/installation.md, Installation]
             - [/docs/start/upgrade.md, Upgrade Guide]
             - [/docs/start/web-servers.md, Web Servers]
         - title: Concepts
           items:
-            - [/docs/concepts/objects.md, Objects]
-            - [/docs/concepts/di.md, Dependency Injection]
+            - [/docs/concepts/value-objects.md, PSR 7]
             - [/docs/concepts/middleware.md, Middleware]
-            - [/docs/concepts/value-objects.md, PSR-7]
-        - title: Objects
+            - [/docs/concepts/di.md, Dependency Container]
+        - title: The Request
           items:
-            - [/docs/objects/request.md, Request]
-            - [/docs/objects/response.md, Response]
-            - [/docs/objects/router.md, Router]
-            - [/docs/objects/environment.md, Environment]
-        - title: Features
+            - [/docs/objects/request.md, Overview]
+            - [/docs/objects/request.md#the-request-method, Method]
+            - [/docs/objects/request.md#the-request-headers, Headers]
+            - [/docs/objects/request.md#the-request-body, Body]
+            - [/docs/objects/request.md#request-helpers, Helpers]
+        - title: The Response
           items:
-            - [/docs/features/templates.md, Templates]
-            - [/docs/features/caching.md, Caching]
+            - [/docs/objects/response.md, Overview]
+            - [/docs/objects/response.md#the-response-status, Status]
+            - [/docs/objects/response.md#the-response-headers, Headers]
+            - [/docs/objects/response.md#the-response-body, Body]
+        - title: Routing
+          items:
+            - [/docs/objects/router.md, Overview]
+            - [/docs/objects/router.md#how-to-create-routes, Create Routes]
+            - [/docs/objects/router.md#route-callbacks, Callbacks]
+            - [/docs/objects/router.md#route-strategies, Strategies]
+            - [/docs/objects/router.md#route-placeholders, Placeholders]
+            - [/docs/objects/router.md#route-names, Names]
+            - [/docs/objects/router.md#route-groups, Groups]
+            - [/docs/objects/router.md#route-middleware, Middleware]
         - title: Error Handling
           items:
             - [/docs/handlers/error.md, 500 Server Error]
             - [/docs/handlers/not-found.md, 404 Not Found]
             - [/docs/handlers/not-allowed.md, 405 Not Allowed]
+        - title: Add Ons
+          items:
+            - [/docs/features/templates.md, Templates]
+            - [/docs/features/caching.md, HTTP Caching]
+            - [/docs/features/csrf.md, CSRF Protection]
+            - [/docs/features/flash.md, Flash Messages]
+
         - title: Contributing
           items:
-            - [docs/contributors/strategy.md, Branching Strategy]
+            - [/docs/contributors/strategy.md, Branching Strategy]
+            - [/docs/contributors/guidelines.html, Guidelines]
   -
     scope:
       path: "docs"

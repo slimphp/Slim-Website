@@ -4,9 +4,9 @@ title: Environment
 
 The Environment object encapsulates the `$_SERVER` superglobal array and decouples the Slim application from the PHP global environment. Decoupling the Slim application from the PHP global environment lets us create HTTP requests that may (or may not) resemble the global environment. This is particuarly useful for unit testing and initiating sub-requests. You can fetch the current Environment object anywhere in your Slim application like this:
 
-```php
+{% highlight php %}
 $environment = $app['environment'];
-```
+{% endhighlight %}
 
 ## Environment Properties
 
@@ -62,7 +62,7 @@ AUTH_TYPE
 
 Each Slim application instantiates an Environment object using information from the current global environment. However, you may also create mock environment objects with custom information. Mock Environment objects are only useful when writing unit tests.
 
-```php
+{% highlight php %}
 $env = \Slim\Environment::mock([
     'REQUEST_METHOD' => 'PUT',
     'REQUEST_URI' => '/foo/bar',
@@ -71,4 +71,4 @@ $env = \Slim\Environment::mock([
     'CONTENT_TYPE' => 'application/json;charset=utf8',
     'CONTENT_LENGTH' => 15
 ]);
-```
+{% endhighlight %}

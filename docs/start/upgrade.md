@@ -2,7 +2,7 @@
 title: Upgrade Guide
 ---
 
-If you are upgrading from version 2 to version 3, these are the signifcant changes tha
+If you are upgrading from version 2 to version 3, these are the significant changes that
 you need to be aware of.
 
 
@@ -20,7 +20,7 @@ And now in Slim 3.x:
 
 {% highlight php %}
 $app->get('/', function ($req, $res, $args) {
-    return $res->withStatus(400)->withBody("Bad Request");
+    return $res->withStatus(400)->write('Bad Request');
 });
 {% endhighlight %}
 
@@ -28,7 +28,7 @@ $app->get('/', function ($req, $res, $args) {
 Slim v3 no longer has the concept of hooks. Hooks were removed as they duplicate the functionality already present in middlewares. You should be able to easily convert your Hook code into Middleware code.
 
 # Removal HTTP Cache
-Slim v3 no longer ships with HTTP Cache methods in core. It has been moved to its own separate repo (https://github.com/slimphp/Slim-HttpCache )
+In Slim v3 we have removed the HTTP-Caching into its own module Slim\Http\Cache ( https://github.com/slimphp/Slim-HttpCache )
 
 # Changed Redirect
 In Slim v2.x one would use the helper function $app->redirect(); to trigger a redirect request.
@@ -57,19 +57,19 @@ Execution
 Application middleware is executed as Last In First Executed (LIFE)
 
 # Flash Messages
-In v3.0 the concept of flash messages has been removed. There currently is no planned feature for this, but could likely be a part of the Cookies package
+Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/features/flash.html) package.
 
 # Cookies
-In v3.0 cookies has been removed from core and moved to a separate component  See (https://github.com/slimphp/Slim-Http-Cookies)
+In v3.0 cookies has been removed from core and moved to a separate component. See (https://github.com/slimphp/Slim-Http-Cookies)
 
 # Removal of Crypto
-In v3.0 we have removed the dependency for crypto in core
+In v3.0 we have removed the dependency for crypto in core.
 
 # PHP Version
-Slim v3.0 requires php 5.4+
+Slim v3.0 requires PHP 5.5+
 
 # Route Callbacks
-In v3.0 we have adopted a new callback signature
+In v3.0 we have adopted a new callback signature:
 
 {% highlight php %}
 $app->get('/', function (
@@ -82,7 +82,7 @@ $app->get('/', function (
 {% endhighlight %}
 
 # New Router
-Slim now utilizes a new more powerful router ( https://github.com/nikic/FastRoute )!
+Slim now utilizes a new, more powerful router ( https://github.com/nikic/FastRoute )!
 
 # Route Middleware
 The syntax for adding route middleware has changed slightly.
@@ -92,5 +92,19 @@ In v3.0:
 php $app->get(…)->add($mw2)->add($mw1);
 {% endhighlight %}
 
-# HTTP Caching
-In Slim v3 we have removed the HTTP-Caching into its own module Slim\Http\Cache ( https://github.com/slimphp/Slim-HttpCache )
+# urlFor() is now pathfor() in the router
+
+`urlFor()` has been renamed `pathFor()` and can be found in the `router` object:
+
+{% highlight php %}
+
+$router = $app->router;
+
+$app->get('/', function ($request, $response, $args) use ($router) {
+    $url = $router->pathFor('home');
+    $response->write("<a href='$url'>Home</a>");
+    return $response;
+})->setName('home');
+{% endhighlight %}
+
+Also, `pathFor()` is base path aware.

@@ -24,6 +24,13 @@ a{
     }
 }
 
+dl{
+    dd{
+        margin-bottom: 1em;
+        margin-left: 1em;
+    }
+}
+
 .divider{
     border-top: 1px solid #CCC;
     margin-bottom: 0;
@@ -36,5 +43,41 @@ a{
         padding: 0 @baseline;
         position: relative;
         top: -@baseline;
+    }
+}
+
+blockquote{
+    border: none;
+    padding-top: 1em;
+    padding-left: 80px;
+    position: relative;
+    font-family: Georgia;
+    font-size: 28px;
+    font-style: italic;
+    line-height: 40px;
+
+    &:before{
+        content: "\f10d";
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0.5em;
+        font-family: "FontAwesome";
+        font-size: 48px;
+    }
+}
+
+figure{
+    margin: 0;
+    padding: 10px 0 20px 0;
+
+    pre{
+        margin-bottom: 10px !important;
+    }
+
+    figcaption{
+        color: #777;
+        font-size: 11px;
+        line-height: 16px;
     }
 }
