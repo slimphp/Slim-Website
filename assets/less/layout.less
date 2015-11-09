@@ -50,3 +50,31 @@ pre{
         }
     }
 }
+
+.wrapper {
+  width: 80%;
+}
+
+.docs-content {
+  word-wrap: break-word;
+}
+
+@import "../bootstrap/less/variables";
+
+@media (max-width: @screen-xs-min) {
+  .wrapper {
+    width: 90%;
+  }
+}
+
+@media (max-width: @screen-md-max) {
+  .slim-button-wrapper {
+    margin-bottom: 24px;
+  }
+}
+
+@media (min-width: @screen-md-min) {
+  .docs-content {
+    padding-left: 2em;
+  }
+}
