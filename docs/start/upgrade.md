@@ -6,7 +6,7 @@ If you are upgrading from version 2 to version 3, these are the significant chan
 you need to be aware of.
 
 # New PHP version
-`"php": ">=5.5.0"`
+Slim 3 requires PHP 5.5+
 
 # New Route Function Signature
 
@@ -20,7 +20,7 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 Slim v3 no longer has the concept of hooks. Hooks were removed as they duplicate the functionality already present in middlewares. You should be able to easily convert your Hook code into Middleware code.
 
 # Removal HTTP Cache
-In Slim v3 we have removed the HTTP-Caching into its own module Slim\Http\Cache ( https://github.com/slimphp/Slim-HttpCache )
+In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache](https://github.com/slimphp/Slim-HttpCache)
 
 # Removal of Stop/Halt
 Slim Core has removed Stop/Halt.
@@ -41,17 +41,48 @@ $app->get('/', function ($req, $res, $args) {
 # Middleware
 Signature
 ----
-The middleware signature has changed from a class to a function
+The middleware signature has changed from a class to a function.
+
 New signature:
 
 {% highlight php %}
-$app->add(function (Request $req,  Response $res, $next) {
+use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
+$app->add(function (Request $req,  Response $res, callable $next) {
     //Do stuff before passing a long
     $newRespose = $next($req, $res);
     //Do Stuff after route is rendered
     return $newResponse; //continue
 });
 {% endhighlight %}
+
+You can still use a class:
+
+{% highlight php %}
+namespace My;
+
+use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
+class Middleware
+{
+    function __invoke(Request $req,  Response $res, callable $next) {
+        //Do stuff before passing a long
+        $newRespose = $next($req, $res);
+        //Do Stuff after route is rendered
+        return $newResponse; //continue
+    }
+}
+
+
+// Register
+$app->add(new My\Middleware());
+// or
+$app->add(My\Middleware::class);
+
+{% endhighlight %}
+
 
 # Middleware Execution
 Application middleware is executed as Last In First Executed (LIFE)
@@ -60,16 +91,23 @@ Application middleware is executed as Last In First Executed (LIFE)
 Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/features/flash.html) package.
 
 # Cookies
-In v3.0 cookies has been removed from core and moved to a separate component. See (https://github.com/slimphp/Slim-Http-Cookies)
+In v3.0 cookies has been removed from core. See [FIG Cookies](https://github.com/dflydev/dflydev-fig-cookies) for a PSR-7 compatible cookie component.
 
 # Removal of Crypto
 In v3.0 we have removed the dependency for crypto in core.
 
-# PHP Version
-Slim v3.0 requires PHP 5.5+
-
 # New Router
-Slim now utilizes a new, more powerful router ( https://github.com/nikic/FastRoute )!
+Slim now utilizes [FastRoute](https://github.com/nikic/FastRoute), a new, more powerful router!
+
+This means that the specification of route patterns has changed with named parameters now in braces and square brackets used for optional segments:
+
+{% highlight php %}
+// named parameter:
+$app->get(/hello/{name}, /*...*/);
+
+// optional segment:
+$app->get(/news[/{year}], /*...*/);
+{% endhighlight %}
 
 # Route Middleware
 The syntax for adding route middleware has changed slightly.
@@ -79,7 +117,7 @@ In v3.0:
 php $app->get(…)->add($mw2)->add($mw1);
 {% endhighlight %}
 
-# urlFor() is now pathfor() in the router
+# urlFor() is now pathFor() in the router
 
 `urlFor()` has been renamed `pathFor()` and can be found in the `router` object:
 
