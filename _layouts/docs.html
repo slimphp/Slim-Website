@@ -1,5 +1,5 @@
 {% include header.html %}
-<div class="wrapper" style="width: 80%">
+<div class="wrapper">
     <div class="container-fluid">
         <header class="site-header">
             <div class="site-title"><a href="/">Slim</a></div>
@@ -18,7 +18,7 @@
                 {% endfor %}
             </div>
 
-            <div class="col-md-8" style="padding-left: 2em">
+            <div class="col-md-8 docs-content">
                 <h1 class="page-header">{{ page.title }}</h1>
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
                     <a href="{{ site.slim_website_repo }}{{page.path}}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
