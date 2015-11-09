@@ -5,21 +5,13 @@ title: Upgrade Guide
 If you are upgrading from version 2 to version 3, these are the significant changes that
 you need to be aware of.
 
+# New PHP version
+Slim 3 requires PHP 5.5+
 
-# Removal of Stop/Halt
-Slim Core has removed Stop/Halt.
-In your applications, you should transition to using the withStatus() and withBody()
-
-Example In Slim 2.x:
+# New Route Function Signature
 
 {% highlight php %}
-$app->get('/', function () {  $app->halt(400, 'Bad Request'); });
-{% endhighlight %}
-
-And now in Slim 3.x:
-
-{% highlight php %}
-$app->get('/', function ($req, $res, $args) {
+$app->get('/', function (Request $req,  Response $res, $args = []) {
     return $res->withStatus(400)->write('Bad Request');
 });
 {% endhighlight %}
@@ -28,7 +20,11 @@ $app->get('/', function ($req, $res, $args) {
 Slim v3 no longer has the concept of hooks. Hooks were removed as they duplicate the functionality already present in middlewares. You should be able to easily convert your Hook code into Middleware code.
 
 # Removal HTTP Cache
-In Slim v3 we have removed the HTTP-Caching into its own module Slim\Http\Cache ( https://github.com/slimphp/Slim-HttpCache )
+In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache](https://github.com/slimphp/Slim-HttpCache)
+
+# Removal of Stop/Halt
+Slim Core has removed Stop/Halt.
+In your applications, you should transition to using the withStatus() and withBody()
 
 # Changed Redirect
 In Slim v2.x one would use the helper function $app->redirect(); to trigger a redirect request.
@@ -45,44 +41,73 @@ $app->get('/', function ($req, $res, $args) {
 # Middleware
 Signature
 ----
-The middleware signature has changed from a class to a function
+The middleware signature has changed from a class to a function.
+
 New signature:
 
 {% highlight php %}
-$app->add(function ($req, $res, $next) {});
+use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
+$app->add(function (Request $req,  Response $res, callable $next) {
+    //Do stuff before passing a long
+    $newRespose = $next($req, $res);
+    //Do Stuff after route is rendered
+    return $newResponse; //continue
+});
 {% endhighlight %}
 
-Execution
------
+You can still use a class:
+
+{% highlight php %}
+namespace My;
+
+use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
+class Middleware
+{
+    function __invoke(Request $req,  Response $res, callable $next) {
+        //Do stuff before passing a long
+        $newRespose = $next($req, $res);
+        //Do Stuff after route is rendered
+        return $newResponse; //continue
+    }
+}
+
+
+// Register
+$app->add(new My\Middleware());
+// or
+$app->add(My\Middleware::class);
+
+{% endhighlight %}
+
+
+# Middleware Execution
 Application middleware is executed as Last In First Executed (LIFE)
 
 # Flash Messages
 Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/features/flash.html) package.
 
 # Cookies
-In v3.0 cookies has been removed from core and moved to a separate component. See (https://github.com/slimphp/Slim-Http-Cookies)
+In v3.0 cookies has been removed from core. See [FIG Cookies](https://github.com/dflydev/dflydev-fig-cookies) for a PSR-7 compatible cookie component.
 
 # Removal of Crypto
 In v3.0 we have removed the dependency for crypto in core.
 
-# PHP Version
-Slim v3.0 requires PHP 5.5+
+# New Router
+Slim now utilizes [FastRoute](https://github.com/nikic/FastRoute), a new, more powerful router!
 
-# Route Callbacks
-In v3.0 we have adopted a new callback signature:
+This means that the specification of route patterns has changed with named parameters now in braces and square brackets used for optional segments:
 
 {% highlight php %}
-$app->get('/', function (
-    \Psr\Http\Message\ServerRequestInterface $request,
-    \Psr\Http\Message\ResponseInterface $response,
-    array $args = null) {
+// named parameter:
+$app->get(/hello/{name}, /*...*/);
 
-    //do stuff!
-});
+// optional segment:
+$app->get(/news[/{year}], /*...*/);
 {% endhighlight %}
-
-# New Router
-Slim now utilizes a new, more powerful router ( https://github.com/nikic/FastRoute )!
 
 # Route Middleware
 The syntax for adding route middleware has changed slightly.
@@ -92,19 +117,76 @@ In v3.0:
 php $app->get(…)->add($mw2)->add($mw1);
 {% endhighlight %}
 
-# urlFor() is now pathfor() in the router
+# urlFor() is now pathFor() in the router
 
 `urlFor()` has been renamed `pathFor()` and can be found in the `router` object:
 
 {% highlight php %}
-
-$router = $app->router;
-
-$app->get('/', function ($request, $response, $args) use ($router) {
-    $url = $router->pathFor('home');
+$app->get('/', function ($request, $response, $args) {
+    $url = $this->router->pathFor('home');
     $response->write("<a href='$url'>Home</a>");
     return $response;
 })->setName('home');
 {% endhighlight %}
 
 Also, `pathFor()` is base path aware.
+
+# Container and DI ... Constructing
+Slim uses Pimple as a Dependency Injection Container
+
+{% highlight php %}
+
+//index.php
+$app = new Slim\App(
+    new \Slim\Container(
+        include "../config/container.config.php"
+    )
+);
+
+//Slim will grab the Home class from the container defined below and execute its index method
+//If the class is not defined in the container Slim will still contruct it and pass the container as the first arugment to the constructor!
+$app->get('/', Home::class . ':index');
+
+
+//In container.config.php
+// We are using the SlimTwig here
+return [
+    "settings" => [
+        'viewTemplatesDirectory' => "../templates",
+    ],
+    'twig' => [
+        'title' => '',
+        'description' => '',
+        'author' => ''
+    ],
+    'view' => function ($c) {
+        $view = new Twig(
+            $c['settings']['viewTemplatesDirectory'],
+            [
+                'cache' => false //"../cache"
+            ]
+        );
+
+        // Instantiate and add Slim specific extension
+        $view->addExtension(
+            new TwigExtension(
+                $c['router'],
+                $c['request']->getUri()
+            )
+        );
+
+        foreach ($c['twig'] as $name => $value) {
+            $view->getEnvironment()->addGlobal($name, $value);
+        }
+
+        return $view;
+    },
+    Home::class => function ($c) {
+        return new Home($c['view']);
+    }
+];
+
+{% endhighlight %}
+
+# PSR-7 Objects
+//To Do
