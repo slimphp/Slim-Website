@@ -228,7 +228,15 @@ $response = (new Response())
      ->withHeader('Content-Type', 'image/jpeg')
      ->withHeader(‘Content-Length', filesize($image))
      ->withBody($body);
-//OR [NOT PSR-7 Complaint]
-$response = (new Response())->write("MY TEXT");    
+// ...
+{% endhighlight %}
+
+For text:
+{% highlight php %}
+// ...
+$response = (new Response())->getBody()->write("Hello world!")
+
+// Or Slim specific: Not PSR-7 compliant
+$response = (new Response())->write("Hello world!");
 // ... 
 {% endhighlight %}
