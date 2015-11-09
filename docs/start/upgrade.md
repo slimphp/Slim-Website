@@ -16,6 +16,16 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 });
 {% endhighlight %}
 
+# Getting _GET and _POST variables
+{% highlight php %}
+$app->get('/', function (Request $req,  Response $res, $args = []) {
+    $myvar1 = $req->getParam('myvar'); //checks both _GET and _POST [NOT PSR-7 Compliant]
+    $myvar2 = $req->getParsedBody()['myvar']; //checks _POST  [IS PSR-7 compliant]
+    $myvar3 = $req->getQueryParams()['myvar']; //checks _GET [IS PSR-7 compliant]
+});
+{% endhighlight %}
+
+
 # Hooks
 Slim v3 no longer has the concept of hooks. Hooks were removed as they duplicate the functionality already present in middlewares. You should be able to easily convert your Hook code into Middleware code.
 
@@ -189,4 +199,44 @@ return [
 {% endhighlight %}
 
 # PSR-7 Objects
-//To Do
+
+### Request, Response, Uri & UploadFile are immutable.
+This means that when you change one of these objects, the old instance is not updated.
+
+{% highlight php %}
+    // THIS IS WRONG. The change will not pass through.
+    $app->add(function (Request $request, Response $response, $next) {
+        $request->withAttribute("abc", "def");
+        return $next($request, $response);
+    });
+    
+    //This is Correct
+    $app->add(function (Request $request, Response $response, $next) {
+        $request = $request->withAttribute("abc", "def");
+        return $next($request, $response);
+    });    
+{% endhighlight %}
+
+### Message bodies are streams
+
+{% highlight php %}
+// ...
+$image = __DIR__ . ‘/huge_photo.jpg';
+$body = new Stream($image);
+$response = (new Response())
+     ->withStatus(200, 'OK')
+     ->withHeader('Content-Type', 'image/jpeg')
+     ->withHeader(‘Content-Length', filesize($image))
+     ->withBody($body);
+// ...
+{% endhighlight %}
+
+For text:
+{% highlight php %}
+// ...
+$response = (new Response())->getBody()->write("Hello world!")
+
+// Or Slim specific: Not PSR-7 compliant
+$response = (new Response())->write("Hello world!");
+// ... 
+{% endhighlight %}
