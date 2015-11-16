@@ -103,3 +103,6 @@ notAllowedHandler
 1. `\Psr\Http\Message\ServerRequestInterface`
 2. `\Psr\Http\Message\ResponseInterface`
 3. Array of allowed HTTP methods
+
+callableResolver
+:   Instance of `\Slim\Interfaces\CallableResolverInterface`.
