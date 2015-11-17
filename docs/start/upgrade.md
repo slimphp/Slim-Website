@@ -232,7 +232,7 @@ $response = (new Response())
 For text:
 {% highlight php %}
 // ...
-$response = (new Response())->getBody()->write('Hello world!'')
+$response = (new Response())->getBody()->write('Hello world!')
 
 // Or Slim specific: Not PSR-7 compliant.
 $response = (new Response())->write('Hello world!');
