@@ -44,7 +44,7 @@ Example:
 
 {% highlight php %}
 $app->get('/', function ($req, $res, $args) {
-  return $res->withStatus(301)->withHeader("Location", "yournewuri");
+  return $res->withStatus(301)->withHeader("Location", "your-new-uri");
 });
 {% endhighlight %}
 
