@@ -30,11 +30,11 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 Slim v3 no longer has the concept of hooks. Hooks were removed as they duplicate the functionality already present in middlewares. You should be able to easily convert your Hook code into Middleware code.
 
 # Removal HTTP Cache
-In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache](https://github.com/slimphp/Slim-HttpCache)
+In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache](https://github.com/slimphp/Slim-HttpCache).
 
 # Removal of Stop/Halt
 Slim Core has removed Stop/Halt.
-In your applications, you should transition to using the withStatus() and withBody()
+In your applications, you should transition to using the withStatus() and withBody() methods.
 
 # Changed Redirect
 In Slim v2.x one would use the helper function $app->redirect(); to trigger a redirect request.
@@ -93,7 +93,7 @@ $app->add(My\Middleware::class);
 
 
 # Middleware Execution
-Application middleware is executed as Last In First Executed (LIFE)
+Application middleware is executed as Last In First Executed (LIFE).
 
 # Flash Messages
 Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/features/flash.html) package.
@@ -140,7 +140,7 @@ $app->get('/', function ($request, $response, $args) {
 Also, `pathFor()` is base path aware.
 
 # Container and DI ... Constructing
-Slim uses Pimple as a Dependency Injection Container
+Slim uses Pimple as a Dependency Injection Container.
 
 {% highlight php %}
 
