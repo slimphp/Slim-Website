@@ -58,10 +58,10 @@ use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 $app->add(function (Request $req,  Response $res, callable $next) {
-    //Do stuff before passing a long
+    // Do stuff before passing a long
     $newRespose = $next($req, $res);
-    //Do Stuff after route is rendered
-    return $newResponse; //continue
+    // Do Stuff after route is rendered
+    return $newResponse; // continue
 });
 {% endhighlight %}
 
@@ -76,10 +76,10 @@ use Psr\Http\Message\ResponseInterface as Response;
 class Middleware
 {
     function __invoke(Request $req,  Response $res, callable $next) {
-        //Do stuff before passing a long
+        // Do stuff before passing a long
         $newRespose = $next($req, $res);
-        //Do Stuff after route is rendered
-        return $newResponse; //continue
+        // Do Stuff after route is rendered
+        return $newResponse; // continue
     }
 }
 
@@ -144,19 +144,19 @@ Slim uses Pimple as a Dependency Injection Container.
 
 {% highlight php %}
 
-//index.php
+// index.php
 $app = new Slim\App(
     new \Slim\Container(
         include "../config/container.config.php"
     )
 );
 
-//Slim will grab the Home class from the container defined below and execute its index method
-//If the class is not defined in the container Slim will still contruct it and pass the container as the first arugment to the constructor!
+// Slim will grab the Home class from the container defined below and execute its index method.
+// If the class is not defined in the container Slim will still contruct it and pass the container as the first arugment to the constructor!
 $app->get('/', Home::class . ':index');
 
 
-//In container.config.php
+// In container.config.php
 // We are using the SlimTwig here
 return [
     "settings" => [
@@ -171,7 +171,7 @@ return [
         $view = new Twig(
             $c['settings']['viewTemplatesDirectory'],
             [
-                'cache' => false //"../cache"
+                'cache' => false // "../cache"
             ]
         );
 
@@ -207,8 +207,8 @@ This means that when you change one of these objects, the old instance is not up
         $request->withAttribute("abc", "def");
         return $next($request, $response);
     });
-    
-    //This is Correct
+
+    // This is Correct
     $app->add(function (Request $request, Response $response, $next) {
         $request = $request->withAttribute("abc", "def");
         return $next($request, $response);
