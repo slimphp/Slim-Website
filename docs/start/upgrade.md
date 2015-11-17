@@ -48,9 +48,7 @@ $app->get('/', function ($req, $res, $args) {
 });
 {% endhighlight %}
 
-# Middleware
-Signature
-----
+# Middleware Signature
 The middleware signature has changed from a class to a function.
 
 New signature:
@@ -221,12 +219,12 @@ This means that when you change one of these objects, the old instance is not up
 
 {% highlight php %}
 // ...
-$image = __DIR__ . ‘/huge_photo.jpg';
+$image = __DIR__ . '/huge_photo.jpg';
 $body = new Stream($image);
 $response = (new Response())
      ->withStatus(200, 'OK')
      ->withHeader('Content-Type', 'image/jpeg')
-     ->withHeader(‘Content-Length', filesize($image))
+     ->withHeader('Content-Length', filesize($image))
      ->withBody($body);
 // ...
 {% endhighlight %}
