@@ -44,7 +44,7 @@ Example:
 
 {% highlight php %}
 $app->get('/', function ($req, $res, $args) {
-  return $res->withStatus(301)->withHeader("Location", "your-new-uri");
+  return $res->withStatus(301)->withHeader('Location', 'your-new-uri');
 });
 {% endhighlight %}
 
@@ -147,7 +147,7 @@ Slim uses Pimple as a Dependency Injection Container.
 // index.php
 $app = new Slim\App(
     new \Slim\Container(
-        include "../config/container.config.php"
+        include '../config/container.config.php'
     )
 );
 
@@ -159,8 +159,8 @@ $app->get('/', Home::class . ':index');
 // In container.config.php
 // We are using the SlimTwig here
 return [
-    "settings" => [
-        'viewTemplatesDirectory' => "../templates",
+    'settings' => [
+        'viewTemplatesDirectory' => '../templates',
     ],
     'twig' => [
         'title' => '',
@@ -171,7 +171,7 @@ return [
         $view = new Twig(
             $c['settings']['viewTemplatesDirectory'],
             [
-                'cache' => false // "../cache"
+                'cache' => false // '../cache'
             ]
         );
 
@@ -204,13 +204,13 @@ This means that when you change one of these objects, the old instance is not up
 {% highlight php %}
 // This is WRONG. The change will not pass through.
 $app->add(function (Request $request, Response $response, $next) {
-    $request->withAttribute("abc", "def");
+    $request->withAttribute('abc', 'def');
     return $next($request, $response);
 });
 
 // This is correct.
 $app->add(function (Request $request, Response $response, $next) {
-    $request = $request->withAttribute("abc", "def");
+    $request = $request->withAttribute('abc', 'def');
     return $next($request, $response);
 });
 {% endhighlight %}
@@ -232,9 +232,9 @@ $response = (new Response())
 For text:
 {% highlight php %}
 // ...
-$response = (new Response())->getBody()->write("Hello world!")
+$response = (new Response())->getBody()->write('Hello world!'')
 
 // Or Slim specific: Not PSR-7 compliant.
-$response = (new Response())->write("Hello world!");
-// ... 
+$response = (new Response())->write('Hello world!');
+// ...
 {% endhighlight %}
