@@ -334,11 +334,3 @@ You can fetch the HTTP request content length with the Request object's `getCont
 {% highlight php %}
 $length = $request->getContentLength();
 {% endhighlight %}
-
-### IP Address
-
-You can fetch the HTTP request's source IP address with the Request object's `getIp()` method. This method respects the `X-Forwarded-For` header, if present.
-
-{% highlight php %}
-$ip = $request->getIp();
-{% endhighlight %}
