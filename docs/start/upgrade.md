@@ -202,17 +202,17 @@ return [
 This means that when you change one of these objects, the old instance is not updated.
 
 {% highlight php %}
-    // THIS IS WRONG. The change will not pass through.
-    $app->add(function (Request $request, Response $response, $next) {
-        $request->withAttribute("abc", "def");
-        return $next($request, $response);
-    });
+// This is WRONG. The change will not pass through.
+$app->add(function (Request $request, Response $response, $next) {
+    $request->withAttribute("abc", "def");
+    return $next($request, $response);
+});
 
-    // This is correct.
-    $app->add(function (Request $request, Response $response, $next) {
-        $request = $request->withAttribute("abc", "def");
-        return $next($request, $response);
-    });    
+// This is correct.
+$app->add(function (Request $request, Response $response, $next) {
+    $request = $request->withAttribute("abc", "def");
+    return $next($request, $response);
+});
 {% endhighlight %}
 
 ### Message bodies are streams
