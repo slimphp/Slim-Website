@@ -122,7 +122,7 @@ The syntax for adding route middleware has changed slightly.
 In v3.0:
 
 {% highlight php %}
-php $app->get(…)->add($mw2)->add($mw1);
+$app->get(…)->add($mw2)->add($mw1);
 {% endhighlight %}
 
 # urlFor() is now pathFor() in the router
