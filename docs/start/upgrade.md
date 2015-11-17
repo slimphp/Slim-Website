@@ -60,7 +60,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 $app->add(function (Request $req,  Response $res, callable $next) {
     // Do stuff before passing a long
     $newRespose = $next($req, $res);
-    // Do Stuff after route is rendered
+    // Do stuff after route is rendered
     return $newResponse; // continue
 });
 {% endhighlight %}
@@ -78,7 +78,7 @@ class Middleware
     function __invoke(Request $req,  Response $res, callable $next) {
         // Do stuff before passing a long
         $newRespose = $next($req, $res);
-        // Do Stuff after route is rendered
+        // Do stuff after route is rendered
         return $newResponse; // continue
     }
 }
@@ -208,7 +208,7 @@ This means that when you change one of these objects, the old instance is not up
         return $next($request, $response);
     });
 
-    // This is Correct
+    // This is correct.
     $app->add(function (Request $request, Response $response, $next) {
         $request = $request->withAttribute("abc", "def");
         return $next($request, $response);
@@ -234,7 +234,7 @@ For text:
 // ...
 $response = (new Response())->getBody()->write("Hello world!")
 
-// Or Slim specific: Not PSR-7 compliant
+// Or Slim specific: Not PSR-7 compliant.
 $response = (new Response())->write("Hello world!");
 // ... 
 {% endhighlight %}
