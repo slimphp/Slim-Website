@@ -98,6 +98,27 @@ $app->patch('/books/{id}', function ($request, $response, $args) {
 });
 {% endhighlight %}
 
+### Any Route
+
+You can add a route that handles all HTTP request methods with the Slim application's `any()` method. It accepts two arguments:
+
+1. The route pattern (with optional named placeholders)
+2. The route callback
+
+{% highlight php %}
+$app = new \Slim\App();
+$app->any('/books/({id})', function ($request, $response, $args) {
+    // Apply changes to books or book identified by $args['id'] if specified.
+    // To check which method is used: $request->getMethod();
+});
+{% endhighlight %}
+
+Note that the second parameter is a callback. You could specify a Class (which need a `__invoke()` implementation) instead of a Closure. You can then do the mapping somewhere else:
+
+{% highlight php %}
+$app->any('/user', 'MyRestfulController');
+{% endhighlight %}
+
 ### Custom Route
 
 You can add a route that handles multiple HTTP request methods with the Slim application's `map()` method. It accepts three arguments:
