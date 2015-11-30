@@ -17,7 +17,7 @@ $app->add(function (Request $request, Response $response, callable $next) {
         // permanently redirect paths with a trailing slash
         // to their non-trailing counterpart
         $uri = $uri->withPath(substr($path, 0, -1));
-        return $response->withRedirect((string)$uri, 301);
+        return $response->withStatus(301)->withHeader("Location", $uri);
     }
 
     return $next($request, $response);
