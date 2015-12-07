@@ -9,17 +9,19 @@ description: Slim is a PHP micro framework that helps you quickly write simple y
 </header>
 <div class="row">
     <div class="col-md-12">
-        <div class="alert alert-info">
-            Slim 3.0 RC 3 has been released. <a href="/2015/11/29/slim3-rc3.html">Details here</a>!
-            Documentation is available <a href="/docs/">here</a>.
-        </div>
         <p class="lead">
-            Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
+            Slim is a PHP micro framework that helps you quickly write simple
+            yet powerful web applications and APIs.
         </p>
         <pre class="language-php"><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/hello/:name', function ($name) {
-    echo "Hello, $name";
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
+$app = new \Slim\App;
+$app-&gt;get('/hello/{name}', function (Request $request, Response $response) {
+    $response->getBody()->write("Hello, $name");
+
+    return $response;
 });
 $app-&gt;run();</code></pre>
     </div>
@@ -31,11 +33,13 @@ $app-&gt;run();</code></pre>
     <div class="col-md-12">
         <h1 class="divider"><span>Download &amp; Install</span></h1>
         <p>
-            We recommend you install the Slim Framework with the <a href="https://getcomposer.org/" target="_blank">Composer</a>
-            dependency manager. Run this bash command in your project's root directory to download
-            and install the latest stable version into your project's <code>vendor/</code> directory.
+            We recommend you install the Slim Framework with the
+            <a href="https://getcomposer.org/" target="_blank">Composer</a>
+            dependency manager. Run this bash command in your project's root
+            directory to download and install the latest stable version into
+            your project's <code>vendor/</code> directory.
         </p>
-        <pre><code class="language-bash">composer require slim/slim</code></pre>
+        <pre><code class="language-bash">composer require slim/slim:^3.0</code></pre>
         <p>
             Next, require the Composer autoloader into your PHP application.
         </p>
@@ -54,64 +58,39 @@ require 'vendor/autoload.php';</code></pre>
         <h1 class="divider"><span>Features</span></h1>
         <div class="row">
             <div class="col-md-6">
-                <h2><i class="fa fa-plane"></i> Router</h2>
+                <h2><i class="fa fa-plane"></i> HTTP Router</h2>
                 <p>
-                    Slim provides a powerful router that maps
-                    route callbacks to specific HTTP request
-                    methods and URIs. It supports route segment
-                    parameters and pattern matching.
+                    Slim provides a fast and powerful router that maps
+                    route callbacks to specific HTTP request methods and
+                    URIs. It supports parameters and pattern matching.
                 </p>
             </div>
 
             <div class="col-md-6">
                 <h2><i class="fa fa-dot-circle-o"></i> Middleware</h2>
                 <p>
-                    Build your application with custom concentric
-                    middleware to tweak the HTTP request and response
-                    objects before and after your Slim app runs.
+                    Build your application with concentric middleware to tweak
+                    the HTTP request and response objects around your Slim app.
                 </p>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-                <h2><i class="fa fa-exchange"></i> HTTP</h2>
+                <h2><i class="fa fa-exchange"></i> PSR-7 Support</h2>
                 <p>
-                    Slim has easy-to-use request and response abstractions
-                    that let you inspect and manipulate
-                    HTTP messages' method, status, URI, headers, cookies, and body.
+                    Slim supports any PSR-7 HTTP message implementation
+                    so you may inspect and manipulate HTTP message method,
+                    status, URI, headers, cookies, and body.
                 </p>
             </div>
 
             <div class="col-md-6">
-                <h2><i class="fa fa-group"></i> Sessions</h2>
+                <h2><i class="fa fa-group"></i> Dependency Injection</h2>
                 <p>
-                    Slim provides first-class session support.
-                    It persists session data using
-                    industry standard encryption. Slim also
-                    enables "flash" messages across requests.
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <h2><i class="fa fa-database"></i> Caching</h2>
-                <p>
-                    Slim provides helper methods that make client-side
-                    HTTP caching easier. It helps you work with
-                    the <code>Expires</code>, <code>Last-Modified</code>,
-                    and <code>ETag</code> headers.
-                </p>
-            </div>
-
-            <div class="col-md-6">
-                <h2><i class="fa fa-lock"></i> Crypto</h2>
-                <p>
-                    Slim has super-secure cryptography
-                    using military-grade encryption. Slim uses
-                    your unique key to encrypt session and cookie
-                    data before persisting data to disk.
+                    Slim supports dependency injection so you
+                    have complete control of your external tools.
+                    Use any Container-Interop container.
                 </p>
             </div>
         </div>
