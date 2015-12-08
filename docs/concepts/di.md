@@ -32,8 +32,7 @@ application route like this:
  * @return \Psr\Http\Message\ResponseInterface
  */
 $app->get('/foo', function ($req, $res, $args) {
-    $container = $this->getContainer();
-    $myService = $container->get('myService');
+    $myService = $this->get('myService');
 
     return $res;
 });
