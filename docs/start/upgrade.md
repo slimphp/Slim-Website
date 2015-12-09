@@ -113,10 +113,10 @@ This means that the specification of route patterns has changed with named param
 
 {% highlight php %}
 // named parameter:
-$app->get(/hello/{name}, /*...*/);
+$app->get('/hello/{name}', /*...*/);
 
 // optional segment:
-$app->get(/news[/{year}], /*...*/);
+$app->get('/news[/{year}]', /*...*/);
 {% endhighlight %}
 
 # Route Middleware
