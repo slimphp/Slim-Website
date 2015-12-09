@@ -107,7 +107,7 @@ You can add a route that handles all HTTP request methods with the Slim applicat
 
 {% highlight php %}
 $app = new \Slim\App();
-$app->any('/books/({id})', function ($request, $response, $args) {
+$app->any('/books/[{id}]', function ($request, $response, $args) {
     // Apply changes to books or book identified by $args['id'] if specified.
     // To check which method is used: $request->getMethod();
 });
