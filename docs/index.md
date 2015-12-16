@@ -2,6 +2,12 @@
 title: Documentation
 ---
 
+<div class="alert alert-info">
+    <p>
+        This documentation is for <strong>Slim 3</strong>. The Slim 2 documentation is available at <a href="http://docs.slimframework.com/">docs.slimframework.com</a>.
+    </p>
+</div>
+
 ## Welcome
 
 Slim is a PHP micro framework that helps you
