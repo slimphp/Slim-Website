@@ -47,7 +47,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li{% if page.url contains "/blog" %} class="active"{% endif %}><a href="/blog">Blog</a></li>
-                        <li><a href="/docs" target="_blank">User Guide</a></li>
+                        <li{% if page.url contains "/docs" %} class="active"{% endif %}><a href="/docs">User Guide</a></li>
                         <li><a href="http://help.slimframework.com/" target="_blank">Support</a></li>
                         <li{% if page.url contains "/contribute" %} class="active"{% endif %}><a href="/contribute">Contribute</a></li>
                         <li{% if page.url contains "/swag" %} class="active"{% endif %}><a href="/swag"><i class="fa fa-heart"></i> Goodies</a></li>
