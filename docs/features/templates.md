@@ -8,12 +8,15 @@ for preparing and returning an appropriate PSR 7 response object.
 
 > Slim's "view" is the HTTP response.
 
+That being said, Slim does provide both a [slim/twig-view][twigview] and a
+[slim/php-view][phpview] component to help you render templates to a PSR7
+Response object.
+
 ## The slim/twig-view component
 
-That being said, Slim does provide the optional [slim/twig-view][twigview]
-PHP component to help you render [Twig][twig] templates to a PSR 7 Response
-object. This component is available on Packagist, and it's easy
-to install with Composer like this:
+The [slim/twig-view][twigview] PHP component helps you render [Twig][twig]
+templates in your application. This component is available on Packagist, and
+it's easy to install with Composer like this:
 
 [twigview]: https://github.com/slimphp/Twig-View
 [twig]: http://twig.sensiolabs.org/
@@ -107,8 +110,58 @@ for the "profile" named route shown in the example Slim application above.
 {% endraw %}
 {% endhighlight %}
 
+## The slim/php-view component
+
+The [slim/php-view][phpview] PHP component helps you render PHP templates.
+This component is available on Packagist and can be installed using
+Composer like this:
+
+[phpview]: https://github.com/slimphp/PHP-View
+
+<figure>
+{% highlight text %}
+composer require slim/php-view
+{% endhighlight %}
+<figcaption>Figure 4: Install slim/php-view component.</figcaption>
+</figure>
+
+To register this component as a service on Slim app's container, do this:
+
+<figure>
+{% highlight php %}
+<?php
+// Create container
+$container = new \Slim\Container;
+
+// Register component on container
+$templatePath = "../templates/";
+$container['view'] = new \Slim\Views\PhpRenderer($templatePath);
+{% endhighlight %}
+<figcaption>Figure 5: Register slim/php-view component with container.</figcaption>
+</figure>
+
+Use the view component to render a PHP view like this:
+
+<figure>
+{% highlight php %}
+// Create app
+$app = new \Slim\App($container);
+
+// Render Twig template in route
+$app->get('/hello/{name}', function ($request, $response, $args) {
+    return $this->view->render($response, 'profile.html', [
+        'name' => $args['name']
+    ]);
+})->setName('profile');
+
+// Run app
+$app->run();
+{% endhighlight %}
+<figcaption>Figure 6: Render template with slim/twig-view container service.</figcaption>
+</figure>
+
 ## Other template systems
 
-You are not limited to the `slim/twig-view` component. You can use any PHP
-template system assuming you ultimately write the rendered template output to
-the PSR 7 Response object's body.
+You are not limited to the `slim/twig-view` and `slim/php-view` components. You
+can use any PHP template system assuming you ultimately write the rendered
+template output to the PSR 7 Response object's body.
