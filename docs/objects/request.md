@@ -234,7 +234,7 @@ $parsedBody = $request->getParsedBody();
 <figcaption>Figure 9: Parse HTTP request body into native PHP format</figcaption>
 </figure>
 
-* JSON requests are converted into a PHP object with `json_decode($input)`.
+* JSON requests are converted into associative arrays with `json_decode($input, true)`.
 * XML requests are converted into a `SimpleXMLElement` with `simplexml_load_string($input)`.
 * URL-encoded requests are converted into a PHP array with `parse_str($input)`.
 
