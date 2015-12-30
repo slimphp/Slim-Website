@@ -51,7 +51,7 @@ defaults:
             - [/docs/objects/router.md#route-middleware, Middleware]
         - title: Error Handling
           items:
-            - [/docs/handlers/error.md, 500 Server Error]
+            - [/docs/handlers/error.md, Error Handlers]
             - [/docs/handlers/not-found.md, 404 Not Found]
             - [/docs/handlers/not-allowed.md, 405 Not Allowed]
         - title: Cook book
