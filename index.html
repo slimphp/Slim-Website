@@ -38,21 +38,17 @@ $app-&gt;run();</code></pre>
         <p>
             We recommend you install the Slim Framework with the
             <a href="https://getcomposer.org/" target="_blank">Composer</a>
-            dependency manager. Run this bash command in your project's root
-            directory to download and install the latest stable version into
-            your project's <code>vendor/</code> directory.
+            dependency manager.
         </p>
-        <pre><code class="language-bash">composer require slim/slim:^3.0</code></pre>
-        <p>
-            Next, require the Composer autoloader into your PHP application.
-        </p>
-        <pre><code class="language-php">&lt;?php
-require 'vendor/autoload.php';</code></pre>
+        <p>The easiest way to start working with Slim is to create a project using
+        <a href="https://github.com/slimphp/Slim-Skeleton">Slim-Skeleon</a> as a base
+        by runing this bash command:</p>
 
-        <p class="center">Not using Composer?</p>
-        <p class="center">
-            <a class="btn btn-primary btn-lg" href="https://github.com/slimphp/Slim/releases" target="_blank">Download ZIP Archive</a>
-        </p>
+        <pre><code class="language-bash">$ php composer.phar create-project slim/slim-skeleton [my-app-name]</code></pre>
+
+        <p>Replace <code>[my-app-name]</code> with the desired directory name for your new application. </p>
+        <p>You can then run it with PHP's built-in webserver:</p>
+        <pre><code class="language-bash">$ cd [my-app-name]; php -S 0.0.0.0:8080 -t public public/index.php</code></pre>
     </div>
 </div>
 
