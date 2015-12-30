@@ -35,13 +35,13 @@ container like this:
 $container = new \Slim\Container;
 
 // Register component on container
-$container['view'] = function ($c) {
+$container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('path/to/templates', [
         'cache' => 'path/to/cache'
     ]);
     $view->addExtension(new \Slim\Views\TwigExtension(
-        $c['router'],
-        $c['request']->getUri()
+        $container['router'],
+        $container['request']->getUri()
     ));
 
     return $view;
