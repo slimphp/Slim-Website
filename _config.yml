@@ -57,6 +57,7 @@ defaults:
         - title: Cook book
           items:
             - [/docs/cookbook/route-patterns.md, Trailing / in routes]
+            - [/docs/cookbook/ip-address.md, Retrieving IP address]
         - title: Add Ons
           items:
             - [/docs/features/templates.md, Templates]
