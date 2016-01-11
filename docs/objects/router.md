@@ -160,7 +160,7 @@ $app = new \Slim\App();
 $app->get('/hello/{name}', function ($request, $response, $args) {
     // Use app HTTP cookie service
     $this->get('cookies')->set('name', [
-        'name' => $args['name'],
+        'value' => $args['name'],
         'expires' => '7 days'
     ]);
 });
