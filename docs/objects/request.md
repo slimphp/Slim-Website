@@ -349,3 +349,49 @@ In this example we are checking first that the user is logged in and second that
     $route = $request->getAttribute('route');
     $courseId = $route->getArgument('id');
 {% endhighlight %}
+
+### Media Parsers
+
+Occasionally you might run into an issue where Slim does not automatically parse your request body. In this case you will need to either parse the raw body yourself or register a new media parser. Media parsers are functions that accept an {% highlight php %}$input{% endhighlight %} and returns a parsed object or array.
+
+Slim ships with a few different ones by default to cover most of the commonly used content-types.
+There are 2 current strategies for registering media parsers.
+ - Register a media parser in the container factory for the request object
+ - Register a media parser in an application/route middleware **
+** you must register the parser before you try to access the parsed body for the first time.
+
+To register in the container factory
+{% highlight php %}
+//...
+// Required to manually create the container
+$container = new \Slim\Container();
+// Create new factory 
+$container['request'] = function ($c) {
+    // construct request from environment
+    $request = \Slim\Http\Request::createFromEnvironment($c['env']);
+    // add media parser
+    $request->registerMediaTypeParser("text/javascript", function ($input) {
+        return json_decode($input, true);
+    });
+};
+
+// Construct App
+$app = new Slim\App($container);
+//...
+{% endhighlight %} 
+
+To do the same inside a middleware
+{% highlight php %}
+//...
+// Add the middleware
+$app->add(function ($request, $response, $next) {
+    // add media parser
+    $request->registerMediaTypeParser("text/javascript", function ($input) {
+        return json_decode($input, true);
+    });
+    
+    return $next($request, $response);
+};
+
+//...
+{% endhighlight %} 
