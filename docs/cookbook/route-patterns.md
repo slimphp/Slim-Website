@@ -2,7 +2,7 @@
 title: Trailing / in route patterns
 ---
 
-Slim treats a URL pattern with a trailing slash as different to one without. That is, `/user` and `/users/` are different and so can have different callbacks attached.
+Slim treats a URL pattern with a trailing slash as different to one without. That is, `/user` and `/user/` are different and so can have different callbacks attached.
 
 If you want to redirect all URLs that end in a `/` to the non-trailing `/` equivalent, then you can add this middleware:
 

@@ -1,5 +1,5 @@
 ---
-title: 500 System Error Handler
+title: System Error Handler
 ---
 
 Things go wrong. You can't predict errors, but you can anticipate them. Each Slim Framework application has an error handler that receives all uncaught PHP exceptions. This error handler also receives the current HTTP request and response objects, too. The error handler must prepare and return an appropriate Response object to be returned to the HTTP client.

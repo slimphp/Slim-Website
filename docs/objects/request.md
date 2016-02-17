@@ -234,7 +234,7 @@ $parsedBody = $request->getParsedBody();
 <figcaption>Figure 9: Parse HTTP request body into native PHP format</figcaption>
 </figure>
 
-* JSON requests are converted into a PHP object with `json_decode($input)`.
+* JSON requests are converted into associative arrays with `json_decode($input, true)`.
 * XML requests are converted into a `SimpleXMLElement` with `simplexml_load_string($input)`.
 * URL-encoded requests are converted into a PHP array with `parse_str($input)`.
 
@@ -335,10 +335,17 @@ You can fetch the HTTP request content length with the Request object's `getCont
 $length = $request->getContentLength();
 {% endhighlight %}
 
-### IP Address
+### Route Object
 
-You can fetch the HTTP request's source IP address with the Request object's `getIp()` method. This method respects the `X-Forwarded-For` header, if present.
+Sometimes in middleware you require the parameter of your route.
+
+In this example we are checking first that the user is logged in and second that the user has permissions to view the particular video they are attempting to view.
 
 {% highlight php %}
-$ip = $request->getIp();
+    $app->get('/course/{id}', Video::class.":watch")->add(Permission::class)->add(Auth::class);
+
+    //.. In the Permission Class's Invoke
+    /** @var $route \Slim\Route */
+    $route = $request->getAttribute('route');
+    $courseId = $route->getArgument('id');
 {% endhighlight %}

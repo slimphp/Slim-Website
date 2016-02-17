@@ -32,8 +32,7 @@ application route like this:
  * @return \Psr\Http\Message\ResponseInterface
  */
 $app->get('/foo', function ($req, $res, $args) {
-    $container = $this->getContainer();
-    $myService = $container->get('myService');
+    $myService = $this->get('myService');
 
     return $res;
 });
@@ -103,3 +102,6 @@ notAllowedHandler
 1. `\Psr\Http\Message\ServerRequestInterface`
 2. `\Psr\Http\Message\ResponseInterface`
 3. Array of allowed HTTP methods
+
+callableResolver
+:   Instance of `\Slim\Interfaces\CallableResolverInterface`.

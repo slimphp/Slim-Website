@@ -24,6 +24,7 @@ $c['notAllowedHandler'] = function ($c) {
             ->withHeader('Allow', implode(', ', $methods))
             ->withHeader('Content-type', 'text/html')
             ->write('Method must be one of: ' . implode(', ', $methods));
+    };
 };
 {% endhighlight %}
 

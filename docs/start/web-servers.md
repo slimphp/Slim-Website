@@ -7,6 +7,15 @@ requests received by your web server to a single PHP file. The instructions
 below explain how to tell your web server to send HTTP requests to your PHP
 front-controller file.
 
+## PHP built-in server
+
+Run the following command in terminal to start localhost web server, 
+assuming `./public/` is public-accessible directory with `index.php` file:
+
+{% highlight bash %}
+php -S localhost:8080 -t ./public/ 
+{% endhighlight %}
+
 ## Apache configuration
 
 Ensure your `.htaccess` and `index.php` files are in the same

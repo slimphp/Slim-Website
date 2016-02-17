@@ -30,11 +30,11 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 Slim v3 no longer has the concept of hooks. Hooks were removed as they duplicate the functionality already present in middlewares. You should be able to easily convert your Hook code into Middleware code.
 
 # Removal HTTP Cache
-In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache](https://github.com/slimphp/Slim-HttpCache)
+In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache](https://github.com/slimphp/Slim-HttpCache).
 
 # Removal of Stop/Halt
 Slim Core has removed Stop/Halt.
-In your applications, you should transition to using the withStatus() and withBody()
+In your applications, you should transition to using the withStatus() and withBody() methods.
 
 # Changed Redirect
 In Slim v2.x one would use the helper function $app->redirect(); to trigger a redirect request.
@@ -44,13 +44,11 @@ Example:
 
 {% highlight php %}
 $app->get('/', function ($req, $res, $args) {
-  return $res->withStatus(301)->withHeader("Location", "yournewuri");
+  return $res->withStatus(301)->withHeader('Location', 'your-new-uri');
 });
 {% endhighlight %}
 
-# Middleware
-Signature
-----
+# Middleware Signature
 The middleware signature has changed from a class to a function.
 
 New signature:
@@ -60,10 +58,10 @@ use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 $app->add(function (Request $req,  Response $res, callable $next) {
-    //Do stuff before passing a long
-    $newRespose = $next($req, $res);
-    //Do Stuff after route is rendered
-    return $newResponse; //continue
+    // Do stuff before passing along
+    $newResponse = $next($req, $res);
+    // Do stuff after route is rendered
+    return $newResponse; // continue
 });
 {% endhighlight %}
 
@@ -78,10 +76,10 @@ use Psr\Http\Message\ResponseInterface as Response;
 class Middleware
 {
     function __invoke(Request $req,  Response $res, callable $next) {
-        //Do stuff before passing a long
-        $newRespose = $next($req, $res);
-        //Do Stuff after route is rendered
-        return $newResponse; //continue
+        // Do stuff before passing along
+        $newResponse = $next($req, $res);
+        // Do stuff after route is rendered
+        return $newResponse; // continue
     }
 }
 
@@ -95,7 +93,7 @@ $app->add(My\Middleware::class);
 
 
 # Middleware Execution
-Application middleware is executed as Last In First Executed (LIFE)
+Application middleware is executed as Last In First Executed (LIFE).
 
 # Flash Messages
 Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/features/flash.html) package.
@@ -113,10 +111,10 @@ This means that the specification of route patterns has changed with named param
 
 {% highlight php %}
 // named parameter:
-$app->get(/hello/{name}, /*...*/);
+$app->get('/hello/{name}', /*...*/);
 
 // optional segment:
-$app->get(/news[/{year}], /*...*/);
+$app->get('/news[/{year}]', /*...*/);
 {% endhighlight %}
 
 # Route Middleware
@@ -124,7 +122,7 @@ The syntax for adding route middleware has changed slightly.
 In v3.0:
 
 {% highlight php %}
-php $app->get(…)->add($mw2)->add($mw1);
+$app->get(…)->add($mw2)->add($mw1);
 {% endhighlight %}
 
 # urlFor() is now pathFor() in the router
@@ -142,27 +140,27 @@ $app->get('/', function ($request, $response, $args) {
 Also, `pathFor()` is base path aware.
 
 # Container and DI ... Constructing
-Slim uses Pimple as a Dependency Injection Container
+Slim uses Pimple as a Dependency Injection Container.
 
 {% highlight php %}
 
-//index.php
+// index.php
 $app = new Slim\App(
     new \Slim\Container(
-        include "../config/container.config.php"
+        include '../config/container.config.php'
     )
 );
 
-//Slim will grab the Home class from the container defined below and execute its index method
-//If the class is not defined in the container Slim will still contruct it and pass the container as the first arugment to the constructor!
+// Slim will grab the Home class from the container defined below and execute its index method.
+// If the class is not defined in the container Slim will still contruct it and pass the container as the first arugment to the constructor!
 $app->get('/', Home::class . ':index');
 
 
-//In container.config.php
+// In container.config.php
 // We are using the SlimTwig here
 return [
-    "settings" => [
-        'viewTemplatesDirectory' => "../templates",
+    'settings' => [
+        'viewTemplatesDirectory' => '../templates',
     ],
     'twig' => [
         'title' => '',
@@ -173,7 +171,7 @@ return [
         $view = new Twig(
             $c['settings']['viewTemplatesDirectory'],
             [
-                'cache' => false //"../cache"
+                'cache' => false // '../cache'
             ]
         );
 
@@ -204,29 +202,29 @@ return [
 This means that when you change one of these objects, the old instance is not updated.
 
 {% highlight php %}
-    // THIS IS WRONG. The change will not pass through.
-    $app->add(function (Request $request, Response $response, $next) {
-        $request->withAttribute("abc", "def");
-        return $next($request, $response);
-    });
-    
-    //This is Correct
-    $app->add(function (Request $request, Response $response, $next) {
-        $request = $request->withAttribute("abc", "def");
-        return $next($request, $response);
-    });    
+// This is WRONG. The change will not pass through.
+$app->add(function (Request $request, Response $response, $next) {
+    $request->withAttribute('abc', 'def');
+    return $next($request, $response);
+});
+
+// This is correct.
+$app->add(function (Request $request, Response $response, $next) {
+    $request = $request->withAttribute('abc', 'def');
+    return $next($request, $response);
+});
 {% endhighlight %}
 
 ### Message bodies are streams
 
 {% highlight php %}
 // ...
-$image = __DIR__ . ‘/huge_photo.jpg';
+$image = __DIR__ . '/huge_photo.jpg';
 $body = new Stream($image);
 $response = (new Response())
      ->withStatus(200, 'OK')
      ->withHeader('Content-Type', 'image/jpeg')
-     ->withHeader(‘Content-Length', filesize($image))
+     ->withHeader('Content-Length', filesize($image))
      ->withBody($body);
 // ...
 {% endhighlight %}
@@ -234,9 +232,9 @@ $response = (new Response())
 For text:
 {% highlight php %}
 // ...
-$response = (new Response())->getBody()->write("Hello world!")
+$response = (new Response())->getBody()->write('Hello world!')
 
-// Or Slim specific: Not PSR-7 compliant
-$response = (new Response())->write("Hello world!");
-// ... 
+// Or Slim specific: Not PSR-7 compliant.
+$response = (new Response())->write('Hello world!');
+// ...
 {% endhighlight %}
