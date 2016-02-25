@@ -160,7 +160,7 @@ $app = new \Slim\App();
 $app->get('/hello/{name}', function ($request, $response, $args) {
     // Use app HTTP cookie service
     $this->get('cookies')->set('name', [
-        'name' => $args['name'],
+        'value' => $args['name'],
         'expires' => '7 days'
     ]);
 });
@@ -225,7 +225,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 You can generate a URL for this named route with the application router's `pathFor()`  method.
 
 {% highlight php %}
-echo $app->router->pathFor('hello', [
+echo $app->getContainer()->get('router')->pathFor('hello', [
     'name' => 'Josh'
 ]);
 // Outputs "/hello/Josh"
