@@ -117,15 +117,17 @@ Application middleware is invoked for every *incoming* HTTP request. Add applica
 $app = new \Slim\App();
 
 $app->add(function ($request, $response, $next) {
-    $response->getBody()->write('BEFORE');
-    $response = $next($request, $response);
-    $response->getBody()->write('AFTER');
+	$response->getBody()->write('BEFORE');
+	$response = $next($request, $response);
+	$response->getBody()->write('AFTER');
 
-    return $response;
+	return $response;
 });
 
-$app->get('/', function ($req, $res, $args) {
-    echo ' Hello ';
+$app->get('/', function ($request, $response, $args) {
+	$response->getBody()->write(' Hello ');
+
+	return $response;
 });
 
 $app->run();
@@ -151,8 +153,10 @@ $mw = function ($request, $response, $next) {
     return $response;
 };
 
-$app->get('/', function ($req, $res, $args) {
-    echo ' Hello ';
+$app->get('/', function ($request, $response, $args) {
+	$response->getBody()->write(' Hello ');
+
+	return $response;
 })->add($mw);
 
 $app->run();
