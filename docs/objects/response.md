@@ -258,7 +258,7 @@ instance of `\Psr\Http\Message\StreamInterface`.
 $newStream = new \GuzzleHttp\Psr7\LazyOpenStream('/path/to/file', 'r');
 $newResponse = $oldResponse->withBody($newStream);
 {% endhighlight %}
-<figcaption>Figure 13: Replace the HTTP response body</figcaption>
+<figcaption>Figure 14: Replace the HTTP response body</figcaption>
 </figure>
 
 <div class="alert alert-info">
