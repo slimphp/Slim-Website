@@ -33,6 +33,8 @@ defaults:
             - [/docs/objects/request.md#the-request-headers, Headers]
             - [/docs/objects/request.md#the-request-body, Body]
             - [/docs/objects/request.md#request-helpers, Helpers]
+            - [/docs/objects/request.md#route-object, Route object]
+            - [/docs/objects/request.md#media-type-parsers, Media type parsers]
         - title: The Response
           items:
             - [/docs/objects/response.md, Overview]
