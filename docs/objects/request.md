@@ -335,7 +335,7 @@ You can fetch the HTTP request content length with the Request object's `getCont
 $length = $request->getContentLength();
 {% endhighlight %}
 
-### Route Object
+## Route Object
 
 Sometimes in middleware you require the parameter of your route.
 
@@ -350,48 +350,33 @@ In this example we are checking first that the user is logged in and second that
     $courseId = $route->getArgument('id');
 {% endhighlight %}
 
-### Media Parsers
+## Media Type Parsers
 
-Occasionally you might run into an issue where Slim does not automatically parse your request body. In this case you will need to either parse the raw body yourself or register a new media parser. Media parsers are functions that accept an {% highlight php %}$input{% endhighlight %} and returns a parsed object or array.
+Slim looks as the request's media type and if it recognises it, will parse it into structured data available via ``$request->getParsedBody()``. This is usually an array, but is an object for XML media types.
 
-Slim ships with a few different ones by default to cover most of the commonly used content-types.
-There are 2 current strategies for registering media parsers.
- - Register a media parser in the container factory for the request object
- - Register a media parser in an application/route middleware **
-** you must register the parser before you try to access the parsed body for the first time.
+The following media types are recognised and parsed:
 
-To register in the container factory
+* application/x-www-form-urlencoded'
+* application/json
+* application/xml & text/xml
+
+If you want Slim to parse contend from a a different media type then you need to either parse the raw body yourself or register a new media parser. Media parsers are simply callables that accept an ``$input`` string and return a parsed object or array.
+
+Register a new media parser in an application or route middleware. Note that you must register the parser before you try to access the parsed body for the first time.
+
+For example, to automatically parse JSON that is sent with a ``text/javascript`` content type, you register a media type parser in middleware like this:
+
 {% highlight php %}
-//...
-// Required to manually create the container
-$container = new \Slim\Container();
-// Create new factory 
-$container['request'] = function ($c) {
-    // construct request from environment
-    $request = \Slim\Http\Request::createFromEnvironment($c['env']);
-    // add media parser
-    $request->registerMediaTypeParser("text/javascript", function ($input) {
-        return json_decode($input, true);
-    });
-};
-
-// Construct App
-$app = new Slim\App($container);
-//...
-{% endhighlight %} 
-
-To do the same inside a middleware
-{% highlight php %}
-//...
 // Add the middleware
 $app->add(function ($request, $response, $next) {
     // add media parser
-    $request->registerMediaTypeParser("text/javascript", function ($input) {
-        return json_decode($input, true);
-    });
+    $request->registerMediaTypeParser(
+        "text/javascript",
+        function ($input) {
+            return json_decode($input, true);
+        }
+    );
     
     return $next($request, $response);
 };
-
-//...
 {% endhighlight %} 
