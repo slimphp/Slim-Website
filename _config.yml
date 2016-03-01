@@ -1,4 +1,5 @@
 highlighter: rouge
+markdown: kramdown
 timezone: America/New_York
 title: Slim Framework
 url: http://www.slimframework.com
@@ -6,6 +7,9 @@ slim_website_repo: https://github.com/slimphp/Slim-Website/tree/gh-pages/
 urlBasePath:
 include: [.htaccess]
 exclude: [node_modules]
+kramdown:
+  input: GFM
+  hard_wrap: false
 gems:
   - jekyll-sitemap
 defaults:
