@@ -25,7 +25,7 @@ $app = new App([
 $app->add(function (Request $request, Response $response, callable $next) {
     $route = $request->getAttribute('route');
     $name = $route->getName();
-    $group = $route->getGroup();
+    $groups = $route->getGroups();
     $methods = $route->getMethods();
     $arguments = $route->getArguments();
 
