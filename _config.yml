@@ -27,7 +27,7 @@ defaults:
             - [/docs/start/web-servers.md, Web Servers]
         - title: Tutorial
           items:
-            - [/docs/tutorial/first-app.md, First Application Walkthrough]
+            - [/docs/tutorial/first-app.md, First Application]
 
         - title: Concepts
           items:
