@@ -25,6 +25,10 @@ defaults:
             - [/docs/start/installation.md, Installation]
             - [/docs/start/upgrade.md, Upgrade Guide]
             - [/docs/start/web-servers.md, Web Servers]
+        - title: Tutorial
+          items:
+            - [/docs/tutorial/first-app.md, First Application]
+
         - title: Concepts
           items:
             - [/docs/concepts/value-objects.md, PSR 7]
