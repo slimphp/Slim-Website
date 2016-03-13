@@ -6,7 +6,7 @@ If you're looking for a tour through all the ingredients for setting up a very s
 
 Before you start: There is also a [skeleton project](https://github.com/slimphp/Slim-Skeleton) which will give you a quick-start for a sample application, so use that if you'd rather just have something working rather than exploring how all the moving parts work.
 
-> This tutorial walks through building an example application.  The [code for the application is available](https://bitbucket.org/lornajane/slim-tutorial) if you want to refer to it.
+> This tutorial walks through building an example application.  The [code for the application is available](https://github.com/slimphp/Tutorial-First-Application) if you want to refer to it.
 
 ## Getting Set Up
 
