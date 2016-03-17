@@ -49,6 +49,7 @@ defaults:
             - [/docs/objects/response.md#the-response-status, Status]
             - [/docs/objects/response.md#the-response-headers, Headers]
             - [/docs/objects/response.md#the-response-body, Body]
+            - [/docs/objects/response.md#returning-json, JSON]
         - title: Routing
           items:
             - [/docs/objects/router.md, Overview]
