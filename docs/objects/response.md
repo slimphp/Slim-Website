@@ -268,3 +268,46 @@ $newResponse = $oldResponse->withBody($newStream);
         of the Response object that contains the new body.
     </div>
 </div>
+
+## Returning JSON
+
+Slim's Response object has a custom method `withJson($data, $status, $encodingOptions)` to help simplify the process of returning JSON data.
+
+The `$data` parameter contains the data structure you wish returned as JSON. `$status` is optional, and can used to return a custom HTTP code. `$encodingOptions` is optional, and are the same encoding options used for [`json_encode()`][json_encode].
+
+In it's simplest form, JSON data can be returned with a default 200 HTTP status code.
+
+<figure>
+{% highlight php %}
+$data = array('name' => 'Bob', 'age' => 40);
+$newResponse = $oldResponse->withJson($data);
+{% endhighlight %}
+<figcaption>Figure 15: Returning JSON with a 200 HTTP status code.</figcaption>
+</figure>
+
+We can also return JSON data with a custom HTTP status code.
+
+<figure>
+{% highlight php %}
+$data = array('name' => 'Rob', 'age' => 40);
+$newResponse = $oldResponse->withJson($data, 201);
+{% endhighlight %}
+<figcaption>Figure 16: Returning JSON with a 201 HTTP status code.</figcaption>
+</figure>
+
+The `Content-Type` of the Response is automatically set to `application/json;charset=utf-8`.
+
+If there is a problem encoding the data to JSON, a `\RuntimeException($message, $code)` is thrown containing the values of [`json_last_error_msg()`][json_last_error_msg] as the `$message` and [`json_last_error()`][json_last_error] as the `$code`.
+
+<div class="alert alert-info">
+    <div><strong>Reminder</strong></div>
+    <div>
+        The Response object is immutable. This method returns a <em>copy</em> of
+        the Response object that has a new Content-Type header. <strong>This method is
+        destructive</strong>, and it <em>replaces</em> the existing Content-Type header. The Status is also replaced if a $status was passed when <code>withJson()</code> was called.
+    </div>
+</div>
+
+[json_encode]: http://php.net/manual/en/function.json-encode.php
+[json_last_error]: http://php.net/manual/en/function.json-last-error.php
+[json_last_error_msg]: http://php.net/manual/en/function.json-last-error-msg.php
