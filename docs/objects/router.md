@@ -204,7 +204,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 To make a section optional, simply wrap in square brackets:
 
 {% highlight php %}
-$app->get('/users[/{id:[0-9]+}]', function ($request, $response, $args) {
+$app->get('/users[/{id}]', function ($request, $response, $args) {
     // reponds to both `/users` and `/users/123`
     // but not to `/users/`
 });
@@ -218,6 +218,20 @@ $app->get('/news[/{year}[/{month}]]', function ($request, $response, $args) {
     // reponds to `/news`, `/news/2016` and `/news/2016/03`
 });
 {% endhighlight %}
+
+For "Unlimited" optional parameters, you can do this:
+
+{% highlight php %}
+$app->get('/news[/{params.*}]', function ($request, $response, $args) {
+    $params = explode('/', $request->getAttribute('params'));
+
+    // $params is an array of all the optional segments
+});
+{% endhighlight %}
+
+In this example, a URI of `/news/2016/03/20` would result in the `$params` array
+containing three elements: `['2016', '03', '20']`.
+
 
 ### Regular expression matching
 
