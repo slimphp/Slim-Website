@@ -63,7 +63,7 @@ $app->get('/', function ($request, $response, $args) {
 {% endhighlight %}
 
 
-### Slim Default Settings
+## Slim Default Settings
 
 Slim has the following default settings that you can override:
 

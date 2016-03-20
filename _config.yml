@@ -37,7 +37,8 @@ defaults:
         - title: The Application
           items:
             - [/docs/objects/application.md, Overview]
-            - [/docs/objects/application.md#the-application-configuration, Configuration]
+            - [/docs/objects/application.md#application-configuration, Configuration]
+            - [/docs/objects/application.md#slim-default-settings, Default settings]
         - title: The Request
           items:
             - [/docs/objects/request.md, Overview]
