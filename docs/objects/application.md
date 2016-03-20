@@ -10,7 +10,7 @@ $app = new \Slim\App();
 
 // Add route callbacks
 $app->get('/', function ($request, $response, $args) {
-    return $res->withStatus(200)->write('Hello World!');
+    return $response->withStatus(200)->write('Hello World!');
 });
 
 // Run application
