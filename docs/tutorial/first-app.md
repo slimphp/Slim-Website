@@ -260,7 +260,7 @@ $app->get('/ticket/{id}', function (Request $request, Response $response, $args)
     $mapper = new TicketMapper($this->db);
     $ticket = $mapper->getTicketById($ticket_id);
 
-    $response->getBody()->write(var_export($tickets, true));
+    $response->getBody()->write(var_export($ticket, true));
     return $response;
 });
 {% endhighlight %}
@@ -282,7 +282,7 @@ These can then be used (after validating of course) inside your callback.
 
 When working with incoming data, we can find this in the body.  We've already seen how we can parse data from the URL and how to obtain the GET variables by doing `$request->getQueryParameters()` but what about POST data?  The POST request data can be found in the body of the request, and Slim has some good built in helpers to make it easier to get the information in a useful format.
 
-For data that comes from a web form, Slim will turn that into an array.  My tickets example application has a form for creating new tickets that just sends two fields: "title" and "description".  Here is the first part of the route that receives that data, note that for a POST route use `$app->post()` rather than `$app-get()`:
+For data that comes from a web form, Slim will turn that into an array.  My tickets example application has a form for creating new tickets that just sends two fields: "title" and "description".  Here is the first part of the route that receives that data, note that for a POST route use `$app->post()` rather than `$app->get()`:
 
 {% highlight php %}
 $app->post('/ticket/new', function (Request $request, Response $response) {
