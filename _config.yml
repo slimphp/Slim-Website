@@ -34,6 +34,10 @@ defaults:
             - [/docs/concepts/value-objects.md, PSR 7]
             - [/docs/concepts/middleware.md, Middleware]
             - [/docs/concepts/di.md, Dependency Container]
+        - title: The Application
+          items:
+            - [/docs/objects/application.md, Overview]
+            - [/docs/objects/application.md#the-application-configuration, Configuration]
         - title: The Request
           items:
             - [/docs/objects/request.md, Overview]
