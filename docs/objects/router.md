@@ -199,6 +199,26 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 });
 {% endhighlight %}
 
+### Optional segments
+
+To make a section optional, simply wrap in square brackets:
+
+{% highlight php %}
+$app->get('/users[/{id:[0-9]+}]', function ($request, $response, $args) {
+    // reponds to both `/users` and `/users/123`
+    // but not to `/users/`
+});
+{% endhighlight %}
+
+
+Multiple optional parameters are supported by nesting:
+
+{% highlight php %}
+$app->get('/news[/{year}[/{month}]]', function ($request, $response, $args) {
+    // reponds to `/news`, `/news/2016` and `/news/2016/03`
+});
+{% endhighlight %}
+
 ### Regular expression matching
 
 By default the placeholders are written inside `{}` and can accept any
