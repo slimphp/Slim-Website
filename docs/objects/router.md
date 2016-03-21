@@ -222,7 +222,7 @@ $app->get('/news[/{year}[/{month}]]', function ($request, $response, $args) {
 For "Unlimited" optional parameters, you can do this:
 
 {% highlight php %}
-$app->get('/news[/{params.*}]', function ($request, $response, $args) {
+$app->get('/news[/{params:.*}]', function ($request, $response, $args) {
     $params = explode('/', $request->getAttribute('params'));
 
     // $params is an array of all the optional segments
