@@ -15,6 +15,32 @@ composer require illuminate/database "~5.1"
 
 ## Configure Eloquent
 
+Add the database settings to Slim's settings array.
+
+<figure>
+{% highlight php %}
+<?php
+return [
+    'settings' => [
+        // Slim Settings
+        'determineRouteBeforeAppMiddleware' => false,
+        'displayErrorDetails' => true,
+        'db' => [
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'database' => 'database',
+            'username' => 'user',
+            'password' => 'password',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ]
+    ],
+];
+{% endhighlight %}
+<figcaption>Figure 2: Settings array.</figcaption>
+</figure>
+
 In your `dependencies.php` or wherever you add your Service Factories:
 
 <figure>
@@ -25,16 +51,7 @@ In your `dependencies.php` or wherever you add your Service Factories:
 
 $container['db'] = function ($container) {
     $capsule = new \Illuminate\Database\Capsule\Manager;
-    $capsule->addConnection([
-        'driver' => 'mysql',
-        'host' => 'localhost'
-        'database' => 'database',
-        'username' => 'user',
-        'password' => 'password',
-        'charset'   => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
-    ]);
+    $capsule->addConnection($container['settings']['db']);
 
     $capsule->setAsGlobal();
     $capsule->bootEloquent();
@@ -42,7 +59,7 @@ $container['db'] = function ($container) {
     return $capsule;
 };
 {% endhighlight %}
-<figcaption>Figure 2: Configure Eloquent.</figcaption>
+<figcaption>Figure 3: Configure Eloquent.</figcaption>
 </figure>
 
 ## Pass a controller an instance of your table
@@ -50,11 +67,11 @@ $container['db'] = function ($container) {
 <figure>
 {% highlight php %}
 $container[App\WidgetController::class] = function ($c) {
-    $model = $c->get('db')->table('table_name');
-    return new \App\WidgetController($c->get('view'), $c->get('logger'), $model);
+    $table = $c->get('db')->table('table_name');
+    return new \App\WidgetController($c->get('view'), $c->get('logger'), $table);
 };
 {% endhighlight %}
-<figcaption>Figure 3: Pass table object into a controller.</figcaption>
+<figcaption>Figure 4: Pass table object into a controller.</figcaption>
 </figure>
 
 ## Query the table from a controller
@@ -67,6 +84,7 @@ namespace App;
 
 use Slim\Views\Twig;
 use Psr\Log\LoggerInterface;
+use Illuminate\Database\Query\Builder;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -74,18 +92,18 @@ class WidgetController
 {
     private $view;
     private $logger;
-    protected $widgets;
+    protected $table;
 
-    public function __construct(Twig $view, LoggerInterface $logger, $widgets)
+    public function __construct(Twig $view, LoggerInterface $logger, Builder $table)
     {
         $this->view = $view;
         $this->logger = $logger;
-        $this->widgets = $widgets;
+        $this->table = $table;
     }
 
     public function __invoke(Request $request, Response $response, $args)
     {
-        $widgets = $this->widgets->get();
+        $widgets = $this->table->get();
 
         $this->view->render($response, 'app/index.twig', ['widgets' => $widgets]);
 
@@ -93,7 +111,7 @@ class WidgetController
     }
 }
 {% endhighlight %}
-<figcaption>Figure 4: Sample controller querying the table.</figcaption>
+<figcaption>Figure 5: Sample controller querying the table.</figcaption>
 </figure>
 
 ### Query the table with where
@@ -101,10 +119,10 @@ class WidgetController
 <figure>
 {% highlight php %}
 ...
-$widgets = $this->widgets->where('name', 'like', '%foo%')->get();
+$records = $this->table->where('name', 'like', '%foo%')->get();
 ...
 {% endhighlight %}
-<figcaption>Figure 5: Query searching for names matching foo.</figcaption>
+<figcaption>Figure 6: Query searching for names matching foo.</figcaption>
 </figure>
 
 ### Query the table by id
@@ -112,10 +130,10 @@ $widgets = $this->widgets->where('name', 'like', '%foo%')->get();
 <figure>
 {% highlight php %}
 ...
-$widgets = $this->widgets->find(1);
+$record = $this->table->find(1);
 ...
 {% endhighlight %}
-<figcaption>Figure 6: Selecting a row based on id.</figcaption>
+<figcaption>Figure 7: Selecting a row based on id.</figcaption>
 </figure>
 
 ## More information
