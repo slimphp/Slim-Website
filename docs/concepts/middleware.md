@@ -26,7 +26,7 @@ Response objects as arguments.
 Different frameworks use middleware differently. Slim adds middleware as concentric
 layers surrounding your core application. Each new middleware layer surrounds
 any existing middleware layers. The concentric structure expands outwardly as
-additional middleware layers are added.
+additional middleware layers are added. The last middleware layer added is the first to be executed.
 
 When you run the Slim application, the Request and Response objects traverse the
 middleware structure from the outside in. They first enter the outer-most middleware,
@@ -117,15 +117,17 @@ Application middleware is invoked for every *incoming* HTTP request. Add applica
 $app = new \Slim\App();
 
 $app->add(function ($request, $response, $next) {
-    $response->getBody()->write('BEFORE');
-    $response = $next($request, $response);
-    $response->getBody()->write('AFTER');
+	$response->getBody()->write('BEFORE');
+	$response = $next($request, $response);
+	$response->getBody()->write('AFTER');
 
-    return $response;
+	return $response;
 });
 
-$app->get('/', function ($req, $res, $args) {
-    echo ' Hello ';
+$app->get('/', function ($request, $response, $args) {
+	$response->getBody()->write(' Hello ');
+
+	return $response;
 });
 
 $app->run();
@@ -151,8 +153,10 @@ $mw = function ($request, $response, $next) {
     return $response;
 };
 
-$app->get('/', function ($req, $res, $args) {
-    echo ' Hello ';
+$app->get('/', function ($request, $response, $args) {
+	$response->getBody()->write(' Hello ');
+
+	return $response;
 })->add($mw);
 
 $app->run();

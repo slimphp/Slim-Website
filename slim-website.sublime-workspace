@@ -1,0 +1,448 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"expected",
+				"expectedBody"
+			],
+			[
+				"Sg",
+				"SgEc2"
+			],
+			[
+				"Load",
+				"LoadBalancer"
+			],
+			[
+				"Security",
+				"SecurityGroups"
+			],
+			[
+				"Volume",
+				"VolumeSizeParameter"
+			],
+			[
+				"seanc",
+				"seancMemberId"
+			],
+			[
+				"lastSy",
+				"lastSyncTimeFile"
+			],
+			[
+				"sync",
+				"syncEnd"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 229.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Proj",
+				"Project: Save As"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"align",
+				"Preferences: Alignment File Settings – Default"
+			]
+		],
+		"width": 1072.0
+	},
+	"console":
+	{
+		"height": 308.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/josh/Projects/Slim-Website"
+	],
+	"file_history":
+	[
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/template-hooks.php",
+		"/C/Users/josh/Projects/rti-website/frontend/src/less/project/global/footer.less",
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/templates/pages/page.tpl.php",
+		"/C/Users/josh/Projects/rti-website/frontend/src/less/project/global/header.less",
+		"/C/Users/josh/Projects/rti-website/Gulpfile.js",
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/templates/views/practice-area-related-services/views-view-unformatted--practice-area-related-services.tpl.php",
+		"/C/Users/josh/Projects/rti-website/frontend/src/less/project/components/cta-filled.less",
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/template-preprocess.php",
+		"/C/Users/josh/Projects/rti-website/public/modules/menu/menu.admin.inc",
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/templates/nodes/node--services-and-capabilities--teaser-block.tpl.php",
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/templates/pages/page--template--wide.tpl.php",
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/templates/pages/page--custom--practice-area-detail.tpl.php",
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/templates/pages/page--url--emerging-issues.tpl.php",
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/rti.info",
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/templates/views/practice-area-related-services/node--view--practice-area-related-services.tpl.php",
+		"/C/Users/josh/Projects/rti-website/public/markup/sub-category-detail.html",
+		"/C/Users/josh/Projects/rti-website/rti-website.sublime-project",
+		"/C/Users/josh/Projects/rti-website/public/sites/all/themes/rti/templates/nodes/node--services-and-capabilities.tpl.php",
+		"/C/Users/josh/Projects/rti-website/public/sites/default/drushrc.php",
+		"/C/Users/josh/Projects/rti-website/.gitignore",
+		"/C/Users/josh/Projects/rti-api/lib/Middleware/ValidateRequestContentTypeMiddleware.php",
+		"/C/Users/josh/Projects/rti-api/lib/Middleware/LogRequestMiddleware.php",
+		"/C/Users/josh/Projects/rti-api/.env",
+		"/C/Users/josh/Projects/rti-api/lib/Middleware/ValidateRequestBodyMiddleware.php",
+		"/C/Users/josh/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/josh/Projects/rti-api/vendor/guzzlehttp/psr7/src/AppendStream.php",
+		"/C/Users/josh/Projects/rti-api/bootstrap.php",
+		"/C/Users/josh/Projects/rti-api/rtiapi.sublime-project",
+		"/C/Users/josh/Projects/rti-api/Vagrantfile",
+		"/C/Users/josh/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/josh/Projects/rti-api/lib/RequestLogger.php",
+		"/C/Users/josh/Projects/rti-api/Capfile",
+		"/C/Users/josh/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/josh/Projects/rti-api/tests/Middleware/ValidateRequestBodyMiddlewareTest.php",
+		"/C/Users/josh/Projects/rti-api/public/index.php",
+		"/C/Users/josh/Projects/rti-api/lib/Util.php",
+		"/C/Users/josh/Projects/rti-api/vendor/slim/slim/Slim/Http/Request.php",
+		"/C/Users/josh/Projects/rti-api/vendor/slim/slim/Slim/Http/Environment.php",
+		"/C/Users/josh/Projects/rti-api/tests/UtilTest.php",
+		"/C/Users/josh/Projects/rti-api/vendor/slim/slim/Slim/Http/Headers.php",
+		"/C/Users/josh/Projects/rti-api/vendor/slim/slim/Slim/Http/Stream.php",
+		"/C/Users/josh/Projects/rti-api/vendor/slim/slim/Slim/Http/Response.php",
+		"/C/Users/josh/Projects/rti-api/vendor/slim/slim/Slim/Http/Body.php",
+		"/C/Users/josh/Projects/rti-api/lib/Middleware/ResponseFormatter.php",
+		"/C/Users/josh/Projects/rti-api/vendor/slim/slim/Slim/Http/Message.php",
+		"/C/Users/josh/AppData/Roaming/Sublime Text 3/Packages/Terminal/Base File.sublime-settings",
+		"/C/Users/josh/Projects/rti-api/lib/Exception/InvalidRequestBodyException.php",
+		"/C/Users/josh/Projects/rti-api/lib/Exception/InvalidContentTypeException.php",
+		"/C/Users/josh/Projects/rti-api/vendor/psr/http-message/src/ServerRequestInterface.php",
+		"/C/Users/josh/Projects/rti-api/vendor/psr/http-message/src/RequestInterface.php",
+		"/C/Users/josh/Projects/rti-api/vendor/psr/http-message/src/StreamInterface.php",
+		"/C/Users/josh/Projects/rti-api/vendor/psr/http-message/src/MessageInterface.php",
+		"/C/Users/josh/Projects/rti-api/README.md",
+		"/C/Users/josh/Downloads/nmc-aws-josh-keys.csv",
+		"/C/Users/josh/Downloads/credentials.csv",
+		"/C/Users/josh/Projects/rti-api/tests/ExampleTest.php",
+		"/C/Users/josh/Projects/rti-api/phpunit.xml",
+		"/C/Users/josh/Projects/rti-api/tests/bootstrap.php",
+		"/C/Users/josh/Projects/rti-api/NOTES.md",
+		"/C/Users/josh/Projects/rti-api/provision/roles/website/templates/php-fpm-pool.conf.j2",
+		"/C/Users/josh/Projects/rti-api/provision/playbook-dev.yml",
+		"/C/Users/josh/Projects/rti-api/provision/playbook-production.yml",
+		"/C/Users/josh/Projects/rti-api/.gitignore",
+		"/C/Users/josh/Projects/rti-api/vendor/aws/aws-sdk-php/src/Credentials/Credentials.php",
+		"/C/Users/josh/Projects/rti-api/composer.json",
+		"/C/Users/josh/Projects/rti-api/lib/README.md",
+		"/C/Users/josh/Projects/rti-api/provision/roles/php/tasks/main.yml",
+		"/C/Users/josh/Projects/rti-publications-api/config/deploy.rb",
+		"/C/Users/josh/Projects/rti-publications-api/provision/playbook-dev.yml",
+		"/C/Users/josh/Projects/rti-publications-api/provision/playbook-production.yml",
+		"/C/Users/josh/Projects/rti-publications-api/Vagrantfile",
+		"/C/Users/josh/Projects/rti-publications-api/composer.json",
+		"/C/Users/josh/Projects/rti-publications-api/bootstrap.php",
+		"/C/Users/josh/Projects/rti-publications-api/public/index.php",
+		"/C/Users/josh/Projects/rti-publications-api/README.md",
+		"/C/Users/josh/Downloads/billpay.johnstonhealth.org/gd_bundle-g2-g1.crt",
+		"/C/Users/josh/Downloads/billpay.johnstonhealth.org/70aadef949601a0a.crt",
+		"/C/Users/josh/AppData/Local/Temp/scp07578/home/donatecisnc/public_html/test.html",
+		"/C/Users/josh/Downloads/STAR_cisnc_org/STAR_cisnc_org.ca-bundle",
+		"/C/Users/josh/Downloads/STAR_cisnc_org/STAR_cisnc_org.crt",
+		"/C/Users/josh/AppData/Local/Temp/Temp1_menu_node_views-7.x-1.x-dev.zip/menu_node_views/menu_node_views.views.inc",
+		"/C/Users/josh/Downloads/Client List for NMC.csv",
+		"/C/Users/josh/Downloads/ckfinder_php_3.2.1/ckfinder/config.php",
+		"/C/Users/josh/Downloads/seanc-ses-credentials.csv",
+		"/C/Users/josh/Desktop/channeladvisor-overview.md",
+		"/C/Users/josh/Projects/nmc-tools/src/sites-status.php",
+		"/C/Users/josh/Projects/nmc-tools/.gitignore",
+		"/C/Users/josh/Projects/nmc-tools/src/sites-are-available.php",
+		"/C/Users/josh/AppData/Local/Temp/scp44645/home/nmcssl/public_html/proxy/facebook/page.php",
+		"/C/Users/josh/Downloads/feeds_files/plugins/FeedsFileProcessor.inc",
+		"/C/Users/josh/Downloads/dns-records.CSV",
+		"/C/Users/josh/Downloads/feeds_files/feeds_file.module",
+		"/C/Users/josh/Projects/demand-signals/public/wp-content/themes/nmc_demand_signals/templates/layouts/layout-one-col.twig",
+		"/C/Users/josh/Projects/demand-signals/public/wp-content/themes/nmc_demand_signals/templates/archive.twig",
+		"/C/Users/josh/Projects/demand-signals/public/wp-content/themes/nmc_demand_signals/templates/index.twig",
+		"/C/Users/josh/Projects/demand-signals/public/wp-content/themes/nmc_demand_signals/template-home.php",
+		"/C/Users/josh/Projects/nmc-tools/src/list-craft-sites.php",
+		"/C/Users/josh/Projects/nmc-tools/src/list-drupal-sites.php",
+		"/C/Users/josh/Projects/nmc-tools/README.md",
+		"/C/Users/josh/Projects/modern-php/10-hosting.asciidoc",
+		"/C/Users/josh/Projects/modern-php/appendix-01-installation.asciidoc",
+		"/C/Users/josh/Projects/modern-php/11-provisioning.asciidoc",
+		"/C/Users/josh/Downloads/fitlosophy (1)",
+		"/C/Users/josh/Projects/dghi/public/sites/all/themes/dghi/templates/nodes/node--event.tpl.php",
+		"/C/Users/josh/Projects/dghi/public/sites/all/themes/dghi/template.php",
+		"/C/Users/josh/Projects/dghi/public/sites/all/themes/dghi/templates/views/events_most_recent/node--view--events-recent.tpl.php",
+		"/C/Users/josh/AppData/Local/Temp/scp47319/home/fastmedc/careers/public_html/index.php",
+		"/C/Users/josh/Projects/rti-website/provision/playbook-dev.yml",
+		"/C/Users/josh/Projects/rti-website/config/deploy/production.rb",
+		"/C/Users/josh/Downloads/021216_Website_Upload %281%29.csv",
+		"/C/Users/josh/Downloads/nccf-test.csv",
+		"/C/Users/josh/Projects/ansible/config/deploy.rb",
+		"/C/Users/josh/Projects/writer-plugin/RW Writer.stack/Contents/Resources/rwwriter.css",
+		"/C/Users/josh/Projects/writer-plugin/RW Writer Advanced.stack/Contents/Resources/rwwriteradvanced.css",
+		"/C/Users/josh/Projects/writer-plugin/RW Writer.stack/Contents/Resources/template.html",
+		"/C/Users/josh/Projects/writer-plugin/RW Writer Advanced.stack/Contents/Resources/template.html",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/josh/Projects/ansible/provision/playbook-production.yml",
+		"/C/Users/josh/Projects/ansible/provision/playbook-dev.yml",
+		"/C/Users/josh/Downloads/mariadb_regexp_replace.txt",
+		"/C/Users/josh/Projects/seanc-mariadb/Vagrantfile",
+		"/C/Users/josh/Projects/seanc/craft/templates/profile/index.html",
+		"/C/Users/josh/Projects/seanc/craft/templates/_specific/partial-insurance.html",
+		"/C/Users/josh/Projects/seanc/craft/plugins/seancsession/SeancSessionPlugin.php",
+		"/C/Users/josh/Projects/seanc/craft/plugins/seancsession/variables/SeancSessionVariable.php",
+		"/C/Users/josh/Projects/seanc/public/login.php",
+		"/C/Users/josh/Projects/seanc/craft/templates/_components/events-list.html",
+		"/C/Users/josh/Projects/seanc/config/deploy/production.rb"
+	],
+	"find":
+	{
+		"height": 55.0
+	},
+	"find_in_files":
+	{
+		"height": 223.0,
+		"where_history":
+		[
+			"<current file>",
+			"C:\\Users\\josh\\Projects\\modern-php",
+			"<current file>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"var_dum",
+			"count($rows)",
+			"key",
+			"theme",
+			"getPar",
+			"xmlR",
+			"getMediaType",
+			"ResponseInterface",
+			"ServerRequestInterface",
+			"strtolower($contentType[0])",
+			"getBody",
+			"$_SERVER",
+			"$c['settings']",
+			"$_SERVER",
+			"APP_NAME",
+			"<option value=\"(.+)\">(.+)</option>",
+			">\n",
+			"https://dicon.medicine.duke.edu/system/files/benchmark-attachments/2015/",
+			"https://dicon.medicine.duke.edu/system/files/",
+			"public://",
+			"https://secure.newmediacampaigns.com/clients/rti-images/elt/",
+			"ppa:ondrej/php",
+			"ondre",
+			"_2",
+			"_1",
+			"    ",
+			"icon-play",
+			",",
+			" ",
+			"STACK_SHARE_FACEBOOK",
+			"http://johnstonhealth.epicenterone.com",
+			".",
+			"\"",
+			"add",
+			"birth",
+			" %}",
+			"setFrom",
+			"../",
+			"/layouts/seanc",
+			"    ",
+			"56",
+			" ",
+			"syncTimeFile",
+			".",
+			"#########################################\n# CHANGE THESE SETTINGS\n#########################################\n\nset :remote_server, 'ec2-54-175-90-169.compute-1.amazonaws.com'\nset :remote_user, 'ubuntu'\nset :private_key, '~/.ssh/demandsignals.pem'\n\n#########################################\n# STOP HERE!\n#########################################\n\nserver \"#{fetch(:remote_server)}\", user: \"#{fetch(:remote_user)}\", roles: %w(app), ssh_options: {\n    keys: \"#{fetch(:private_key)}\",\n    auth_methods: %w(publickey)\n}\n",
+			" ",
+			"Name",
+			", register results",
+			"##",
+			"    ",
+			"# ",
+			"* ",
+			"'\n",
+			"APP_NAME",
+			" ",
+			" permanent",
+			"rewrite ^(.*) ",
+			"\\par",
+			"\"\n",
+			"\\n\\n",
+			" === false",
+			"not",
+			"ansible",
+			"demo",
+			"\\n",
+			",",
+			".*<option value=\"(.*)\">(.*) - (.*)</option>",
+			".*<option value=\"(.*)\">(.*)</option>",
+			"iconv",
+			"extension",
+			"iconv"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"'$1' => '$2',",
+			"https://secure.newmediacampaigns.com/clients/dicon/",
+			"private://",
+			",\\n",
+			"http://johnstonhealth.org",
+			"",
+			"return 301 ",
+			"\\n",
+			",",
+			":",
+			"\n$1,$3",
+			"$1,$2"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 55.0
+	},
+	"input":
+	{
+		"height": 64.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "slim-website.sublime-project",
+	"replace":
+	{
+		"height": 106.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				".env"
+			],
+			[
+				"capfi",
+				"Capfile"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 1000.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\josh\\Projects\\fleetfeetsportsecommerce\\fleetfeet.sublime-project"
+			]
+		],
+		"width": 760.0
+	},
+	"select_symbol":
+	{
+		"height": 85.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"AppendStream"
+			]
+		],
+		"width": 1280.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 565.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

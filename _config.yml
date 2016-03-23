@@ -1,4 +1,5 @@
-highlighter: pygments
+highlighter: rouge
+markdown: kramdown
 timezone: America/New_York
 title: Slim Framework
 url: http://www.slimframework.com
@@ -6,6 +7,9 @@ slim_website_repo: https://github.com/slimphp/Slim-Website/tree/gh-pages/
 urlBasePath:
 include: [.htaccess]
 exclude: [node_modules]
+kramdown:
+  input: GFM
+  hard_wrap: false
 gems:
   - jekyll-sitemap
 defaults:
@@ -21,11 +25,20 @@ defaults:
             - [/docs/start/installation.md, Installation]
             - [/docs/start/upgrade.md, Upgrade Guide]
             - [/docs/start/web-servers.md, Web Servers]
+        - title: Tutorial
+          items:
+            - [/docs/tutorial/first-app.md, First Application]
+
         - title: Concepts
           items:
             - [/docs/concepts/value-objects.md, PSR 7]
             - [/docs/concepts/middleware.md, Middleware]
             - [/docs/concepts/di.md, Dependency Container]
+        - title: The Application
+          items:
+            - [/docs/objects/application.md, Overview]
+            - [/docs/objects/application.md#application-configuration, Configuration]
+            - [/docs/objects/application.md#slim-default-settings, Default settings]
         - title: The Request
           items:
             - [/docs/objects/request.md, Overview]
@@ -33,12 +46,15 @@ defaults:
             - [/docs/objects/request.md#the-request-headers, Headers]
             - [/docs/objects/request.md#the-request-body, Body]
             - [/docs/objects/request.md#request-helpers, Helpers]
+            - [/docs/objects/request.md#route-object, Route object]
+            - [/docs/objects/request.md#media-type-parsers, Media type parsers]
         - title: The Response
           items:
             - [/docs/objects/response.md, Overview]
             - [/docs/objects/response.md#the-response-status, Status]
             - [/docs/objects/response.md#the-response-headers, Headers]
             - [/docs/objects/response.md#the-response-body, Body]
+            - [/docs/objects/response.md#returning-json, JSON]
         - title: Routing
           items:
             - [/docs/objects/router.md, Overview]
@@ -59,6 +75,7 @@ defaults:
             - [/docs/cookbook/route-patterns.md, Trailing / in routes]
             - [/docs/cookbook/ip-address.md, Retrieving IP address]
             - [/docs/cookbook/retrieving-current-route.md, Retrieving Current Route]
+            - [/docs/cookbook/database-eloquent.md, Using Eloquent with Slim]
         - title: Add Ons
           items:
             - [/docs/features/templates.md, Templates]
