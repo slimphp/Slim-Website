@@ -45,10 +45,7 @@ In your `dependencies.php` or wherever you add your Service Factories:
 
 <figure>
 {% highlight php %}
-// -----------------------------------------------------------------------------
-// Service factories
-// -----------------------------------------------------------------------------
-
+// Service factory for the ORM
 $container['db'] = function ($container) {
     $capsule = new \Illuminate\Database\Capsule\Manager;
     $capsule->addConnection($container['settings']['db']);
@@ -67,8 +64,10 @@ $container['db'] = function ($container) {
 <figure>
 {% highlight php %}
 $container[App\WidgetController::class] = function ($c) {
+    $view = $c->get('view');
+    $logger = $c->get('logger')
     $table = $c->get('db')->table('table_name');
-    return new \App\WidgetController($c->get('view'), $c->get('logger'), $table);
+    return new \App\WidgetController($view, $logger, $table);
 };
 {% endhighlight %}
 <figcaption>Figure 4: Pass table object into a controller.</figcaption>
@@ -94,8 +93,11 @@ class WidgetController
     private $logger;
     protected $table;
 
-    public function __construct(Twig $view, LoggerInterface $logger, Builder $table)
-    {
+    public function __construct(
+        Twig $view,
+        LoggerInterface $logger,
+        Builder $table
+    ) {
         $this->view = $view;
         $this->logger = $logger;
         $this->table = $table;
@@ -105,7 +107,9 @@ class WidgetController
     {
         $widgets = $this->table->get();
 
-        $this->view->render($response, 'app/index.twig', ['widgets' => $widgets]);
+        $this->view->render($response, 'app/index.twig', [
+            'widgets' => $widgets
+        ]);
 
         return $response;
     }
