@@ -271,7 +271,7 @@ Look at where the route itself is defined: we write it as `/ticket/{id}`.  When 
 
 Since GET and POST send data in such different ways, then the way that we get that data from the Request object differs hugely in Slim.
 
-It is possible to get all the query parameters from a request by doing `$request->getQueryParameters()` which will return an associative array.  So for the URL `/tickets?sort=date&order=desc` we'd get an associative array like:
+It is possible to get all the query parameters from a request by doing `$request->getQueryParams()` which will return an associative array.  So for the URL `/tickets?sort=date&order=desc` we'd get an associative array like:
 
     ["sort" => "date", "order" => "desc"]
 
@@ -280,7 +280,7 @@ These can then be used (after validating of course) inside your callback.
 
 ### Working with POST Data
 
-When working with incoming data, we can find this in the body.  We've already seen how we can parse data from the URL and how to obtain the GET variables by doing `$request->getQueryParameters()` but what about POST data?  The POST request data can be found in the body of the request, and Slim has some good built in helpers to make it easier to get the information in a useful format.
+When working with incoming data, we can find this in the body.  We've already seen how we can parse data from the URL and how to obtain the GET variables by doing `$request->getQueryParams()` but what about POST data?  The POST request data can be found in the body of the request, and Slim has some good built in helpers to make it easier to get the information in a useful format.
 
 For data that comes from a web form, Slim will turn that into an array.  My tickets example application has a form for creating new tickets that just sends two fields: "title" and "description".  Here is the first part of the route that receives that data, note that for a POST route use `$app->post()` rather than `$app->get()`:
 
