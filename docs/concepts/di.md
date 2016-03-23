@@ -65,8 +65,13 @@ container for all properties that do not already exist on the application instan
 Your container MUST implement these required services. If you use Slim's built-in container, these are provided for you. If you choose a third-party container, you must define these required services on your own.
 
 settings
-:   Associative array of application settings, including keys `httpVersion`, `outputBuffering`,
-    `responseChunkSize` and `determineRouteBeforeAppMiddleware`.
+:   Associative array of application settings, including keys:
+    
+    * `httpVersion`
+    * `responseChunkSize`
+    * `outputBuffering`
+    * `determineRouteBeforeAppMiddleware`.
+    * `displayErrorDetails`.
 
 environment
 :   Instance of `\Slim\Interfaces\Http\EnvironmentInterface`.
@@ -83,8 +88,15 @@ router
 foundHandler
 :   Instance of `\Slim\Interfaces\InvocationStrategyInterface`.
 
+phpErrorHandler
+:   Callable invoked if a PHP 7 Error is thrown. The callable **MUST** return an instance of `\Psr\Http\Message\ResponseInterface` and accept three arguments:
+
+1. `\Psr\Http\Message\ServerRequestInterface`
+2. `\Psr\Http\Message\ResponseInterface`
+3. `\Error`
+
 errorHandler
-:   Callable invoked if application error. The callable **MUST** return an instance of `\Psr\Http\Message\ResponseInterface` and accept three arguments:
+:   Callable invoked if an Exception is thrown. The callable **MUST** return an instance of `\Psr\Http\Message\ResponseInterface` and accept three arguments:
 
 1. `\Psr\Http\Message\ServerRequestInterface`
 2. `\Psr\Http\Message\ResponseInterface`
