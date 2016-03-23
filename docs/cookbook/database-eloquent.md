@@ -1,5 +1,5 @@
 ---
-title: Adding a Database ORM
+title: Using Eloquent with Slim
 ---
 
 You can use a database ORM such as [Eloquent](https://laravel.com/docs/5.1/eloquent) to connect your SlimPHP application to a database.
