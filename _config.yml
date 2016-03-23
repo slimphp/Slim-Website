@@ -65,6 +65,7 @@ defaults:
             - [/docs/objects/router.md#route-names, Names]
             - [/docs/objects/router.md#route-groups, Groups]
             - [/docs/objects/router.md#route-middleware, Middleware]
+            - [/docs/objects/router.md#container, Container Resolution]
         - title: Error Handling
           items:
             - [/docs/handlers/error.md, Error Handlers]
