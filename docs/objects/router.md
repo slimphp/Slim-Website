@@ -295,7 +295,7 @@ You can also attach middleware to any route or route group. [Learn more](/docs/c
 
 ## Container Resolution
 
-You are not limited to defining a function for your routes. In slime there are a few different ways to define your route action functions.
+You are not limited to defining a function for your routes. In Slim there are a few different ways to define your route action functions.
 
 In addition to a function, you may use:
  - An invokable class
