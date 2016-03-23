@@ -292,3 +292,79 @@ Note inside the group closure, `$this` is used instead of `$app`. Slim binds the
 ## Route middleware
 
 You can also attach middleware to any route or route group. [Learn more](/docs/concepts/middleware.html).
+
+## Container Resolution
+
+You are not limited to defining a function for your routes. In slime there are a few different ways to define your route action functions.
+
+In addition to a function, you may use:
+ - An invokable class
+ - `Class:method`
+ 
+This function is enabled by Slim's Callable Resolver Class. It translates a string entry into a function call.
+Example:
+
+{% highlight php %}
+$app->get('/home', '\HomeController:home');
+{% endhighlight %}
+
+In this code above we are defining a `/home` route and telling Slim to execute the `home()` method on the `\HomeController` class
+Slim first looks for an entry of `\HomeController` in the container, if it's found it will use that instance otherwise it will call it's constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.
+ 
+Invokable class would look like this.
+
+{% highlight php %}
+class MyAction {
+   protected $ci;
+   //Constructor
+   public function __construct(ContainerInterface $ci) {
+       $this->ci = $ci;
+   }
+   
+   public function __invoke($request, $response, $args) {
+        //your code
+        //to access items in the container... $this->ci->get('');
+   }
+}
+{% endhighlight %}
+
+You can use this class like so.
+
+{% highlight php %}
+$app->get('/home', '\MyAction');
+{% endhighlight %}
+
+In a more traditional MVC appraoch you can construct controllers with many actions instead of an invokable class which only handles one action.
+
+{% highlight php %}
+class MyController {
+   protected $ci;
+   //Constructor
+   public function __construct(ContainerInterface $ci) {
+       $this->ci = $ci;
+   }
+   
+   public function method1($request, $response, $args) {
+        //your code
+        //to access items in the container... $this->ci->get('');
+   }
+   
+   public function method2($request, $response, $args) {
+        //your code
+        //to access items in the container... $this->ci->get('');
+   }
+      
+   public function method3($request, $response, $args) {
+        //your code
+        //to access items in the container... $this->ci->get('');
+   }      
+}
+{% endhighlight %}
+
+You can use your controller method like so.
+
+{% highlight php %}
+$app->get('/method1', '\MyController:method1');
+$app->get('/method2', '\MyController:method1');
+$app->get('/method3', '\MyController:method1');
+{% endhighlight %}
