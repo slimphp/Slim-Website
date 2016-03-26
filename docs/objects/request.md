@@ -134,7 +134,9 @@ resource. The HTTP request URI has several parts:
 * Path (e.g. `/users/1`)
 * Query string (e.g. `sort=created&dir=asc`)
 
-You can fetch the PSR 7 Request object's URI with its `getUri()` method:
+You can fetch the PSR 7 Request object's [URI object][psr7_uri] with its `getUri()` method:
+
+[psr7_uri]: http://www.php-fig.org/psr/psr-7/#3-5-psr-http-message-uriinterface
 
 {% highlight php %}
 $uri = $request->getUri();
@@ -144,12 +146,17 @@ The PSR 7 Request object's URI is itself an object that provides the following
 methods to inspect the HTTP request's URL parts:
 
 * `getScheme()`
+* `getAuthority()`
+* `getUserInfo()`
 * `getHost()`
 * `getPort()`
 * `getPath()`
 * `getBasePath()`
-* `getQuery()` <small>(returns string)</small>
-* `getQueryParams()` <small>(returns associative array)</small>
+* `getQuery()` <small>(returns the full query string, e.g. `a=1&b=2`)</small>
+* `getFragment()`
+* `getBaseUrl()`
+
+You can get the query parameters as an associative array on the Request object using `getQueryParams()`. 
 
 <div class="alert alert-info">
     <div><strong>Base Path</strong></div>
