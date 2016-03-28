@@ -138,7 +138,7 @@ $container = $app->getContainer();
 
 // Register component on container
 $container['view'] = function ($container) {
-    return new \Slim\Views\PhpRenderer('path/to/templates');
+    return new \Slim\Views\PhpRenderer('path/to/templates/with/trailing/slash/');
 };
 {% endhighlight %}
 <figcaption>Figure 5: Register slim/php-view component with container.</figcaption>
