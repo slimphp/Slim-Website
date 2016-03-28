@@ -311,7 +311,7 @@ $app->get('/home', '\HomeController:home');
 In this code above we are defining a `/home` route and telling Slim to execute the `home()` method on the `\HomeController` class
 Slim first looks for an entry of `\HomeController` in the container, if it's found it will use that instance otherwise it will call it's constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.
  
-Invokable class would look like this.
+Alternatively, you can use an invokable class, such as:
 
 {% highlight php %}
 class MyAction {
@@ -357,11 +357,11 @@ class MyController {
    public function method3($request, $response, $args) {
         //your code
         //to access items in the container... $this->ci->get('');
-   }      
+   }
 }
 {% endhighlight %}
 
-You can use your controller method like so.
+You can use your controller methods like so.
 
 {% highlight php %}
 $app->get('/method1', '\MyController:method1');
