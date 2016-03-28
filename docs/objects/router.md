@@ -308,7 +308,8 @@ Example:
 $app->get('/home', '\HomeController:home');
 {% endhighlight %}
 
-In this code above we are defining a `/home` route and telling Slim to execute the `home()` method on the `\HomeController` class
+In this code above we are defining a `/home` route and telling Slim to execute the `home()` method on the `\HomeController` class.
+
 Slim first looks for an entry of `\HomeController` in the container, if it's found it will use that instance otherwise it will call it's constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.
  
 Alternatively, you can use an invokable class, such as:
