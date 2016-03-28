@@ -365,6 +365,6 @@ You can use your controller methods like so.
 
 {% highlight php %}
 $app->get('/method1', '\MyController:method1');
-$app->get('/method2', '\MyController:method1');
-$app->get('/method3', '\MyController:method1');
+$app->get('/method2', '\MyController:method2');
+$app->get('/method3', '\MyController:method3');
 {% endhighlight %}
