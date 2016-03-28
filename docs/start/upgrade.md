@@ -27,7 +27,7 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 
 
 # Hooks
-Hooks are no longer part of Slim as of v3.  You should consider reimplementing any functionality associated with the [default hooks in Slim v2](http://docs.slimframework.com/hooks/defaults/) as [middleware](/docs/concepts/middleware.html) instead.  If you need the ability to apply custom hooks at arbitrary points in your code (for example, within a route), you should consider a third-party package such as [Symfony's EventDispatcher component](http://symfony.com/doc/current/components/event_dispatcher/introduction.html).
+Hooks are no longer part of Slim as of v3.  You should consider reimplementing any functionality associated with the [default hooks in Slim v2](http://docs.slimframework.com/hooks/defaults/) as [middleware](/docs/concepts/middleware.html) instead.  If you need the ability to apply custom hooks at arbitrary points in your code (for example, within a route), you should consider a third-party package such as [Symfony's EventDispatcher](http://symfony.com/doc/current/components/event_dispatcher/introduction.html) or [Zend Framework's EventManager](https://zend-eventmanager.readthedocs.org/en/latest/).
 
 # Removal HTTP Cache
 In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache](https://github.com/slimphp/Slim-HttpCache).
