@@ -28,9 +28,4 @@ require 'vendor/autoload.php';
 
 ## How to Install Composer
 
-Don't have Composer? It's easy to install. The following bash command
-downloads Composer and moves it into your `/usr/local/bin` directory.
-
-{% highlight bash %}
-curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-{% endhighlight %}
+Don't have Composer? It's easy to install by following the instructions on their [download](https://getcomposer.org/download/) page.
