@@ -8,6 +8,10 @@
 
         <div class="row">
             <div class="col-md-3">
+                <form id="doc-search" style="margin-bottom: 20px">
+                    <input type="text" id="doc-search-input" placeholder="Search&hellip;" value=""/>
+                </form>
+
                 {% for section in page.docs %}
                     {% assign isCurrentSection = false %}
                     {% for item in section.items %}
