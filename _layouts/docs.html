@@ -11,7 +11,7 @@
                 {% for section in page.docs %}
                     {% assign isCurrentSection = false %}
                     {% for item in section.items %}
-                        {% assign itemUrl = item[0] | replace: '.md', '' %}
+                        {% assign itemUrl = item[0] | replace: '.md', '.html' %}
                         {% if itemUrl == page.url %}
                             {% assign isCurrentSection = true %}
                         {% endif %}
