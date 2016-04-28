@@ -64,6 +64,12 @@ In this example, we define a new `errorHandler` factory that returns a callable.
 
 The callable **MUST** return a new `\Psr\Http\Message\ResponseInterface` instance as is appropriate for the given exception.
 
+**Please note**: The following three types of exceptions will not be handled by a custom `errorHandler`:
+
+- `Slim\Exception\MethodNotAllowedException`: This can be handled via a custom [`notAllowedHandler`](/docs/handlers/not-allowed.html).
+- `Slim\Exception\NotFoundException`: This can be handled via a custom [`notFoundHandler`](/docs/handlers/not-found.html).
+- `Slim\Exception\SlimException`: This type of exception is internal to Slim, and its handling cannot be overridden.
+
 ### Disabling
 
 To completely disable Slim's error handling, simply remove the error handler from the container:
