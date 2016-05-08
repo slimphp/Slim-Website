@@ -72,6 +72,7 @@ settings
     * `outputBuffering`
     * `determineRouteBeforeAppMiddleware`.
     * `displayErrorDetails`.
+    * `addContentLengthHeader`.
 
 environment
 :   Instance of `\Slim\Interfaces\Http\EnvironmentInterface`.

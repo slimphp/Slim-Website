@@ -90,4 +90,8 @@ Slim has the following default settings that you can override:
     <dd>When true, additional information about exceptions are displayed by the
     <a href="/docs/handlers/error.html">default error handler</a>.
     <br>(Default: <code>false</code>)</dd>
+<dt><code>addContentLengthHeader</code></dt>
+    <dd>When true, Slim will add a <code>Content-Length</code> header to the response.
+    If you are using a runtime analytics tool, such as New Relic, then this should be disabled.
+    <br>(Default: <code>true</code>)</dd>
 </dl>
