@@ -73,6 +73,7 @@ settings
     * `determineRouteBeforeAppMiddleware`.
     * `displayErrorDetails`.
     * `addContentLengthHeader`.
+    * `routerCacheFile`.
 
 environment
 :   Instance of `\Slim\Interfaces\Http\EnvironmentInterface`.
