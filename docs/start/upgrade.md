@@ -5,10 +5,10 @@ title: Upgrade Guide
 If you are upgrading from version 2 to version 3, these are the significant changes that
 you need to be aware of.
 
-# New PHP version
+## New PHP version
 Slim 3 requires PHP 5.5+
 
-# New Route Function Signature
+## New Route Function Signature
 
 {% highlight php %}
 $app->get('/', function (Request $req,  Response $res, $args = []) {
@@ -16,7 +16,7 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 });
 {% endhighlight %}
 
-# Getting _GET and _POST variables
+## Getting _GET and _POST variables
 {% highlight php %}
 $app->get('/', function (Request $req,  Response $res, $args = []) {
     $myvar1 = $req->getParam('myvar'); //checks both _GET and _POST [NOT PSR-7 Compliant]
@@ -26,17 +26,17 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 {% endhighlight %}
 
 
-# Hooks
+## Hooks
 Hooks are no longer part of Slim as of v3.  You should consider reimplementing any functionality associated with the [default hooks in Slim v2](http://docs.slimframework.com/hooks/defaults/) as [middleware](/docs/concepts/middleware.html) instead.  If you need the ability to apply custom hooks at arbitrary points in your code (for example, within a route), you should consider a third-party package such as [Symfony's EventDispatcher](http://symfony.com/doc/current/components/event_dispatcher/introduction.html) or [Zend Framework's EventManager](https://zend-eventmanager.readthedocs.org/en/latest/).
 
-# Removal HTTP Cache
+## Removal HTTP Cache
 In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache](https://github.com/slimphp/Slim-HttpCache).
 
-# Removal of Stop/Halt
+## Removal of Stop/Halt
 Slim Core has removed Stop/Halt.
 In your applications, you should transition to using the withStatus() and withBody() methods.
 
-# Changed Redirect
+## Changed Redirect
 In Slim v2.x one would use the helper function $app->redirect(); to trigger a redirect request.
 In Slim v3.x one can do the same with using the Response class like so.
 
@@ -48,7 +48,7 @@ $app->get('/', function ($req, $res, $args) {
 });
 {% endhighlight %}
 
-# Middleware Signature
+## Middleware Signature
 The middleware signature has changed from a class to a function.
 
 New signature:
@@ -92,19 +92,19 @@ $app->add(My\Middleware::class);
 {% endhighlight %}
 
 
-# Middleware Execution
+## Middleware Execution
 Application middleware is executed as Last In First Executed (LIFE).
 
-# Flash Messages
+## Flash Messages
 Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/features/flash.html) package.
 
-# Cookies
+## Cookies
 In v3.0 cookies has been removed from core. See [FIG Cookies](https://github.com/dflydev/dflydev-fig-cookies) for a PSR-7 compatible cookie component.
 
-# Removal of Crypto
+## Removal of Crypto
 In v3.0 we have removed the dependency for crypto in core.
 
-# New Router
+## New Router
 Slim now utilizes [FastRoute](https://github.com/nikic/FastRoute), a new, more powerful router!
 
 This means that the specification of route patterns has changed with named parameters now in braces and square brackets used for optional segments:
@@ -117,7 +117,7 @@ $app->get('/hello/{name}', /*...*/);
 $app->get('/news[/{year}]', /*...*/);
 {% endhighlight %}
 
-# Route Middleware
+## Route Middleware
 The syntax for adding route middleware has changed slightly.
 In v3.0:
 
@@ -125,7 +125,7 @@ In v3.0:
 $app->get(…)->add($mw2)->add($mw1);
 {% endhighlight %}
 
-# urlFor() is now pathFor() in the router
+## urlFor() is now pathFor() in the router
 
 `urlFor()` has been renamed `pathFor()` and can be found in the `router` object:
 
@@ -139,7 +139,7 @@ $app->get('/', function ($request, $response, $args) {
 
 Also, `pathFor()` is base path aware.
 
-# Container and DI ... Constructing
+## Container and DI ... Constructing
 Slim uses Pimple as a Dependency Injection Container.
 
 {% highlight php %}
@@ -196,7 +196,7 @@ return [
 
 {% endhighlight %}
 
-# PSR-7 Objects
+## PSR-7 Objects
 
 ### Request, Response, Uri & UploadFile are immutable.
 This means that when you change one of these objects, the old instance is not updated.

@@ -63,7 +63,7 @@ AUTH_TYPE
 Each Slim application instantiates an Environment object using information from the current global environment. However, you may also create mock environment objects with custom information. Mock Environment objects are only useful when writing unit tests.
 
 {% highlight php %}
-$env = \Slim\Environment::mock([
+$env = \Slim\Http\Environment::mock([
     'REQUEST_METHOD' => 'PUT',
     'REQUEST_URI' => '/foo/bar',
     'QUERY_STRING' => 'abc=123&foo=bar',
