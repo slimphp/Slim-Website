@@ -335,7 +335,7 @@ You can use this class like so.
 $app->get('/home', '\MyAction');
 {% endhighlight %}
 
-In a more traditional MVC appraoch you can construct controllers with many actions instead of an invokable class which only handles one action.
+In a more traditional MVC approach you can construct controllers with many actions instead of an invokable class which only handles one action.
 
 {% highlight php %}
 class MyController {
