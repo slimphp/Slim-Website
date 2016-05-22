@@ -367,7 +367,7 @@ The following media types are recognised and parsed:
 * application/json
 * application/xml & text/xml
 
-If you want Slim to parse contend from a a different media type then you need to either parse the raw body yourself or register a new media parser. Media parsers are simply callables that accept an ``$input`` string and return a parsed object or array.
+If you want Slim to parse content from a different media type then you need to either parse the raw body yourself or register a new media parser. Media parsers are simply callables that accept an ``$input`` string and return a parsed object or array.
 
 Register a new media parser in an application or route middleware. Note that you must register the parser before you try to access the parsed body for the first time.
 
