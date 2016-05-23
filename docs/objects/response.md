@@ -273,7 +273,7 @@ $newResponse = $oldResponse->withBody($newStream);
 
 Slim's Response object has a custom method `withJson($data, $status, $encodingOptions)` to help simplify the process of returning JSON data.
 
-The `$data` parameter contains the data structure you wish returned as JSON. `$status` is optional, and can used to return a custom HTTP code. `$encodingOptions` is optional, and are the same encoding options used for [`json_encode()`][json_encode].
+The `$data` parameter contains the data structure you wish returned as JSON. `$status` is optional, and can be used to return a custom HTTP code. `$encodingOptions` is optional, and are the same encoding options used for [`json_encode()`][json_encode].
 
 In it's simplest form, JSON data can be returned with a default 200 HTTP status code.
 
