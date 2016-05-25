@@ -165,7 +165,7 @@ Now we have the `Slim\Container` object, we can add our services to it.
 
 ### Use Monolog In Your Application
 
-If you're not already familiar with Monolog, it's an excellent logging framework for PHP applications, which is why I'm going to use it here.  First of all, get the Monlog library installed via Composer:
+If you're not already familiar with Monolog, it's an excellent logging framework for PHP applications, which is why I'm going to use it here.  First of all, get the Monolog library installed via Composer:
 
     php composer.phar require monolog/monolog
 
