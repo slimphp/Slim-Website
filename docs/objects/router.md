@@ -236,7 +236,7 @@ containing three elements: `['2016', '03', '20']`.
 ### Regular expression matching
 
 By default the placeholders are written inside `{}` and can accept any
-values. However, placeholders can also require the HTTP request URI to match a particular regular expression. If the current HTTP request URI does not match a placeholder regular expression, the route is not invoked. This is an example placeholder named `id` that requires a digit.
+values. However, placeholders can also require the HTTP request URI to match a particular regular expression. If the current HTTP request URI does not match a placeholder regular expression, the route is not invoked. This is an example placeholder named `id` that requires one or more digits.
 
 {% highlight php %}
 $app = new \Slim\App();
