@@ -65,7 +65,7 @@ $container['db'] = function ($container) {
 {% highlight php %}
 $container[App\WidgetController::class] = function ($c) {
     $view = $c->get('view');
-    $logger = $c->get('logger')
+    $logger = $c->get('logger');
     $table = $c->get('db')->table('table_name');
     return new \App\WidgetController($view, $logger, $table);
 };
