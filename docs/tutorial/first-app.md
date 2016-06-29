@@ -118,6 +118,7 @@ First the configuration itself:
 
 {% highlight php %}
 $config['displayErrorDetails'] = true;
+$config['addContentLengthHeader'] = false;
 
 $config['db']['host']   = "localhost";
 $config['db']['user']   = "user";
@@ -125,7 +126,9 @@ $config['db']['pass']   = "password";
 $config['db']['dbname'] = "exampleapp";
 {% endhighlight %}
 
-The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you're using the built in PHP webserver then you'll see them in the console output which is helpful).  The other settings here are not specific keys/values, they're just some data that I want to be able to access later.
+The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you're using the built in PHP webserver then you'll see them in the console output which is helpful). The second line allows the web server to set the Content-Length header which makes Slim behave more predictably.
+
+The other settings here are not specific keys/values, they're just some data that I want to be able to access later.
 
 Now to feed this into Slim, we need to *change* where we create the `Slim/App` object so that it now looks like this:
 
