@@ -158,6 +158,8 @@ methods to inspect the HTTP request's URL parts:
 
 You can get the query parameters as an associative array on the Request object using `getQueryParams()`. 
 
+You can also get a single query parameter value, with optional default value if the parameter is missing, using `getQueryParam($key, $default = null)`. 
+
 <div class="alert alert-info">
     <div><strong>Base Path</strong></div>
     If your Slim application's front-controller lives in a physical subdirectory
@@ -244,6 +246,8 @@ $parsedBody = $request->getParsedBody();
 * JSON requests are converted into associative arrays with `json_decode($input, true)`.
 * XML requests are converted into a `SimpleXMLElement` with `simplexml_load_string($input)`.
 * URL-encoded requests are converted into a PHP array with `parse_str($input)`.
+
+For URL-encoded requests, you can also get a single parameter value, with optional default value if the parameter is missing, using `getParsedBodyParam($key, $default = null)`. 
 
 Technically speaking, Slim's PSR 7 Request object represents the HTTP request
 body as an instance of `\Psr\Http\Message\StreamInterface`. You can get
