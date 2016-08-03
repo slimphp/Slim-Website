@@ -125,6 +125,17 @@ In v3.0:
 $app->get(…)->add($mw2)->add($mw1);
 {% endhighlight %}
 
+## Getting the current route
+The route is an attribute of the Request object in v3.0:
+
+{% highlight php %}
+$request->getAttribute('route');
+{% endhighlight %}
+
+When getting the current route in middleware, the value for
+`determineRouteBeforeAppMiddleware` must be set to `true` in the Application
+configuration, otherwise the getAttribute call returns `null`.
+
 ## urlFor() is now pathFor() in the router
 
 `urlFor()` has been renamed `pathFor()` and can be found in the `router` object:
