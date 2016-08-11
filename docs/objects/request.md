@@ -156,9 +156,9 @@ methods to inspect the HTTP request's URL parts:
 * `getFragment()`
 * `getBaseUrl()`
 
-You can get the query parameters as an associative array on the Request object using `getQueryParams()`. 
+You can get the query parameters as an associative array on the Request object using `getQueryParams()`.
 
-You can also get a single query parameter value, with optional default value if the parameter is missing, using `getQueryParam($key, $default = null)`. 
+You can also get a single query parameter value, with optional default value if the parameter is missing, using `getQueryParam($key, $default = null)`.
 
 <div class="alert alert-info">
     <div><strong>Base Path</strong></div>
@@ -247,7 +247,7 @@ $parsedBody = $request->getParsedBody();
 * XML requests are converted into a `SimpleXMLElement` with `simplexml_load_string($input)`.
 * URL-encoded requests are converted into a PHP array with `parse_str($input)`.
 
-For URL-encoded requests, you can also get a single parameter value, with optional default value if the parameter is missing, using `getParsedBodyParam($key, $default = null)`. 
+For URL-encoded requests, you can also get a single parameter value, with optional default value if the parameter is missing, using `getParsedBodyParam($key, $default = null)`.
 
 Technically speaking, Slim's PSR 7 Request object represents the HTTP request
 body as an instance of `\Psr\Http\Message\StreamInterface`. You can get
@@ -277,6 +277,14 @@ methods to read and iterate its underlying PHP `resource`.
 * `read($length)`
 * `getContents()`
 * `getMetadata($key = null)`
+
+### Reparsing the body
+
+When calling `getParsedBody` on the Request object multiple times, the body is
+only parsed once, even if the Request body is modified in the meantime.
+
+To ensure the body is reparsed, the Request object's method `reparseBody` can be
+used.
 
 ## Request Helpers
 
@@ -387,7 +395,7 @@ $app->add(function ($request, $response, $next) {
             return json_decode($input, true);
         }
     );
-    
+
     return $next($request, $response);
 });
-{% endhighlight %} 
+{% endhighlight %}
