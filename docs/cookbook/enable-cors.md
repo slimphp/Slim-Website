@@ -1,0 +1,69 @@
+---
+title: Setting up CORS
+----------------------
+
+CORS - Cross origin resource sharing
+
+A good flowchart for implementing CORS support Reference: http://www.html5rocks.com/static/images/cors_server_flowchart.png
+
+You can test your CORS Support here: http://www.test-cors.org/
+
+You can read the specification here: https://www.w3.org/TR/cors/
+
+
+## The simple solution
+
+For simple CORS requests, the server only needs to add the following header to its response:
+
+`Access-Control-Allow-Origin: <domain>, ... | *`
+
+## Access-Control-Allow-Methods
+
+The following middleware can be used to query Slim's router and get a list of methods a particular pattern implements.
+
+Here is a complete example application:
+
+```php
+require __DIR__ . "/vendor/autoload.php";
+
+// This Slim setting is required for the middleware to work
+$app = new Slim\App([
+    "settings"  => [
+        "determineRouteBeforeAppMiddleware" => true,
+    ]
+]);
+
+// This is the middleware
+// It will add the Access-Control-Allow-Methods header to every request
+
+$app->add(function($request, $response, $next) {
+    $pattern = $request->getAttribute("route")->getPattern();
+
+    $methods = [];
+    foreach ($this->router->getRoutes() as $route) {
+        if ($pattern === $route->getPattern()) {
+            $methods = array_merge_recursive($methods, $route->getMethods());
+        }
+    }
+    //Methods holds all of the HTTP Verbs that a particular route handles.
+
+    $response = $next($request, $response);
+
+
+    return $response->withHeader("Access-Control-Allow-Methods", implode(",", $methods);
+});
+
+$app->get("/api/{id}", function($request, $response, $arguments) {
+});
+
+$app->post("/api/{id}", function($request, $response, $arguments) {
+});
+
+$app->map(["DELETE", "PATCH"], "/api/{id}", function($request, $response, $arguments) {
+});
+
+$app->run();
+```
+
+A big thank you to [tuupola](https://github.com/tuupola) for coming up with this!
+

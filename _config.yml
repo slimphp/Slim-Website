@@ -77,6 +77,7 @@ defaults:
             - [/docs/cookbook/ip-address.md, Retrieving IP address]
             - [/docs/cookbook/retrieving-current-route.md, Retrieving Current Route]
             - [/docs/cookbook/database-eloquent.md, Using Eloquent with Slim]
+            - [/docs/cookbook/enable-cors.md, Enabling CORS]
         - title: Add Ons
           items:
             - [/docs/features/templates.md, Templates]
