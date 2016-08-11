@@ -1,6 +1,6 @@
 ---
 title: Setting up CORS
-----------------------
+---
 
 CORS - Cross origin resource sharing
 
@@ -16,6 +16,25 @@ You can read the specification here: https://www.w3.org/TR/cors/
 For simple CORS requests, the server only needs to add the following header to its response:
 
 `Access-Control-Allow-Origin: <domain>, ... | *`
+
+The following code should enable lazy CORS.
+
+```php
+$app->options('/{routes:.+}', function ($request, $response, $args) {
+    return $response;
+});
+
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', 'http://mysite')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+```
+
+
 
 ## Access-Control-Allow-Methods
 
