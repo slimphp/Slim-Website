@@ -78,6 +78,7 @@ defaults:
             - [/docs/cookbook/retrieving-current-route.md, Retrieving Current Route]
             - [/docs/cookbook/database-eloquent.md, Using Eloquent with Slim]
             - [/docs/cookbook/enable-cors.md, Enabling CORS]
+            - [/docs/cookbook/environment.md, Getting and Mocking the Environment]
         - title: Add Ons
           items:
             - [/docs/features/templates.md, Templates]
