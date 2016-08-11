@@ -46,7 +46,7 @@ the middleware process flow:
 
 ## How do I write middleware?
 
-Middleware is a callable that accepts three arguments: a Request object, a Response object, and the next middleware. Each middleware **MUST** return an instance of `\Psr\Http\Message\ResponseInterface`. 
+Middleware is a callable that accepts three arguments: a Request object, a Response object, and the next middleware. Each middleware **MUST** return an instance of `\Psr\Http\Message\ResponseInterface`.
 
 ### Closure middleware example.
 
@@ -172,7 +172,7 @@ This would output this HTTP response body:
 
 In addition to the overall application, and standard routes being able to accept middleware, the `group()` multi-route definition functionality, also allows individual routes internally. Route group middleware is invoked _only if_ its route matches one of the defined HTTP request methods and URIs from the group. To add middleware within the callback, and entire-group middleware to be set by chaining `add()` after the `group()` method.
 
-Sample Application, making use of callback middleware on a group of url-handlers 
+Sample Application, making use of callback middleware on a group of url-handlers
 {% highlight php %}
 <?php
 
@@ -212,3 +212,18 @@ but visiting `/` *(domain-root)*, would be expected to generate the following ou
 
     Hello World
 
+### Passing variables from middleware
+The easiest way to pass attributes from middleware is to use the request's
+attributes.
+
+Setting the variable in the middleware:
+
+{% highlight php %}
+$request = $request->withAttribute('foo', 'bar');
+{% endhighlight %}
+
+Getting the variable in the route callback:
+
+{% highlight php %}
+$foo = $request->getAttribute('foo');
+{% endhighlight %}
