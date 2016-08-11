@@ -26,7 +26,9 @@ Response objects as arguments.
 Different frameworks use middleware differently. Slim adds middleware as concentric
 layers surrounding your core application. Each new middleware layer surrounds
 any existing middleware layers. The concentric structure expands outwardly as
-additional middleware layers are added. The last middleware layer added is the first to be executed.
+additional middleware layers are added.
+
+The last middleware layer added is the first to be executed.
 
 When you run the Slim application, the Request and Response objects traverse the
 middleware structure from the outside in. They first enter the outer-most middleware,
