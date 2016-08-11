@@ -48,9 +48,9 @@ $app->add(function($request, $response, $next) {
     //Methods holds all of the HTTP Verbs that a particular route handles.
 
     $response = $next($request, $response);
-    
-    
-    return $response->withHeader("Access-Control-Allow-Methods", implode(",", $methods); 
+
+
+    return $response->withHeader("Access-Control-Allow-Methods", implode(",", $methods);
 });
 
 $app->get("/api/{id}", function($request, $response, $arguments) {
@@ -65,8 +65,5 @@ $app->map(["DELETE", "PATCH"], "/api/{id}", function($request, $response, $argum
 $app->run();
 ```
 
-A big thank you to https://github.com/tuupola for coming up with this!
-
-
-
+A big thank you to [tuupola](https://github.com/tuupola) for coming up with this!
 
