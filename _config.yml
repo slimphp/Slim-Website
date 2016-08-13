@@ -90,7 +90,7 @@ defaults:
         - title: Contributing
           items:
             - [/docs/contributors/strategy.md, Branching Strategy]
-            - [/docs/contributors/guidelines.html, Guidelines]
+            - [/docs/contributors/guidelines.md, Guidelines]
   -
     scope:
       path: "docs"
