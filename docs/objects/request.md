@@ -354,6 +354,16 @@ You can fetch the HTTP request content length with the Request object's `getCont
 $length = $request->getContentLength();
 {% endhighlight %}
 
+### Request Parameter
+
+To fetch single request parameter value, use methods: `getParam()`, `getQueryParam()`, `getParsedBodyParam()`, `getCookieParam()`, `getServerParam()`, counterparts of PSR-7's plural form get*Params() methods.
+
+For example, to get a single Server Parameter:
+
+{% highlight php %}
+$foo = $request->getServerParam('HTTP_NOT_EXIST', 'default_value_here');
+{% endhighlight %}
+
 ## Route Object
 
 Sometimes in middleware you require the parameter of your route.
