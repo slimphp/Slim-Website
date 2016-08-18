@@ -54,7 +54,7 @@ server {
     root /path/to/public;
 
     location / {
-        try_files $uri $uri/ /index.php$is_args$args;
+        try_files $uri /index.php$is_args$args;
     }
 
     location ~ \.php {
