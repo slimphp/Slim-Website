@@ -16,6 +16,17 @@ assuming `./public/` is public-accessible directory with `index.php` file:
 php -S localhost:8080 -t ./public/ 
 {% endhighlight %}
 
+### CAUTION
+
+The PHP Built-in server is not perfect! It does not set some `$_SERVER` keys that slim requires.
+If you are NOT using `index.php` as the entry point into your application then please apply the following fix.
+
+{% highlight php %}
+if (!isset($_SERVER['SCRIPT_NAME']) {
+    $_SERVER['SCRIPT_NAME'] = '/api.php'; //or whatever entry point you are using.
+}
+{% endhighlight %}
+
 ## Apache configuration
 
 Ensure your `.htaccess` and `index.php` files are in the same
