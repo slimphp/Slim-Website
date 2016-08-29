@@ -121,6 +121,8 @@ if (!-e $request_filename){
 }
 ```
 
+*NOTE:* If you want your entry point to be something other than index.php you will need your config to change as well. `api.php` is also commonly used as an entry point, so your set up should match accordingly. This example assumes your are using index.php.
+
 With this setup, just remember to use http://slimproject.dev instead of http://localhost:8080 in the other examples in this tutorial.  The same health warning as above applies: you'll see an error page at http://slimproject.dev but crucially it's *Slim's* error page.  If you go to http://slimproject.dev/hello/joebloggs then something better should happen.
 
 ## Configuration and Autoloaders
