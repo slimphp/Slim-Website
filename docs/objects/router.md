@@ -247,7 +247,7 @@ $app->get('/users/{id:[0-9]+}', function ($request, $response, $args) {
 
 ## Route names
 
-Application route's can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the router's `pathFor()` method. Each routing method described above returns a `\Slim\Route` object, and this object exposes a `setName()` method.
+Application routes can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the router's `pathFor()` method. Each routing method described above returns a `\Slim\Route` object, and this object exposes a `setName()` method.
 
 {% highlight php %}
 $app = new \Slim\App();
