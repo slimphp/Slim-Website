@@ -287,9 +287,8 @@ $app->group('/users/{id:[0-9]+}', function () {
 });
 {% endhighlight %}
 
-Note inside the group closure, `$this` is used instead of `$app`. Slim binds the closure to the application instance for you, just like it is the case with route callback binds with container instance.
-* inside group closure, `$this` is binded to the instance of `Slim\App`
-* inside route callbacks, `$this` is binded to the instance of `Slim\Container`
+Note inside the group closure, `$this` is used instead of `$app`. Slim binds the closure to the application instance for you, just like it is the case with route callback binds with container instance. Inside group closure, `$this` is binded to the instance of `Slim\App`
+and inside route callbacks, `$this` is binded to the instance of `Slim\Container`.
 
 ## Route middleware
 
