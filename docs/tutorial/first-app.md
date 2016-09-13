@@ -81,19 +81,28 @@ This will make your application available at http://localhost:8080 (if you're al
 
 **Note** you'll get an error message about "Page Not Found" at this URL - but it's an error message **from** Slim, so this is expected.  Try http://localhost:8080/hello/joebloggs instead :)
 
-### Run Your Application With Apache
+### Run Your Application With Apache or nginx
 
 To get this set up on a standard LAMP stack, we'll need a couple of extra ingredients: some virtual host configuration, and one rewrite rule.
 
 The vhost configuration should be fairly straightforward; we don't need anything special here.  Copy your existing default vhost configuration and set the `ServerName` to be how you want to refer to your project.  For example you can set:
 
     ServerName slimproject.dev
+    
+    or for nginx:
+    
+    server_name slimproject.dev;
 
 Then you'll also want to set the `DocumentRoot` to point to the `public/` directory of your project, something like this (edit the existing line):
 
     DocumentRoot    /home/lorna/projects/slim/project/src/public/
+    
+    or for nginx:
+    
+    root    /home/lorna/projects/slim/project/src/public/
 
-**Don't forget** to restart apache now you've changed the configuration!
+
+**Don't forget** to restart your server process now you've changed the configuration!
 
 I also have a `.htaccess` file in my `src/public` directory; this relies on Apache's rewrite module being enabled and simply makes all web requests go to index.php so that Slim can then handle all the routing for us.  Here's my `.htaccess` file:
 
@@ -103,6 +112,16 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . index.php [L]
 ```
+
+nginx does not use `.htaccess` files, so you will need to add the following to your server configuration in the `location` block:
+
+```
+if (!-e $request_filename){
+    rewrite ^(.*)$ /index.php break;
+}
+```
+
+*NOTE:* If you want your entry point to be something other than index.php you will need your config to change as well. `api.php` is also commonly used as an entry point, so your set up should match accordingly. This example assumes your are using index.php.
 
 With this setup, just remember to use http://slimproject.dev instead of http://localhost:8080 in the other examples in this tutorial.  The same health warning as above applies: you'll see an error page at http://slimproject.dev but crucially it's *Slim's* error page.  If you go to http://slimproject.dev/hello/joebloggs then something better should happen.
 
