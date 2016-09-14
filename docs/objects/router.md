@@ -296,6 +296,10 @@ Note inside the group closure, `$this` is used instead of `$app`. Slim binds the
 
 You can also attach middleware to any route or route group. [Learn more](/docs/concepts/middleware.html).
 
+## Router caching
+
+It's possible to enable router cache by setting valid filename in default Slim settings. [Learn more](/docs/objects/application.html#slim-default-settings).
+
 ## Container Resolution
 
 You are not limited to defining a function for your routes. In Slim there are a few different ways to define your route action functions.
