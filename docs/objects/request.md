@@ -428,7 +428,7 @@ Example, how to retrieve the value.
 
 {% highlight php %}
 $app->get('/test', function ($request, $response, $next) {
-    $session = $request->getAttribute('session'); //add the session storage to your request
+    $session = $request->getAttribute('session'); //get the session from the request
     
     return $response->write('Yay, ' . $session['name']);
 });
