@@ -418,7 +418,7 @@ Example, Setting a value on your request object.
 
 {% highlight php %}
 $app->add(function ($request, $response, $next) {
-    $request = $request->withAttribute('session', $_SESSION); //add the session storage to your request
+    $request = $request->withAttribute('session', $_SESSION); //add the session storage to your request as [READ-ONLY]
     return $next($request, $response);
 });
 {% endhighlight %}
