@@ -76,7 +76,7 @@ $app->add(function($request, $response, $next) {
     $response = $next($request, $response);
 
 
-    return $response->withHeader("Access-Control-Allow-Methods", implode(",", $methods);
+    return $response->withHeader("Access-Control-Allow-Methods", implode(",", $methods));
 });
 
 $app->get("/api/{id}", function($request, $response, $arguments) {
@@ -91,7 +91,7 @@ $app->map(["DELETE", "PATCH"], "/api/{id}", function($request, $response, $argum
 // Pay attention to this when you are using some javascript front-end framework and you are using groups in slim php
 $app->group('/api', function () {
     // Due to the behaviour of browsers when sending PUT or DELETE request, you must add the OPTIONS method. Read about preflight.
-    $app->map(['PUT', 'OPTIONS'], '/{:user_id[0-9]+}', function (Request $request, Response $response) {
+    $this->map(['PUT', 'OPTIONS'], '/{user_id:[0-9]+}', function ($request, $response, $arguments) {
         // Your code here...
     });
 });
