@@ -81,14 +81,12 @@ $app->post("/api/{id}", function($request, $response, $arguments) {
 $app->map(["DELETE", "PATCH"], "/api/{id}", function($request, $response, $arguments) {
 });
 
-// Especial attention to this when you are using some javascript fron-end framework and you are using groups in slim php
+// Pay attention to this when you are using some javascript front-end framework and you are using groups in slim php
 $app->group('/api', function () {
-    // because the behaviour of browsers sending PUT or DELETE request, you must add the OPTIONS method. Read about preflight.
-    // This can save you a lot of headache :p
-    $app-map(['PUT', 'OPTIONS'], '/{:user_id[0-9]+}', function (Request $request, Response $response) {
+    // Due to the behaviour of browsers when sending PUT or DELETE request, you must add the OPTIONS method. Read about preflight.
+    $app->map(['PUT', 'OPTIONS'], '/{:user_id[0-9]+}', function (Request $request, Response $response) {
         // Your code here...
     });
-    
 });
 
 $app->run();
