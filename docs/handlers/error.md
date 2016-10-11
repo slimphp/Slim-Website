@@ -69,6 +69,7 @@ The callable **MUST** return a new `\Psr\Http\Message\ResponseInterface` instanc
 - `Slim\Exception\MethodNotAllowedException`: This can be handled via a custom [`notAllowedHandler`](/docs/handlers/not-allowed.html).
 - `Slim\Exception\NotFoundException`: This can be handled via a custom [`notFoundHandler`](/docs/handlers/not-found.html).
 - `Slim\Exception\SlimException`: This type of exception is internal to Slim, and its handling cannot be overridden.
+- `Runtime PHP errors`: This can be handled via a custom `phpErrorHandler`.
 
 ### Disabling
 
