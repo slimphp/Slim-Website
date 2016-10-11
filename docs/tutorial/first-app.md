@@ -88,17 +88,17 @@ To get this set up on a standard LAMP stack, we'll need a couple of extra ingred
 The vhost configuration should be fairly straightforward; we don't need anything special here.  Copy your existing default vhost configuration and set the `ServerName` to be how you want to refer to your project.  For example you can set:
 
     ServerName slimproject.dev
-    
+
     or for nginx:
-    
+
     server_name slimproject.dev;
 
 Then you'll also want to set the `DocumentRoot` to point to the `public/` directory of your project, something like this (edit the existing line):
 
     DocumentRoot    /home/lorna/projects/slim/project/src/public/
-    
+
     or for nginx:
-    
+
     root    /home/lorna/projects/slim/project/src/public/
 
 
@@ -365,7 +365,7 @@ As an example, here's a snippet from the template that displays the ticket list 
         <th>Actions</th>
     </tr>
 
-<?php foreach($data['tickets'] as $ticket): ?>
+<?php foreach ($tickets as $ticket): ?>
 
     <tr>
         <td><?=$ticket->getTitle() ?></td>
@@ -407,4 +407,3 @@ With the `/tickets/{id}` route having a friendly name, and the router now availa
 This article gave a walkthrough of how to get set up with a simple application of your own, which I hope will let you get quickly started, see some working examples, and build something awesome.
 
 From here, I'd recommend you take a look at the other parts of the project documentation for anything you need that wasn't already covered or that you want to see an alternative example of.  A great next step would be to take a look at the [Middleware](http://www.slimframework.com/docs/concepts/middleware.html) section - this technique is how we layer up our application and add functionality such as authentication which can be applied to multiple routes.
-
