@@ -409,3 +409,29 @@ $app->add(function ($request, $response, $next) {
     return $next($request, $response);
 });
 {% endhighlight %}
+
+## Attributes
+
+With PSR-7 it is possible to inject objects/values into the request object for further processing. In your applications middleware often need to pass along information to your route closure and the way to do is it is to add it to the request object via an attribute.
+
+Example, Setting a value on your request object.
+
+{% highlight php %}
+$app->add(function ($request, $response, $next) {
+    $request = $request->withAttribute('session', $_SESSION); //add the session storage to your request as [READ-ONLY]
+    return $next($request, $response);
+});
+{% endhighlight %}
+
+
+Example, how to retrieve the value.
+
+{% highlight php %}
+$app->get('/test', function ($request, $response, $next) {
+    $session = $request->getAttribute('session'); //get the session from the request
+    
+    return $response->write('Yay, ' . $session['name']);
+});
+{% endhighlight %}
+
+The request object also has bulk functions as well. `$request->getAttributes()` and `$request->withAttributes()`
