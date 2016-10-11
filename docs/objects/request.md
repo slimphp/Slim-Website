@@ -434,4 +434,4 @@ $app->get('/test', function ($request, $response, $next) {
 });
 {% endhighlight %}
 
-The request object also has bulk functions as well. `$request->getAttributes()` and `$request->withAttrubtes()`
+The request object also has bulk functions as well. `$request->getAttributes()` and `$request->withAttributes()`
