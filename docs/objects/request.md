@@ -286,6 +286,29 @@ only parsed once, even if the Request body is modified in the meantime.
 To ensure the body is reparsed, the Request object's method `reparseBody` can be
 used.
 
+## Uploaded Files
+
+The file uploads in `$_FILES` are available from the Request object's
+`getUploadedFiles()` method. This returns an array keyed by the name of the
+`<input>` element.
+
+<figure>
+{% highlight php %}
+$files = $request->getUploadedFiles();
+{% endhighlight %}
+<figcaption>Figure 11: Get uploaded files</figcaption>
+</figure>
+
+Each object in the `$files` array is a instance of
+`\Psr\Http\Message\UploadedFileInterface` and supports the following methods:
+
+* `getStream()`
+* `moveTo($targetPath)`
+* `getSize()`
+* `getError()`
+* `getClientFilename()`
+* `getClientMediaType()`
+
 ## Request Helpers
 
 Slim's PSR 7 Request implementation provides these additional proprietary methods
@@ -307,7 +330,7 @@ X-Requested-With: XMLHttpRequest
 
 foo=bar
 {% endhighlight %}
-<figcaption>Figure 11: Example XHR request.</figcaption>
+<figcaption>Figure 12: Example XHR request.</figcaption>
 </figure>
 
 {% highlight php %}
