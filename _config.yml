@@ -71,6 +71,7 @@ defaults:
             - [/docs/handlers/error.md, Error Handlers]
             - [/docs/handlers/not-found.md, 404 Not Found]
             - [/docs/handlers/not-allowed.md, 405 Not Allowed]
+            - [/docs/handlers/php-error.md, PHP Runtime Error]
         - title: Cook book
           items:
             - [/docs/cookbook/route-patterns.md, Trailing / in routes]
