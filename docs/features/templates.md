@@ -8,8 +8,7 @@ for preparing and returning an appropriate PSR 7 response object.
 
 > Slim's "view" is the HTTP response.
 
-That being said, the Slim project provides the [Twig-View](#the-slimtwig-view-component) and
-[PHP-View](#the-slimphp-view-component) components to help you render templates to a PSR7
+That being said, the Slim project provides the [Twig-View](#the-slimtwig-view-component), [PHP-View](#the-slimphp-view-component) and [Mustache-View](#the-andrewslinceslim3-mustache-view-component) components to help you render templates to a PSR7
 Response object.
 
 ## The slim/twig-view component
@@ -45,7 +44,7 @@ $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('path/to/templates', [
         'cache' => 'path/to/cache'
     ]);
-    
+
     // Instantiate and add Slim specific extension
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
@@ -162,8 +161,71 @@ $app->run();
 <figcaption>Figure 6: Render template with slim/php-view container service.</figcaption>
 </figure>
 
+## The andrewslince/slim3-mustache-view component
+
+The [Mustache-View][mustacheview] PHP component helps you render [Mustache][mustache] templates.
+This component is [available on Packagist][packagist-available] and can be installed using
+Composer like this:
+
+[mustacheview]: https://github.com/andrewslince/slim3-mustache-view
+[mustache]:https://github.com/bobthecow/mustache.php
+[packagist-available]:https://packagist.org/packages/andrewslince/slim3-mustache-view
+
+<figure>
+{% highlight text %}
+composer require andrewslince/slim3-mustache-view
+{% endhighlight %}
+<figcaption>Figure 4: Install andrewslince/slim3-mustache-view component.</figcaption>
+</figure>
+
+To register this component as a service on Slim App's container, do this:
+
+<figure>
+{% highlight php %}
+<?php
+// Create app
+$app = new \Slim\App();
+
+// Get container
+$container = $app->getContainer();
+
+// Register component on container
+$container['view'] = function ($container) {
+    return new \Slim\Views\Mustache([
+        'template' => [
+            'extension' => 'html', // or another extension of your preference
+            'charset' => 'utf-8',
+            'paths' => [
+                'path/to/templates/with/trailing/slash'
+            ]
+        ]
+    ]);
+};
+{% endhighlight %}
+<figcaption>Figure 7: Register andrewslince/slim3-mustache-view component with container.</figcaption>
+</figure>
+
+Use the view component to render a Mustache view like this:
+
+<figure>
+{% highlight php %}
+
+// Render Mustache template in route
+$app->get('/hello/{name}', function ($request, $response, $args) {
+    $viewName = 'profile'; // without extension
+    return $this->view->render($response, $viewName, [
+        'name' => $args['name']
+    ]);
+});
+
+// Run app
+$app->run();
+{% endhighlight %}
+<figcaption>Figure 8: Render template with andrewslince/slim3-mustache-view container service.</figcaption>
+</figure>
+
 ## Other template systems
 
-You are not limited to the `Twig-View` and `PHP-View` components. You
+You are not limited to the `Twig-View`, `PHP-View` and `Mustache-View` components. You
 can use any PHP template system provided that you ultimately write the rendered
 template output to the PSR 7 Response object's body.
