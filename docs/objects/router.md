@@ -307,8 +307,10 @@ You are not limited to defining a function for your routes. In Slim there are a 
 In addition to a function, you may use:
  - An invokable class
  - `Class:method`
+ - `container_key:method`
+ - `container_key`
  
-This function is enabled by Slim's Callable Resolver Class. It translates a string entry into a function call.
+This functionality is enabled by Slim's Callable Resolver Class. It translates a string entry into a function call.
 Example:
 
 {% highlight php %}
@@ -376,3 +378,27 @@ $app->get('/method1', '\MyController:method1');
 $app->get('/method2', '\MyController:method2');
 $app->get('/method3', '\MyController:method3');
 {% endhighlight %}
+
+In addition to using a class name, or a class name with a method, you can use entries from the Slim
+Container. You can use the name of a key if the container service is callable. Otherwise, you can use
+the `key:method` pattern, like so.
+
+{% highlight php %}
+class HomeController
+{
+   public function index($request, $response, $args) {
+   }
+}
+{% endhighlight %}
+
+{% highlight php %}
+$container = new \Slim\Container
+$app = new \Slim\App($container);
+$container['home'] = function() {
+    return new HomeController;
+};
+$app->get('/index','home:index');
+{% endhighlight %}
+
+This allows you to leverage the Symfony Container for dependency injection. If you would prefer to
+inject specific dependencies instead of the container itself, you can use the container to do so.
