@@ -2,7 +2,7 @@
 title: Application
 ---
 
-The Application, (or `Slim\App`) is the entry point to your Slim application and is used to register the route that link to your callbacks or controllers.
+The Application, (or `Slim\App`) is the entry point to your Slim application and is used to register the routes that link to your callbacks or controllers.
 
 {% highlight php %}
 // instantiate the App object
