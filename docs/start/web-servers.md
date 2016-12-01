@@ -9,12 +9,14 @@ front-controller file.
 
 ## PHP built-in server
 
-Run the following command in terminal to start localhost web server, 
+Run the following command in terminal to start localhost web server,
 assuming `./public/` is public-accessible directory with `index.php` file:
 
 {% highlight bash %}
-php -S localhost:8080 -t ./public/ 
+php -S localhost:8888 -t public public/index.php
 {% endhighlight %}
+
+If you are not using `index.php` as your entry point then change appropriately.
 
 ## Apache configuration
 
@@ -54,7 +56,7 @@ server {
     root /path/to/public;
 
     location / {
-        try_files $uri $uri/ /index.php$is_args$args;
+        try_files $uri /index.php$is_args$args;
     }
 
     location ~ \.php {

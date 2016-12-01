@@ -236,7 +236,7 @@ containing three elements: `['2016', '03', '20']`.
 ### Regular expression matching
 
 By default the placeholders are written inside `{}` and can accept any
-values. However, placeholders can also require the HTTP request URI to match a particular regular expression. If the current HTTP request URI does not match a placeholder regular expression, the route is not invoked. This is an example placeholder named `id` that requires a digit.
+values. However, placeholders can also require the HTTP request URI to match a particular regular expression. If the current HTTP request URI does not match a placeholder regular expression, the route is not invoked. This is an example placeholder named `id` that requires one or more digits.
 
 {% highlight php %}
 $app = new \Slim\App();
@@ -247,7 +247,7 @@ $app->get('/users/{id:[0-9]+}', function ($request, $response, $args) {
 
 ## Route names
 
-Application route's can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the router's `pathFor()` method. Each routing method described above returns a `\Slim\Route` object, and this object exposes a `setName()` method.
+Application routes can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the router's `pathFor()` method. Each routing method described above returns a `\Slim\Route` object, and this object exposes a `setName()` method.
 
 {% highlight php %}
 $app = new \Slim\App();
@@ -287,11 +287,18 @@ $app->group('/users/{id:[0-9]+}', function () {
 });
 {% endhighlight %}
 
-Note inside the group closure, `$this` is used instead of `$app`. Slim binds the closure to the application instance for you, just like it is the case with route callbacks.
+Note inside the group closure, `$this` is used instead of `$app`. Slim binds the closure to the application instance for you, just like it is the case with route callback binds with container instance.
+
+* inside group closure, `$this` is bound to the instance of `Slim\App`
+* inside route closure, `$this` is bound to the instance of `Slim\Container`
 
 ## Route middleware
 
 You can also attach middleware to any route or route group. [Learn more](/docs/concepts/middleware.html).
+
+## Router caching
+
+It's possible to enable router cache by setting valid filename in default Slim settings. [Learn more](/docs/objects/application.html#slim-default-settings).
 
 ## Container Resolution
 
@@ -335,7 +342,7 @@ You can use this class like so.
 $app->get('/home', '\MyAction');
 {% endhighlight %}
 
-In a more traditional MVC appraoch you can construct controllers with many actions instead of an invokable class which only handles one action.
+In a more traditional MVC approach you can construct controllers with many actions instead of an invokable class which only handles one action.
 
 {% highlight php %}
 class MyController {

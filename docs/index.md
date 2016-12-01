@@ -56,7 +56,10 @@ example application:
 {% highlight php %}
 <?php
 // Create and configure Slim app
-$app = new \Slim\App;
+$config = ['settings' => [
+    'addContentLengthHeader' => false,
+]];
+$app = new \Slim\App($config);
 
 // Define app routes
 $app->get('/hello/{name}', function ($request, $response, $args) {

@@ -45,10 +45,10 @@ $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('path/to/templates', [
         'cache' => 'path/to/cache'
     ]);
-    $view->addExtension(new \Slim\Views\TwigExtension(
-        $container['router'],
-        $container['request']->getUri()
-    ));
+    
+    // Instantiate and add Slim specific extension
+    $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
+    $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
 
     return $view;
 };
@@ -149,7 +149,7 @@ Use the view component to render a PHP view like this:
 <figure>
 {% highlight php %}
 
-// Render Twig template in route
+// Render PHP template in route
 $app->get('/hello/{name}', function ($request, $response, $args) {
     return $this->view->render($response, 'profile.html', [
         'name' => $args['name']
@@ -159,7 +159,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 // Run app
 $app->run();
 {% endhighlight %}
-<figcaption>Figure 6: Render template with slim/twig-view container service.</figcaption>
+<figcaption>Figure 6: Render template with slim/php-view container service.</figcaption>
 </figure>
 
 ## Other template systems

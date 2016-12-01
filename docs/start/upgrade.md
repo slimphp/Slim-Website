@@ -36,8 +36,23 @@ In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache
 Slim Core has removed Stop/Halt.
 In your applications, you should transition to using the withStatus() and withBody() methods.
 
-## Changed Redirect
-In Slim v2.x one would use the helper function $app->redirect(); to trigger a redirect request.
+## Removal of autoloader
+`Slim::registerAutoloader()` have been removed, we have fully moved to composer.
+
+## Changes to container
+`$app->container->singleton(...)` is now `$app['...'] = function () {};` Please read Pimple docs for more info
+
+## Removal of configureMode()
+`$app->configureMode(...)` has been removed in v3.
+
+## Removal of PrettyExceptions
+PrettyExceptions cause lots of issues for many people, so this have been removed.
+
+## Route::setDefaultConditions(...) has been removed
+We have switched routers which enable you to keep the default conditions regex inside of the route pattern.
+
+## Changes to redirect
+In Slim v2.x one would use the helper function `$app->redirect();` to trigger a redirect request.
 In Slim v3.x one can do the same with using the Response class like so.
 
 Example:
@@ -124,6 +139,17 @@ In v3.0:
 {% highlight php %}
 $app->get(…)->add($mw2)->add($mw1);
 {% endhighlight %}
+
+## Getting the current route
+The route is an attribute of the Request object in v3.0:
+
+{% highlight php %}
+$request->getAttribute('route');
+{% endhighlight %}
+
+When getting the current route in middleware, the value for
+`determineRouteBeforeAppMiddleware` must be set to `true` in the Application
+configuration, otherwise the getAttribute call returns `null`.
 
 ## urlFor() is now pathFor() in the router
 

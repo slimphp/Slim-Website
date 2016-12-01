@@ -64,10 +64,41 @@ In this example, we define a new `errorHandler` factory that returns a callable.
 
 The callable **MUST** return a new `\Psr\Http\Message\ResponseInterface` instance as is appropriate for the given exception.
 
-**Please note**: The following three types of exceptions will not be handled by a custom `errorHandler`:
+### Class-based error handler
+
+Error handlers may also be defined as an invokable class.
+
+{% highlight php %}
+class CustomHandler {
+   public function __invoke($request, $response, $args) {
+        return $response
+            ->withStatus(500)
+            ->withHeader('Content-Type', 'text/html')
+            ->write('Something went wrong!');
+   }
+}
+{% endhighlight %}
+
+and attached like so:
+
+{% highlight php %}
+$app = new \Slim\App();
+$c = $app->getContainer();
+$c['errorHandler'] = function ($c) {
+    return new CustomHandler();
+};
+{% endhighlight %}
+
+This allows us to define more sophisticated handlers or extend/override the
+built-in `Slim\Handlers\*` classes.
+
+### Handling other errors
+
+**Please note**: The following four types of exceptions will not be handled by a custom `errorHandler`:
 
 - `Slim\Exception\MethodNotAllowedException`: This can be handled via a custom [`notAllowedHandler`](/docs/handlers/not-allowed.html).
 - `Slim\Exception\NotFoundException`: This can be handled via a custom [`notFoundHandler`](/docs/handlers/not-found.html).
+- Runtime PHP errors (PHP 7+ only): This can be handled via a custom [`phpErrorHandler`](/docs/handlers/php-error.html).
 - `Slim\Exception\SlimException`: This type of exception is internal to Slim, and its handling cannot be overridden.
 
 ### Disabling

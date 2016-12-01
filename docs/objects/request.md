@@ -156,7 +156,9 @@ methods to inspect the HTTP request's URL parts:
 * `getFragment()`
 * `getBaseUrl()`
 
-You can get the query parameters as an associative array on the Request object using `getQueryParams()`. 
+You can get the query parameters as an associative array on the Request object using `getQueryParams()`.
+
+You can also get a single query parameter value, with optional default value if the parameter is missing, using `getQueryParam($key, $default = null)`.
 
 <div class="alert alert-info">
     <div><strong>Base Path</strong></div>
@@ -245,6 +247,8 @@ $parsedBody = $request->getParsedBody();
 * XML requests are converted into a `SimpleXMLElement` with `simplexml_load_string($input)`.
 * URL-encoded requests are converted into a PHP array with `parse_str($input)`.
 
+For URL-encoded requests, you can also get a single parameter value, with optional default value if the parameter is missing, using `getParsedBodyParam($key, $default = null)`.
+
 Technically speaking, Slim's PSR 7 Request object represents the HTTP request
 body as an instance of `\Psr\Http\Message\StreamInterface`. You can get
 the HTTP request body `StreamInterface` instance with the PSR 7 Request object's
@@ -274,6 +278,37 @@ methods to read and iterate its underlying PHP `resource`.
 * `getContents()`
 * `getMetadata($key = null)`
 
+### Reparsing the body
+
+When calling `getParsedBody` on the Request object multiple times, the body is
+only parsed once, even if the Request body is modified in the meantime.
+
+To ensure the body is reparsed, the Request object's method `reparseBody` can be
+used.
+
+## Uploaded Files
+
+The file uploads in `$_FILES` are available from the Request object's
+`getUploadedFiles()` method. This returns an array keyed by the name of the
+`<input>` element.
+
+<figure>
+{% highlight php %}
+$files = $request->getUploadedFiles();
+{% endhighlight %}
+<figcaption>Figure 11: Get uploaded files</figcaption>
+</figure>
+
+Each object in the `$files` array is a instance of
+`\Psr\Http\Message\UploadedFileInterface` and supports the following methods:
+
+* `getStream()`
+* `moveTo($targetPath)`
+* `getSize()`
+* `getError()`
+* `getClientFilename()`
+* `getClientMediaType()`
+
 ## Request Helpers
 
 Slim's PSR 7 Request implementation provides these additional proprietary methods
@@ -295,7 +330,7 @@ X-Requested-With: XMLHttpRequest
 
 foo=bar
 {% endhighlight %}
-<figcaption>Figure 11: Example XHR request.</figcaption>
+<figcaption>Figure 12: Example XHR request.</figcaption>
 </figure>
 
 {% highlight php %}
@@ -342,6 +377,16 @@ You can fetch the HTTP request content length with the Request object's `getCont
 $length = $request->getContentLength();
 {% endhighlight %}
 
+### Request Parameter
+
+To fetch single request parameter value, use methods: `getParam()`, `getQueryParam()`, `getParsedBodyParam()`, `getCookieParam()`, `getServerParam()`, counterparts of PSR-7's plural form get*Params() methods.
+
+For example, to get a single Server Parameter:
+
+{% highlight php %}
+$foo = $request->getServerParam('HTTP_NOT_EXIST', 'default_value_here');
+{% endhighlight %}
+
 ## Route Object
 
 Sometimes in middleware you require the parameter of your route.
@@ -367,7 +412,7 @@ The following media types are recognised and parsed:
 * application/json
 * application/xml & text/xml
 
-If you want Slim to parse contend from a a different media type then you need to either parse the raw body yourself or register a new media parser. Media parsers are simply callables that accept an ``$input`` string and return a parsed object or array.
+If you want Slim to parse content from a different media type then you need to either parse the raw body yourself or register a new media parser. Media parsers are simply callables that accept an ``$input`` string and return a parsed object or array.
 
 Register a new media parser in an application or route middleware. Note that you must register the parser before you try to access the parsed body for the first time.
 
@@ -383,7 +428,33 @@ $app->add(function ($request, $response, $next) {
             return json_decode($input, true);
         }
     );
-    
+
     return $next($request, $response);
 });
-{% endhighlight %} 
+{% endhighlight %}
+
+## Attributes
+
+With PSR-7 it is possible to inject objects/values into the request object for further processing. In your applications middleware often need to pass along information to your route closure and the way to do is it is to add it to the request object via an attribute.
+
+Example, Setting a value on your request object.
+
+{% highlight php %}
+$app->add(function ($request, $response, $next) {
+    $request = $request->withAttribute('session', $_SESSION); //add the session storage to your request as [READ-ONLY]
+    return $next($request, $response);
+});
+{% endhighlight %}
+
+
+Example, how to retrieve the value.
+
+{% highlight php %}
+$app->get('/test', function ($request, $response, $next) {
+    $session = $request->getAttribute('session'); //get the session from the request
+    
+    return $response->write('Yay, ' . $session['name']);
+});
+{% endhighlight %}
+
+The request object also has bulk functions as well. `$request->getAttributes()` and `$request->withAttributes()`

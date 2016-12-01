@@ -81,7 +81,7 @@ This will make your application available at http://localhost:8080 (if you're al
 
 **Note** you'll get an error message about "Page Not Found" at this URL - but it's an error message **from** Slim, so this is expected.  Try http://localhost:8080/hello/joebloggs instead :)
 
-### Run Your Application With Apache
+### Run Your Application With Apache or nginx
 
 To get this set up on a standard LAMP stack, we'll need a couple of extra ingredients: some virtual host configuration, and one rewrite rule.
 
@@ -89,11 +89,20 @@ The vhost configuration should be fairly straightforward; we don't need anything
 
     ServerName slimproject.dev
 
+    or for nginx:
+
+    server_name slimproject.dev;
+
 Then you'll also want to set the `DocumentRoot` to point to the `public/` directory of your project, something like this (edit the existing line):
 
     DocumentRoot    /home/lorna/projects/slim/project/src/public/
 
-**Don't forget** to restart apache now you've changed the configuration!
+    or for nginx:
+
+    root    /home/lorna/projects/slim/project/src/public/
+
+
+**Don't forget** to restart your server process now you've changed the configuration!
 
 I also have a `.htaccess` file in my `src/public` directory; this relies on Apache's rewrite module being enabled and simply makes all web requests go to index.php so that Slim can then handle all the routing for us.  Here's my `.htaccess` file:
 
@@ -103,6 +112,16 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . index.php [L]
 ```
+
+nginx does not use `.htaccess` files, so you will need to add the following to your server configuration in the `location` block:
+
+```
+if (!-e $request_filename){
+    rewrite ^(.*)$ /index.php break;
+}
+```
+
+*NOTE:* If you want your entry point to be something other than index.php you will need your config to change as well. `api.php` is also commonly used as an entry point, so your set up should match accordingly. This example assumes your are using index.php.
 
 With this setup, just remember to use http://slimproject.dev instead of http://localhost:8080 in the other examples in this tutorial.  The same health warning as above applies: you'll see an error page at http://slimproject.dev but crucially it's *Slim's* error page.  If you go to http://slimproject.dev/hello/joebloggs then something better should happen.
 
@@ -118,6 +137,7 @@ First the configuration itself:
 
 {% highlight php %}
 $config['displayErrorDetails'] = true;
+$config['addContentLengthHeader'] = false;
 
 $config['db']['host']   = "localhost";
 $config['db']['user']   = "user";
@@ -125,7 +145,9 @@ $config['db']['pass']   = "password";
 $config['db']['dbname'] = "exampleapp";
 {% endhighlight %}
 
-The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you're using the built in PHP webserver then you'll see them in the console output which is helpful).  The other settings here are not specific keys/values, they're just some data that I want to be able to access later.
+The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you're using the built in PHP webserver then you'll see them in the console output which is helpful). The second line allows the web server to set the Content-Length header which makes Slim behave more predictably.
+
+The other settings here are not specific keys/values, they're just some data that I want to be able to access later.
 
 Now to feed this into Slim, we need to *change* where we create the `Slim/App` object so that it now looks like this:
 
@@ -165,7 +187,7 @@ Now we have the `Slim\Container` object, we can add our services to it.
 
 ### Use Monolog In Your Application
 
-If you're not already familiar with Monolog, it's an excellent logging framework for PHP applications, which is why I'm going to use it here.  First of all, get the Monlog library installed via Composer:
+If you're not already familiar with Monolog, it's an excellent logging framework for PHP applications, which is why I'm going to use it here.  First of all, get the Monolog library installed via Composer:
 
     php composer.phar require monolog/monolog
 
@@ -343,7 +365,7 @@ As an example, here's a snippet from the template that displays the ticket list 
         <th>Actions</th>
     </tr>
 
-<?php foreach($data['tickets'] as $ticket): ?>
+<?php foreach ($tickets as $ticket): ?>
 
     <tr>
         <td><?=$ticket->getTitle() ?></td>
@@ -378,11 +400,10 @@ To use this in my template, I need to make the router available in the template 
     $response = $this->view->render($response, "tickets.phtml", ["tickets" => $tickets, "router" => $this->router]);
 {% endhighlight %}
 
-With the `/tickets/{id}` route having a friendly name, and the router now available in our template, this is is what makes the `pathFor()` call in our template work.  By supplying the `id`, this gets used as a named placeholder in the URL pattern, and the correct URL for linking to that route with those values is created.  This feature is brilliant for readable template URLs and is even better if you ever need to change a URL format for any reason - no need to grep templates to see where it's used.  This approach is definitely recomended, especially for links you'll use a lot.
+With the `/tickets/{id}` route having a friendly name, and the router now available in our template, this is what makes the `pathFor()` call in our template work.  By supplying the `id`, this gets used as a named placeholder in the URL pattern, and the correct URL for linking to that route with those values is created.  This feature is brilliant for readable template URLs and is even better if you ever need to change a URL format for any reason - no need to grep templates to see where it's used.  This approach is definitely recomended, especially for links you'll use a lot.
 
 ## Where Next?
 
 This article gave a walkthrough of how to get set up with a simple application of your own, which I hope will let you get quickly started, see some working examples, and build something awesome.
 
 From here, I'd recommend you take a look at the other parts of the project documentation for anything you need that wasn't already covered or that you want to see an alternative example of.  A great next step would be to take a look at the [Middleware](http://www.slimframework.com/docs/concepts/middleware.html) section - this technique is how we layer up our application and add functionality such as authentication which can be applied to multiple routes.
-

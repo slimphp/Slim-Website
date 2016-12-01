@@ -5,7 +5,7 @@ title: Dependency Container
 Slim uses a dependency container to prepare, manage, and inject application
 dependencies. Slim supports containers that implement the [Container-Interop](https://github.com/container-interop/container-interop) interface. You can use Slim's built-in container (based on [Pimple](http://pimple.sensiolabs.org/))
 or third-party containers like [Acclimate](https://github.com/jeremeamia/acclimate-container)
-or [PHP-DI](http://php-di.org/).
+or [PHP-DI](http://php-di.org/doc/frameworks/slim.html).
 
 ## How to use the container
 
@@ -57,6 +57,28 @@ $app->get('/foo', function ($req, $res, $args) {
 });
 {% endhighlight %}
 
+To test if a service exists in the container before using it, use the `has()` method, like this:
+
+{% highlight php %}
+/**
+ * Example GET route
+ *
+ * @param  \Psr\Http\Message\ServerRequestInterface $req  PSR7 request
+ * @param  \Psr\Http\Message\ResponseInterface      $res  PSR7 response
+ * @param  array                                    $args Route parameters
+ *
+ * @return \Psr\Http\Message\ResponseInterface
+ */
+$app->get('/foo', function ($req, $res, $args) {
+    if($this->has('myService')) {
+        $myService = $this->myService;
+    }
+
+    return $res;
+});
+{% endhighlight %}
+
+
 Slim uses `__get()` and `__isset()` magic methods that defer to the application's
 container for all properties that do not already exist on the application instance.
 
@@ -72,6 +94,8 @@ settings
     * `outputBuffering`
     * `determineRouteBeforeAppMiddleware`.
     * `displayErrorDetails`.
+    * `addContentLengthHeader`.
+    * `routerCacheFile`.
 
 environment
 :   Instance of `\Slim\Interfaces\Http\EnvironmentInterface`.
