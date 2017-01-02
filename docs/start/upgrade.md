@@ -8,6 +8,13 @@ you need to be aware of.
 ## New PHP version
 Slim 3 requires PHP 5.5+
 
+## Class \Slim\Slim renamed \Slim\App
+Slim 3 uses `\Slim\App` for the [Application](/docs/object/application.html) object usually named `$app`.
+
+{% highlight php %}
+$app = new \Slim\App();
+{% endhighlight %}
+
 ## New Route Function Signature
 
 {% highlight php %}
@@ -15,6 +22,9 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
     return $res->withStatus(400)->write('Bad Request');
 });
 {% endhighlight %}
+
+## Request and response objects are no longer accessible via the Application object
+As mentioned above, Slim 3 passes the `Request` and `Response` objects as arguments to the route handling function. Since they are now accessible directly in the body of a route function, `request` and `response` are no longer properties of the `/Slim/App` ([Application](/docs/object/application.html) object) instance.
 
 ## Getting _GET and _POST variables
 {% highlight php %}
@@ -46,7 +56,7 @@ In your applications, you should transition to using the withStatus() and withBo
 `$app->configureMode(...)` has been removed in v3.
 
 ## Removal of PrettyExceptions
-PrettyExceptions cause lots of issues for many people, so this have been removed.
+PrettyExceptions cause lots of issues for many people, so these have been removed.
 
 ## Route::setDefaultConditions(...) has been removed
 We have switched routers which enable you to keep the default conditions regex inside of the route pattern.
