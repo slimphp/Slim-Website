@@ -205,7 +205,7 @@ To make a section optional, simply wrap in square brackets:
 
 {% highlight php %}
 $app->get('/users[/{id}]', function ($request, $response, $args) {
-    // reponds to both `/users` and `/users/123`
+    // responds to both `/users` and `/users/123`
     // but not to `/users/`
 });
 {% endhighlight %}
@@ -312,7 +312,7 @@ This function is enabled by Slim's Callable Resolver Class. It translates a stri
 Example:
 
 {% highlight php %}
-$app->get('/home', '\HomeController:home');
+$app->get('/home', \HomeController::class . ':home');
 {% endhighlight %}
 
 In this code above we are defining a `/home` route and telling Slim to execute the `home()` method on the `\HomeController` class.
@@ -339,7 +339,7 @@ class MyAction {
 You can use this class like so.
 
 {% highlight php %}
-$app->get('/home', '\MyAction');
+$app->get('/home', \MyAction::class);
 {% endhighlight %}
 
 In a more traditional MVC approach you can construct controllers with many actions instead of an invokable class which only handles one action.
@@ -372,7 +372,7 @@ class MyController {
 You can use your controller methods like so.
 
 {% highlight php %}
-$app->get('/method1', '\MyController:method1');
-$app->get('/method2', '\MyController:method2');
-$app->get('/method3', '\MyController:method3');
+$app->get('/method1', \MyController::class . ':method1');
+$app->get('/method2', \MyController::class . ':method2');
+$app->get('/method3', \MyController::class . ':method3');
 {% endhighlight %}
