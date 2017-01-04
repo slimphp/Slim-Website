@@ -400,5 +400,5 @@ $container['home'] = function() {
 $app->get('/index','home:index');
 {% endhighlight %}
 
-This allows you to leverage the Symfony Container for dependency injection. If you would prefer to
+This allows you to leverage the container for dependency injection. If you would prefer to
 inject specific dependencies instead of the container itself, you can use the container to do so.
