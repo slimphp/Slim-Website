@@ -305,68 +305,84 @@ It's possible to enable router cache by setting valid filename in default Slim s
 You are not limited to defining a function for your routes. In Slim there are a few different ways to define your route action functions.
 
 In addition to a function, you may use:
- - An invokable class
- - `Class:method`
+
  - `container_key:method`
+ - `Class:method`
+ - An invokable class
  - `container_key`
  
 This functionality is enabled by Slim's Callable Resolver Class. It translates a string entry into a function call.
 Example:
 
 {% highlight php %}
-$app->get('/home', '\HomeController:home');
+$app->get('/home', 'HomeController:home');
 {% endhighlight %}
 
-In this code above we are defining a `/home` route and telling Slim to execute the `home()` method on the `\HomeController` class.
+In this code above we are defining a `/home` route and telling Slim to execute the `home()` method on the `HomeController` class.
 
-Slim first looks for an entry of `\HomeController` in the container, if it's found it will use that instance otherwise it will call it's constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.
- 
-Alternatively, you can use an invokable class, such as:
+Slim first looks for an entry of `HomeController` in the container, if it's found it will use that instance otherwise it will call it's constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.
+
+### Registering a controller with the container
+
+Create a controller with the `home` action method. The constructor should accept
+the dependencies that are required. For example:
 
 {% highlight php %}
-class MyAction {
-   protected $ci;
-   //Constructor
-   public function __construct(ContainerInterface $ci) {
-       $this->ci = $ci;
-   }
-   
-   public function __invoke($request, $response, $args) {
-        //your code
-        //to access items in the container... $this->ci->get('');
-   }
+class HomeController
+{
+    protected $view;
+    
+    public function __construct(\Slim\Views\Twig $view) {
+        $this->view = $view;
+    }
+    public function home($request, $response, $args) {
+      // your code here
+      // use $this->view to render the HTML
+      return $response;
+    }
 }
 {% endhighlight %}
 
-You can use this class like so.
+Create a factory in the container that instantiates the controller with the dependencies:
 
 {% highlight php %}
-$app->get('/home', '\MyAction');
+$container = $app->getContainer();
+$container['HomeController'] = function($c) {
+    $view = $c->get("view"); // retrieve the 'view' from the container
+    return new HomeController($view);
+};
 {% endhighlight %}
 
-In a more traditional MVC approach you can construct controllers with many actions instead of an invokable class which only handles one action.
+This allows you to leverage the container for dependency injection and so you can 
+inject specific dependencies into the controller.
+
+
+### Allow Slim to instantiate the controller
+
+Alternatively, if the class does not have an entry in the container, then Slim
+will pass the container's instance to the constructor. You can construct controllers 
+with many actions instead of an invokable class which only handles one action.
 
 {% highlight php %}
-class MyController {
-   protected $ci;
-   //Constructor
-   public function __construct(ContainerInterface $ci) {
-       $this->ci = $ci;
+class HomeController 
+{
+   protected $container;
+
+   // constructor receives container instance
+   public function __construct(ContainerInterface $container) {
+       $this->container = $container;
    }
    
-   public function method1($request, $response, $args) {
-        //your code
-        //to access items in the container... $this->ci->get('');
+   public function home($request, $response, $args) {
+        // your code
+        // to access items in the container... $this->container->get('');
+        return $response;
    }
    
-   public function method2($request, $response, $args) {
-        //your code
-        //to access items in the container... $this->ci->get('');
-   }
-      
-   public function method3($request, $response, $args) {
-        //your code
-        //to access items in the container... $this->ci->get('');
+   public function contact($request, $response, $args) {
+        // your code
+        // to access items in the container... $this->container->get('');
+        return $response;
    }
 }
 {% endhighlight %}
@@ -374,31 +390,37 @@ class MyController {
 You can use your controller methods like so.
 
 {% highlight php %}
-$app->get('/method1', '\MyController:method1');
-$app->get('/method2', '\MyController:method2');
-$app->get('/method3', '\MyController:method3');
+$app->get('/', 'HomeController:home');
+$app->get('/contact', 'HomeController:contact');
 {% endhighlight %}
 
-In addition to using a class name, or a class name with a method, you can use entries from the Slim
-Container. You can use the name of a key if the container service is callable. Otherwise, you can use
-the `key:method` pattern, like so.
+### Using an invokable class
+
+You do not have to specificy a method in your route callable and can just set it to be an invokable class such as:
 
 {% highlight php %}
-class HomeController
+class HomeAction
 {
-   public function index($request, $response, $args) {
+   protected $container;
+   
+   public function __construct(ContainerInterface $container) {
+       $this->container = $container;
+   }
+   
+   public function __invoke($request, $response, $args) {
+        // your code
+        // to access items in the container... $this->container->get('');
+        return $response;
    }
 }
 {% endhighlight %}
 
+You can use this class like so.
+
 {% highlight php %}
-$container = new \Slim\Container
-$app = new \Slim\App($container);
-$container['home'] = function() {
-    return new HomeController;
-};
-$app->get('/index','home:index');
+$app->get('/home', 'HomeAction');
 {% endhighlight %}
 
-This allows you to leverage the container for dependency injection. If you would prefer to
-inject specific dependencies instead of the container itself, you can use the container to do so.
+Again, as with controllers, if you register the class name with the container, then you 
+can create a factory and inject just the specific dependencies that you require into your
+action class.
