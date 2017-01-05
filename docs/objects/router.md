@@ -305,66 +305,90 @@ It's possible to enable router cache by setting valid filename in default Slim s
 You are not limited to defining a function for your routes. In Slim there are a few different ways to define your route action functions.
 
 In addition to a function, you may use:
- - An invokable class
+
+ - `container_key:method`
  - `Class:method`
+ - An invokable class
+ - `container_key`
  
-This function is enabled by Slim's Callable Resolver Class. It translates a string entry into a function call.
+This functionality is enabled by Slim's Callable Resolver Class. It translates a string entry into a function call.
 Example:
 
 {% highlight php %}
-$app->get('/home', \HomeController::class . ':home');
+$app->get('/', '\HomeController:home');
 {% endhighlight %}
 
-In this code above we are defining a `/home` route and telling Slim to execute the `home()` method on the `\HomeController` class.
-
-Slim first looks for an entry of `\HomeController` in the container, if it's found it will use that instance otherwise it will call it's constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.
- 
-Alternatively, you can use an invokable class, such as:
+Alternatively, you can take advantage of PHP's `::class` operator which works well with IDE lookup systems and produces the same result: 
 
 {% highlight php %}
-class MyAction {
-   protected $ci;
-   //Constructor
-   public function __construct(ContainerInterface $ci) {
-       $this->ci = $ci;
-   }
-   
-   public function __invoke($request, $response, $args) {
-        //your code
-        //to access items in the container... $this->ci->get('');
-   }
+$app->get('/', \HomeController::class . ':home');
+{% endhighlight %}
+
+In this code above we are defining a `/` route and telling Slim to execute the `home()` method on the `HomeController` class.
+
+Slim first looks for an entry of `HomeController` in the container, if it's found it will use that instance otherwise it will call it's constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.
+
+### Registering a controller with the container
+
+Create a controller with the `home` action method. The constructor should accept
+the dependencies that are required. For example:
+
+{% highlight php %}
+class HomeController
+{
+    protected $view;
+    
+    public function __construct(\Slim\Views\Twig $view) {
+        $this->view = $view;
+    }
+    public function home($request, $response, $args) {
+      // your code here
+      // use $this->view to render the HTML
+      return $response;
+    }
 }
 {% endhighlight %}
 
-You can use this class like so.
+Create a factory in the container that instantiates the controller with the dependencies:
 
 {% highlight php %}
-$app->get('/home', \MyAction::class);
+$container = $app->getContainer();
+$container['HomeController'] = function($c) {
+    $view = $c->get("view"); // retrieve the 'view' from the container
+    return new HomeController($view);
+};
 {% endhighlight %}
 
-In a more traditional MVC approach you can construct controllers with many actions instead of an invokable class which only handles one action.
+This allows you to leverage the container for dependency injection and so you can 
+inject specific dependencies into the controller.
+
+
+### Allow Slim to instantiate the controller
+
+Alternatively, if the class does not have an entry in the container, then Slim
+will pass the container's instance to the constructor. You can construct controllers 
+with many actions instead of an invokable class which only handles one action.
 
 {% highlight php %}
-class MyController {
-   protected $ci;
-   //Constructor
-   public function __construct(ContainerInterface $ci) {
-       $this->ci = $ci;
+class HomeController 
+{
+   protected $container;
+
+   // constructor receives container instance
+   public function __construct(ContainerInterface $container) {
+       $this->container = $container;
    }
    
-   public function method1($request, $response, $args) {
-        //your code
-        //to access items in the container... $this->ci->get('');
+   public function home($request, $response, $args) {
+        // your code
+        // to access items in the container... $this->container->get('');
+        return $response;
    }
    
-   public function method2($request, $response, $args) {
-        //your code
-        //to access items in the container... $this->ci->get('');
-   }
-      
-   public function method3($request, $response, $args) {
-        //your code
-        //to access items in the container... $this->ci->get('');
+   public function contact($request, $response, $args) {
+        // your code
+        // to access items in the container... $this->container->get('');
+        return $response;
    }
 }
 {% endhighlight %}
@@ -372,7 +396,37 @@ class MyController {
 You can use your controller methods like so.
 
 {% highlight php %}
-$app->get('/method1', \MyController::class . ':method1');
-$app->get('/method2', \MyController::class . ':method2');
-$app->get('/method3', \MyController::class . ':method3');
+$app->get('/', \HomeController::class . ':home');
+$app->get('/contact', \HomeController::class . ':contact');
 {% endhighlight %}
+
+### Using an invokable class
+
+You do not have to specificy a method in your route callable and can just set it to be an invokable class such as:
+
+{% highlight php %}
+class HomeAction
+{
+   protected $container;
+   
+   public function __construct(ContainerInterface $container) {
+       $this->container = $container;
+   }
+   
+   public function __invoke($request, $response, $args) {
+        // your code
+        // to access items in the container... $this->container->get('');
+        return $response;
+   }
+}
+{% endhighlight %}
+
+You can use this class like so.
+
+{% highlight php %}
+$app->get('/', \HomeAction::class);
+{% endhighlight %}
+
+Again, as with controllers, if you register the class name with the container, then you 
+can create a factory and inject just the specific dependencies that you require into your
+action class.
