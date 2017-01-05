@@ -25,6 +25,7 @@ defaults:
             - [/docs/start/installation.md, Installation]
             - [/docs/start/upgrade.md, Upgrade Guide]
             - [/docs/start/web-servers.md, Web Servers]
+            - [/docs/deployment/deployment.md, Deployment]
         - title: Tutorial
           items:
             - [/docs/tutorial/first-app.md, First Application]
