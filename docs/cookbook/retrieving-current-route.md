@@ -6,24 +6,31 @@ If you ever need to get access to the current route within your application all 
 
 From there you can get the route's name by using `getName()` or get the methods supported by this route via `getMethods()`, etc.
 
- Note: If you need to access the route from within your app middleware you must set `'determineRouteBeforeAppMiddleware'` to true in your configuration otherwise `getAttribute('route')` will return null. The route is always available in route middleware.
+ Note: If you need to access the route from within your app middleware you must set `'determineRouteBeforeAppMiddleware'` to true in your configuration otherwise `getAttribute('route')` will return null. Also `getAttribute('route')` will return null on non existent routes.
 
 Example:
 {% highlight php %}
+use Slim\App;
+use Slim\Exception\NotFoundException;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\App;
 
 $app = new App([
     'settings' => [
         // Only set this if you need access to route within middleware
         'determineRouteBeforeAppMiddleware' => true
     ]
-])
+]);
 
 // routes...
 $app->add(function (Request $request, Response $response, callable $next) {
     $route = $request->getAttribute('route');
+
+    // return NotFound for non existent route
+    if (empty($route)) {
+        throw new NotFoundException($request, $response);
+    }
+
     $name = $route->getName();
     $groups = $route->getGroups();
     $methods = $route->getMethods();
