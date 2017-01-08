@@ -107,6 +107,7 @@ To completely disable Slim's error handling, simply remove the error handler fro
 
 {% highlight php %}
 unset($app->getContainer()['errorHandler']);
+unset($app->getContainer()['phpErrorHandler']);
 {% endhighlight %}
 
 You are now responsible for handling any exceptions that occur in your application as they will not be handled by Slim.
