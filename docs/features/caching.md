@@ -5,7 +5,7 @@ title: HTTP Caching
 Slim 3 uses the optional standalone [slimphp/Slim-HttpCache](https://github.com/slimphp/Slim-HttpCache) PHP component
 for HTTP caching. You can use this component to create and return responses that
 contain `Cache`, `Expires`, `ETag`, and `Last-Modified` headers that control
-when and how long application output is retained by client-side caches.
+when and how long application output is retained by client-side caches. You may have to set your php.ini setting "session.cache_limiter" to an empty string in order to get this working without interferences.
 
 ## Installation
 
