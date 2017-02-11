@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Slim\Http\Uri | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Slim_Http_Uri" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../Slim.html">Slim</a></li>
+                                        <li><a href="../../Slim/Http.html">Http</a></li>
+    
+                <li>Uri</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            Uri
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>Uri</strong>        implements
+        <abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr>
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Value object representing a URI.</p>            <p>This interface is meant to represent URIs according to RFC 3986 and to
+provide methods for most common operations. Additional functionality for
+working with URIs can be provided on top of the interface or externally.
+Its primary use is for HTTP requests, but may also be used in other
+contexts.</p>
+
+<p>Instances of this interface are considered immutable; all methods that
+might change state MUST be implemented such that they retain the internal
+state of the current instance and return an instance that contains the
+changed state.</p>
+
+<p>Typically the Host header will be also be present in the request message.
+For server-side requests, the scheme will typically be discoverable in the
+server parameters.</p>        </div>
+    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_scheme">
+                                        protected                                        string
+                </td>
+                <td>$scheme</td>
+                <td class="last">Uri scheme (without "://" suffix)</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_user">
+                                        protected                                        string
+                </td>
+                <td>$user</td>
+                <td class="last">Uri user</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_password">
+                                        protected                                        string
+                </td>
+                <td>$password</td>
+                <td class="last">Uri password</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_host">
+                                        protected                                        string
+                </td>
+                <td>$host</td>
+                <td class="last">Uri host</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_port">
+                                        protected                                        null|int
+                </td>
+                <td>$port</td>
+                <td class="last">Uri port number</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_basePath">
+                                        protected                                        string
+                </td>
+                <td>$basePath</td>
+                <td class="last">Uri base path</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_path">
+                                        protected                                        string
+                </td>
+                <td>$path</td>
+                <td class="last">Uri path</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_query">
+                                        protected                                        string
+                </td>
+                <td>$query</td>
+                <td class="last">Uri query string (without "?" prefix)</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_fragment">
+                                        protected                                        string
+                </td>
+                <td>$fragment</td>
+                <td class="last">Uri fragment string (without "#" prefix)</td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(string $scheme, string $host, int $port = null, string $path = &#039;/&#039;, string $query = &#039;&#039;, string $fragment = &#039;&#039;, string $user = &#039;&#039;, string $password = &#039;&#039;)
+        
+                                            <p>Create new Uri.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_createFromString">createFromString</a>(string $uri)
+        
+                                            <p>Create new Uri from string.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_createFromEnvironment">createFromEnvironment</a>(<a href="../../Slim/Http/Environment.html"><abbr title="Slim\Http\Environment">Environment</abbr></a> $env)
+        
+                                            <p>Create new Uri from environment.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getScheme">getScheme</a>()
+        
+                                            <p>Retrieve the scheme component of the URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withScheme">withScheme</a>(string $scheme)
+        
+                                            <p>Return an instance with the specified scheme.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_filterScheme">filterScheme</a>(string $scheme)
+        
+                                            <p>Filter Uri scheme.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getAuthority">getAuthority</a>()
+        
+                                            <p>Retrieve the authority component of the URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getUserInfo">getUserInfo</a>()
+        
+                                            <p>Retrieve the user information component of the URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withUserInfo">withUserInfo</a>(string $user, null|string $password = null)
+        
+                                            <p>Return an instance with the specified user information.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getHost">getHost</a>()
+        
+                                            <p>Retrieve the host component of the URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withHost">withHost</a>(string $host)
+        
+                                            <p>Return an instance with the specified host.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    null|int
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPort">getPort</a>()
+        
+                                            <p>Retrieve the port component of the URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withPort">withPort</a>(null|int $port)
+        
+                                            <p>Return an instance with the specified port.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasStandardPort">hasStandardPort</a>()
+        
+                                            <p>Does this Uri use a standard port?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    null|int
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_filterPort">filterPort</a>(null|int $port)
+        
+                                            <p>Filter Uri port.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPath">getPath</a>()
+        
+                                            <p>Retrieve the path component of the URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withPath">withPath</a>(string $path)
+        
+                                            <p>Return an instance with the specified path.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getBasePath">getBasePath</a>()
+        
+                                            <p>Retrieve the base path segment of the URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withBasePath">withBasePath</a>(string $basePath)
+        
+                                            <p>Set base path.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_filterPath">filterPath</a>(string $path)
+        
+                                            <p>Filter Uri path.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getQuery">getQuery</a>()
+        
+                                            <p>Retrieve the query string of the URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withQuery">withQuery</a>(string $query)
+        
+                                            <p>Return an instance with the specified query string.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_filterQuery">filterQuery</a>(string $query)
+        
+                                            <p>Filters the query string or fragment of a URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getFragment">getFragment</a>()
+        
+                                            <p>Retrieve the fragment component of the URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withFragment">withFragment</a>(string $fragment)
+        
+                                            <p>Return an instance with the specified URI fragment.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___toString">__toString</a>()
+        
+                                            <p>Return the string representation as a URI reference.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getBaseUrl">getBaseUrl</a>()
+        
+                                            <p>Return the fully qualified base URL.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         line 112</div>
+        <code>                    
+    <strong>__construct</strong>(string $scheme, string $host, int $port = null, string $path = &#039;/&#039;, string $query = &#039;&#039;, string $fragment = &#039;&#039;, string $user = &#039;&#039;, string $password = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create new Uri.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$scheme</td>
+                <td>Uri scheme.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$host</td>
+                <td>Uri host.</td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$port</td>
+                <td>Uri port number.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>Uri path.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$query</td>
+                <td>Uri query string.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$fragment</td>
+                <td>Uri fragment.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$user</td>
+                <td>Uri user.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$password</td>
+                <td>Uri password.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_createFromString">
+        <div class="location">at         line 140</div>
+        <code>        static            <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+    <strong>createFromString</strong>(string $uri)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create new Uri from string.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$uri</td>
+                <td>Complete Uri string
+    (i.e., https://user:pass@host:443/path?query).</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_createFromEnvironment">
+        <div class="location">at         line 166</div>
+        <code>        static            <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+    <strong>createFromEnvironment</strong>(<a href="../../Slim/Http/Environment.html"><abbr title="Slim\Http\Environment">Environment</abbr></a> $env)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create new Uri from environment.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../Slim/Http/Environment.html"><abbr title="Slim\Http\Environment">Environment</abbr></a></td>
+                <td>$env</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getScheme">
+        <div class="location">at         line 255</div>
+        <code>                    string
+    <strong>getScheme</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the scheme component of the URI.</p>                    <p>If no scheme is present, this method MUST return an empty string.</p>
+
+<p>The value returned MUST be normalized to lowercase, per RFC 3986
+Section 3.1.</p>
+
+<p>The trailing ":" character is not part of the scheme and MUST NOT be
+added.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The URI scheme.</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>https://tools.ietf.org/html/rfc3986#section-3.1</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withScheme">
+        <div class="location">at         line 275</div>
+        <code>                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+    <strong>withScheme</strong>(string $scheme)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified scheme.</p>                    <p>This method MUST retain the state of the current instance, and return
+an instance that contains the specified scheme.</p>
+
+<p>Implementations MUST support the schemes "http" and "https" case
+insensitively, and MAY accommodate other schemes if required.</p>
+
+<p>An empty scheme is equivalent to removing the scheme.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$scheme</td>
+                <td>The scheme to use with the new instance.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a></td>
+            <td>A new instance with the specified scheme.</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>for invalid or unsupported schemes.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_filterScheme">
+        <div class="location">at         line 293</div>
+        <code>            protected        string
+    <strong>filterScheme</strong>(string $scheme)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Filter Uri scheme.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$scheme</td>
+                <td>Raw Uri scheme.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>If the Uri scheme is not a string.</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>If Uri scheme is not "", "https", or "http".</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAuthority">
+        <div class="location">at         line 335</div>
+        <code>                    string
+    <strong>getAuthority</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the authority component of the URI.</p>                    <p>If no authority information is present, this method MUST return an empty
+string.</p>
+
+<p>The authority syntax of the URI is:</p>
+
+<pre>
+[user-info@]host[:port]
+</pre>
+
+<p>If the port component is not set or is the standard port for the current
+scheme, it SHOULD NOT be included.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The URI authority, in "[user-info@]host[:port]" format.</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>https://tools.ietf.org/html/rfc3986#section-3.2</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getUserInfo">
+        <div class="location">at         line 359</div>
+        <code>                    string
+    <strong>getUserInfo</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the user information component of the URI.</p>                    <p>If no user information is present, this method MUST return an empty
+string.</p>
+
+<p>If a user is present in the URI, this will return that value;
+additionally, if the password is also present, it will be appended to the
+user value, with a colon (":") separating the values.</p>
+
+<p>The trailing "@" character is not part of the user information and MUST
+NOT be added.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The URI user information, in "username[:password]" format.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withUserInfo">
+        <div class="location">at         line 378</div>
+        <code>                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+    <strong>withUserInfo</strong>(string $user, null|string $password = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified user information.</p>                    <p>This method MUST retain the state of the current instance, and return
+an instance that contains the specified user information.</p>
+
+<p>Password is optional, but the user information MUST include the
+user; an empty string for the user is equivalent to removing user
+information.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$user</td>
+                <td>The user name to use for authority.</td>
+            </tr>
+                    <tr>
+                <td>null|string</td>
+                <td>$password</td>
+                <td>The password associated with $user.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a></td>
+            <td>A new instance with the specified user information.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getHost">
+        <div class="location">at         line 398</div>
+        <code>                    string
+    <strong>getHost</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the host component of the URI.</p>                    <p>If no host is present, this method MUST return an empty string.</p>
+
+<p>The value returned MUST be normalized to lowercase, per RFC 3986
+Section 3.2.2.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The URI host.</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>http://tools.ietf.org/html/rfc3986#section-3.2.2</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withHost">
+        <div class="location">at         line 415</div>
+        <code>                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+    <strong>withHost</strong>(string $host)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified host.</p>                    <p>This method MUST retain the state of the current instance, and return
+an instance that contains the specified host.</p>
+
+<p>An empty host value is equivalent to removing the host.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$host</td>
+                <td>The hostname to use with the new instance.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a></td>
+            <td>A new instance with the specified host.</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>for invalid hostnames.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPort">
+        <div class="location">at         line 438</div>
+        <code>                    null|int
+    <strong>getPort</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the port component of the URI.</p>                    <p>If a port is present, and it is non-standard for the current scheme,
+this method MUST return it as an integer. If the port is the standard port
+used with the current scheme, this method SHOULD return null.</p>
+
+<p>If no port is present, and no scheme is present, this method MUST return
+a null value.</p>
+
+<p>If no port is present, but a scheme is present, this method MAY return
+the standard port for that scheme, but SHOULD return null.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null|int</td>
+            <td>The URI port.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withPort">
+        <div class="location">at         line 460</div>
+        <code>                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+    <strong>withPort</strong>(null|int $port)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified port.</p>                    <p>This method MUST retain the state of the current instance, and return
+an instance that contains the specified port.</p>
+
+<p>Implementations MUST raise an exception for ports outside the
+established TCP and UDP port ranges.</p>
+
+<p>A null value provided for the port is equivalent to removing the port
+information.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>null|int</td>
+                <td>$port</td>
+                <td>The port to use with the new instance; a null value
+    removes the port information.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a></td>
+            <td>A new instance with the specified port.</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>for invalid ports.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasStandardPort">
+        <div class="location">at         line 474</div>
+        <code>            protected        bool
+    <strong>hasStandardPort</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Does this Uri use a standard port?</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_filterPort">
+        <div class="location">at         line 487</div>
+        <code>            protected        null|int
+    <strong>filterPort</strong>(null|int $port)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Filter Uri port.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>null|int</td>
+                <td>$port</td>
+                <td>The Uri port number.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null|int</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>If the port is invalid.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPath">
+        <div class="location">at         line 525</div>
+        <code>                    string
+    <strong>getPath</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the path component of the URI.</p>                    <p>The path can either be empty or absolute (starting with a slash) or
+rootless (not starting with a slash). Implementations MUST support all
+three syntaxes.</p>
+
+<p>Normally, the empty path "" and absolute path "/" are considered equal as
+defined in RFC 7230 Section 2.7.3. But this method MUST NOT automatically
+do this normalization because in contexts with a trimmed base path, e.g.
+the front controller, this difference becomes significant. It's the task
+of the user to handle both "" and "/".</p>
+
+<p>The value returned MUST be percent-encoded, but MUST NOT double-encode
+any characters. To determine what characters to encode, please refer to
+RFC 3986, Sections 2 and 3.3.</p>
+
+<p>As an example, if the value should include a slash ("/") not intended as
+delimiter between path segments, that value MUST be passed in encoded
+form (e.g., "%2F") to the instance.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The URI path.</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>https://tools.ietf.org/html/rfc3986#section-2</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>https://tools.ietf.org/html/rfc3986#section-3.3</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withPath">
+        <div class="location">at         line 552</div>
+        <code>                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+    <strong>withPath</strong>(string $path)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified path.</p>                    <p>This method MUST retain the state of the current instance, and return
+an instance that contains the specified path.</p>
+
+<p>The path can either be empty or absolute (starting with a slash) or
+rootless (not starting with a slash). Implementations MUST support all
+three syntaxes.</p>
+
+<p>If the path is intended to be domain-relative rather than path relative then
+it must begin with a slash ("/"). Paths not starting with a slash ("/")
+are assumed to be relative to some base path known to the application or
+consumer.</p>
+
+<p>Users can provide both encoded and decoded path characters.
+Implementations ensure the correct encoding as outlined in getPath().</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>The path to use with the new instance.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a></td>
+            <td>A new instance with the specified path.</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>for invalid paths.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getBasePath">
+        <div class="location">at         line 579</div>
+        <code>                    string
+    <strong>getBasePath</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the base path segment of the URI.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>
+
+<p>This method MUST return a string; if no path is present it MUST return
+an empty string.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The base path segment of the URI.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withBasePath">
+        <div class="location">at         line 592</div>
+        <code>                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+    <strong>withBasePath</strong>(string $basePath)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set base path.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$basePath</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_filterPath">
+        <div class="location">at         line 621</div>
+        <code>            protected        string
+    <strong>filterPath</strong>(string $path)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Filter Uri path.</p>                    <p>This method percent-encodes all reserved
+characters in the provided path string. This method
+will NOT double-encode characters that are already
+percent-encoded.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>The raw uri path.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The RFC 3986 percent-encoded uri path.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getQuery">
+        <div class="location">at         line 656</div>
+        <code>                    string
+    <strong>getQuery</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the query string of the URI.</p>                    <p>If no query string is present, this method MUST return an empty string.</p>
+
+<p>The leading "?" character is not part of the query and MUST NOT be
+added.</p>
+
+<p>The value returned MUST be percent-encoded, but MUST NOT double-encode
+any characters. To determine what characters to encode, please refer to
+RFC 3986, Sections 2 and 3.4.</p>
+
+<p>As an example, if a value in a key/value pair of the query string should
+include an ampersand ("&amp;") not intended as a delimiter between values,
+that value MUST be passed in encoded form (e.g., "%26") to the instance.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The URI query string.</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>https://tools.ietf.org/html/rfc3986#section-2</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>https://tools.ietf.org/html/rfc3986#section-3.4</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withQuery">
+        <div class="location">at         line 676</div>
+        <code>                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+    <strong>withQuery</strong>(string $query)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified query string.</p>                    <p>This method MUST retain the state of the current instance, and return
+an instance that contains the specified query string.</p>
+
+<p>Users can provide both encoded and decoded query characters.
+Implementations ensure the correct encoding as outlined in getQuery().</p>
+
+<p>An empty query string value is equivalent to removing the query string.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$query</td>
+                <td>The query string to use with the new instance.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a></td>
+            <td>A new instance with the specified query string.</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>for invalid query strings.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_filterQuery">
+        <div class="location">at         line 694</div>
+        <code>            protected        string
+    <strong>filterQuery</strong>(string $query)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Filters the query string or fragment of a URI.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$query</td>
+                <td>The raw uri query string.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The percent-encoded query string.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFragment">
+        <div class="location">at         line 725</div>
+        <code>                    string
+    <strong>getFragment</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the fragment component of the URI.</p>                    <p>If no fragment is present, this method MUST return an empty string.</p>
+
+<p>The leading "#" character is not part of the fragment and MUST NOT be
+added.</p>
+
+<p>The value returned MUST be percent-encoded, but MUST NOT double-encode
+any characters. To determine what characters to encode, please refer to
+RFC 3986, Sections 2 and 3.5.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The URI fragment.</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>https://tools.ietf.org/html/rfc3986#section-2</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>https://tools.ietf.org/html/rfc3986#section-3.5</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withFragment">
+        <div class="location">at         line 744</div>
+        <code>                    <a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a>
+    <strong>withFragment</strong>(string $fragment)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified URI fragment.</p>                    <p>This method MUST retain the state of the current instance, and return
+an instance that contains the specified URI fragment.</p>
+
+<p>Users can provide both encoded and decoded fragment characters.
+Implementations ensure the correct encoding as outlined in getFragment().</p>
+
+<p>An empty fragment value is equivalent to removing the fragment.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$fragment</td>
+                <td>The fragment to use with the new instance.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Uri.html"><abbr title="Slim\Http\Uri">Uri</abbr></a></td>
+            <td>A new instance with the specified fragment.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___toString">
+        <div class="location">at         line 783</div>
+        <code>                    string
+    <strong>__toString</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return the string representation as a URI reference.</p>                    <p>Depending on which components of the URI are present, the resulting
+string is either a full URI or relative reference according to RFC 3986,
+Section 4.1. The method concatenates the various components of the URI,
+using the appropriate delimiters:</p>
+
+<ul>
+<li>If a scheme is present, it MUST be suffixed by ":".</li>
+<li>If an authority is present, it MUST be prefixed by "//".</li>
+<li>The path can be concatenated without delimiters. But there are two
+cases where the path has to be adjusted to make the URI reference
+valid as PHP does not allow to throw an exception in __toString():
+
+<ul>
+<li>If the path is rootless and an authority is present, the path MUST
+be prefixed by "/".</li>
+<li>If the path is starting with more than one "/" and no authority is
+present, the starting slashes MUST be reduced to one.</li>
+</ul></li>
+<li>If a query is present, it MUST be prefixed by "?".</li>
+<li>If a fragment is present, it MUST be prefixed by "#".</li>
+</ul>
+</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>http://tools.ietf.org/html/rfc3986#section-4.1</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getBaseUrl">
+        <div class="location">at         line 810</div>
+        <code>                    string
+    <strong>getBaseUrl</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return the fully qualified base URL.</p>                    <p>Note that this method never includes a trailing /</p>
+
+<p>This method is not part of PSR-7.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Slim\Router | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/sami.css">
+        <script src="../js/jquery-1.11.1.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/typeahead.min.js"></script>
+        <script src="../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Slim_Router" data-root-path="../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../index.html">API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../classes.html">Classes</a></li>
+                                            <li><a href="../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../interfaces.html">Interfaces</a></li>
+                    <li><a href="../traits.html">Traits</a></li>
+                    <li><a href="../doc-index.html">Index</a></li>
+                    <li><a href="../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../Slim.html">Slim</a></li>
+    
+                <li>Router</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            Router
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>Router</strong>        implements
+        <a href="../Slim/Interfaces/RouterInterface.html"><abbr title="Slim\Interfaces\RouterInterface">RouterInterface</abbr></a>
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Router</p>            <p>This class organizes Slim application route objects. It is responsible
+for registering route objects, assigning names to route objects,
+finding routes that match the current HTTP request, and creating
+URLs for a named route.</p>        </div>
+    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_container">
+                                        protected                                        <abbr title="Interop\Container\ContainerInterface">ContainerInterface</abbr>
+                </td>
+                <td>$container</td>
+                <td class="last">Container Interface</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_routeParser">
+                                        protected                                        <abbr title="FastRoute\RouteParser">RouteParser</abbr>
+                </td>
+                <td>$routeParser</td>
+                <td class="last">Parser</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_basePath">
+                                        protected                                        string
+                </td>
+                <td>$basePath</td>
+                <td class="last">Base path used in pathFor()</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_cacheFile">
+                                        protected                                        string|<abbr title="Slim\False">False</abbr>
+                </td>
+                <td>$cacheFile</td>
+                <td class="last">Path to fast route cache file. Set to false to disable route caching</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_routes">
+                                        protected                                        <a href="../Slim/Route.html"><abbr title="Slim\Route">Route</abbr></a>[]
+                </td>
+                <td>$routes</td>
+                <td class="last">Routes</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_routeCounter">
+                                        protected                                        int
+                </td>
+                <td>$routeCounter</td>
+                <td class="last">Route counter incrementer</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_routeGroups">
+                                        protected                                        <a href="../Slim/RouteGroup.html"><abbr title="Slim\RouteGroup">RouteGroup</abbr></a>[]
+                </td>
+                <td>$routeGroups</td>
+                <td class="last">Route groups</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_dispatcher">
+                                        protected                                        <abbr title="FastRoute\Dispatcher">Dispatcher</abbr>
+                </td>
+                <td>$dispatcher</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<abbr title="FastRoute\RouteParser">RouteParser</abbr> $parser = null)
+        
+                                            <p>Create new router</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Router.html"><abbr title="Slim\Router">Router</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setBasePath">setBasePath</a>(string $basePath)
+        
+                                            <p>Set the base path used in pathFor()</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Router.html"><abbr title="Slim\Router">Router</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setCacheFile">setCacheFile</a>(string|<abbr title="Slim\false">false</abbr> $cacheFile)
+        
+                                            <p>Set path to fast route cache file. If this is false then route caching is disabled.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setContainer">setContainer</a>(<abbr title="Interop\Container\ContainerInterface">ContainerInterface</abbr> $container)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_map">map</a>(string[] $methods, string $pattern, callable $handler)
+        
+                                            <p>Add route</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_dispatch">dispatch</a>(<abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request)
+        
+                                            <p>Dispatch router for HTTP request</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_createRoute">createRoute</a>($methods, $pattern, $callable)
+        
+                                            <p>Create a new Route object</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="FastRoute\Dispatcher">Dispatcher</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_createDispatcher">createDispatcher</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setDispatcher">setDispatcher</a>(<abbr title="FastRoute\Dispatcher">Dispatcher</abbr> $dispatcher)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Route.html"><abbr title="Slim\Route">Route</abbr></a>[]
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRoutes">getRoutes</a>()
+        
+                                            <p>Get route objects</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getNamedRoute">getNamedRoute</a>(string $name)
+        
+                                            <p>Get named route object</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeNamedRoute">removeNamedRoute</a>(string $name)
+        
+                                            <p>Remove named route</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_processGroups">processGroups</a>()
+        
+                                            <p>Process route groups</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteGroupInterface.html"><abbr title="Slim\Interfaces\RouteGroupInterface">RouteGroupInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_pushGroup">pushGroup</a>(string $pattern, callable $callable)
+        
+                                            <p>Add a route group to the array</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_popGroup">popGroup</a>()
+        
+                                            <p>Removes the last route group from the array</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_lookupRoute">lookupRoute</a>($identifier)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_relativePathFor">relativePathFor</a>(string $name, array $data = [], array $queryParams = [])
+        
+                                            <p>Build the path for a named route excluding the base path</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_pathFor">pathFor</a>(string $name, array $data = [], array $queryParams = [])
+        
+                                            <p>Build the path for a named route including the base path</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_urlFor">urlFor</a>(string $name, array $data = [], array $queryParams = [])
+        
+                                            <p>Build the path for a named route.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         line 91</div>
+        <code>                    
+    <strong>__construct</strong>(<abbr title="FastRoute\RouteParser">RouteParser</abbr> $parser = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create new router</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="FastRoute\RouteParser">RouteParser</abbr></td>
+                <td>$parser</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setBasePath">
+        <div class="location">at         line 103</div>
+        <code>                    <a href="../Slim/Router.html"><abbr title="Slim\Router">Router</abbr></a>
+    <strong>setBasePath</strong>(string $basePath)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set the base path used in pathFor()</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$basePath</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Router.html"><abbr title="Slim\Router">Router</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setCacheFile">
+        <div class="location">at         line 121</div>
+        <code>                    <a href="../Slim/Router.html"><abbr title="Slim\Router">Router</abbr></a>
+    <strong>setCacheFile</strong>(string|<abbr title="Slim\false">false</abbr> $cacheFile)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set path to fast route cache file. If this is false then route caching is disabled.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|<abbr title="Slim\false">false</abbr></td>
+                <td>$cacheFile</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Router.html"><abbr title="Slim\Router">Router</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setContainer">
+        <div class="location">at         line 140</div>
+        <code>                    
+    <strong>setContainer</strong>(<abbr title="Interop\Container\ContainerInterface">ContainerInterface</abbr> $container)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Interop\Container\ContainerInterface">ContainerInterface</abbr></td>
+                <td>$container</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_map">
+        <div class="location">at         line 156</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>map</strong>(string[] $methods, string $pattern, callable $handler)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add route</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string[]</td>
+                <td>$methods</td>
+                <td>Array of HTTP methods</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td>The route pattern</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$handler</td>
+                <td>The route callable</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>if the route pattern isn't a string</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_dispatch">
+        <div class="location">at         line 187</div>
+        <code>                    array
+    <strong>dispatch</strong>(<abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Dispatch router for HTTP request</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></td>
+                <td>$request</td>
+                <td>The current HTTP request object</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_createRoute">
+        <div class="location">at         line 206</div>
+        <code>            protected        <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>createRoute</strong>($methods, $pattern, $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create a new Route object</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$methods</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$pattern</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$callable</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_createDispatcher">
+        <div class="location">at         line 219</div>
+        <code>            protected        <abbr title="FastRoute\Dispatcher">Dispatcher</abbr>
+    <strong>createDispatcher</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="FastRoute\Dispatcher">Dispatcher</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setDispatcher">
+        <div class="location">at         line 248</div>
+        <code>                    
+    <strong>setDispatcher</strong>(<abbr title="FastRoute\Dispatcher">Dispatcher</abbr> $dispatcher)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="FastRoute\Dispatcher">Dispatcher</abbr></td>
+                <td>$dispatcher</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRoutes">
+        <div class="location">at         line 258</div>
+        <code>                    <a href="../Slim/Route.html"><abbr title="Slim\Route">Route</abbr></a>[]
+    <strong>getRoutes</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get route objects</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Route.html"><abbr title="Slim\Route">Route</abbr></a>[]</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getNamedRoute">
+        <div class="location">at         line 272</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>getNamedRoute</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get named route object</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Route name</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>If named route does not exist</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeNamedRoute">
+        <div class="location">at         line 289</div>
+        <code>                    
+    <strong>removeNamedRoute</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Remove named route</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Route name</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>If named route does not exist</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_processGroups">
+        <div class="location">at         line 302</div>
+        <code>            protected        string
+    <strong>processGroups</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Process route groups</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>A group pattern to prefix routes with</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_pushGroup">
+        <div class="location">at         line 319</div>
+        <code>                    <a href="../Slim/Interfaces/RouteGroupInterface.html"><abbr title="Slim\Interfaces\RouteGroupInterface">RouteGroupInterface</abbr></a>
+    <strong>pushGroup</strong>(string $pattern, callable $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add a route group to the array</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td>The group pattern</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$callable</td>
+                <td>A group callable</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteGroupInterface.html"><abbr title="Slim\Interfaces\RouteGroupInterface">RouteGroupInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_popGroup">
+        <div class="location">at         line 331</div>
+        <code>                    bool
+    <strong>popGroup</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Removes the last route group from the array</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>True if successful, else False</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_lookupRoute">
+        <div class="location">at         line 341</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>lookupRoute</strong>($identifier)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$identifier</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_relativePathFor">
+        <div class="location">at         line 361</div>
+        <code>                    string
+    <strong>relativePathFor</strong>(string $name, array $data = [], array $queryParams = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Build the path for a named route excluding the base path</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Route name</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td>Named argument replacement data</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$queryParams</td>
+                <td>Optional query string parameters</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>If named route does not exist</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>If required data not provided</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_pathFor">
+        <div class="location">at         line 425</div>
+        <code>                    string
+    <strong>pathFor</strong>(string $name, array $data = [], array $queryParams = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Build the path for a named route including the base path</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Route name</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td>Named argument replacement data</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$queryParams</td>
+                <td>Optional query string parameters</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>If named route does not exist</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>If required data not provided</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_urlFor">
+        <div class="location">at         line 450</div>
+        <code>                    string
+    <strong>urlFor</strong>(string $name, array $data = [], array $queryParams = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Build the path for a named route.</p>                    <p>This method is deprecated. Use pathFor() from now on.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Route name</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td>Named argument replacement data</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$queryParams</td>
+                <td>Optional query string parameters</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>If named route does not exist</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>If required data not provided</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

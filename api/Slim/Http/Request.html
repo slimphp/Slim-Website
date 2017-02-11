@@ -1,0 +1,3295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Slim\Http\Request | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Slim_Http_Request" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../Slim.html">Slim</a></li>
+                                        <li><a href="../../Slim/Http.html">Http</a></li>
+    
+                <li>Request</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            Request
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>Request</strong>        extends <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>        implements
+        <abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Request</p>            <p>This class represents an HTTP request. It manages
+the request method, URI, headers, cookies, and body
+according to the PSR-7 standard.</p>        </div>
+    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_protocolVersion">
+                                        protected                                        string
+                </td>
+                <td>$protocolVersion</td>
+                <td class="last">Protocol version</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Message.html#property_protocolVersion"><abbr title="Slim\Http\Message">Message</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_validProtocolVersions">
+                    static                    protected                                        array
+                </td>
+                <td>$validProtocolVersions</td>
+                <td class="last">A map of valid protocol versions</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Message.html#property_validProtocolVersions"><abbr title="Slim\Http\Message">Message</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_headers">
+                                        protected                                        <a href="../../Slim/Interfaces/Http/HeadersInterface.html"><abbr title="Slim\Interfaces\Http\HeadersInterface">HeadersInterface</abbr></a>
+                </td>
+                <td>$headers</td>
+                <td class="last">Headers</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Message.html#property_headers"><abbr title="Slim\Http\Message">Message</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_body">
+                                        protected                                        <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr>
+                </td>
+                <td>$body</td>
+                <td class="last">Body object</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Message.html#property_body"><abbr title="Slim\Http\Message">Message</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_method">
+                                        protected                                        string
+                </td>
+                <td>$method</td>
+                <td class="last">The request method</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_originalMethod">
+                                        protected                                        string
+                </td>
+                <td>$originalMethod</td>
+                <td class="last">The original request method (ignoring override)</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_uri">
+                                        protected                                        <abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr>
+                </td>
+                <td>$uri</td>
+                <td class="last">The request URI object</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_requestTarget">
+                                        protected                                        string
+                </td>
+                <td>$requestTarget</td>
+                <td class="last">The request URI target (path + query string)</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_queryParams">
+                                        protected                                        array
+                </td>
+                <td>$queryParams</td>
+                <td class="last">The request query string params</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_cookies">
+                                        protected                                        array
+                </td>
+                <td>$cookies</td>
+                <td class="last">The request cookies</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_serverParams">
+                                        protected                                        array
+                </td>
+                <td>$serverParams</td>
+                <td class="last">The server environment variables at the time the request was created.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_attributes">
+                                        protected                                        <a href="../../Slim/Collection.html"><abbr title="Slim\Collection">Collection</abbr></a>
+                </td>
+                <td>$attributes</td>
+                <td class="last">The request attributes (route segment names and values)</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_bodyParsed">
+                                        protected                                        null|array|object
+                </td>
+                <td>$bodyParsed</td>
+                <td class="last">The request body parsed (if possible) into a PHP array or object</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_bodyParsers">
+                                        protected                                        callable[]
+                </td>
+                <td>$bodyParsers</td>
+                <td class="last">List of request body parsers (e.g., url-encoded, JSON, XML, multipart)</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_uploadedFiles">
+                                        protected                                        <abbr title="Psr\Http\Message\UploadedFileInterface">UploadedFileInterface</abbr>[]
+                </td>
+                <td>$uploadedFiles</td>
+                <td class="last">List of uploaded files</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_validMethods">
+                                        protected                                        string[]
+                </td>
+                <td>$validMethods</td>
+                <td class="last">Valid request methods</td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___set">__set</a>($name, $value)
+        
+                                            <p>Disable magic setter to ensure immutability</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method___set"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getProtocolVersion">getProtocolVersion</a>()
+        
+                                            <p>Retrieves the HTTP protocol version as a string.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_getProtocolVersion"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withProtocolVersion">withProtocolVersion</a>(string $version)
+        
+                                            <p>Return an instance with the specified HTTP protocol version.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_withProtocolVersion"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getHeaders">getHeaders</a>()
+        
+                                            <p>Retrieves all message header values.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_getHeaders"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasHeader">hasHeader</a>(string $name)
+        
+                                            <p>Checks if a header exists by the given case-insensitive name.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_hasHeader"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string[]
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getHeader">getHeader</a>(string $name)
+        
+                                            <p>Retrieves a message header value by the given case-insensitive name.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_getHeader"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getHeaderLine">getHeaderLine</a>(string $name)
+        
+                                            <p>Retrieves a comma-separated string of the values for a single header.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_getHeaderLine"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withHeader">withHeader</a>(string $name, string|string[] $value)
+        
+                                            <p>Return an instance with the provided value replacing the specified header.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_withHeader"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withAddedHeader">withAddedHeader</a>(string $name, string|string[] $value)
+        
+                                            <p>Return an instance with the specified header appended with the given value.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_withAddedHeader"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withoutHeader">withoutHeader</a>(string $name)
+        
+                                            <p>Return an instance without the specified header.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_withoutHeader"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getBody">getBody</a>()
+        
+                                            <p>Gets the body of the message.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_getBody"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withBody">withBody</a>(<abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr> $body)
+        
+                                            <p>Return an instance with the specified message body.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Message.html#method_withBody"><abbr title="Slim\Http\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_createFromEnvironment">createFromEnvironment</a>(<a href="../../Slim/Http/Environment.html"><abbr title="Slim\Http\Environment">Environment</abbr></a> $environment)
+        
+                                            <p>Create new HTTP request with data extracted from the application
+Environment object</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(string $method, <abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr> $uri, <a href="../../Slim/Interfaces/Http/HeadersInterface.html"><abbr title="Slim\Interfaces\Http\HeadersInterface">HeadersInterface</abbr></a> $headers, array $cookies, array $serverParams, <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr> $body, array $uploadedFiles = [])
+        
+                                            <p>Create new HTTP request.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___clone">__clone</a>()
+        
+                                            <p>This method is applied to the cloned object
+after PHP performs an initial shallow-copy. This
+method completes a deep-copy by creating new objects
+for the cloned object's internal reference pointers.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getMethod">getMethod</a>()
+        
+                                            <p>Retrieves the HTTP method of the request.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getOriginalMethod">getOriginalMethod</a>()
+        
+                                            <p>Get the original HTTP method (ignore override).</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withMethod">withMethod</a>(string $method)
+        
+                                            <p>Return an instance with the provided HTTP method.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    null|string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_filterMethod">filterMethod</a>(null|string $method)
+        
+                                            <p>Validate the HTTP method</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isMethod">isMethod</a>(string $method)
+        
+                                            <p>Does this request use a given method?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isGet">isGet</a>()
+        
+                                            <p>Is this a GET request?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isPost">isPost</a>()
+        
+                                            <p>Is this a POST request?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isPut">isPut</a>()
+        
+                                            <p>Is this a PUT request?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isPatch">isPatch</a>()
+        
+                                            <p>Is this a PATCH request?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isDelete">isDelete</a>()
+        
+                                            <p>Is this a DELETE request?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isHead">isHead</a>()
+        
+                                            <p>Is this a HEAD request?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isOptions">isOptions</a>()
+        
+                                            <p>Is this a OPTIONS request?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isXhr">isXhr</a>()
+        
+                                            <p>Is this an XHR request?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRequestTarget">getRequestTarget</a>()
+        
+                                            <p>Retrieves the message's request target.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withRequestTarget">withRequestTarget</a>(mixed $requestTarget)
+        
+                                            <p>Return an instance with the specific request-target.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getUri">getUri</a>()
+        
+                                            <p>Retrieves the URI instance.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withUri">withUri</a>(<abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr> $uri, bool $preserveHost = false)
+        
+                                            <p>Returns an instance with the provided URI.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getContentType">getContentType</a>()
+        
+                                            <p>Get request content type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getMediaType">getMediaType</a>()
+        
+                                            <p>Get request media type, if known.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getMediaTypeParams">getMediaTypeParams</a>()
+        
+                                            <p>Get request media type params, if known.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getContentCharset">getContentCharset</a>()
+        
+                                            <p>Get request content character set, if known.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getContentLength">getContentLength</a>()
+        
+                                            <p>Get request content length, if known.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getCookieParams">getCookieParams</a>()
+        
+                                            <p>Retrieve cookies.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getCookieParam">getCookieParam</a>(string $key, mixed $default = null)
+        
+                                            <p>Fetch cookie value from cookies sent by the client to the server.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withCookieParams">withCookieParams</a>(array $cookies)
+        
+                                            <p>Return an instance with the specified cookies.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getQueryParams">getQueryParams</a>()
+        
+                                            <p>Retrieve query string arguments.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withQueryParams">withQueryParams</a>(array $query)
+        
+                                            <p>Return an instance with the specified query string arguments.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getUploadedFiles">getUploadedFiles</a>()
+        
+                                            <p>Retrieve normalized file upload data.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withUploadedFiles">withUploadedFiles</a>(array $uploadedFiles)
+        
+                                            <p>Create a new instance with the specified uploaded files.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getServerParams">getServerParams</a>()
+        
+                                            <p>Retrieve server parameters.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getServerParam">getServerParam</a>(string $key, mixed $default = null)
+        
+                                            <p>Retrieve a server parameter.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getAttributes">getAttributes</a>()
+        
+                                            <p>Retrieve attributes derived from the request.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getAttribute">getAttribute</a>(string $name, mixed $default = null)
+        
+                                            <p>Retrieve a single derived request attribute.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withAttribute">withAttribute</a>(string $name, mixed $value)
+        
+                                            <p>Return an instance with the specified derived request attribute.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withAttributes">withAttributes</a>(array $attributes)
+        
+                                            <p>Create a new instance with the specified derived request attributes.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withoutAttribute">withoutAttribute</a>(string $name)
+        
+                                            <p>Return an instance that removes the specified derived request attribute.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    null|array|object
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getParsedBody">getParsedBody</a>()
+        
+                                            <p>Retrieve any parameters provided in the request body.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withParsedBody">withParsedBody</a>(null|array|object $data)
+        
+                                            <p>Return an instance with the specified body parameters.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Slim\Http\$this">$this</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_reparseBody">reparseBody</a>()
+        
+                                            <p>Force Body to be parsed again.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_registerMediaTypeParser">registerMediaTypeParser</a>(string $mediaType, callable $callable)
+        
+                                            <p>Register media type parser.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getParam">getParam</a>(string $key, string $default = null)
+        
+                                            <p>Fetch request parameter value from body or query string (in that order).</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getParsedBodyParam">getParsedBodyParam</a>(string $key, mixed $default = null)
+        
+                                            <p>Fetch parameter value from request body.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getQueryParam">getQueryParam</a>(string $key, mixed $default = null)
+        
+                                            <p>Fetch parameter value from query string.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getParams">getParams</a>()
+        
+                                            <p>Fetch assocative array of body and query string parameters.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___set">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method___set"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 63</div>
+        <code>                    
+    <strong>__set</strong>($name, $value)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Disable magic setter to ensure immutability</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$name</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getProtocolVersion">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_getProtocolVersion"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 79</div>
+        <code>                    string
+    <strong>getProtocolVersion</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves the HTTP protocol version as a string.</p>                    <p>The string MUST contain only the HTTP version number (e.g., "1.1", "1.0").</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>HTTP protocol version.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withProtocolVersion">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_withProtocolVersion"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 98</div>
+        <code>                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+    <strong>withProtocolVersion</strong>(string $version)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified HTTP protocol version.</p>                    <p>The version string MUST contain only the HTTP version number (e.g.,
+"1.1", "1.0").</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+new protocol version.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$version</td>
+                <td>HTTP protocol version</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>if the http version is an invalid number</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getHeaders">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_getHeaders"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 141</div>
+        <code>                    array
+    <strong>getHeaders</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves all message header values.</p>                    <p>The keys represent the header name as it will be sent over the wire, and
+each value is an array of strings associated with the header.</p>
+
+<pre><code>// Represent the headers as a string
+foreach ($message-&gt;getHeaders() as $name =&gt; $values) {
+    echo $name . ": " . implode(", ", $values);
+}
+
+// Emit headers iteratively:
+foreach ($message-&gt;getHeaders() as $name =&gt; $values) {
+    foreach ($values as $value) {
+        header(sprintf('%s: %s', $name, $value), false);
+    }
+}
+</code></pre>
+
+<p>While header names are not case-sensitive, getHeaders() will preserve the
+exact case in which headers were originally specified.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>Returns an associative array of the message's headers. Each
+    key MUST be a header name, and each value MUST be an array of strings
+    for that header.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasHeader">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_hasHeader"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 154</div>
+        <code>                    bool
+    <strong>hasHeader</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Checks if a header exists by the given case-insensitive name.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>Returns true if any header names match the given header
+    name using a case-insensitive string comparison. Returns false if
+    no matching header name is found in the message.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getHeader">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_getHeader"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 173</div>
+        <code>                    string[]
+    <strong>getHeader</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves a message header value by the given case-insensitive name.</p>                    <p>This method returns an array of all the header values of the given
+case-insensitive header name.</p>
+
+<p>If the header does not appear in the message, this method MUST return an
+empty array.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string[]</td>
+            <td>An array of string values as provided for the given
+   header. If the header does not appear in the message, this method MUST
+   return an empty array.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getHeaderLine">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_getHeaderLine"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 197</div>
+        <code>                    string
+    <strong>getHeaderLine</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves a comma-separated string of the values for a single header.</p>                    <p>This method returns all of the header values of the given
+case-insensitive header name as a string concatenated together using
+a comma.</p>
+
+<p>NOTE: Not all header values may be appropriately represented using
+comma concatenation. For such headers, use getHeader() instead
+and supply your own delimiter when concatenating.</p>
+
+<p>If the header does not appear in the message, this method MUST return
+an empty string.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>A string of values as provided for the given header
+   concatenated together using a comma. If the header does not appear in
+   the message, this method MUST return an empty string.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withHeader">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_withHeader"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 217</div>
+        <code>                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+    <strong>withHeader</strong>(string $name, string|string[] $value)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the provided value replacing the specified header.</p>                    <p>While header names are case-insensitive, the casing of the header will
+be preserved by this function, and returned from getHeaders().</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+new and/or updated header and value.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name.</td>
+            </tr>
+                    <tr>
+                <td>string|string[]</td>
+                <td>$value</td>
+                <td>Header value(s).</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>for invalid header names or values.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withAddedHeader">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_withAddedHeader"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 241</div>
+        <code>                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+    <strong>withAddedHeader</strong>(string $name, string|string[] $value)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified header appended with the given value.</p>                    <p>Existing values for the specified header will be maintained. The new
+value(s) will be appended to the existing list. If the header did not
+exist previously, it will be added.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+new header and/or value.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name to add.</td>
+            </tr>
+                    <tr>
+                <td>string|string[]</td>
+                <td>$value</td>
+                <td>Header value(s).</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>for invalid header names or values.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withoutHeader">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_withoutHeader"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 261</div>
+        <code>                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+    <strong>withoutHeader</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance without the specified header.</p>                    <p>Header resolution MUST be done without case-sensitivity.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that removes
+the named header.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name to remove.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getBody">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_getBody"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 278</div>
+        <code>                    <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr>
+    <strong>getBody</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Gets the body of the message.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr></td>
+            <td>Returns the body as a stream.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withBody">
+        <div class="location">in <a href="../../Slim/Http/Message.html#method_withBody"><abbr title="Slim\Http\Message">Message</abbr></a> at         line 296</div>
+        <code>                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+    <strong>withBody</strong>(<abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr> $body)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified message body.</p>                    <p>The body MUST be a StreamInterface object.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return a new instance that has the
+new body stream.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr></td>
+                <td>$body</td>
+                <td>Body.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>When the body is not valid.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_createFromEnvironment">
+        <div class="location">at         line 136</div>
+        <code>        static            <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>createFromEnvironment</strong>(<a href="../../Slim/Http/Environment.html"><abbr title="Slim\Http\Environment">Environment</abbr></a> $environment)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create new HTTP request with data extracted from the application
+Environment object</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../Slim/Http/Environment.html"><abbr title="Slim\Http\Environment">Environment</abbr></a></td>
+                <td>$environment</td>
+                <td>The Slim application Environment</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         line 170</div>
+        <code>                    
+    <strong>__construct</strong>(string $method, <abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr> $uri, <a href="../../Slim/Interfaces/Http/HeadersInterface.html"><abbr title="Slim\Interfaces\Http\HeadersInterface">HeadersInterface</abbr></a> $headers, array $cookies, array $serverParams, <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr> $body, array $uploadedFiles = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create new HTTP request.</p>                    <p>Adds a host header when none was provided and a host is defined in uri.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$method</td>
+                <td>The request method</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr></td>
+                <td>$uri</td>
+                <td>The request URI object</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Slim/Interfaces/Http/HeadersInterface.html"><abbr title="Slim\Interfaces\Http\HeadersInterface">HeadersInterface</abbr></a></td>
+                <td>$headers</td>
+                <td>The request headers collection</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$cookies</td>
+                <td>The request cookies collection</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$serverParams</td>
+                <td>The server environment variables</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr></td>
+                <td>$body</td>
+                <td>The request body object</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$uploadedFiles</td>
+                <td>The request uploadedFiles collection</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___clone">
+        <div class="location">at         line 226</div>
+        <code>                    
+    <strong>__clone</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>This method is applied to the cloned object
+after PHP performs an initial shallow-copy. This
+method completes a deep-copy by creating new objects
+for the cloned object's internal reference pointers.</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getMethod">
+        <div class="location">at         line 242</div>
+        <code>                    string
+    <strong>getMethod</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves the HTTP method of the request.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Returns the request method.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getOriginalMethod">
+        <div class="location">at         line 272</div>
+        <code>                    string
+    <strong>getOriginalMethod</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the original HTTP method (ignore override).</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withMethod">
+        <div class="location">at         line 292</div>
+        <code>                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>withMethod</strong>(string $method)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the provided HTTP method.</p>                    <p>While HTTP method names are typically all uppercase characters, HTTP
+method names are case-sensitive and thus implementations SHOULD NOT
+modify the given string.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+changed request method.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$method</td>
+                <td>Case-sensitive method.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>for invalid HTTP methods.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_filterMethod">
+        <div class="location">at         line 309</div>
+        <code>            protected        null|string
+    <strong>filterMethod</strong>(null|string $method)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Validate the HTTP method</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>null|string</td>
+                <td>$method</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null|string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>on invalid HTTP method.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isMethod">
+        <div class="location">at         line 341</div>
+        <code>                    bool
+    <strong>isMethod</strong>(string $method)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Does this request use a given method?</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$method</td>
+                <td>HTTP method</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isGet">
+        <div class="location">at         line 353</div>
+        <code>                    bool
+    <strong>isGet</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is this a GET request?</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isPost">
+        <div class="location">at         line 365</div>
+        <code>                    bool
+    <strong>isPost</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is this a POST request?</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isPut">
+        <div class="location">at         line 377</div>
+        <code>                    bool
+    <strong>isPut</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is this a PUT request?</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isPatch">
+        <div class="location">at         line 389</div>
+        <code>                    bool
+    <strong>isPatch</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is this a PATCH request?</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isDelete">
+        <div class="location">at         line 401</div>
+        <code>                    bool
+    <strong>isDelete</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is this a DELETE request?</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isHead">
+        <div class="location">at         line 413</div>
+        <code>                    bool
+    <strong>isHead</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is this a HEAD request?</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isOptions">
+        <div class="location">at         line 425</div>
+        <code>                    bool
+    <strong>isOptions</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is this a OPTIONS request?</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isXhr">
+        <div class="location">at         line 437</div>
+        <code>                    bool
+    <strong>isXhr</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is this an XHR request?</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRequestTarget">
+        <div class="location">at         line 462</div>
+        <code>                    string
+    <strong>getRequestTarget</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves the message's request target.</p>                    <p>Retrieves the message's request-target either as it will appear (for
+clients), as it appeared at request (for servers), or as it was
+specified for the instance (see withRequestTarget()).</p>
+
+<p>In most cases, this will be the origin-form of the composed URI,
+unless a value was provided to the concrete implementation (see
+withRequestTarget() below).</p>
+
+<p>If no URI is available, and no request-target has been specifically
+provided, this method MUST return the string "/".</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withRequestTarget">
+        <div class="location">at         line 503</div>
+        <code>                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>withRequestTarget</strong>(mixed $requestTarget)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specific request-target.</p>                    <p>If the request needs a non-origin-form request-target — e.g., for
+specifying an absolute-form, authority-form, or asterisk-form —
+this method may be used to create an instance with the specified
+request-target, verbatim.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+changed request target.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                <td>$requestTarget</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>if the request target is invalid</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getUri">
+        <div class="location">at         line 525</div>
+        <code>                    <abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr>
+    <strong>getUri</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves the URI instance.</p>                    <p>This method MUST return a UriInterface instance.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr></td>
+            <td>Returns a UriInterface instance
+    representing the URI of the request.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withUri">
+        <div class="location">at         line 560</div>
+        <code>                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>withUri</strong>(<abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr> $uri, bool $preserveHost = false)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns an instance with the provided URI.</p>                    <p>This method MUST update the Host header of the returned request by
+default if the URI contains a host component. If the URI does not
+contain a host component, any pre-existing Host header MUST be carried
+over to the returned request.</p>
+
+<p>You can opt-in to preserving the original state of the Host header by
+setting <code>$preserveHost</code> to <code>true</code>. When <code>$preserveHost</code> is set to
+<code>true</code>, this method interacts with the Host header in the following ways:</p>
+
+<ul>
+<li>If the the Host header is missing or empty, and the new URI contains
+a host component, this method MUST update the Host header in the returned
+request.</li>
+<li>If the Host header is missing or empty, and the new URI does not contain a
+host component, this method MUST NOT update the Host header in the returned
+request.</li>
+<li>If a Host header is present and non-empty, this method MUST NOT update
+the Host header in the returned request.</li>
+</ul>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+new UriInterface instance.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\UriInterface">UriInterface</abbr></td>
+                <td>$uri</td>
+                <td>New request URI to use.</td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$preserveHost</td>
+                <td>Preserve the original state of the Host header.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getContentType">
+        <div class="location">at         line 585</div>
+        <code>                    string|null
+    <strong>getContentType</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get request content type.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string|null</td>
+            <td>The request content type, if known</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getMediaType">
+        <div class="location">at         line 599</div>
+        <code>                    string|null
+    <strong>getMediaType</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get request media type, if known.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string|null</td>
+            <td>The request media type, minus content-type params</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getMediaTypeParams">
+        <div class="location">at         line 618</div>
+        <code>                    array
+    <strong>getMediaTypeParams</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get request media type params, if known.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getContentCharset">
+        <div class="location">at         line 641</div>
+        <code>                    string|null
+    <strong>getContentCharset</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get request content character set, if known.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string|null</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getContentLength">
+        <div class="location">at         line 658</div>
+        <code>                    int|null
+    <strong>getContentLength</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get request content length, if known.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int|null</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getCookieParams">
+        <div class="location">at         line 679</div>
+        <code>                    array
+    <strong>getCookieParams</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve cookies.</p>                    <p>Retrieves cookies sent by the client to the server.</p>
+
+<p>The data MUST be compatible with the structure of the $_COOKIE
+superglobal.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getCookieParam">
+        <div class="location">at         line 694</div>
+        <code>                    mixed
+    <strong>getCookieParam</strong>(string $key, mixed $default = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Fetch cookie value from cookies sent by the client to the server.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td>The attribute name.</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$default</td>
+                <td>Default value to return if the attribute does not exist.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withCookieParams">
+        <div class="location">at         line 722</div>
+        <code>                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>withCookieParams</strong>(array $cookies)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified cookies.</p>                    <p>The data IS NOT REQUIRED to come from the $<em>COOKIE superglobal, but MUST
+be compatible with the structure of $</em>COOKIE. Typically, this data will
+be injected at instantiation.</p>
+
+<p>This method MUST NOT update the related Cookie header of the request
+instance, nor related values in the server params.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+updated cookie values.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$cookies</td>
+                <td>Array of key/value pairs representing cookies.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getQueryParams">
+        <div class="location">at         line 746</div>
+        <code>                    array
+    <strong>getQueryParams</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve query string arguments.</p>                    <p>Retrieves the deserialized query string arguments, if any.</p>
+
+<p>Note: the query params might not be in sync with the URI or server
+params. If you need to ensure you are only getting the original
+values, you may need to parse the query string from <code>getUri()-&gt;getQuery()</code>
+or from the <code>QUERY_STRING</code> server param.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withQueryParams">
+        <div class="location">at         line 783</div>
+        <code>                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>withQueryParams</strong>(array $query)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified query string arguments.</p>                    <p>These values SHOULD remain immutable over the course of the incoming
+request. They MAY be injected during instantiation, such as from PHP's
+$<em>GET superglobal, or MAY be derived from some other value such as the
+URI. In cases where the arguments are parsed from the URI, the data
+MUST be compatible with what PHP's parse</em>str() would return for
+purposes of how duplicate query parameters are handled, and how nested
+sets are handled.</p>
+
+<p>Setting query string arguments MUST NOT change the URI stored by the
+request, nor the values in the server params.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+updated query string arguments.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$query</td>
+                <td>Array of query string arguments, typically from
+    $_GET.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getUploadedFiles">
+        <div class="location">at         line 807</div>
+        <code>                    array
+    <strong>getUploadedFiles</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve normalized file upload data.</p>                    <p>This method returns upload metadata in a normalized tree, with each leaf
+an instance of Psr\Http\Message\UploadedFileInterface.</p>
+
+<p>These values MAY be prepared from $_FILES or the message body during
+instantiation, or MAY be injected via withUploadedFiles().</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>An array tree of UploadedFileInterface instances; an empty
+    array MUST be returned if no data is present.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withUploadedFiles">
+        <div class="location">at         line 823</div>
+        <code>                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>withUploadedFiles</strong>(array $uploadedFiles)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create a new instance with the specified uploaded files.</p>                    <p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+updated body parameters.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$uploadedFiles</td>
+                <td>An array tree of UploadedFileInterface instances.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>if an invalid structure is provided.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getServerParams">
+        <div class="location">at         line 844</div>
+        <code>                    array
+    <strong>getServerParams</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve server parameters.</p>                    <p>Retrieves data related to the incoming request environment,
+typically derived from PHP's $<em>SERVER superglobal. The data IS NOT
+REQUIRED to originate from $</em>SERVER.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getServerParam">
+        <div class="location">at         line 858</div>
+        <code>                    mixed
+    <strong>getServerParam</strong>(string $key, mixed $default = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve a server parameter.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$default</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAttributes">
+        <div class="location">at         line 880</div>
+        <code>                    array
+    <strong>getAttributes</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve attributes derived from the request.</p>                    <p>The request "attributes" may be used to allow injection of any
+parameters derived from the request: e.g., the results of path
+match operations; the results of decrypting cookies; the results of
+deserializing non-form-encoded message bodies; etc. Attributes
+will be application and request specific, and CAN be mutable.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>Attributes derived from the request.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAttribute">
+        <div class="location">at         line 900</div>
+        <code>                    mixed
+    <strong>getAttribute</strong>(string $name, mixed $default = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve a single derived request attribute.</p>                    <p>Retrieves a single derived request attribute as described in
+getAttributes(). If the attribute has not been previously set, returns
+the default value as provided.</p>
+
+<p>This method obviates the need for a hasAttribute() method, as it allows
+specifying a default value to return if the attribute is not found.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>The attribute name.</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$default</td>
+                <td>Default value to return if the attribute does not exist.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>getAttributes()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withAttribute">
+        <div class="location">at         line 920</div>
+        <code>                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>withAttribute</strong>(string $name, mixed $value)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified derived request attribute.</p>                    <p>This method allows setting a single derived request attribute as
+described in getAttributes().</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+updated attribute.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>The attribute name.</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>The value of the attribute.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>getAttributes()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withAttributes">
+        <div class="location">at         line 943</div>
+        <code>                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>withAttributes</strong>(array $attributes)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create a new instance with the specified derived request attributes.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>
+
+<p>This method allows setting all new derived request attributes as
+described in getAttributes().</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return a new instance that has the
+updated attributes.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$attributes</td>
+                <td>New attributes</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withoutAttribute">
+        <div class="location">at         line 965</div>
+        <code>                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>withoutAttribute</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance that removes the specified derived request attribute.</p>                    <p>This method allows removing a single derived request attribute as
+described in getAttributes().</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that removes
+the attribute.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>The attribute name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>getAttributes()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getParsedBody">
+        <div class="location">at         line 993</div>
+        <code>                    null|array|object
+    <strong>getParsedBody</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve any parameters provided in the request body.</p>                    <p>If the request Content-Type is either application/x-www-form-urlencoded
+or multipart/form-data, and the request method is POST, this method MUST
+return the contents of $_POST.</p>
+
+<p>Otherwise, this method may return any results of deserializing
+the request body content; as parsing returns structured content, the
+potential types MUST be arrays or objects only. A null value indicates
+the absence of body content.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null|array|object</td>
+            <td>The deserialized body parameters, if any.
+    These will typically be an array or object.</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>if the request body media type parser returns an invalid value</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withParsedBody">
+        <div class="location">at         line 1055</div>
+        <code>                    <a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a>
+    <strong>withParsedBody</strong>(null|array|object $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified body parameters.</p>                    <p>These MAY be injected during instantiation.</p>
+
+<p>If the request Content-Type is either application/x-www-form-urlencoded
+or multipart/form-data, and the request method is POST, use this method
+ONLY to inject the contents of $_POST.</p>
+
+<p>The data IS NOT REQUIRED to come from $_POST, but MUST be the results of
+deserializing the request body content. Deserialization/parsing returns
+structured data, and, as such, this method ONLY accepts arrays or objects,
+or a null value if nothing was available to parse.</p>
+
+<p>As an example, if content negotiation determines that the request data
+is a JSON payload, this method could be used to create a request
+instance with the deserialized parameters.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+updated body parameters.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>null|array|object</td>
+                <td>$data</td>
+                <td>The deserialized body data. This will
+    typically be in an array or object.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Request.html"><abbr title="Slim\Http\Request">Request</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>if an unsupported argument type is
+    provided.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_reparseBody">
+        <div class="location">at         line 1074</div>
+        <code>                    <abbr title="Slim\Http\$this">$this</abbr>
+    <strong>reparseBody</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Force Body to be parsed again.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Slim\Http\$this">$this</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_registerMediaTypeParser">
+        <div class="location">at         line 1091</div>
+        <code>                    
+    <strong>registerMediaTypeParser</strong>(string $mediaType, callable $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Register media type parser.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$mediaType</td>
+                <td>A HTTP media type (excluding content-type
+    params).</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$callable</td>
+                <td>A callable that returns parsed contents for
+    media type.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getParam">
+        <div class="location">at         line 1113</div>
+        <code>                    mixed
+    <strong>getParam</strong>(string $key, string $default = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Fetch request parameter value from body or query string (in that order).</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td>The parameter key.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$default</td>
+                <td>The default value.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>The parameter value.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getParsedBodyParam">
+        <div class="location">at         line 1139</div>
+        <code>                    mixed
+    <strong>getParsedBodyParam</strong>(string $key, mixed $default = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Fetch parameter value from request body.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$default</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getQueryParam">
+        <div class="location">at         line 1162</div>
+        <code>                    mixed
+    <strong>getQueryParam</strong>(string $key, mixed $default = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Fetch parameter value from query string.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$default</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getParams">
+        <div class="location">at         line 1180</div>
+        <code>                    array
+    <strong>getParams</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Fetch assocative array of body and query string parameters.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

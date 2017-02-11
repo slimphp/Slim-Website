@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Slim\App | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/sami.css">
+        <script src="../js/jquery-1.11.1.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/typeahead.min.js"></script>
+        <script src="../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Slim_App" data-root-path="../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../index.html">API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../classes.html">Classes</a></li>
+                                            <li><a href="../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../interfaces.html">Interfaces</a></li>
+                    <li><a href="../traits.html">Traits</a></li>
+                    <li><a href="../doc-index.html">Index</a></li>
+                    <li><a href="../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../Slim.html">Slim</a></li>
+    
+                <li>App</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            App
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>App</strong>
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>App</p>            <p>This is the primary class with which you instantiate,
+configure, and run a Slim Framework application.
+The \Slim\App class also accepts Slim Framework middleware.</p>        </div>
+    
+            <h2>Traits</h2>
+
+        
+    <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-6">
+                                            <a href="../Slim/MiddlewareAwareTrait.html"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a>
+                                            
+                </div>
+                <div class="col-md-6">
+                    Middleware
+                </div>
+            </div>
+            </div>
+    
+            <h2>Constants</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td>VERSION</td>
+                <td class="last">
+                    <p><em>Current version</em></p>
+                    <p></p>
+                </td>
+            </tr>
+            </table>
+
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_stack">
+                                        protected                                        <a target="_blank" href="http://php.net/SplStack">SplStack</a>
+                </td>
+                <td>$stack</td>
+                <td class="last">Middleware call stack</td>
+                <td><small>from&nbsp;<a href="../Slim/MiddlewareAwareTrait.html#property_stack"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_middlewareLock">
+                                        protected                                        bool
+                </td>
+                <td>$middlewareLock</td>
+                <td class="last">Middleware stack lock</td>
+                <td><small>from&nbsp;<a href="../Slim/MiddlewareAwareTrait.html#property_middlewareLock"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a></small></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/MiddlewareAwareTrait.html"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addMiddleware">addMiddleware</a>(callable $callable)
+        
+                                            <p>Add middleware</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../Slim/MiddlewareAwareTrait.html#method_addMiddleware"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_seedMiddlewareStack">seedMiddlewareStack</a>(callable $kernel = null)
+        
+                                            <p>Seed middleware stack with first callable</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../Slim/MiddlewareAwareTrait.html#method_seedMiddlewareStack"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_callMiddlewareStack">callMiddlewareStack</a>(<abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        
+                                            <p>Call middleware stack</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../Slim/MiddlewareAwareTrait.html#method_callMiddlewareStack"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<abbr title="Interop\Container\ContainerInterface">ContainerInterface</abbr>|array $container = [])
+        
+                                            <p>Create new application</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Interop\Container\ContainerInterface">ContainerInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getContainer">getContainer</a>()
+        
+                                            <p>Enable access to the DI container by consumers of $app</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/App.html"><abbr title="Slim\App">App</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_add">add</a>(callable|string $callable)
+        
+                                            <p>Add middleware</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___call">__call</a>(string $method, array $args)
+        
+                                            <p>Calling a non-existant method on App checks to see if there's an item
+in the container that is callable and if so, calls it.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_get">get</a>(string $pattern, callable|string $callable)
+        
+                                            <p>Add GET route</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_post">post</a>(string $pattern, callable|string $callable)
+        
+                                            <p>Add POST route</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_put">put</a>(string $pattern, callable|string $callable)
+        
+                                            <p>Add PUT route</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_patch">patch</a>(string $pattern, callable|string $callable)
+        
+                                            <p>Add PATCH route</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_delete">delete</a>(string $pattern, callable|string $callable)
+        
+                                            <p>Add DELETE route</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_options">options</a>(string $pattern, callable|string $callable)
+        
+                                            <p>Add OPTIONS route</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_any">any</a>(string $pattern, callable|string $callable)
+        
+                                            <p>Add route for any HTTP method</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_map">map</a>(array $methods, string $pattern, callable|string $callable)
+        
+                                            <p>Add route with multiple methods</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Slim/Interfaces/RouteGroupInterface.html"><abbr title="Slim\Interfaces\RouteGroupInterface">RouteGroupInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_group">group</a>(string $pattern, callable $callable)
+        
+                                            <p>Route Groups</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_run">run</a>(bool|<abbr title="Slim\false">false</abbr> $silent = false)
+        
+                                            <p>Run application</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_process">process</a>(<abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        
+                                            <p>Process a request</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_respond">respond</a>(<abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        
+                                            <p>Send the response the client</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___invoke">__invoke</a>(<abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        
+                                            <p>Invoke application</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_subRequest">subRequest</a>(string $method, string $path, string $query = &#039;&#039;, array $headers = [], array $cookies = [], string $bodyContent = &#039;&#039;, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response = null)
+        
+                                            <p>Perform a sub-request from within an application route</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_dispatchRouterAndPrepareRoute">dispatchRouterAndPrepareRoute</a>(<abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <a href="../Slim/Interfaces/RouterInterface.html"><abbr title="Slim\Interfaces\RouterInterface">RouterInterface</abbr></a> $router)
+        
+                                            <p>Dispatch the router to find the route. Prepare the route for use.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_finalize">finalize</a>(<abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        
+                                            <p>Finalize response</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isEmptyResponse">isEmptyResponse</a>(<abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        
+                                            <p>Helper method, which returns true if the provided response must not output a body and false
+if the response could have a body.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_handleException">handleException</a>(<a target="_blank" href="http://php.net/Exception">Exception</a> $e, <abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        
+                                            <p>Call relevant handler from the Container if needed. If it doesn't exist,
+then just re-throw.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_handlePhpError">handlePhpError</a>(<a target="_blank" href="http://php.net/Throwable">Throwable</a> $e, <abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        
+                                            <p>Call relevant handler from the Container if needed. If it doesn't exist,
+then just re-throw.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_addMiddleware">
+        <div class="location">in <a href="../Slim/MiddlewareAwareTrait.html#method_addMiddleware"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a> at         line 56</div>
+        <code>            protected        <a href="../Slim/MiddlewareAwareTrait.html"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a>
+    <strong>addMiddleware</strong>(callable $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add middleware</p>                    <p>This method prepends new middleware to the application middleware stack.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>callable</td>
+                <td>$callable</td>
+                <td>Any callable that accepts three arguments:
+                          1. A Request object
+                          2. A Response object
+                          3. A "next" middleware callable</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/MiddlewareAwareTrait.html"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>If middleware is added while the stack is dequeuing</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/UnexpectedValueException">UnexpectedValueException</a></td>
+                <td>If the middleware doesn't return a Psr\Http\Message\ResponseInterface</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_seedMiddlewareStack">
+        <div class="location">in <a href="../Slim/MiddlewareAwareTrait.html#method_seedMiddlewareStack"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a> at         line 93</div>
+        <code>            protected        
+    <strong>seedMiddlewareStack</strong>(callable $kernel = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seed middleware stack with first callable</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>callable</td>
+                <td>$kernel</td>
+                <td>The last item to run as middleware</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>if the stack is seeded more than once</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_callMiddlewareStack">
+        <div class="location">in <a href="../Slim/MiddlewareAwareTrait.html#method_callMiddlewareStack"><abbr title="Slim\MiddlewareAwareTrait">MiddlewareAwareTrait</abbr></a> at         line 114</div>
+        <code>                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+    <strong>callMiddlewareStack</strong>(<abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Call middleware stack</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></td>
+                <td>$request</td>
+                <td>A request object</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                <td>$response</td>
+                <td>A response object</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         line 72</div>
+        <code>                    
+    <strong>__construct</strong>(<abbr title="Interop\Container\ContainerInterface">ContainerInterface</abbr>|array $container = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create new application</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Interop\Container\ContainerInterface">ContainerInterface</abbr>|array</td>
+                <td>$container</td>
+                <td>Either a ContainerInterface or an associative array of app settings</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>when no container is provided that implements ContainerInterface</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getContainer">
+        <div class="location">at         line 88</div>
+        <code>                    <abbr title="Interop\Container\ContainerInterface">ContainerInterface</abbr>
+    <strong>getContainer</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Enable access to the DI container by consumers of $app</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Interop\Container\ContainerInterface">ContainerInterface</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_add">
+        <div class="location">at         line 102</div>
+        <code>                    <a href="../Slim/App.html"><abbr title="Slim\App">App</abbr></a>
+    <strong>add</strong>(callable|string $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add middleware</p>                    <p>This method prepends new middleware to the app's middleware stack.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>callable|string</td>
+                <td>$callable</td>
+                <td>The callback routine</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/App.html"><abbr title="Slim\App">App</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___call">
+        <div class="location">at         line 115</div>
+        <code>                    mixed
+    <strong>__call</strong>(string $method, array $args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Calling a non-existant method on App checks to see if there's an item
+in the container that is callable and if so, calls it.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$method</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$args</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_get">
+        <div class="location">at         line 139</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>get</strong>(string $pattern, callable|string $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add GET route</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td>The route URI pattern</td>
+            </tr>
+                    <tr>
+                <td>callable|string</td>
+                <td>$callable</td>
+                <td>The route callback routine</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_post">
+        <div class="location">at         line 152</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>post</strong>(string $pattern, callable|string $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add POST route</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td>The route URI pattern</td>
+            </tr>
+                    <tr>
+                <td>callable|string</td>
+                <td>$callable</td>
+                <td>The route callback routine</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_put">
+        <div class="location">at         line 165</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>put</strong>(string $pattern, callable|string $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add PUT route</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td>The route URI pattern</td>
+            </tr>
+                    <tr>
+                <td>callable|string</td>
+                <td>$callable</td>
+                <td>The route callback routine</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_patch">
+        <div class="location">at         line 178</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>patch</strong>(string $pattern, callable|string $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add PATCH route</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td>The route URI pattern</td>
+            </tr>
+                    <tr>
+                <td>callable|string</td>
+                <td>$callable</td>
+                <td>The route callback routine</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_delete">
+        <div class="location">at         line 191</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>delete</strong>(string $pattern, callable|string $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add DELETE route</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td>The route URI pattern</td>
+            </tr>
+                    <tr>
+                <td>callable|string</td>
+                <td>$callable</td>
+                <td>The route callback routine</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_options">
+        <div class="location">at         line 204</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>options</strong>(string $pattern, callable|string $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add OPTIONS route</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td>The route URI pattern</td>
+            </tr>
+                    <tr>
+                <td>callable|string</td>
+                <td>$callable</td>
+                <td>The route callback routine</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_any">
+        <div class="location">at         line 217</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>any</strong>(string $pattern, callable|string $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add route for any HTTP method</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td>The route URI pattern</td>
+            </tr>
+                    <tr>
+                <td>callable|string</td>
+                <td>$callable</td>
+                <td>The route callback routine</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_map">
+        <div class="location">at         line 231</div>
+        <code>                    <a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a>
+    <strong>map</strong>(array $methods, string $pattern, callable|string $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add route with multiple methods</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$methods</td>
+                <td>Numeric array of HTTP method names</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td>The route URI pattern</td>
+            </tr>
+                    <tr>
+                <td>callable|string</td>
+                <td>$callable</td>
+                <td>The route callback routine</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteInterface.html"><abbr title="Slim\Interfaces\RouteInterface">RouteInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_group">
+        <div class="location">at         line 261</div>
+        <code>                    <a href="../Slim/Interfaces/RouteGroupInterface.html"><abbr title="Slim\Interfaces\RouteGroupInterface">RouteGroupInterface</abbr></a>
+    <strong>group</strong>(string $pattern, callable $callable)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Route Groups</p>                    <p>This method accepts a route pattern and a callback. All route
+declarations in the callback will be prepended by the group(s)
+that it is in.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pattern</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$callable</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../Slim/Interfaces/RouteGroupInterface.html"><abbr title="Slim\Interfaces\RouteGroupInterface">RouteGroupInterface</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_run">
+        <div class="location">at         line 288</div>
+        <code>                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+    <strong>run</strong>(bool|<abbr title="Slim\false">false</abbr> $silent = false)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Run application</p>                    <p>This method traverses the application middleware stack and then sends the
+resultant Response object to the HTTP client.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool|<abbr title="Slim\false">false</abbr></td>
+                <td>$silent</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/Exception">Exception</a></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../Slim/Exception/MethodNotAllowedException.html"><abbr title="Slim\Exception\MethodNotAllowedException">MethodNotAllowedException</abbr></a></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../Slim/Exception/NotFoundException.html"><abbr title="Slim\Exception\NotFoundException">NotFoundException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_process">
+        <div class="location">at         line 316</div>
+        <code>                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+    <strong>process</strong>(<abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Process a request</p>                    <p>This method traverses the application middleware stack and then returns the
+resultant Response object.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></td>
+                <td>$request</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                <td>$response</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/Exception">Exception</a></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../Slim/Exception/MethodNotAllowedException.html"><abbr title="Slim\Exception\MethodNotAllowedException">MethodNotAllowedException</abbr></a></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../Slim/Exception/NotFoundException.html"><abbr title="Slim\Exception\NotFoundException">NotFoundException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_respond">
+        <div class="location">at         line 349</div>
+        <code>                    
+    <strong>respond</strong>(<abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Send the response the client</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                <td>$response</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___invoke">
+        <div class="location">at         line 422</div>
+        <code>                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+    <strong>__invoke</strong>(<abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Invoke application</p>                    <p>This method implements the middleware interface. It receives
+Request and Response objects, and it returns a Response object
+after compiling the routes registered in the Router and dispatching
+the Request object to the appropriate Route callback routine.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></td>
+                <td>$request</td>
+                <td>The most recent Request object</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                <td>$response</td>
+                <td>The most recent Response object</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../Slim/Exception/MethodNotAllowedException.html"><abbr title="Slim\Exception\MethodNotAllowedException">MethodNotAllowedException</abbr></a></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../Slim/Exception/NotFoundException.html"><abbr title="Slim\Exception\NotFoundException">NotFoundException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_subRequest">
+        <div class="location">at         line 474</div>
+        <code>                    <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+    <strong>subRequest</strong>(string $method, string $path, string $query = &#039;&#039;, array $headers = [], array $cookies = [], string $bodyContent = &#039;&#039;, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Perform a sub-request from within an application route</p>                    <p>This method allows you to prepare and initiate a sub-request, run within
+the context of the current request. This WILL NOT issue a remote HTTP
+request. Instead, it will route the provided URL, method, headers,
+cookies, body, and server variables against the set of registered
+application routes. The result response object is returned.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$method</td>
+                <td>The request method (e.g., GET, POST, PUT, etc.)</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>The request URI path</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$query</td>
+                <td>The request URI query string</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$headers</td>
+                <td>The request headers (key-value array)</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$cookies</td>
+                <td>The request cookies (key-value array)</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$bodyContent</td>
+                <td>The request body</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                <td>$response</td>
+                <td>The response object (optional)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_dispatchRouterAndPrepareRoute">
+        <div class="location">at         line 506</div>
+        <code>            protected        <abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>
+    <strong>dispatchRouterAndPrepareRoute</strong>(<abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <a href="../Slim/Interfaces/RouterInterface.html"><abbr title="Slim\Interfaces\RouterInterface">RouterInterface</abbr></a> $router)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Dispatch the router to find the route. Prepare the route for use.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></td>
+                <td>$request</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../Slim/Interfaces/RouterInterface.html"><abbr title="Slim\Interfaces\RouterInterface">RouterInterface</abbr></a></td>
+                <td>$router</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_finalize">
+        <div class="location">at         line 534</div>
+        <code>            protected        <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+    <strong>finalize</strong>(<abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Finalize response</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                <td>$response</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isEmptyResponse">
+        <div class="location">at         line 568</div>
+        <code>            protected        bool
+    <strong>isEmptyResponse</strong>(<abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Helper method, which returns true if the provided response must not output a body and false
+if the response could have a body.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                <td>$response</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>https://tools.ietf.org/html/rfc7231</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_handleException">
+        <div class="location">at         line 588</div>
+        <code>            protected        <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+    <strong>handleException</strong>(<a target="_blank" href="http://php.net/Exception">Exception</a> $e, <abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Call relevant handler from the Container if needed. If it doesn't exist,
+then just re-throw.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/Exception">Exception</a></td>
+                <td>$e</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></td>
+                <td>$request</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                <td>$response</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/Exception">Exception</a></td>
+                <td>if a handler is needed and not found</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_handlePhpError">
+        <div class="location">at         line 625</div>
+        <code>            protected        <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>
+    <strong>handlePhpError</strong>(<a target="_blank" href="http://php.net/Throwable">Throwable</a> $e, <abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr> $request, <abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr> $response)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Call relevant handler from the Container if needed. If it doesn't exist,
+then just re-throw.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/Throwable">Throwable</a></td>
+                <td>$e</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></td>
+                <td>$request</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                <td>$response</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/Throwable">Throwable</a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>
