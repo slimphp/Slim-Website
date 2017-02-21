@@ -17,6 +17,16 @@ $container = new \Slim\Container;
 $app = new \Slim\App($container);
 {% endhighlight %}
 
+Add a service to Slim container:
+
+{% highlight php %}
+$container = $app->getContainer();
+$container['myService'] = function ($container) {
+    $myService = new MyService();
+    return $myService;
+};
+{% endhighlight %}
+
 You can fetch services from your container explicitly or implicitly.
 You can fetch an explicit reference to the container instance from inside a Slim
 application route like this:
