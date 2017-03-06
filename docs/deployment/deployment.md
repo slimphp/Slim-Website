@@ -1,8 +1,8 @@
 ---
 title: Deployment
 ---
-Congratulation! if you have made it this far, that means you have successfully built something 
-awesome using Slim . However, the time to party has not come yet . We still have to push our 
+Congratulations! if you have made it this far, that means you have successfully built something 
+awesome using Slim. However, the time to party has not come yet. We still have to push our 
 application to the production server.
 
 There are many ways to do this that are beyond the scope of this documentation. In 
