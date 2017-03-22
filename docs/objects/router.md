@@ -402,7 +402,7 @@ $app->get('/contact', \HomeController::class . ':contact');
 
 ### Using an invokable class
 
-You do not have to specificy a method in your route callable and can just set it to be an invokable class such as:
+You do not have to specify a method in your route callable and can just set it to be an invokable class such as:
 
 {% highlight php %}
 class HomeAction
