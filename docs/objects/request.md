@@ -450,7 +450,7 @@ $app->add(function ($request, $response, $next) {
 Example, how to retrieve the value.
 
 {% highlight php %}
-$app->get('/test', function ($request, $response, $next) {
+$app->get('/test', function ($request, $response, $args) {
     $session = $request->getAttribute('session'); //get the session from the request
     
     return $response->write('Yay, ' . $session['name']);
