@@ -321,7 +321,7 @@ $app->get('/', '\HomeController:home');
 Alternatively, you can take advantage of PHP's `::class` operator which works well with IDE lookup systems and produces the same result: 
 
 {% highlight php %}
-$app->get('/', \HomeController::class . ':home');
+$app->get('/', [\HomeController::class . 'home']);
 {% endhighlight %}
 
 In this code above we are defining a `/` route and telling Slim to execute the `home()` method on the `HomeController` class.
@@ -396,8 +396,8 @@ class HomeController
 You can use your controller methods like so.
 
 {% highlight php %}
-$app->get('/', \HomeController::class . ':home');
-$app->get('/contact', \HomeController::class . ':contact');
+$app->get('/', [\HomeController::class . 'home']);
+$app->get('/contact', [\HomeController::class . 'contact']);
 {% endhighlight %}
 
 ### Using an invokable class
