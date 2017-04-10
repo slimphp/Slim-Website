@@ -159,17 +159,25 @@ We'll be able to access any settings we put into that `$config` array from our a
 
 ## Set up Autoloading for Your Own Classes
 
-We already added the composer autoloader file, but what about the code that we write that isn't part of the composer libraries?  One option is to [use Composer to manage autoloading rules](https://getcomposer.org/doc/04-schema.md#autoload) which is a great solution, but you can also add your own autoloader if you want to.
+Composer can handle the autoloading of your own classes just as well as the vendored ones. For an in-depth guide, take a look at [using Composer to manage autoloading rules](https://getcomposer.org/doc/04-schema.md#autoload).
 
-My setup is pretty simple since I only have a few extra classes, they're just in the global namespace, and the files are in the `src/classes/` directory.  So to add the autoloader, I have this block of code after the `vendor/autoload.php` file is required:
+My setup is pretty simple since I only have a few extra classes, they're just in the global namespace, and the files are in the `src/classes/` directory.  So to autoload them, I add this `autoload` section to my `composer.json` file:
 
-{% highlight php %}
-spl_autoload_register(function ($classname) {
-    require ("../classes/" . $classname . ".php");
-});
+{% highlight javascript %}
+{
+    "require": {
+        "slim/slim": "^3.1",
+        "slim/php-view": "^2.0",
+        "monolog/monolog": "^1.17",
+        "robmorgan/phinx": "^0.5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "classes/"
+        }
+    }
+}
 {% endhighlight %}
-
-The [spl_autoload_register](http://php.net/spl_autoload_register) function accepts the (namespaced) class name and then by the end of the function, the class code should have been included.
 
 ## Add Dependencies
 
