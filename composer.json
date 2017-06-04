@@ -1,0 +1,9 @@
+{
+    "name": "slim/slim-website",
+    "type": "project",
+    "minimum-stability": "stable",
+    "require": {},
+    "require-dev": {
+        "apigen/apigen": "^4.1"
+    }
+}

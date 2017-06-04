@@ -1,0 +1,7 @@
+visibilityLevels: [public, protected]
+annotationGroups: [todo, deprecated]
+title: "Slim Framework"
+baseUrl: "https://www.slimframework.com/api"
+destination: api
+source: temp/Slim
+templateTheme: bootstrap

@@ -1,0 +1,26 @@
+branches:
+  only:
+    - master
+
+language: php
+
+php:
+  - 7.1
+
+script:
+  - composer install
+  - git clone -b 3.x git://github.com/slimphp/Slim.git temp # only fetch branch 3.x
+  - cd temp
+  - git checkout tags/$(git describe --abbrev=0 --tags) #get the latest release/tag in this branch
+  - cd ..
+  - php vendor/bin/apigen generate
+  - rm -rf temp
+  - rm -rf vendor
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  fqdn: http://www.slimframework.com
+  on:
+    branch: gh-pages
