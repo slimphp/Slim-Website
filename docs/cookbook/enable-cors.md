@@ -6,7 +6,7 @@ CORS - Cross origin resource sharing
 
 A good flowchart for implementing CORS support Reference: 
 
-![CORS server flowchart](http://www.html5rocks.com/static/images/cors_server_flowchart.png)
+[CORS server flowchart](http://www.html5rocks.com/static/images/cors_server_flowchart.png)
 
 You can test your CORS Support here: http://www.test-cors.org/
 
