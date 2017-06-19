@@ -46,6 +46,7 @@ defaults:
             - [/docs/objects/request.md#the-request-method, Method]
             - [/docs/objects/request.md#the-request-headers, Headers]
             - [/docs/objects/request.md#the-request-body, Body]
+            - [/docs/objects/request.md#uploaded-files, Uploaded Files]
             - [/docs/objects/request.md#request-helpers, Helpers]
             - [/docs/objects/request.md#route-object, Route object]
             - [/docs/objects/request.md#media-type-parsers, Media type parsers]
@@ -81,6 +82,7 @@ defaults:
             - [/docs/cookbook/database-eloquent.md, Using Eloquent with Slim]
             - [/docs/cookbook/enable-cors.md, Enabling CORS]
             - [/docs/cookbook/environment.md, Getting and Mocking the Environment]
+            - [/docs/cookbook/uploading-files.md, Uploading Files using POST forms]
         - title: Add Ons
           items:
             - [/docs/features/templates.md, Templates]
