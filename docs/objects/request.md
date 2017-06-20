@@ -309,6 +309,8 @@ Each object in the `$files` array is a instance of
 * `getClientFilename()`
 * `getClientMediaType()`
 
+See the [cookbook](/docs/cookbook/uploading-files.html) on how to upload files using a POST form.
+
 ## Request Helpers
 
 Slim's PSR 7 Request implementation provides these additional proprietary methods
@@ -330,7 +332,7 @@ X-Requested-With: XMLHttpRequest
 
 foo=bar
 {% endhighlight %}
-<figcaption>Figure 12: Example XHR request.</figcaption>
+<figcaption>Figure 13: Example XHR request.</figcaption>
 </figure>
 
 {% highlight php %}
@@ -452,7 +454,7 @@ Example, how to retrieve the value.
 {% highlight php %}
 $app->get('/test', function ($request, $response, $next) {
     $session = $request->getAttribute('session'); //get the session from the request
-    
+
     return $response->write('Yay, ' . $session['name']);
 });
 {% endhighlight %}
