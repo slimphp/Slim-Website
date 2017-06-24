@@ -70,7 +70,7 @@ Error handlers may also be defined as an invokable class.
 
 {% highlight php %}
 class CustomHandler {
-   public function __invoke($request, $response, $args) {
+   public function __invoke($request, $response, $exception) {
         return $response
             ->withStatus(500)
             ->withHeader('Content-Type', 'text/html')
