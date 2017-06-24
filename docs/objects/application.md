@@ -54,7 +54,6 @@ $settings = $container->get('settings')['logger'];
 
 You can also access them in route callables via `$this`:
 
-
 {% highlight php %}
 $app->get('/', function ($request, $response, $args) {
     $loggerSettings = $this->get('settings')['logger'];
@@ -62,6 +61,20 @@ $app->get('/', function ($request, $response, $args) {
 });
 {% endhighlight %}
 
+### Updating Settings
+
+If you need to add or update settings stored in the DI container *after* the container is initialized,
+you can use the `replace` method on the settings container. For example:
+
+{% highlight php %}
+$settings = $container->get('settings');
+$settings->replace([
+        'displayErrorDetails' => true,
+        'determineRouteBeforeAppMiddleware' => true,
+        'debug' => true
+    ]);
+]);
+{% endhighlight %}
 
 ## Slim Default Settings
 
