@@ -410,7 +410,7 @@ Slim looks as the request's media type and if it recognises it, will parse it in
 
 The following media types are recognised and parsed:
 
-* application/x-www-form-urlencoded'
+* application/x-www-form-urlencoded
 * application/json
 * application/xml & text/xml
 
