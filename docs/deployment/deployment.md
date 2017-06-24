@@ -18,8 +18,8 @@ public.
   'displayErrorDetails' => false, // set to false in production
 {% endhighlight %}
 
-You should also ensure that your PHP installation is configure to not display
-errors too with the `php.ini` setting:
+You should also ensure that your PHP installation is configured to not display
+errors with the `php.ini` setting:
 
 {% highlight ini %}
 display_errors = 0
