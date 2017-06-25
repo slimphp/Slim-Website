@@ -37,7 +37,7 @@ one of the many deployment system such as:
 * Script controlled with Phing, Make, Ant, etc.
 
 
-Review the [Web Servers](docs/start/web-servers.html) documentation to configure your webserver.
+Review the [Web Servers](/docs/start/web-servers.html) documentation to configure your webserver.
 
 
 ## Deploying to a shared server
