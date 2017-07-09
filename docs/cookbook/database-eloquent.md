@@ -46,15 +46,12 @@ In your `dependencies.php` or wherever you add your Service Factories:
 <figure>
 {% highlight php %}
 // Service factory for the ORM
-$container['db'] = function ($container) {
-    $capsule = new \Illuminate\Database\Capsule\Manager;
-    $capsule->addConnection($container['settings']['db']);
-
-    $capsule->setAsGlobal();
-    $capsule->bootEloquent();
-
-    return $capsule;
-};
+use Illuminate\Database\Capsule\Manager as Capsule;
+$setting = include('settings.php');
+$capsule = new Capsule;
+$capsule->addConnection($setting['settings']['db']);
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
 {% endhighlight %}
 <figcaption>Figure 3: Configure Eloquent.</figcaption>
 </figure>
