@@ -49,7 +49,7 @@ $app = new \Slim\App($config);
 As the settings are stored in the DI container so you can access them via the `settings` key in container factories. For example:
 
 {% highlight php %}
-$settings = $container->get('settings')['logger'];
+$loggerSettings = $container->get('settings')['logger'];
 {% endhighlight %}
 
 You can also access them in route callables via `$this`:
