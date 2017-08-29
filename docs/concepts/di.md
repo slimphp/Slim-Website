@@ -3,7 +3,7 @@ title: Dependency Container
 ---
 
 Slim uses a dependency container to prepare, manage, and inject application
-dependencies. Slim supports containers that implement the [Container-Interop](https://github.com/container-interop/container-interop) interface. You can use Slim's built-in container (based on [Pimple](http://pimple.sensiolabs.org/))
+dependencies. Slim supports containers that implement [PSR-11](http://www.php-fig.org/psr/psr-11/) or the [Container-Interop](https://github.com/container-interop/container-interop) interface. You can use Slim's built-in container (based on [Pimple](http://pimple.sensiolabs.org/))
 or third-party containers like [Acclimate](https://github.com/jeremeamia/acclimate-container)
 or [PHP-DI](http://php-di.org/doc/frameworks/slim.html).
 
