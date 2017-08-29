@@ -323,7 +323,7 @@ $app->post('/ticket/new', function (Request $request, Response $response) {
     // ...
 {% endhighlight %}
 
-The call to `$request->getParsedBody()` asks Slim to look at the request and the `Content-Type` headers of that request, then do something smart and useful with the body.  In this example it's just a form post and so the resulting `$data` array looks very similar to what we'd expect from `$_POST` - and we can go ahead and use the [filter](http://php.net/manual/en/book.filter.php) extension to check the value is aceptable before we use it.  A huge advantage of using the built in Slim methods is that we can test things by injecting different request objects - if we were to use `$_POST` directly, we aren't able to do that.
+The call to `$request->getParsedBody()` asks Slim to look at the request and the `Content-Type` headers of that request, then do something smart and useful with the body.  In this example it's just a form post and so the resulting `$data` array looks very similar to what we'd expect from `$_POST` - and we can go ahead and use the [filter](http://php.net/manual/en/book.filter.php) extension to check the value is acceptable before we use it.  A huge advantage of using the built in Slim methods is that we can test things by injecting different request objects - if we were to use `$_POST` directly, we aren't able to do that.
 
 What's really neat here is that if you're building an API or writing AJAX endpoints, for example, it's super easy to work with data formats that arrive by POST but which aren't a web form.  As long as the `Content-Type` header is set correctly, Slim will parse a JSON payload into an array and you can access it exactly the same way: by using `$request->getParsedBody()`.
 
