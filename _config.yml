@@ -83,6 +83,7 @@ defaults:
             - [/docs/cookbook/enable-cors.md, Enabling CORS]
             - [/docs/cookbook/environment.md, Getting and Mocking the Environment]
             - [/docs/cookbook/uploading-files.md, Uploading Files using POST forms]
+            - [/docs/cookbook/action-domain-responder.md, Action-Domain-Responder with Slim]
         - title: Add Ons
           items:
             - [/docs/features/templates.md, Templates]
