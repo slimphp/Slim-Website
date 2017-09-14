@@ -114,7 +114,7 @@ $app->get('/ticket/{id}', function (Request $request, Response $response, $args)
 
 One benefit here is that we can now test the domain activities separately from the actions. We can begin to do something more like integration testing, even unit testing, instead of end-to-end system testing.
 
-## Extract Reponder
+## Extract Responder
 
 In the case of the tutorial application, the presentation work is so straightforward as to not require a separate Responder for each action. A relaxed variation of a Responder layer is perfectly suitable in this simple case, one where each Action uses a different method on a common Responder.
 
