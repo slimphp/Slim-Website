@@ -50,7 +50,7 @@ In your applications, you should transition to using the withStatus() and withBo
 `Slim::registerAutoloader()` have been removed, we have fully moved to composer.
 
 ## Changes to container
-`$app->container->singleton(...)` is now `$app['...'] = function () {};` Please read Pimple docs for more info
+`$app->container->singleton(...)` is now `$container = $app->getContainer(); $container['...'] = function () {};` Please read Pimple docs for more info
 
 ## Removal of configureMode()
 `$app->configureMode(...)` has been removed in v3.
