@@ -24,10 +24,12 @@ Ensure your `.htaccess` and `index.php` files are in the same
 public-accessible directory. The `.htaccess` file should contain this code:
 
 {% highlight text %}
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.php [QSA,L]
+</IfModule>
 {% endhighlight %}
 
 Make sure your Apache virtual host is configured with the `AllowOverride` option
