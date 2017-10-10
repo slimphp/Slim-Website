@@ -9,7 +9,7 @@ you need to be aware of.
 Slim 3 requires PHP 5.5+
 
 ## Class \Slim\Slim renamed \Slim\App
-Slim 3 uses `\Slim\App` for the [Application](/docs/object/application.html) object usually named `$app`.
+Slim 3 uses `\Slim\App` for the [Application](/docs/objects/application.html) object usually named `$app`.
 
 {% highlight php %}
 $app = new \Slim\App();
@@ -24,7 +24,7 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 {% endhighlight %}
 
 ## Request and response objects are no longer accessible via the Application object
-As mentioned above, Slim 3 passes the `Request` and `Response` objects as arguments to the route handling function. Since they are now accessible directly in the body of a route function, `request` and `response` are no longer properties of the `/Slim/App` ([Application](/docs/object/application.html) object) instance.
+As mentioned above, Slim 3 passes the `Request` and `Response` objects as arguments to the route handling function. Since they are now accessible directly in the body of a route function, `request` and `response` are no longer properties of the `/Slim/App` ([Application](/docs/objects/application.html) object) instance.
 
 ## Getting _GET and _POST variables
 {% highlight php %}
