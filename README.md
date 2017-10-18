@@ -37,3 +37,14 @@ To change any CSS, edit the appropriate files in `assets\less` and then run:
 
 You can also run `grunt watch` to automatically rebuild when you make CSS
 changes.
+
+#### PDF
+
+After building the site locally via `jekyll serve` you can then build a PDF
+file of the documentation.
+
+* `$ grunt html_pdf`
+
+This will use the `site/docs.pdf.html` file to create a new `docs/docs.pdf`
+file that you should then check into source control. It will be handled by
+Jekyll as a static file at that point.
