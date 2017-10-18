@@ -13,7 +13,7 @@ description: Slim is a PHP micro framework that helps you quickly write simple y
             {% capture itemHash %}{{ item[0] | replace: '.md', '' | replace: '/', ''}}{% endcapture %}
             <section class="item">
                 <h3 class="title" id="{{ itemHash }}">{{ item[1] }}</h3>
-                {% capture inpath %}{{ item[0] | remove_dirst: '/'}}{% endcapture %}
+                {% capture inpath %}{{ item[0] | remove_first: '/'}}{% endcapture %}
                 {% capture content %}{% include_relative {{inpath}} %}{% endcapture %}
                 {{ content | markdownify}}
             </section>
