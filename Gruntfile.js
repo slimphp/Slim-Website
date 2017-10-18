@@ -32,6 +32,19 @@ module.exports = function(grunt) {
                         "assets/less/all.less"
                     ]
                 }
+            },
+            pdf: {
+                options: {
+                    compress: true,
+                    cleancss: true,
+                    ieCompat: true
+                },
+                files: {
+                    "assets/css/pdf.css": [
+                        "assets/bootstrap/less/bootstrap.less",
+                        "assets/less/pdf.less"
+                    ]
+                }
             }
         },
 
@@ -59,6 +72,20 @@ module.exports = function(grunt) {
                     "assets/scripts/build/production.min.js": "assets/scripts/build/production.js"
                 }
             }
+        },
+
+        // Documentation PDF
+        html_pdf: {
+            docs: {
+                options: {
+                    format: 'A4',
+                    orientation: 'portrait',
+                    quality: '75'
+                },
+                files: {
+                    'docs/docs.pdf': ['_site/docs.pdf.html']
+                }
+            }
         }
     });
 
@@ -67,6 +94,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-html-pdf-2');
 
     // Default task(s).
     grunt.registerTask('default', ['less','concat','uglify']);
