@@ -4,24 +4,25 @@ title: Slim Framework Documentation
 description: Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
 ---
 
-<h1>Slim Documentation</h1>
+<h1 class="title">Slim Documentation</h1>
 
 {% for section in page.docs %}
-    <h2>{{ section.title }}</h2>
+    <h1>{{ section.title }}</h1>
     {% for item in section.items %}
         {% if item[0] contains '.md' %}{% unless item[0] contains '#' %}
             {% capture itemHash %}{{ item[0] | replace: '.md', '' | replace: '/', ''}}{% endcapture %}
             <section class="item">
-                <h3 class="title" id="{{ itemHash }}">{{ item[1] }}</h3>
+                <h2 class="title"><a name="{{ itemHash }}">{{ item[1] }}</a></h2>
                 {% capture inpath %}{{ item[0] | remove_first: '/'}}{% endcapture %}
                 {% capture content %}{% include_relative {{inpath}} %}{% endcapture %}
+                {% capture content %}{{ content | remove: 'title: Installation'}}{% endcapture %}
                 {{ content | markdownify}}
             </section>
         {% endunless%}{% endif %}
     {% endfor %}
 {% endfor %}
 
-<h2>Index</h2>
+<h1>Index</h1>
 {% for section in page.docs %}
 <h5 class="toc-title">{{ section.title }}</h5>
 <ul class="toc-links">

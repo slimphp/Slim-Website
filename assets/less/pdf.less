@@ -11,6 +11,12 @@ html, body{
   font-size: 8pt;
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
 a code {
   color: @green;
 }
@@ -34,7 +40,20 @@ h1, h2, h3 {
   page-break-after: avoid;
 }
 
+h1.title { font-size: 36pt; color: #719e40; }
+h1 { font-size: 32pt; }
+h2 { font-size: 24pt; }
+h3 { font-size: 18pt; }
+h4 { font-size: 16pt; }
+h5 { font-size: 14pt; }
+h6 { font-size: 12pt; }
+
 // Front matter is included into our PDF and is rendered into html.
 // We use this code to hide it from printing.
-h4.title + hr { display: none }
-h4.title + hr + p { display: none }
+h2.title + hr { display: none }
+h2.title + hr + p { display: none }
+
+section.item {
+  h2 { font-size: 14pt; }
+  h3 { font-size: 12pt; }
+}
