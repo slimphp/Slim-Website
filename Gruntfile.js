@@ -78,9 +78,15 @@ module.exports = function(grunt) {
         html_pdf: {
             docs: {
                 options: {
-                    format: 'A4',
+                    format: 'Letter',
                     orientation: 'portrait',
-                    quality: '75'
+                    quality: '75',
+                    border: {
+                        top: '.1in',
+                        right: '.25in',
+                        left: '.25in',
+                        bottom: '.1in'
+                    }
                 },
                 files: {
                     'docs/docs.pdf': ['_site/docs.pdf.html']

@@ -7,24 +7,27 @@ description: Slim is a PHP micro framework that helps you quickly write simple y
 <h1>Slim Documentation</h1>
 
 {% for section in page.docs %}
-    <h3 class="toc-title">{{ section.title }}</h3>
-    <ul class="toc-links">
-        {% for item in section.items %}
-            {% capture itemHash %}{{ item[0] | replace: '.md', '' | replace: '/', ''}}{% endcapture %}
-            <li><a href="#{{ itemHash }}">{{ item[1] }}</a></li>
-        {% endfor %}
-    </ul>
-{% endfor %}
-
-{% for section in page.docs %}
-    <h3>{{ section.title }}</h3>
+    <h2>{{ section.title }}</h2>
     {% for item in section.items %}
         {% if item[0] contains '.md' %}{% unless item[0] contains '#' %}
             {% capture itemHash %}{{ item[0] | replace: '.md', '' | replace: '/', ''}}{% endcapture %}
-            <h4 class="title" id="{{ itemHash }}">{{ item[1] }}</h4>
-            {% capture inpath %}{{ item[0] | remove_dirst: '/'}}{% endcapture %}
-            {% capture content %}{% include_relative {{inpath}} %}{% endcapture %}
-            {{ content | markdownify }}
+            <section class="item">
+                <h3 class="title" id="{{ itemHash }}">{{ item[1] }}</h3>
+                {% capture inpath %}{{ item[0] | remove_dirst: '/'}}{% endcapture %}
+                {% capture content %}{% include_relative {{inpath}} %}{% endcapture %}
+                {{ content | markdownify}}
+            </section>
         {% endunless%}{% endif %}
     {% endfor %}
+{% endfor %}
+
+<h2>Index</h2>
+{% for section in page.docs %}
+<h5 class="toc-title">{{ section.title }}</h5>
+<ul class="toc-links">
+    {% for item in section.items %}
+    {% capture itemHash %}{{ item[0] | replace: '.md', '' | replace: '/', ''}}{% endcapture %}
+    <li><a href="#{{ itemHash }}">{{ item[1] }}</a></li>
+    {% endfor %}
+</ul>
 {% endfor %}

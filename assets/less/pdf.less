@@ -8,10 +8,30 @@
 html, body{
   margin: 0;
   padding: 0;
+  font-size: 8pt;
 }
 
 a code {
   color: @green;
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+  code {
+    font-size: 6pt;
+  }
+  pre {
+    font-size: 6pt;
+    color: #333;
+    background: rgb(241, 241, 241) !important;
+    border: 1px solid #ccc;
+  }
+}
+
+h1, h2, h3 {
+  page-break-after: avoid;
 }
 
 // Front matter is included into our PDF and is rendered into html.
