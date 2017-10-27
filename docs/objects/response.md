@@ -311,3 +311,14 @@ If there is a problem encoding the data to JSON, a `\RuntimeException($message, 
 [json_encode]: http://php.net/manual/en/function.json-encode.php
 [json_last_error]: http://php.net/manual/en/function.json-last-error.php
 [json_last_error_msg]: http://php.net/manual/en/function.json-last-error-msg.php
+
+## Returning a Redirect
+
+Slim's Response object has a custom method `withRedirect($url, $status = null)` when you wish to return a redirect to another URL. You provide the `$url` where you wish the client to be redirected to along with an optional `$status` code.
+
+<figure>
+{% highlight php %}
+return $response->withRedirect('/new-url', 301);
+{% endhighlight %}
+<figcaption>Figure 17: Returning a redirect with an optional status code.</figcaption>
+</figure>
