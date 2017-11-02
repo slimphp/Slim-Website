@@ -210,7 +210,7 @@ $container['logger'] = function($c) {
 };
 {% endhighlight %}
 
-We're adding an element to the container, which is itself an anonymous function (the `$c` that is passed in is the container itself so you can acess other dependencies if you need to).  This will be called when we try to access this dependency for the first time; the code here does the setup of the dependency.  Next time we try to access the same dependence, the same object that was created the first time will be used the next time.
+We're adding an element to the container, which is itself an anonymous function (the `$c` that is passed in is the container itself so you can access other dependencies if you need to).  This will be called when we try to access this dependency for the first time; the code here does the setup of the dependency.  Next time we try to access the same dependence, the same object that was created the first time will be used the next time.
 
 My Monolog config here is fairly light; just setting up the application to log all errors to a file called `logs/app.log` (remember this path is from the point of view of where the script is running, i.e. `index.php`).
 
