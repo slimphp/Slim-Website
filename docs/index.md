@@ -20,8 +20,8 @@ title: Documentation
 
 Slim is a PHP micro framework that helps you
 quickly write simple yet powerful web applications and APIs. At its core, Slim
-is a dispatcher that receives an HTTP request, invokes an appropriate callback
-routine, and returns an HTTP response. That's it.
+is a dispatcher that receives a HTTP request, invokes an appropriate callback
+routine, and returns a HTTP response. That's it.
 
 ## What's the point?
 
@@ -47,7 +47,7 @@ requests to one "front-controller" PHP file. You instantiate and run your Slim
 app in this PHP file.
 
 A Slim app contains routes that respond to specific HTTP requests. Each route
-invokes a callback and returns an HTTP response. To get started, you first
+invokes a callback and returns a HTTP response. To get started, you first
 instantiate and configure the Slim application. Next, you define your application
 routes. Finally, you run the Slim application. It's that easy. Here's an
 example application:
