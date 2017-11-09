@@ -32,8 +32,8 @@ and has very little code. In fact, you can read and understand its source code
 in only an afternoon!
 
 > At its core, Slim
-is a dispatcher that receives an HTTP request, invokes an appropriate callback
-routine, and returns an HTTP response. That's it.
+is a dispatcher that receives a HTTP request, invokes an appropriate callback
+routine, and returns a HTTP response. That's it.
 
 You don't always need a kitchen-sink solution like [Symfony][symfony] or [Laravel][laravel].
 These are great tools, for sure. But they are often overkill. Instead, Slim
