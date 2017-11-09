@@ -4,7 +4,7 @@ description: Learn about the Slim Framework application life-cycle
 layout: post
 ---
 
-The essence of a web application is simple: it receives an HTTP request; it invokes the appropriate code; and it returns an HTTP response. The Slim Framework makes it dead simple to build and launch small web applications and APIs by hiding the prerequisite application underpinnings beneath a simple, easy-to-use interface. But for those interested in the low-level details, here’s what a Slim application’s lifecycle looks like from start to finish.
+The essence of a web application is simple: it receives a HTTP request; it invokes the appropriate code; and it returns a HTTP response. The Slim Framework makes it dead simple to build and launch small web applications and APIs by hiding the prerequisite application underpinnings beneath a simple, easy-to-use interface. But for those interested in the low-level details, here’s what a Slim application’s lifecycle looks like from start to finish.
 
 ## Instantiation
 
@@ -25,7 +25,7 @@ $app = new Slim(); $app->get('/foo', function () {
 $app->run();
 {% endhighlight %}
 
-This example demonstrates a Route mapping the URI “/foo” to specific controller code for an HTTP GET request. The `$app->get()`, `$app->post()`, `$app->put()`, `$app->delete()`, `$app->options()`, or `$app->map()` Slim application instance methods may be used to define application routes that respond to the respective HTTP request methods.
+This example demonstrates a Route mapping the URI “/foo” to specific controller code for a HTTP GET request. The `$app->get()`, `$app->post()`, `$app->put()`, `$app->delete()`, `$app->options()`, or `$app->map()` Slim application instance methods may be used to define application routes that respond to the respective HTTP request methods.
 
 When one of these Slim application instance methods is invoked to define a Route, the Router object relates the given URI to the particular controller code for the given HTTP request method(s) in the form of a Route object.
 

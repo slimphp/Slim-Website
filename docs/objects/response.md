@@ -203,7 +203,7 @@ $newResponse = $oldResponse->withoutHeader('Allow');
 
 ## The Response Body
 
-An HTTP response typically has a body. Slim provides a PSR 7 Response object
+A HTTP response typically has a body. Slim provides a PSR 7 Response object
 with which you can inspect and manipulate the eventual HTTP response's body.
 
 Just like the PSR 7 Request object, the PSR 7 Response object implements

@@ -1,6 +1,6 @@
 ---
-title: Automatically parse an HTTP request by content type
-description: Learn how to automatically parse an HTTP request body using Slim Framework middleware
+title: Automatically parse a HTTP request by content type
+description: Learn how to automatically parse a HTTP request body using Slim Framework middleware
 layout: post
 ---
 
@@ -15,7 +15,7 @@ After you add the Slim_Middleware_ContentTypes middleware to your Slim applicati
 
 ## JSON Requests
 
-This middleware will parse a JSON request’s body into an associative array. Imagine you send an HTTP request to the POST route below. The request body is `{"name":"John","email":"john.doe@gmail.com"}`.
+This middleware will parse a JSON request’s body into an associative array. Imagine you send a HTTP request to the POST route below. The request body is `{"name":"John","email":"john.doe@gmail.com"}`.
 
 {% highlight php %}
 $app->post('/book', function () use ($app) {
@@ -27,7 +27,7 @@ In this example, the $body variable will equal `array('name' => 'John', 'email' 
 
 ## XML Requests
 
-This middleware will parse a XML request’s body into a SimpleXMLElement instance if the SimpleXML extension is available; otherwise the body will remain a string. Imagine you send an HTTP request to the POST route above. The HTTP request body is:
+This middleware will parse a XML request’s body into a SimpleXMLElement instance if the SimpleXML extension is available; otherwise the body will remain a string. Imagine you send a HTTP request to the POST route above. The HTTP request body is:
 
 {% highlight xml %}
 <book>
@@ -41,7 +41,7 @@ The `$body` variable will be an instance of SimpleXMLElement; you can fetch the 
 
 ## CSV Requests
 
-This middleware will parse a CSV request’s body into an array or arrays. Imagine you send an HTTP request to the POST route above. The HTTP request body is:
+This middleware will parse a CSV request’s body into an array or arrays. Imagine you send a HTTP request to the POST route above. The HTTP request body is:
 
 {% highlight text %}
 Doe,John,john.doe@gmail.com
@@ -59,9 +59,9 @@ array(
 
 ## Custom Content Types
 
-If you want to parse an HTTP request body that is not JSON, XML, or CSV you can provide your own parsing functions to this middleware using its optional second argument. You’ll need to know the content type of the incoming HTTP request, and you’ll need to prepare a callable item to parse the request body. The callable item that will parse the HTTP request body should accept a string argument and return the appropriate PHP data structure.
+If you want to parse a HTTP request body that is not JSON, XML, or CSV you can provide your own parsing functions to this middleware using its optional second argument. You’ll need to know the content type of the incoming HTTP request, and you’ll need to prepare a callable item to parse the request body. The callable item that will parse the HTTP request body should accept a string argument and return the appropriate PHP data structure.
 
-Imagine we want the POST route above to accept an HTTP request with an HTML body. We tell our Slim_Middleware_ContentTypes middleware to parse these requests like this:
+Imagine we want the POST route above to accept a HTTP request with an HTML body. We tell our Slim_Middleware_ContentTypes middleware to parse these requests like this:
 
 {% highlight php %}
 function parseHtml( $rawBody ) {
