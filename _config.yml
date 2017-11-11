@@ -81,6 +81,7 @@ defaults:
             - [/docs/v3/cookbook/ip-address.md, Retrieving IP address]
             - [/docs/v3/cookbook/retrieving-current-route.md, Retrieving Current Route]
             - [/docs/v3/cookbook/database-eloquent.md, Using Eloquent with Slim]
+            - [/docs/v3/cookbook/database-doctrine.md, Using Doctrine with Slim]
             - [/docs/v3/cookbook/enable-cors.md, Enabling CORS]
             - [/docs/v3/cookbook/environment.md, Getting and Mocking the Environment]
             - [/docs/v3/cookbook/uploading-files.md, Uploading Files using POST forms]
