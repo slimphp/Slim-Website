@@ -223,7 +223,7 @@ For "Unlimited" optional parameters, you can do this:
 
 ```php
 $app->get('/news[/{params:.*}]', function ($request, $response, $args) {
-    $params = explode('/', $request->getAttribute('params'));
+    $params = explode('/', $args['params']);
 
     // $params is an array of all the optional segments
 });
@@ -310,7 +310,7 @@ In addition to a function, you may use:
  - `Class:method`
  - An invokable class
  - `container_key`
- 
+
 This functionality is enabled by Slim's Callable Resolver Class. It translates a string entry into a function call.
 Example:
 
@@ -318,7 +318,7 @@ Example:
 $app->get('/', '\HomeController:home');
 ```
 
-Alternatively, you can take advantage of PHP's `::class` operator which works well with IDE lookup systems and produces the same result: 
+Alternatively, you can take advantage of PHP's `::class` operator which works well with IDE lookup systems and produces the same result:
 
 ```php
 $app->get('/', \HomeController::class . ':home');
@@ -337,7 +337,7 @@ the dependencies that are required. For example:
 class HomeController
 {
     protected $view;
-    
+
     public function __construct(\Slim\Views\Twig $view) {
         $this->view = $view;
     }
@@ -359,18 +359,18 @@ $container['HomeController'] = function($c) {
 };
 ```
 
-This allows you to leverage the container for dependency injection and so you can 
+This allows you to leverage the container for dependency injection and so you can
 inject specific dependencies into the controller.
 
 
 ### Allow Slim to instantiate the controller
 
 Alternatively, if the class does not have an entry in the container, then Slim
-will pass the container's instance to the constructor. You can construct controllers 
+will pass the container's instance to the constructor. You can construct controllers
 with many actions instead of an invokable class which only handles one action.
 
 ```php
-class HomeController 
+class HomeController
 {
    protected $container;
 
@@ -378,13 +378,13 @@ class HomeController
    public function __construct(ContainerInterface $container) {
        $this->container = $container;
    }
-   
+
    public function home($request, $response, $args) {
         // your code
         // to access items in the container... $this->container->get('');
         return $response;
    }
-   
+
    public function contact($request, $response, $args) {
         // your code
         // to access items in the container... $this->container->get('');
@@ -408,11 +408,11 @@ You do not have to specify a method in your route callable and can just set it t
 class HomeAction
 {
    protected $container;
-   
+
    public function __construct(ContainerInterface $container) {
        $this->container = $container;
    }
-   
+
    public function __invoke($request, $response, $args) {
         // your code
         // to access items in the container... $this->container->get('');
@@ -427,6 +427,6 @@ You can use this class like so.
 $app->get('/', \HomeAction::class);
 ```
 
-Again, as with controllers, if you register the class name with the container, then you 
+Again, as with controllers, if you register the class name with the container, then you
 can create a factory and inject just the specific dependencies that you require into your
 action class.
