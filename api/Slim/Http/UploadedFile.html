@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Slim\Http\UploadedFile | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Slim_Http_UploadedFile" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../Slim.html">Slim</a></li>
+                                        <li><a href="../../Slim/Http.html">Http</a></li>
+    
+                <li>UploadedFile</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            UploadedFile
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>UploadedFile</strong>        implements
+        <abbr title="Psr\Http\Message\UploadedFileInterface">UploadedFileInterface</abbr>
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Represents Uploaded Files.</p>            <p>It manages and normalizes uploaded files according to the PSR-7 standard.</p>        </div>
+    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_file">
+                                                                                string
+                </td>
+                <td>$file</td>
+                <td class="last">The client-provided full path to the file</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_name">
+                                        protected                                        string
+                </td>
+                <td>$name</td>
+                <td class="last">The client-provided file name.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_type">
+                                        protected                                        string
+                </td>
+                <td>$type</td>
+                <td class="last">The client-provided media type of the file.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_size">
+                                        protected                                        int
+                </td>
+                <td>$size</td>
+                <td class="last">The size of the file in bytes.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_error">
+                                        protected                                        int
+                </td>
+                <td>$error</td>
+                <td class="last">A valid PHP UPLOAD<em>ERR</em>xxx code for the file upload.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_sapi">
+                                        protected                                        bool
+                </td>
+                <td>$sapi</td>
+                <td class="last">Indicates if the upload is from a SAPI environment.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_stream">
+                                        protected                                        <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr>
+                </td>
+                <td>$stream</td>
+                <td class="last">An optional StreamInterface wrapping the file resource.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_moved">
+                                        protected                                        bool
+                </td>
+                <td>$moved</td>
+                <td class="last">Indicates if the uploaded file has already been moved.</td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;array|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_createFromEnvironment">createFromEnvironment</a>(<a href="../../Slim/Http/Environment.html"><abbr title="Slim\Http\Environment">Environment</abbr></a> $env)
+        
+                                            <p>Create a normalized tree of UploadedFile instances from the Environment.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(string $file, string|null $name = null, string|null $type = null, int|null $size = null, int $error = UPLOAD_ERR_OK, bool $sapi = false)
+        
+                                            <p>Construct a new UploadedFile instance.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getStream">getStream</a>()
+        
+                                            <p>Retrieve a stream representing the uploaded file.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_moveTo">moveTo</a>(string $targetPath)
+        
+                                            <p>Move the uploaded file to a new location.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getError">getError</a>()
+        
+                                            <p>Retrieve the error associated with the uploaded file.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getClientFilename">getClientFilename</a>()
+        
+                                            <p>Retrieve the filename sent by the client.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getClientMediaType">getClientMediaType</a>()
+        
+                                            <p>Retrieve the media type sent by the client.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getSize">getSize</a>()
+        
+                                            <p>Retrieve the file size.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_createFromEnvironment">
+        <div class="location">at         line 84</div>
+        <code>        static            array|null
+    <strong>createFromEnvironment</strong>(<a href="../../Slim/Http/Environment.html"><abbr title="Slim\Http\Environment">Environment</abbr></a> $env)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create a normalized tree of UploadedFile instances from the Environment.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../Slim/Http/Environment.html"><abbr title="Slim\Http\Environment">Environment</abbr></a></td>
+                <td>$env</td>
+                <td>The environment</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array|null</td>
+            <td>A normalized tree of UploadedFile instances or null if none are provided.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         line 151</div>
+        <code>                    
+    <strong>__construct</strong>(string $file, string|null $name = null, string|null $type = null, int|null $size = null, int $error = UPLOAD_ERR_OK, bool $sapi = false)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Construct a new UploadedFile instance.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$file</td>
+                <td>The full path to the uploaded file provided by the client.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$name</td>
+                <td>The file name.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$type</td>
+                <td>The file media type.</td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$size</td>
+                <td>The file size in bytes.</td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$error</td>
+                <td>The UPLOAD<em>ERR</em>XXX code representing the status of the upload.</td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$sapi</td>
+                <td>Indicates if the upload is in a SAPI environment.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getStream">
+        <div class="location">at         line 177</div>
+        <code>                    <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr>
+    <strong>getStream</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve a stream representing the uploaded file.</p>                    <p>This method MUST return a StreamInterface instance, representing the
+uploaded file. The purpose of this method is to allow utilizing native PHP
+stream functionality to manipulate the file upload, such as
+stream<em>copy</em>to_stream() (though the result will need to be decorated in a
+native PHP stream wrapper to work with such functions).</p>
+
+<p>If the moveTo() method has been called previously, this method MUST raise
+an exception.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr></td>
+            <td>Stream representation of the uploaded file.</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>in cases when no stream is available or can be
+    created.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_moveTo">
+        <div class="location">at         line 223</div>
+        <code>                    
+    <strong>moveTo</strong>(string $targetPath)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Move the uploaded file to a new location.</p>                    <p>Use this method as an alternative to move<em>uploaded</em>file(). This method is
+guaranteed to work in both SAPI and non-SAPI environments.
+Implementations must determine which environment they are in, and use the
+appropriate method (move<em>uploaded</em>file(), rename(), or a stream
+operation) to perform the operation.</p>
+
+<p>$targetPath may be an absolute path, or a relative path. If it is a
+relative path, resolution should be the same as used by PHP's rename()
+function.</p>
+
+<p>The original file or stream MUST be removed on completion.</p>
+
+<p>If this method is called more than once, any subsequent calls MUST raise
+an exception.</p>
+
+<p>When used in an SAPI environment where $<em>FILES is populated, when writing
+files via moveTo(), is</em>uploaded<em>file() and move</em>uploaded_file() SHOULD be
+used to ensure permissions and upload status are verified correctly.</p>
+
+<p>If you wish to move to a stream, use getStream(), as SAPI operations
+cannot guarantee writing to stream destinations.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$targetPath</td>
+                <td>Path to which to move the uploaded file.</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>if the $path specified is invalid.</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>on any error during the move operation, or on
+    the second or subsequent call to the method.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>http://php.net/is_uploaded_file</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>http://php.net/move_uploaded_file</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getError">
+        <div class="location">at         line 273</div>
+        <code>                    int
+    <strong>getError</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the error associated with the uploaded file.</p>                    <p>The return value MUST be one of PHP's UPLOAD<em>ERR</em>XXX constants.</p>
+
+<p>If the file was uploaded successfully, this method MUST return
+UPLOAD<em>ERR</em>OK.</p>
+
+<p>Implementations SHOULD return the value stored in the "error" key of
+the file in the $_FILES array.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td>One of PHP's UPLOAD<em>ERR</em>XXX constants.</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>http://php.net/manual/en/features.file-upload.errors.php</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getClientFilename">
+        <div class="location">at         line 291</div>
+        <code>                    string|null
+    <strong>getClientFilename</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the filename sent by the client.</p>                    <p>Do not trust the value returned by this method. A client could send
+a malicious filename with the intention to corrupt or hack your
+application.</p>
+
+<p>Implementations SHOULD return the value stored in the "name" key of
+the file in the $_FILES array.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string|null</td>
+            <td>The filename sent by the client or null if none
+    was provided.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getClientMediaType">
+        <div class="location">at         line 309</div>
+        <code>                    string|null
+    <strong>getClientMediaType</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the media type sent by the client.</p>                    <p>Do not trust the value returned by this method. A client could send
+a malicious media type with the intention to corrupt or hack your
+application.</p>
+
+<p>Implementations SHOULD return the value stored in the "type" key of
+the file in the $_FILES array.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string|null</td>
+            <td>The media type sent by the client or null if none
+    was provided.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getSize">
+        <div class="location">at         line 323</div>
+        <code>                    int|null
+    <strong>getSize</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the file size.</p>                    <p>Implementations SHOULD return the value stored in the "size" key of
+the file in the $_FILES array if available, as PHP calculates this based
+on the actual size transmitted.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int|null</td>
+            <td>The file size in bytes or null if unknown.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

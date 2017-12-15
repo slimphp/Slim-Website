@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Slim\Http\Message | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Slim_Http_Message" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../Slim.html">Slim</a></li>
+                                        <li><a href="../../Slim/Http.html">Http</a></li>
+    
+                <li>Message</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            Message
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>Message</strong>        implements
+        <abbr title="Psr\Http\Message\MessageInterface">MessageInterface</abbr>
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Abstract message (base class for Request and Response)</p>            <p>This class represents a general HTTP message. It provides common properties and methods for
+the HTTP request and response, as defined in the PSR-7 MessageInterface.</p>        </div>
+    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_protocolVersion">
+                                        protected                                        string
+                </td>
+                <td>$protocolVersion</td>
+                <td class="last">Protocol version</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_validProtocolVersions">
+                    static                    protected                                        array
+                </td>
+                <td>$validProtocolVersions</td>
+                <td class="last">A map of valid protocol versions</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_headers">
+                                        protected                                        <a href="../../Slim/Interfaces/Http/HeadersInterface.html"><abbr title="Slim\Interfaces\Http\HeadersInterface">HeadersInterface</abbr></a>
+                </td>
+                <td>$headers</td>
+                <td class="last">Headers</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_body">
+                                        protected                                        <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr>
+                </td>
+                <td>$body</td>
+                <td class="last">Body object</td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___set">__set</a>($name, $value)
+        
+                                            <p>Disable magic setter to ensure immutability</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getProtocolVersion">getProtocolVersion</a>()
+        
+                                            <p>Retrieves the HTTP protocol version as a string.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withProtocolVersion">withProtocolVersion</a>(string $version)
+        
+                                            <p>Return an instance with the specified HTTP protocol version.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getHeaders">getHeaders</a>()
+        
+                                            <p>Retrieves all message header values.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasHeader">hasHeader</a>(string $name)
+        
+                                            <p>Checks if a header exists by the given case-insensitive name.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string[]
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getHeader">getHeader</a>(string $name)
+        
+                                            <p>Retrieves a message header value by the given case-insensitive name.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getHeaderLine">getHeaderLine</a>(string $name)
+        
+                                            <p>Retrieves a comma-separated string of the values for a single header.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withHeader">withHeader</a>(string $name, string|string[] $value)
+        
+                                            <p>Return an instance with the provided value replacing the specified header.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withAddedHeader">withAddedHeader</a>(string $name, string|string[] $value)
+        
+                                            <p>Return an instance with the specified header appended with the given value.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withoutHeader">withoutHeader</a>(string $name)
+        
+                                            <p>Return an instance without the specified header.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getBody">getBody</a>()
+        
+                                            <p>Gets the body of the message.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withBody">withBody</a>(<abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr> $body)
+        
+                                            <p>Return an instance with the specified message body.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___set">
+        <div class="location">at         line 63</div>
+        <code>                    
+    <strong>__set</strong>($name, $value)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Disable magic setter to ensure immutability</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$name</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getProtocolVersion">
+        <div class="location">at         line 79</div>
+        <code>                    string
+    <strong>getProtocolVersion</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves the HTTP protocol version as a string.</p>                    <p>The string MUST contain only the HTTP version number (e.g., "1.1", "1.0").</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>HTTP protocol version.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withProtocolVersion">
+        <div class="location">at         line 98</div>
+        <code>                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+    <strong>withProtocolVersion</strong>(string $version)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified HTTP protocol version.</p>                    <p>The version string MUST contain only the HTTP version number (e.g.,
+"1.1", "1.0").</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+new protocol version.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$version</td>
+                <td>HTTP protocol version</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>if the http version is an invalid number</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getHeaders">
+        <div class="location">at         line 141</div>
+        <code>                    array
+    <strong>getHeaders</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves all message header values.</p>                    <p>The keys represent the header name as it will be sent over the wire, and
+each value is an array of strings associated with the header.</p>
+
+<pre><code>// Represent the headers as a string
+foreach ($message-&gt;getHeaders() as $name =&gt; $values) {
+    echo $name . ": " . implode(", ", $values);
+}
+
+// Emit headers iteratively:
+foreach ($message-&gt;getHeaders() as $name =&gt; $values) {
+    foreach ($values as $value) {
+        header(sprintf('%s: %s', $name, $value), false);
+    }
+}
+</code></pre>
+
+<p>While header names are not case-sensitive, getHeaders() will preserve the
+exact case in which headers were originally specified.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>Returns an associative array of the message's headers. Each
+    key MUST be a header name, and each value MUST be an array of strings
+    for that header.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasHeader">
+        <div class="location">at         line 154</div>
+        <code>                    bool
+    <strong>hasHeader</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Checks if a header exists by the given case-insensitive name.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>Returns true if any header names match the given header
+    name using a case-insensitive string comparison. Returns false if
+    no matching header name is found in the message.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getHeader">
+        <div class="location">at         line 173</div>
+        <code>                    string[]
+    <strong>getHeader</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves a message header value by the given case-insensitive name.</p>                    <p>This method returns an array of all the header values of the given
+case-insensitive header name.</p>
+
+<p>If the header does not appear in the message, this method MUST return an
+empty array.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string[]</td>
+            <td>An array of string values as provided for the given
+   header. If the header does not appear in the message, this method MUST
+   return an empty array.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getHeaderLine">
+        <div class="location">at         line 197</div>
+        <code>                    string
+    <strong>getHeaderLine</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieves a comma-separated string of the values for a single header.</p>                    <p>This method returns all of the header values of the given
+case-insensitive header name as a string concatenated together using
+a comma.</p>
+
+<p>NOTE: Not all header values may be appropriately represented using
+comma concatenation. For such headers, use getHeader() instead
+and supply your own delimiter when concatenating.</p>
+
+<p>If the header does not appear in the message, this method MUST return
+an empty string.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>A string of values as provided for the given header
+   concatenated together using a comma. If the header does not appear in
+   the message, this method MUST return an empty string.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withHeader">
+        <div class="location">at         line 217</div>
+        <code>                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+    <strong>withHeader</strong>(string $name, string|string[] $value)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the provided value replacing the specified header.</p>                    <p>While header names are case-insensitive, the casing of the header will
+be preserved by this function, and returned from getHeaders().</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+new and/or updated header and value.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name.</td>
+            </tr>
+                    <tr>
+                <td>string|string[]</td>
+                <td>$value</td>
+                <td>Header value(s).</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>for invalid header names or values.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withAddedHeader">
+        <div class="location">at         line 241</div>
+        <code>                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+    <strong>withAddedHeader</strong>(string $name, string|string[] $value)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified header appended with the given value.</p>                    <p>Existing values for the specified header will be maintained. The new
+value(s) will be appended to the existing list. If the header did not
+exist previously, it will be added.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that has the
+new header and/or value.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name to add.</td>
+            </tr>
+                    <tr>
+                <td>string|string[]</td>
+                <td>$value</td>
+                <td>Header value(s).</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>for invalid header names or values.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withoutHeader">
+        <div class="location">at         line 261</div>
+        <code>                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+    <strong>withoutHeader</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance without the specified header.</p>                    <p>Header resolution MUST be done without case-sensitivity.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return an instance that removes
+the named header.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>Case-insensitive header field name to remove.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getBody">
+        <div class="location">at         line 278</div>
+        <code>                    <abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr>
+    <strong>getBody</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Gets the body of the message.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr></td>
+            <td>Returns the body as a stream.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withBody">
+        <div class="location">at         line 296</div>
+        <code>                    <a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a>
+    <strong>withBody</strong>(<abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr> $body)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Return an instance with the specified message body.</p>                    <p>The body MUST be a StreamInterface object.</p>
+
+<p>This method MUST be implemented in such a way as to retain the
+immutability of the message, and MUST return a new instance that has the
+new body stream.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Psr\Http\Message\StreamInterface">StreamInterface</abbr></td>
+                <td>$body</td>
+                <td>Body.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Slim/Http/Message.html"><abbr title="Slim\Http\Message">Message</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>When the body is not valid.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

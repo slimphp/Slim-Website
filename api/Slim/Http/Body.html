@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Slim\Http\Body | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Slim_Http_Body" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../Slim.html">Slim</a></li>
+                                        <li><a href="../../Slim/Http.html">Http</a></li>
+    
+                <li>Body</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            Body
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>Body</strong>        extends <a href="../../Slim/Http/Stream.html"><abbr title="Slim\Http\Stream">Stream</abbr></a>
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Body</p>            <p>This class represents an HTTP message body and encapsulates a
+streamable resource according to the PSR-7 standard.</p>        </div>
+    
+    
+            <h2>Constants</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td>FSTAT_MODE_S_IFIFO</td>
+                <td class="last">
+                    <p><em>Bit mask to determine if the stream is a pipe</em></p>
+                    <p>This is octal as per header stat.h</p>
+                </td>
+            </tr>
+            </table>
+
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_modes">
+                    static                    protected                                        array
+                </td>
+                <td>$modes</td>
+                <td class="last">Resource modes</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Stream.html#property_modes"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_stream">
+                                        protected                                        resource
+                </td>
+                <td>$stream</td>
+                <td class="last">The underlying stream resource</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Stream.html#property_stream"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_meta">
+                                        protected                                        array
+                </td>
+                <td>$meta</td>
+                <td class="last">Stream metadata</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Stream.html#property_meta"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_readable">
+                                        protected                                        bool
+                </td>
+                <td>$readable</td>
+                <td class="last">Is this stream readable?</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Stream.html#property_readable"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_writable">
+                                        protected                                        bool
+                </td>
+                <td>$writable</td>
+                <td class="last">Is this stream writable?</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Stream.html#property_writable"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_seekable">
+                                        protected                                        bool
+                </td>
+                <td>$seekable</td>
+                <td class="last">Is this stream seekable?</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Stream.html#property_seekable"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_size">
+                                        protected                                        null|int
+                </td>
+                <td>$size</td>
+                <td class="last">The size of the stream if known</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Stream.html#property_size"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_isPipe">
+                                        protected                                        bool
+                </td>
+                <td>$isPipe</td>
+                <td class="last">Is this stream a pipe?</td>
+                <td><small>from&nbsp;<a href="../../Slim/Http/Stream.html#property_isPipe"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(resource $stream)
+        
+                                            <p>Create a new Stream.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method___construct"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array|mixed|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getMetadata">getMetadata</a>(string $key = null)
+        
+                                            <p>Get stream metadata as an associative array or retrieve a specific key.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_getMetadata"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isAttached">isAttached</a>()
+        
+                                            <p>Is a resource attached to this stream?</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_isAttached"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_attach">attach</a>(resource $newStream)
+        
+                                            <p>Attach new resource to this object.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_attach"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    resource|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_detach">detach</a>()
+        
+                                            <p>Separates any underlying resources from the stream.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_detach"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___toString">__toString</a>()
+        
+                                            <p>Reads all data from the stream into a string, from the beginning to end.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method___toString"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_close">close</a>()
+        
+                                            <p>Closes the stream and any underlying resources.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_close"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getSize">getSize</a>()
+        
+                                            <p>Get the size of the stream if known.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_getSize"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_tell">tell</a>()
+        
+                                            <p>Returns the current position of the file read/write pointer</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_tell"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_eof">eof</a>()
+        
+                                            <p>Returns true if the stream is at the end of the stream.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_eof"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isReadable">isReadable</a>()
+        
+                                            <p>Returns whether or not the stream is readable.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_isReadable"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isWritable">isWritable</a>()
+        
+                                            <p>Returns whether or not the stream is writable.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_isWritable"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isSeekable">isSeekable</a>()
+        
+                                            <p>Returns whether or not the stream is seekable.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_isSeekable"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_seek">seek</a>(int $offset, int $whence = SEEK_SET)
+        
+                                            <p>Seek to a position in the stream.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_seek"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_rewind">rewind</a>()
+        
+                                            <p>Seek to the beginning of the stream.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_rewind"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_read">read</a>(int $length)
+        
+                                            <p>Read data from the stream.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_read"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_write">write</a>(string $string)
+        
+                                            <p>Write data to the stream.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_write"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getContents">getContents</a>()
+        
+                                            <p>Returns the remaining contents in a string</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_getContents"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isPipe">isPipe</a>()
+        
+                                            <p>Returns whether or not the stream is a pipe.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Slim/Http/Stream.html#method_isPipe"><abbr title="Slim\Http\Stream">Stream</abbr></a></small></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method___construct"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 96</div>
+        <code>                    
+    <strong>__construct</strong>(resource $stream)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Create a new Stream.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>resource</td>
+                <td>$stream</td>
+                <td>A PHP resource handle.</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>If argument is not a resource.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getMetadata">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_getMetadata"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 115</div>
+        <code>                    array|mixed|null
+    <strong>getMetadata</strong>(string $key = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get stream metadata as an associative array or retrieve a specific key.</p>                    <p>The keys returned are identical to the keys returned from PHP's
+stream<em>get</em>meta_data() function.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td>Specific metadata to retrieve.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array|mixed|null</td>
+            <td>Returns an associative array if no key is
+    provided. Returns a specific key value if a key is provided and the
+    value is found, or null if the key is not found.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isAttached">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_isAttached"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 132</div>
+        <code>            protected        bool
+    <strong>isAttached</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is a resource attached to this stream?</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_attach">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_attach"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 146</div>
+        <code>            protected        
+    <strong>attach</strong>(resource $newStream)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Attach new resource to this object.</p>                    <p>Note: This method is not part of the PSR-7 standard.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>resource</td>
+                <td>$newStream</td>
+                <td>A PHP resource handle.</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td>If argument is not a valid PHP resource.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_detach">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_detach"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 166</div>
+        <code>                    resource|null
+    <strong>detach</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Separates any underlying resources from the stream.</p>                    <p>After the stream has been detached, the stream is in an unusable state.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>resource|null</td>
+            <td>Underlying PHP stream, if any</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___toString">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method___toString"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 194</div>
+        <code>                    string
+    <strong>__toString</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Reads all data from the stream into a string, from the beginning to end.</p>                    <p>This method MUST attempt to seek to the beginning of the stream before
+reading data and read the stream until the end is reached.</p>
+
+<p>Warning: This could attempt to load a large amount of data into memory.</p>
+
+<p>This method MUST NOT raise an exception in order to conform with PHP's
+string casting operations.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>http://php.net/manual/en/language.oop5.magic.php#object.tostring</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_close">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_close"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 211</div>
+        <code>                    
+    <strong>close</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Closes the stream and any underlying resources.</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getSize">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_getSize"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 229</div>
+        <code>                    int|null
+    <strong>getSize</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the size of the stream if known.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int|null</td>
+            <td>Returns the size in bytes if known, or null if unknown.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_tell">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_tell"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 246</div>
+        <code>                    int
+    <strong>tell</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns the current position of the file read/write pointer</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td>Position of the file pointer</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>on error.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_eof">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_eof"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 260</div>
+        <code>                    bool
+    <strong>eof</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns true if the stream is at the end of the stream.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isReadable">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_isReadable"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 270</div>
+        <code>                    bool
+    <strong>isReadable</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns whether or not the stream is readable.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isWritable">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_isWritable"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 297</div>
+        <code>                    bool
+    <strong>isWritable</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns whether or not the stream is writable.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isSeekable">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_isSeekable"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 320</div>
+        <code>                    bool
+    <strong>isSeekable</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns whether or not the stream is seekable.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_seek">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_seek"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 347</div>
+        <code>                    
+    <strong>seek</strong>(int $offset, int $whence = SEEK_SET)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seek to a position in the stream.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int</td>
+                <td>$offset</td>
+                <td>Stream offset</td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$whence</td>
+                <td>Specifies how the cursor position will be calculated
+    based on the seek offset. Valid values are identical to the built-in
+    PHP $whence values for <code>fseek()</code>.  SEEK<em>SET: Set position equal to
+    offset bytes SEEK</em>CUR: Set position to current location plus offset
+    SEEK_END: Set position to end-of-stream plus offset.</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>on failure.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_rewind">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_rewind"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 367</div>
+        <code>                    
+    <strong>rewind</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seek to the beginning of the stream.</p>                    <p>If the stream is not seekable, this method will raise an exception;
+otherwise, it will perform a seek(0).</p>            </div>
+                <div class="tags">
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>on failure.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>seek()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_read">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_read"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 386</div>
+        <code>                    string
+    <strong>read</strong>(int $length)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Read data from the stream.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int</td>
+                <td>$length</td>
+                <td>Read up to $length bytes from the object and return
+    them. Fewer than $length bytes may be returned if underlying stream
+    call returns fewer bytes.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Returns the data read from the stream, or an empty string
+    if no bytes are available.</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>if an error occurs.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_write">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_write"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 404</div>
+        <code>                    int
+    <strong>write</strong>(string $string)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Write data to the stream.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$string</td>
+                <td>The string that is to be written.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td>Returns the number of bytes written to the stream.</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>on failure.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getContents">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_getContents"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 424</div>
+        <code>                    string
+    <strong>getContents</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns the remaining contents in a string</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td>if unable to read or an error occurs while
+    reading.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isPipe">
+        <div class="location">in <a href="../../Slim/Http/Stream.html#method_isPipe"><abbr title="Slim\Http\Stream">Stream</abbr></a> at         line 438</div>
+        <code>                    bool
+    <strong>isPipe</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns whether or not the stream is a pipe.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>
