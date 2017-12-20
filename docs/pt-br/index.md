@@ -1,29 +1,26 @@
 ---
-title: Documentation
+title: Documentação
 ---
 
 <div class="alert alert-info">
     <p>
-        This documentation is for <strong>Slim 3</strong>. The Slim 2 documentation is available at <a href="https://docs.slimframework.com/">docs.slimframework.com</a>.
+        Esta documentação é para o <strong>Slim 3</strong>. A documentação do Slim 2 está disponível em <a href="http://docs.slimframework.com/">docs.slimframework.com</a>.
     </p>
 </div>
 
 <p style="text-align: center;">
-    <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-        <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
-    </a>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
+        <img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
+    </a>.
     <br />
-    This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+    Esta obra está licenciada com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Atribuição-NãoComercial-SemDerivações 4.0 Internacional</a>.
 </p>
 
-## Welcome
+## Bem-Vindo
 
-Slim is a PHP micro framework that helps you
-quickly write simple yet powerful web applications and APIs. At its core, Slim
-is a dispatcher that receives an HTTP request, invokes an appropriate callback
-routine, and returns an HTTP response. That's it.
+O Slim é um micro framework para PHP que te ajuda a escrever rapidamente aplicações web e APIs de forma simples, porém, poderosas. No seu núcleo, o Slim é um despachador que recebe uma requisição HTTP, chama a função callback apropriada, e retorna uma resposta HTTP. É isso aí.
 
-## What's the point?
+## Qual é o objetivo?
 
 Slim is an ideal tool to create APIs that consume, repurpose, or publish data. Slim is also
 a great tool for rapid prototyping. Heck, you can even build full-featured web
