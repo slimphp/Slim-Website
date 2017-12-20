@@ -4,16 +4,16 @@ title: Documentation
 
 <div class="alert alert-info">
     <p>
-        This documentation is for <strong>Slim 3</strong>. The Slim 2 documentation is available at <a href="http://docs.slimframework.com/">docs.slimframework.com</a>.
+        This documentation is for <strong>Slim 3</strong>. The Slim 2 documentation is available at <a href="https://docs.slimframework.com/">docs.slimframework.com</a>.
     </p>
 </div>
 
 <p style="text-align: center;">
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
         <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
     </a>
     <br />
-    This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+    This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
 </p>
 
 ## Welcome
@@ -100,10 +100,10 @@ This documentation begins by explaining Slim's concepts and architecture
 before venturing into specific topics like request and response handling,
 routing, and error handling.
 
-[symfony]: http://symfony.com/
-[laravel]: http://laravel.com/
+[symfony]: https://symfony.com/
+[laravel]: https://laravel.com/
 [csrf]: https://github.com/slimphp/Slim-Csrf/
 [httpcache]: https://github.com/slimphp/Slim-HttpCache
 [flash]: https://github.com/slimphp/Slim-Flash
-[eloquent]: http://laravel.com/docs/5.1/eloquent
+[eloquent]: https://laravel.com/docs/5.1/eloquent
 [doctrine]: http://www.doctrine-project.org/projects/orm.html
