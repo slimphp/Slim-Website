@@ -52,7 +52,7 @@ Middleware is a callable that accepts three arguments: a Request object, a Respo
 
 This example middleware is a Closure.
 
-{% highlight php %}
+```php
 <?php
 /**
  * Example middleware closure
@@ -70,13 +70,13 @@ function ($request, $response, $next) {
 
     return $response;
 };
-{% endhighlight %}
+```
 
 ### Invokable class middleware example
 
 This example middleware is an invokable class that implements the magic `__invoke()` method.
 
-{% highlight php %}
+```php
 <?php
 class ExampleMiddleware
 {
@@ -98,13 +98,13 @@ class ExampleMiddleware
         return $response;
     }
 }
-{% endhighlight %}
+```
 
 To use this class as a middleware, you can use `->add( new ExampleMiddleware() );` function chain after the `$app`, `Route`,  or `group()`, which in the code below, any one of these, could represent $subject.
 
-{% highlight php %}
+```php
 $subject->add( new ExampleMiddleware() );
-{% endhighlight %}
+```
 
 ## How do I add middleware?
 
@@ -114,7 +114,7 @@ You may add middleware to a Slim application, to an individual Slim application 
 
 Application middleware is invoked for every *incoming* HTTP request. Add application middleware with the Slim application instance's `add()` method. This example adds the Closure middleware example above:
 
-{% highlight php %}
+```php
 <?php
 $app = new \Slim\App();
 
@@ -133,7 +133,7 @@ $app->get('/', function ($request, $response, $args) {
 });
 
 $app->run();
-{% endhighlight %}
+```
 
 This would output this HTTP response body:
 
@@ -143,7 +143,7 @@ This would output this HTTP response body:
 
 Route middleware is invoked _only if_ its route matches the current HTTP request method and URI. Route middleware is specified immediately after you invoke any of the Slim application's routing methods (e.g., `get()` or `post()`). Each routing method returns an instance of `\Slim\Route`, and this class provides the same middleware interface as the Slim application instance. Add middleware to a Route with the Route instance's `add()` method. This example adds the Closure middleware example above:
 
-{% highlight php %}
+```php
 <?php
 $app = new \Slim\App();
 
@@ -162,7 +162,7 @@ $app->get('/', function ($request, $response, $args) {
 })->add($mw);
 
 $app->run();
-{% endhighlight %}
+```
 
 This would output this HTTP response body:
 
@@ -173,7 +173,7 @@ This would output this HTTP response body:
 In addition to the overall application, and standard routes being able to accept middleware, the `group()` multi-route definition functionality, also allows individual routes internally. Route group middleware is invoked _only if_ its route matches one of the defined HTTP request methods and URIs from the group. To add middleware within the callback, and entire-group middleware to be set by chaining `add()` after the `group()` method.
 
 Sample Application, making use of callback middleware on a group of url-handlers
-{% highlight php %}
+```php
 <?php
 
 require_once __DIR__.'/vendor/autoload.php';
@@ -198,7 +198,7 @@ $app->group('/utils', function () use ($app) {
 
     return $response;
 });
-{% endhighlight %}
+```
 
 When calling the `/utils/date` method, this would output a string similar to the below
 
@@ -218,15 +218,15 @@ attributes.
 
 Setting the variable in the middleware:
 
-{% highlight php %}
+```php
 $request = $request->withAttribute('foo', 'bar');
-{% endhighlight %}
+```
 
 Getting the variable in the route callback:
 
-{% highlight php %}
+```php
 $foo = $request->getAttribute('foo');
-{% endhighlight %}
+```
 
 ## Finding available middleware
 

@@ -9,7 +9,7 @@ From there you can get the route's name by using `getName()` or get the methods 
  Note: If you need to access the route from within your app middleware you must set `'determineRouteBeforeAppMiddleware'` to true in your configuration otherwise `getAttribute('route')` will return null. Also `getAttribute('route')` will return null on non existent routes.
 
 Example:
-{% highlight php %}
+```php
 use Slim\App;
 use Slim\Exception\NotFoundException;
 use Slim\Http\Request;
@@ -40,4 +40,4 @@ $app->add(function (Request $request, Response $response, callable $next) {
 
     return $next($request, $response);
 });
-{% endhighlight %}
+```

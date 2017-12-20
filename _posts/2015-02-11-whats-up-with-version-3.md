@@ -50,7 +50,7 @@ The 3.0 release will be coded such that all internal app methods expect _interfa
 
 If you use Closures as Route callback routines, the Closures will become bound to the `\Slim\App` instance. This means you will have access to the app instance _inside_ of the Closure via the `$this` keyword.
 
-{% highlight php %}
+```php
 <?php
 $app = new \Slim\App();
 $app->get('/hello', function ($req, $res) {
@@ -59,7 +59,7 @@ $app->get('/hello', function ($req, $res) {
         'url' => 'https://joshlockhart.com'
     ]);
 });
-{% endhighlight %}
+```
 
 ### Simpler codebase
 

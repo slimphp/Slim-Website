@@ -16,12 +16,12 @@ application's `get()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->get('/books/{id}', function ($request, $response, $args) {
     // Show book identified by $args['id']
 });
-{% endhighlight %}
+```
 
 ### POST Route
 
@@ -31,12 +31,12 @@ application's `post()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->post('/books', function ($request, $response, $args) {
     // Create new book
 });
-{% endhighlight %}
+```
 
 ### PUT Route
 
@@ -46,12 +46,12 @@ application's `put()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->put('/books/{id}', function ($request, $response, $args) {
     // Update book identified by $args['id']
 });
-{% endhighlight %}
+```
 
 ### DELETE Route
 
@@ -61,12 +61,12 @@ application's `delete()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->delete('/books/{id}', function ($request, $response, $args) {
     // Delete book identified by $args['id']
 });
-{% endhighlight %}
+```
 
 ### OPTIONS Route
 
@@ -76,12 +76,12 @@ application's `options()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->options('/books/{id}', function ($request, $response, $args) {
     // Return response headers
 });
-{% endhighlight %}
+```
 
 ### PATCH Route
 
@@ -91,12 +91,12 @@ application's `patch()` method. It accepts two arguments:
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->patch('/books/{id}', function ($request, $response, $args) {
     // Apply changes to book identified by $args['id']
 });
-{% endhighlight %}
+```
 
 ### Any Route
 
@@ -105,19 +105,19 @@ You can add a route that handles all HTTP request methods with the Slim applicat
 1. The route pattern (with optional named placeholders)
 2. The route callback
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->any('/books/[{id}]', function ($request, $response, $args) {
     // Apply changes to books or book identified by $args['id'] if specified.
     // To check which method is used: $request->getMethod();
 });
-{% endhighlight %}
+```
 
 Note that the second parameter is a callback. You could specify a Class (which need a `__invoke()` implementation) instead of a Closure. You can then do the mapping somewhere else:
 
-{% highlight php %}
+```php
 $app->any('/user', 'MyRestfulController');
-{% endhighlight %}
+```
 
 ### Custom Route
 
@@ -127,12 +127,12 @@ You can add a route that handles multiple HTTP request methods with the Slim app
 2. The route pattern (with optional named placeholders)
 3. The route callback
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->map(['GET', 'POST'], '/books', function ($request, $response, $args) {
     // Create new book or list all books
 });
-{% endhighlight %}
+```
 
 ## Route callbacks
 
@@ -155,7 +155,7 @@ There are two ways you can write content to the HTTP response. First, you can si
 
 If you use a `Closure` instance as the route callback, the closure's state is bound to the `Container` instance. This means you will have access to the DI container instance _inside_ of the Closure via the `$this` keyword:
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->get('/hello/{name}', function ($request, $response, $args) {
     // Use app HTTP cookie service
@@ -164,13 +164,13 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
         'expires' => '7 days'
     ]);
 });
-{% endhighlight %}
+```
 
 ## Route strategies
 
 The route callback signature is determined by a route strategy. By default, Slim expects route callbacks to accept the request, response, and an array of route placeholder arguments. This is called the RequestResponse strategy. However, you can change the expected route callback signature by simply using a different strategy. As an example, Slim provides an alternative strategy called RequestResponseArgs that accepts request and response, plus each route placeholder as a separate argument. Here is an example of using this alternative strategy; simply replace the `foundHandler` dependency provided by the default `\Slim\Container`:
 
-{% highlight php %}
+```php
 $c = new \Slim\Container();
 $c['foundHandler'] = function() {
     return new \Slim\Handlers\Strategies\RequestResponseArgs();
@@ -180,7 +180,7 @@ $app = new \Slim\App($c);
 $app->get('/hello/{name}', function ($request, $response, $name) {
     return $response->write($name);
 });
-{% endhighlight %}
+```
 
 You can provide your own route strategy by implementing the `\Slim\Interfaces\InvocationStrategyInterface`.
 
@@ -192,42 +192,42 @@ Each routing method described above accepts a URL pattern that is matched agains
 
 A route pattern placeholder starts with a `{`, followed by the placeholder name, ending with a `}`. This is an example placeholder named `name`:
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->get('/hello/{name}', function ($request, $response, $args) {
     echo "Hello, " . $args['name'];
 });
-{% endhighlight %}
+```
 
 ### Optional segments
 
 To make a section optional, simply wrap in square brackets:
 
-{% highlight php %}
+```php
 $app->get('/users[/{id}]', function ($request, $response, $args) {
     // responds to both `/users` and `/users/123`
     // but not to `/users/`
 });
-{% endhighlight %}
+```
 
 
 Multiple optional parameters are supported by nesting:
 
-{% highlight php %}
+```php
 $app->get('/news[/{year}[/{month}]]', function ($request, $response, $args) {
     // reponds to `/news`, `/news/2016` and `/news/2016/03`
 });
-{% endhighlight %}
+```
 
 For "Unlimited" optional parameters, you can do this:
 
-{% highlight php %}
+```php
 $app->get('/news[/{params:.*}]', function ($request, $response, $args) {
     $params = explode('/', $request->getAttribute('params'));
 
     // $params is an array of all the optional segments
 });
-{% endhighlight %}
+```
 
 In this example, a URI of `/news/2016/03/20` would result in the `$params` array
 containing three elements: `['2016', '03', '20']`.
@@ -238,32 +238,32 @@ containing three elements: `['2016', '03', '20']`.
 By default the placeholders are written inside `{}` and can accept any
 values. However, placeholders can also require the HTTP request URI to match a particular regular expression. If the current HTTP request URI does not match a placeholder regular expression, the route is not invoked. This is an example placeholder named `id` that requires one or more digits.
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->get('/users/{id:[0-9]+}', function ($request, $response, $args) {
     // Find user identified by $args['id']
 });
-{% endhighlight %}
+```
 
 ## Route names
 
 Application routes can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the router's `pathFor()` method. Each routing method described above returns a `\Slim\Route` object, and this object exposes a `setName()` method.
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->get('/hello/{name}', function ($request, $response, $args) {
     echo "Hello, " . $args['name'];
 })->setName('hello');
-{% endhighlight %}
+```
 
 You can generate a URL for this named route with the application router's `pathFor()`  method.
 
-{% highlight php %}
+```php
 echo $app->getContainer()->get('router')->pathFor('hello', [
     'name' => 'Josh'
 ]);
 // Outputs "/hello/Josh"
-{% endhighlight %}
+```
 
 The router's `pathFor()` method accepts two arguments:
 
@@ -274,7 +274,7 @@ The router's `pathFor()` method accepts two arguments:
 
 To help organize routes into logical groups, the `\Slim\App` also provides a `group()` method. Each group's route pattern is prepended to the routes or groups contained within it, and any placeholder arguments in the group pattern are ultimately made available to the nested routes:
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $app->group('/users/{id:[0-9]+}', function () {
     $this->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
@@ -285,7 +285,7 @@ $app->group('/users/{id:[0-9]+}', function () {
         // Reset the password for user identified by $args['id']
     })->setName('user-password-reset');
 });
-{% endhighlight %}
+```
 
 Note inside the group closure, `$this` is used instead of `$app`. Slim binds the closure to the application instance for you, just like it is the case with route callback binds with container instance.
 
@@ -314,15 +314,15 @@ In addition to a function, you may use:
 This functionality is enabled by Slim's Callable Resolver Class. It translates a string entry into a function call.
 Example:
 
-{% highlight php %}
+```php
 $app->get('/', '\HomeController:home');
-{% endhighlight %}
+```
 
 Alternatively, you can take advantage of PHP's `::class` operator which works well with IDE lookup systems and produces the same result: 
 
-{% highlight php %}
+```php
 $app->get('/', \HomeController::class . ':home');
-{% endhighlight %}
+```
 
 In this code above we are defining a `/` route and telling Slim to execute the `home()` method on the `HomeController` class.
 
@@ -333,7 +333,7 @@ Slim first looks for an entry of `HomeController` in the container, if it's foun
 Create a controller with the `home` action method. The constructor should accept
 the dependencies that are required. For example:
 
-{% highlight php %}
+```php
 class HomeController
 {
     protected $view;
@@ -347,17 +347,17 @@ class HomeController
       return $response;
     }
 }
-{% endhighlight %}
+```
 
 Create a factory in the container that instantiates the controller with the dependencies:
 
-{% highlight php %}
+```php
 $container = $app->getContainer();
 $container['HomeController'] = function($c) {
     $view = $c->get("view"); // retrieve the 'view' from the container
     return new HomeController($view);
 };
-{% endhighlight %}
+```
 
 This allows you to leverage the container for dependency injection and so you can 
 inject specific dependencies into the controller.
@@ -369,7 +369,7 @@ Alternatively, if the class does not have an entry in the container, then Slim
 will pass the container's instance to the constructor. You can construct controllers 
 with many actions instead of an invokable class which only handles one action.
 
-{% highlight php %}
+```php
 class HomeController 
 {
    protected $container;
@@ -391,20 +391,20 @@ class HomeController
         return $response;
    }
 }
-{% endhighlight %}
+```
 
 You can use your controller methods like so.
 
-{% highlight php %}
+```php
 $app->get('/', \HomeController::class . ':home');
 $app->get('/contact', \HomeController::class . ':contact');
-{% endhighlight %}
+```
 
 ### Using an invokable class
 
 You do not have to specify a method in your route callable and can just set it to be an invokable class such as:
 
-{% highlight php %}
+```php
 class HomeAction
 {
    protected $container;
@@ -419,13 +419,13 @@ class HomeAction
         return $response;
    }
 }
-{% endhighlight %}
+```
 
 You can use this class like so.
 
-{% highlight php %}
+```php
 $app->get('/', \HomeAction::class);
-{% endhighlight %}
+```
 
 Again, as with controllers, if you register the class name with the container, then you 
 can create a factory and inject just the specific dependencies that you require into your

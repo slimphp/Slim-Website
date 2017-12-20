@@ -11,29 +11,29 @@ Slim 3 requires PHP 5.5+
 ## Class \Slim\Slim renamed \Slim\App
 Slim 3 uses `\Slim\App` for the [Application](/docs/objects/application.html) object usually named `$app`.
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
-{% endhighlight %}
+```
 
 ## New Route Function Signature
 
-{% highlight php %}
+```php
 $app->get('/', function (Request $req,  Response $res, $args = []) {
     return $res->withStatus(400)->write('Bad Request');
 });
-{% endhighlight %}
+```
 
 ## Request and response objects are no longer accessible via the Application object
 As mentioned above, Slim 3 passes the `Request` and `Response` objects as arguments to the route handling function. Since they are now accessible directly in the body of a route function, `request` and `response` are no longer properties of the `/Slim/App` ([Application](/docs/objects/application.html) object) instance.
 
 ## Getting _GET and _POST variables
-{% highlight php %}
+```php
 $app->get('/', function (Request $req,  Response $res, $args = []) {
     $myvar1 = $req->getParam('myvar'); //checks both _GET and _POST [NOT PSR-7 Compliant]
     $myvar2 = $req->getParsedBody()['myvar']; //checks _POST  [IS PSR-7 compliant]
     $myvar3 = $req->getQueryParams()['myvar']; //checks _GET [IS PSR-7 compliant]
 });
-{% endhighlight %}
+```
 
 
 ## Hooks
@@ -67,18 +67,18 @@ In Slim v3.x one can do the same with using the Response class like so.
 
 Example:
 
-{% highlight php %}
+```php
 $app->get('/', function ($req, $res, $args) {
   return $res->withStatus(302)->withHeader('Location', 'your-new-uri');
 });
-{% endhighlight %}
+```
 
 ## Middleware Signature
 The middleware signature has changed from a class to a function.
 
 New signature:
 
-{% highlight php %}
+```php
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -88,11 +88,11 @@ $app->add(function (Request $req,  Response $res, callable $next) {
     // Do stuff after route is rendered
     return $newResponse; // continue
 });
-{% endhighlight %}
+```
 
 You can still use a class:
 
-{% highlight php %}
+```php
 namespace My;
 
 use Psr\Http\Message\RequestInterface as Request;
@@ -114,7 +114,7 @@ $app->add(new My\Middleware());
 // or
 $app->add(My\Middleware::class);
 
-{% endhighlight %}
+```
 
 
 ## Middleware Execution
@@ -134,28 +134,28 @@ Slim now utilizes [FastRoute](https://github.com/nikic/FastRoute), a new, more p
 
 This means that the specification of route patterns has changed with named parameters now in braces and square brackets used for optional segments:
 
-{% highlight php %}
+```php
 // named parameter:
 $app->get('/hello/{name}', /*...*/);
 
 // optional segment:
 $app->get('/news[/{year}]', /*...*/);
-{% endhighlight %}
+```
 
 ## Route Middleware
 The syntax for adding route middleware has changed slightly.
 In v3.0:
 
-{% highlight php %}
+```php
 $app->get(…)->add($mw2)->add($mw1);
-{% endhighlight %}
+```
 
 ## Getting the current route
 The route is an attribute of the Request object in v3.0:
 
-{% highlight php %}
+```php
 $request->getAttribute('route');
-{% endhighlight %}
+```
 
 When getting the current route in middleware, the value for
 `determineRouteBeforeAppMiddleware` must be set to `true` in the Application
@@ -165,20 +165,20 @@ configuration, otherwise the getAttribute call returns `null`.
 
 `urlFor()` has been renamed `pathFor()` and can be found in the `router` object:
 
-{% highlight php %}
+```php
 $app->get('/', function ($request, $response, $args) {
     $url = $this->router->pathFor('home');
     $response->write("<a href='$url'>Home</a>");
     return $response;
 })->setName('home');
-{% endhighlight %}
+```
 
 Also, `pathFor()` is base path aware.
 
 ## Container and DI ... Constructing
 Slim uses Pimple as a Dependency Injection Container.
 
-{% highlight php %}
+```php
 
 // index.php
 $app = new Slim\App(
@@ -230,14 +230,14 @@ return [
     }
 ];
 
-{% endhighlight %}
+```
 
 ## PSR-7 Objects
 
 ### Request, Response, Uri & UploadFile are immutable.
 This means that when you change one of these objects, the old instance is not updated.
 
-{% highlight php %}
+```php
 // This is WRONG. The change will not pass through.
 $app->add(function (Request $request, Response $response, $next) {
     $request->withAttribute('abc', 'def');
@@ -249,11 +249,11 @@ $app->add(function (Request $request, Response $response, $next) {
     $request = $request->withAttribute('abc', 'def');
     return $next($request, $response);
 });
-{% endhighlight %}
+```
 
 ### Message bodies are streams
 
-{% highlight php %}
+```php
 // ...
 $image = __DIR__ . '/huge_photo.jpg';
 $body = new Stream($image);
@@ -263,14 +263,14 @@ $response = (new Response())
      ->withHeader('Content-Length', filesize($image))
      ->withBody($body);
 // ...
-{% endhighlight %}
+```
 
 For text:
-{% highlight php %}
+```php
 // ...
 $response = (new Response())->getBody()->write('Hello world!')
 
 // Or Slim specific: Not PSR-7 compliant.
 $response = (new Response())->write('Hello world!');
 // ...
-{% endhighlight %}
+```

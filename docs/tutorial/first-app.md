@@ -43,7 +43,7 @@ Now git won't prompt you to add the files in `vendor/` to the repository - we do
 
 There's a really excellent and minimal example of an `index.php` for Slim Framework on the [project homepage](http://www.slimframework.com) so we'll use that as our starting point.  Put the following code into `src/public/index.php`:
 
-{% highlight php %}
+```php
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
@@ -59,7 +59,7 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
 });
 $app->run();
 
-{% endhighlight %}
+```
 
 We just pasted a load of code ... let's take a look at what it does.
 
@@ -135,7 +135,7 @@ The initial example uses all the Slim defaults, but we can easily add configurat
 
 First the configuration itself:
 
-{% highlight php %}
+```php
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
@@ -143,7 +143,7 @@ $config['db']['host']   = "localhost";
 $config['db']['user']   = "user";
 $config['db']['pass']   = "password";
 $config['db']['dbname'] = "exampleapp";
-{% endhighlight %}
+```
 
 The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you're using the built in PHP webserver then you'll see them in the console output which is helpful). The second line allows the web server to set the Content-Length header which makes Slim behave more predictably.
 
@@ -151,9 +151,9 @@ The other settings here are not specific keys/values, they're just some data tha
 
 Now to feed this into Slim, we need to *change* where we create the `Slim/App` object so that it now looks like this:
 
-{% highlight php %}
+```php
 $app = new \Slim\App(["settings" => $config]);
-{% endhighlight %}
+```
 
 We'll be able to access any settings we put into that `$config` array from our application later on.
 
@@ -163,7 +163,7 @@ Composer can handle the autoloading of your own classes just as well as the vend
 
 My setup is pretty simple since I only have a few extra classes, they're just in the global namespace, and the files are in the `src/classes/` directory.  So to autoload them, I add this `autoload` section to my `composer.json` file:
 
-{% highlight javascript %}
+```javascript
 {
     "require": {
         "slim/slim": "^3.1",
@@ -177,7 +177,7 @@ My setup is pretty simple since I only have a few extra classes, they're just in
         }
     }
 }
-{% endhighlight %}
+```
 
 ## Add Dependencies
 
@@ -187,9 +187,9 @@ The idea of the dependency injection container is that you configure the contain
 
 To get the container, we can add the following after the line where we create `$app` and before we start to register the routes in our application:
 
-{% highlight php %}
+```php
 $container = $app->getContainer();
-{% endhighlight %}
+```
 
 Now we have the `Slim\Container` object, we can add our services to it.
 
@@ -201,14 +201,14 @@ If you're not already familiar with Monolog, it's an excellent logging framework
 
 The dependency is named `logger` and the code to add it looks like this:
 
-{% highlight php %}
+```php
 $container['logger'] = function($c) {
     $logger = new \Monolog\Logger('my_logger');
     $file_handler = new \Monolog\Handler\StreamHandler("../logs/app.log");
     $logger->pushHandler($file_handler);
     return $logger;
 };
-{% endhighlight %}
+```
 
 We're adding an element to the container, which is itself an anonymous function (the `$c` that is passed in is the container itself so you can access other dependencies if you need to).  This will be called when we try to access this dependency for the first time; the code here does the setup of the dependency.  Next time we try to access the same dependence, the same object that was created the first time will be used the next time.
 
@@ -216,9 +216,9 @@ My Monolog config here is fairly light; just setting up the application to log a
 
 With the logger in place, I can use it from inside my route code with a line like this:
 
-{% highlight php %}
+```php
     $this->logger->addInfo("Something interesting happened");
-{% endhighlight %}
+```
 
 Having good application logging is a really important foundation for any application so I'd always recommend putting something like this in place.  This allows you to add as much or as little debugging as you want, and by using the appropriate log levels with each message, you can have as much or as little detail as is appropriate for what you're doing in any one moment.
 
@@ -228,7 +228,7 @@ There are many database libraries available for PHP, but this example uses PDO -
 
 Exactly as we did for adding Monolog to the DIC, we'll add an anonymous function that sets up the dependency, in this case called `db`:
 
-{% highlight php %}
+```php
 $container['db'] = function ($c) {
     $db = $c['settings']['db'];
     $pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'],
@@ -237,15 +237,15 @@ $container['db'] = function ($c) {
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $pdo;
 };
-{% endhighlight %}
+```
 
 Remember the config that we added into our app earlier?  Well, this is where we use it - the container knows how to access our settings, and so we can grab our configuration very easily from here.  With the config, we create the `PDO` object (remember this will throw a `PDOException` if it fails and you might like to handle that here) so that we can connect to the database.  I've included two `setAttribute()` calls that really aren't necessary but I find these two settings make PDO itself much more usable as a library so I left the settings in this example so you can use them too!  Finally, we return our connection object.
 
 Again, we can access our dependencies with just `$this->` and then the name of the dependency we want which in this case is `$this->db`, so there is code in my application that looks something like:
 
-{% highlight php %}
+```php
     $mapper = new TicketMapper($this->db);
-{% endhighlight %}
+```
 
 This will fetch the `db` dependency from the DIC, creating it if necessary, and in this example just allows me to pass the `PDO` object straight into my mapper class.
 
@@ -255,7 +255,7 @@ This will fetch the `db` dependency from the DIC, creating it if necessary, and 
 
 As a first example, here's the code for making a GET request to `/tickets` which lists the tickets in my bug tracker example application.  It just spits out the variables since we haven't added any views to our application yet:
 
-{% highlight php %}
+```php
 $app->get('/tickets', function (Request $request, Response $response) {
     $this->logger->addInfo("Ticket list");
     $mapper = new TicketMapper($this->db);
@@ -264,7 +264,7 @@ $app->get('/tickets', function (Request $request, Response $response) {
     $response->getBody()->write(var_export($tickets, true));
     return $response;
 });
-{% endhighlight %}
+```
 
 The use of `$app->get()` here means that this route is only available for GET requests; there's an equivalent `$app->post()` call that also takes the route pattern and a callback for POST requests.  There are also [methods for other verbs](http://www.slimframework.com/docs/objects/router.html) - and also the `map()` function for situations where more than one verb should use the same code for a particular route.
 
@@ -284,7 +284,7 @@ This emphasis on Request and Response illustrates Slim 3 being based on the PSR-
 
 Sometimes, our URLs have variables in them that we want to use in our application.  In my bug tracking example, I want to have URLs like `/ticket/42` to refer to the ticket - and Slim has an easy way of parsing out the "42" bit and making it available for easy use in the code.  Here's the route that does exactly that:
 
-{% highlight php %}
+```php
 $app->get('/ticket/{id}', function (Request $request, Response $response, $args) {
     $ticket_id = (int)$args['id'];
     $mapper = new TicketMapper($this->db);
@@ -293,7 +293,7 @@ $app->get('/ticket/{id}', function (Request $request, Response $response, $args)
     $response->getBody()->write(var_export($ticket, true));
     return $response;
 });
-{% endhighlight %}
+```
 
 Look at where the route itself is defined: we write it as `/ticket/{id}`.  When we do this, the route will take the portion of the URL from where the `{id}` is declared, and it becomes available as `$args['id']` inside the callback.
 
@@ -314,14 +314,14 @@ When working with incoming data, we can find this in the body.  We've already se
 
 For data that comes from a web form, Slim will turn that into an array.  My tickets example application has a form for creating new tickets that just sends two fields: "title" and "description".  Here is the first part of the route that receives that data, note that for a POST route use `$app->post()` rather than `$app->get()`:
 
-{% highlight php %}
+```php
 $app->post('/ticket/new', function (Request $request, Response $response) {
     $data = $request->getParsedBody();
     $ticket_data = [];
     $ticket_data['title'] = filter_var($data['title'], FILTER_SANITIZE_STRING);
     $ticket_data['description'] = filter_var($data['description'], FILTER_SANITIZE_STRING);
     // ...
-{% endhighlight %}
+```
 
 The call to `$request->getParsedBody()` asks Slim to look at the request and the `Content-Type` headers of that request, then do something smart and useful with the body.  In this example it's just a form post and so the resulting `$data` array looks very similar to what we'd expect from `$_POST` - and we can go ahead and use the [filter](http://php.net/manual/en/book.filter.php) extension to check the value is acceptable before we use it.  A huge advantage of using the built in Slim methods is that we can test things by injecting different request objects - if we were to use `$_POST` directly, we aren't able to do that.
 
@@ -337,13 +337,13 @@ Since we'll be using the PHP views, we'll need to add this dependency to our pro
 
 In order to be able to render the view, we'll first need to create a view and make it available to our application; we do that by adding it to the DIC.  The code we need goes with the other DIC additions near the top of `src/public/index.php` and it looks like this:
 
-{% highlight php %}
+```php
 $container['view'] = new \Slim\Views\PhpRenderer("../templates/");
-{% endhighlight %}
+```
 
 Now we have a `view` element in the DIC, and by default it will look for its templates in the `src/templates/` directory.  We can use it to render templates in our actions - here's the ticket list route again, this time including the call to pass data into the template and render it:
 
-{% highlight php %}
+```php
 $app->get('/tickets', function (Request $request, Response $response) {
     $this->logger->addInfo("Ticket list");
     $mapper = new TicketMapper($this->db);
@@ -352,7 +352,7 @@ $app->get('/tickets', function (Request $request, Response $response) {
     $response = $this->view->render($response, "tickets.phtml", ["tickets" => $tickets]);
     return $response;
 });
-{% endhighlight %}
+```
 
 The only new part here is the penultimate line where we set the `$response` variable.  Now that the `view` is in the DIC, we can refer to it as `$this->view`.  Calling `render()` needs us to supply three arguments: the `$response` to use, the template file (inside the default templates directory), and any data we want to pass in.  Response objects are *immutable* which means that the call to `render()` won't update the response object; instead it will return us a new object which is why it needs to be captured like this.  This is always true when you operate on the response object.
 
@@ -360,7 +360,7 @@ When passing the data to templates, you can add as many elements to the array as
 
 As an example, here's a snippet from the template that displays the ticket list (i.e. the code from `src/templates/tickets.phtml` - which uses [Pure.css](http://purecss.io/) to help cover my lack of frontend skills):
 
-{% highlight php %}
+```php
 <h1>All Tickets</h1>
 
 <p><a href="/ticket/new">Add new ticket</a></p>
@@ -386,7 +386,7 @@ As an example, here's a snippet from the template that displays the ticket list 
 
 <?php endforeach; ?>
 </table>
-{% endhighlight %}
+```
 
 In this case, `$tickets` is actually a `TicketEntity` class with getters and setters, but if you passed in an array, you'd be able to access it using array rather than object notation here.
 
@@ -396,17 +396,17 @@ Did you notice something fun going on with `$router->pathFor()` right at the end
 
 When we create a route, we can give it a name by calling `->setName()` on the route object.  In this case, I am adding the name to the route that lets me view an individual ticket so that I can quickly create the right URL for a ticket by just giving the name of the route, so my code now looks something like this (just the changed bits shown here):
 
-{% highlight php %}
+```php
 $app->get('/ticket/{id}', function (Request $request, Response $response, $args) {
     // ...
 })->setName("ticket-detail");
-{% endhighlight %}
+```
 
 To use this in my template, I need to make the router available in the template that's going to want to create this URL, so I've amended the `tickets/` route to pass a router through to the template by changing the render line to look like this:
 
-{% highlight php %}
+```php
     $response = $this->view->render($response, "tickets.phtml", ["tickets" => $tickets, "router" => $this->router]);
-{% endhighlight %}
+```
 
 With the `/tickets/{id}` route having a friendly name, and the router now available in our template, this is what makes the `pathFor()` call in our template work.  By supplying the `id`, this gets used as a named placeholder in the URL pattern, and the correct URL for linking to that route with those values is created.  This feature is brilliant for readable template URLs and is even better if you ever need to change a URL format for any reason - no need to grep templates to see where it's used.  This approach is definitely recomended, especially for links you'll use a lot.
 

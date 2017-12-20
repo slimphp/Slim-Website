@@ -4,7 +4,7 @@ title: Application
 
 The Application, (or `Slim\App`) is the entry point to your Slim application and is used to register the routes that link to your callbacks or controllers.
 
-{% highlight php %}
+```php
 // instantiate the App object
 $app = new \Slim\App();
 
@@ -15,7 +15,7 @@ $app->get('/', function ($request, $response, $args) {
 
 // Run application
 $app->run();
-{% endhighlight %}
+```
 
 ## Application Configuration
 
@@ -28,7 +28,7 @@ configuration key. You can also add your application-specific settings.
 For example, we can set the Slim setting `displayErrorDetails` to true and also configure
 Monolog like this:
 
-{% highlight php %}
+```php
 $config = [
     'settings' => [
         'displayErrorDetails' => true,
@@ -41,32 +41,32 @@ $config = [
     ],
 ];
 $app = new \Slim\App($config);
-{% endhighlight %}
+```
 
 
 ### Retrieving Settings
 
 As the settings are stored in the DI container so you can access them via the `settings` key in container factories. For example:
 
-{% highlight php %}
+```php
 $loggerSettings = $container->get('settings')['logger'];
-{% endhighlight %}
+```
 
 You can also access them in route callables via `$this`:
 
-{% highlight php %}
+```php
 $app->get('/', function ($request, $response, $args) {
     $loggerSettings = $this->get('settings')['logger'];
     // ...
 });
-{% endhighlight %}
+```
 
 ### Updating Settings
 
 If you need to add or update settings stored in the DI container *after* the container is initialized,
 you can use the `replace` method on the settings container. For example:
 
-{% highlight php %}
+```php
 $settings = $container->get('settings');
 $settings->replace([
         'displayErrorDetails' => true,
@@ -74,7 +74,7 @@ $settings->replace([
         'debug' => true
     ]);
 ]);
-{% endhighlight %}
+```
 
 ## Slim Default Settings
 

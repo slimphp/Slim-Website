@@ -28,7 +28,7 @@ interface methods (these methods typically have a `with` prefix). For example,
 a PSR 7 Response object has a `withHeader($name, $value)` method that returns a
 cloned value object with the new HTTP header.
 
-{% highlight php %}
+```php
 <?php
 $app = new \Slim\App;
 $app->get('/foo', function ($req, $res, $args) {
@@ -38,7 +38,7 @@ $app->get('/foo', function ($req, $res, $args) {
     );
 });
 $app->run();
-{% endhighlight %}
+```
 
 The PSR 7 interface provides these methods to transform Request and Response
 objects:

@@ -19,7 +19,7 @@ A Slim Framework application's PHP Error handler is a Pimple service. You can
 substitute your own PHP Error handler by defining a custom Pimple factory
 method with the application container.
 
-{% highlight php %}
+```php
 // Create Slim
 $app = new \Slim\App();
 // get the app's di-container
@@ -32,7 +32,7 @@ $c['phpErrorHandler'] = function ($c) {
             ->write('Something went wrong!');
     };
 };
-{% endhighlight %}
+```
 
 > **N.B** Check out [Not Found](/docs/handlers/not-found.html) docs for
 > pre-slim creation method using a new instance of `\Slim\Container`

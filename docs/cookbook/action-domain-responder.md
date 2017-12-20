@@ -12,7 +12,7 @@ So the Action part of Action-Domain-Responder already exists for Slim. All that 
 
 Let's begin by extracting the Domain logic. In the original tutorial, the Actions use two data-source mappers directly, and embed some business logic as well. We can create a Service Layer class called `TicketService` and move those operations from the Actions into the Domain. Doing so gives us this class:
 
-{% highlight php %}
+```php
 class TicketService
 {
     protected $ticket_mapper;
@@ -57,22 +57,22 @@ class TicketService
         return $ticket;
     }
 }
-{% endhighlight %}
+```
 
 We create a container object for it in `index.php` like so:
 
-{% highlight php %}
+```php
 $container['ticket_service'] = function ($c) {
     return new TicketService(
         new TicketMapper($c['db']),
         new ComponentMapper($c['db'])
     );
 };
-{% endhighlight %}
+```
 
 And now the Actions can use the `TicketService` instead of performing domain logic directly:
 
-{% highlight php %}
+```php
 $app->get('/tickets', function (Request $request, Response $response) {
     $this->logger->addInfo("Ticket list");
     $tickets = $this->ticket_service->getTickets();
@@ -110,7 +110,7 @@ $app->get('/ticket/{id}', function (Request $request, Response $response, $args)
     );
     return $response;
 })->setName('ticket-detail');
-{% endhighlight %}
+```
 
 One benefit here is that we can now test the domain activities separately from the actions. We can begin to do something more like integration testing, even unit testing, instead of end-to-end system testing.
 
@@ -120,7 +120,7 @@ In the case of the tutorial application, the presentation work is so straightfor
 
 Extracting the presentation work to a separate Responder, so that response-building is completely removed from the Action, looks like this:
 
-{% highlight php %}
+```php
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\PhpRenderer;
 
@@ -165,19 +165,19 @@ class TicketResponder
         return $response->withRedirect("/tickets");
     }
 }
-{% endhighlight %}
+```
 
 We can then add the `TicketResponder` object to the container in `index.php`:
 
-{% highlight php %}
+```php
 $container['ticket_responder'] = function ($c) {
     return new TicketResponder($c['view']);
 };
-{% endhighlight %}
+```
 
 And finally we can refer to the Responder, instead of just the template system, in the Actions:
 
-{% highlight php %}
+```php
 $app->get('/tickets', function (Request $request, Response $response) {
     $this->logger->addInfo("Ticket list");
     $tickets = $this->ticket_service->getTickets();
@@ -208,7 +208,7 @@ $app->get('/ticket/{id}', function (Request $request, Response $response, $args)
         ["ticket" => $ticket]
     );
 })->setName('ticket-detail');
-{% endhighlight %}
+```
 
 Now we can test the response-building work separately from the domain work.
 

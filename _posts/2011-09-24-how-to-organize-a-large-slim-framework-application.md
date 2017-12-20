@@ -12,7 +12,7 @@ You can build a Slim Framework web application with only a single file. Over tim
 
 Here’s the directory structure I use for my own Slim Framework applications:
 
-{% highlight text %}
+```
 public_html/
     .htaccess
     index.php
@@ -27,7 +27,7 @@ app/
 vendor/
 lib/
 data/
-{% endhighlight %}
+```
 
 `public_html/`
 :   Contains the Slim Framework’s .htaccess and index.php. files. The index.php file is where you instantiate and run your Slim Framework application. Public assets (stylesheets, images, and scripts) are in this directory, too.
@@ -48,12 +48,12 @@ data/
 
 An example Slim Framework application may have an admin control panel, members-only pages, and public pages (e.g. log in, log out, and register). As shown in the filesystem layout above, I separate related routes into separate files. Admin routes go into `app/routes/admin.php`. Member routes go into `app/routes/member.php`. Session management routes (e.g. log in, log out, register) go into `app/routes/session.php`. These separate route files are required by `public_html/index.php` like this:
 
-{% highlight php %}
+```php
 $app = new Slim();
 require '../app/routes/session.php';
 require '../app/routes/member.php';
 require '../app/routes/admin.php';
 $app->run();
-{% endhighlight %}
+```
 
 Instead of having one very large `index.php` file, there are several smaller files that make building a larger Slim Framework application much easier.

@@ -18,12 +18,12 @@ The Router and View objects remain behind-the-scenes. The Request and Response o
 
 After instantiation, Slim application routes are defined. A Route is a collection containing a URI, controller code, and one or more HTTP methods to which the Route responds.
 
-{% highlight php %}
+```php
 $app = new Slim(); $app->get('/foo', function () {
     //Controller code
 });
 $app->run();
-{% endhighlight %}
+```
 
 This example demonstrates a Route mapping the URI “/foo” to specific controller code for an HTTP GET request. The `$app->get()`, `$app->post()`, `$app->put()`, `$app->delete()`, `$app->options()`, or `$app->map()` Slim application instance methods may be used to define application routes that respond to the respective HTTP request methods.
 
