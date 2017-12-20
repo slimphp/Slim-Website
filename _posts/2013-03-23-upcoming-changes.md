@@ -51,7 +51,7 @@ The following Response object methods and interfaces will be deprecated in the n
 
 The next stable release will introduce the \Slim\Helper\Set interface. This interface will be used by many of the collections in a Slim application: cookies, headers, etc. This interface will help unify and simplify many of Slim’s methods and interfaces. The \Slim\Helper\Set interface is:
 
-{% highlight php %}
+```php
 __construct(array $items);
 set(string $key, mixed $value);
 get(string $key, mixed $defaultValue);
@@ -60,7 +60,7 @@ all();
 keys();
 has(string $key);
 remove(string $key);
-{% endhighlight %}
+```
 
 This interface implements \ArrayAccess, \Countable, and \IteratorAggregate.
 

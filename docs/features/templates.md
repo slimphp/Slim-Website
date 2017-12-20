@@ -21,18 +21,18 @@ it's easy to install with Composer like this:
 [twigview]: https://github.com/slimphp/Twig-View
 [twig]: http://twig.sensiolabs.org/
 
-<figure>
-{% highlight text %}
+<figure markdown="1">
+```
 composer require slim/twig-view
-{% endhighlight %}
+```
 <figcaption>Figure 1: Install slim/twig-view component.</figcaption>
 </figure>
 
 Next, you need to register the component as a service on the Slim app's
 container like this:
 
-<figure>
-{% highlight php %}
+<figure markdown="1">
+```php
 <?php
 // Create app
 $app = new \Slim\App();
@@ -52,7 +52,7 @@ $container['view'] = function ($container) {
 
     return $view;
 };
-{% endhighlight %}
+```
 <figcaption>Figure 2: Register slim/twig-view component with container.</figcaption>
 </figure>
 
@@ -61,8 +61,8 @@ Note : "cache" could be set to false to disable it, see also 'auto_reload' optio
 Now you can use the `slim/twig-view` component service inside an app route
 to render a template and write it to a PSR 7 Response object like this:
 
-<figure>
-{% highlight php %}
+<figure markdown="1">
+```php
 // Render Twig template in route
 $app->get('/hello/{name}', function ($request, $response, $args) {
     return $this->view->render($response, 'profile.html', [
@@ -72,7 +72,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 
 // Run app
 $app->run();
-{% endhighlight %}
+```
 <figcaption>Figure 3: Render template with slim/twig-view container service.</figcaption>
 </figure>
 
@@ -97,7 +97,7 @@ The second argument's keys should correspond to the selected route's pattern
 placeholders. This is an example Twig template that draws a link URL
 for the "profile" named route shown in the example Slim application above.
 
-{% highlight html %}
+```html
 {% raw %}
 {% extends "layout.html" %}
 
@@ -108,7 +108,7 @@ for the "profile" named route shown in the example Slim application above.
 </ul>
 {% endblock %}
 {% endraw %}
-{% endhighlight %}
+```
 
 ## The slim/php-view component
 
@@ -118,17 +118,17 @@ Composer like this:
 
 [phpview]: https://github.com/slimphp/PHP-View
 
-<figure>
-{% highlight text %}
+<figure markdown="1">
+```
 composer require slim/php-view
-{% endhighlight %}
+```
 <figcaption>Figure 4: Install slim/php-view component.</figcaption>
 </figure>
 
 To register this component as a service on Slim App's container, do this:
 
-<figure>
-{% highlight php %}
+<figure markdown="1">
+```php
 <?php
 // Create app
 $app = new \Slim\App();
@@ -140,14 +140,14 @@ $container = $app->getContainer();
 $container['view'] = function ($container) {
     return new \Slim\Views\PhpRenderer('path/to/templates/with/trailing/slash/');
 };
-{% endhighlight %}
+```
 <figcaption>Figure 5: Register slim/php-view component with container.</figcaption>
 </figure>
 
 Use the view component to render a PHP view like this:
 
-<figure>
-{% highlight php %}
+<figure markdown="1">
+```php
 
 // Render PHP template in route
 $app->get('/hello/{name}', function ($request, $response, $args) {
@@ -158,7 +158,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 
 // Run app
 $app->run();
-{% endhighlight %}
+```
 <figcaption>Figure 6: Render template with slim/php-view container service.</figcaption>
 </figure>
 

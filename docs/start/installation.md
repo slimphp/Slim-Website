@@ -14,17 +14,17 @@ Navigate into your project's root directory and execute the bash command
 shown below. This command downloads the Slim Framework and its third-party
 dependencies into your project's `vendor/` directory.
 
-{% highlight bash %}
+```bash
 composer require slim/slim "^3.0"
-{% endhighlight %}
+```
 
 Require the Composer autoloader into your PHP script, and you are ready
 to start using Slim.
 
-{% highlight php %}
+```php
 <?php
 require 'vendor/autoload.php';
-{% endhighlight %}
+```
 
 ## How to Install Composer
 

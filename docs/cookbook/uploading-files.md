@@ -14,8 +14,8 @@ only one uploaded file will be returned for the input name by `getUploadedFiles(
 
 Below is an example HTML form that contains both single and multiple file uploads.
 
-<figure>
-{% highlight php %}
+<figure markdown="1">
+```php
 <!-- make sure the attribute enctype is set to multipart/form-data -->
 <form method="post" enctype="multipart/form-data">
     <!-- upload of a single file -->
@@ -41,15 +41,15 @@ Below is an example HTML form that contains both single and multiple file upload
         <input type="submit"/>
     </p>
 </form>
-{% endhighlight %}
+```
 <figcaption>Figure 1: Example HTML form for file uploads</figcaption>
 </figure>
 
 Uploaded files can be moved to a directory using the `moveTo` method. Below is an example application
 that handles the uploaded files of the HTML form above.
 
-<figure>
-{% highlight php %}
+<figure markdown="1">
+```php
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -121,7 +121,7 @@ function moveUploadedFile($directory, UploadedFile $uploadedFile)
 }
 
 $app->run();
-{% endhighlight %}
+```
 <figcaption>Figure 2: Example Slim applcation to handle the uploaded files</figcaption>
 </figure>
 

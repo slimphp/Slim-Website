@@ -12,7 +12,7 @@ This is _probably_ not appropriate for production applications. You are strongly
 
 The default error handler can also include detailed error diagnostic information. To enable this you need to set the `displayErrorDetails` setting to true:
 
-{% highlight php %}
+```php
 $configuration = [
     'settings' => [
         'displayErrorDetails' => true,
@@ -20,7 +20,7 @@ $configuration = [
 ];
 $c = new \Slim\Container($configuration);
 $app = new \Slim\App($c);
-{% endhighlight %}
+```
 
 ## Custom error handler
 
@@ -30,7 +30,7 @@ There are two ways to inject handlers:
 
 ### Pre App
 
-{% highlight php %}
+```php
 $c = new \Slim\Container();
 $c['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
@@ -40,11 +40,11 @@ $c['errorHandler'] = function ($c) {
     };
 };
 $app = new \Slim\App($c);
-{% endhighlight %}
+```
 
 ### Post App
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $c = $app->getContainer();
 $c['errorHandler'] = function ($c) {
@@ -54,7 +54,7 @@ $c['errorHandler'] = function ($c) {
                              ->write('Something went wrong!');
     };
 };
-{% endhighlight %}
+```
 
 In this example, we define a new `errorHandler` factory that returns a callable. The returned callable accepts three arguments:
 
@@ -68,7 +68,7 @@ The callable **MUST** return a new `\Psr\Http\Message\ResponseInterface` instanc
 
 Error handlers may also be defined as an invokable class.
 
-{% highlight php %}
+```php
 class CustomHandler {
    public function __invoke($request, $response, $exception) {
         return $response
@@ -77,17 +77,17 @@ class CustomHandler {
             ->write('Something went wrong!');
    }
 }
-{% endhighlight %}
+```
 
 and attached like so:
 
-{% highlight php %}
+```php
 $app = new \Slim\App();
 $c = $app->getContainer();
 $c['errorHandler'] = function ($c) {
     return new CustomHandler();
 };
-{% endhighlight %}
+```
 
 This allows us to define more sophisticated handlers or extend/override the
 built-in `Slim\Handlers\*` classes.
@@ -105,9 +105,9 @@ built-in `Slim\Handlers\*` classes.
 
 To completely disable Slim's error handling, simply remove the error handler from the container:
 
-{% highlight php %}
+```php
 unset($app->getContainer()['errorHandler']);
 unset($app->getContainer()['phpErrorHandler']);
-{% endhighlight %}
+```
 
 You are now responsible for handling any exceptions that occur in your application as they will not be handled by Slim.

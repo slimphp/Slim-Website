@@ -56,14 +56,14 @@ Earlier versions also provided secure sessions that were stored in a hashed, enc
 
 Slim Framework logging has also changed from previous versions. In version 1.5.2, there is a Slim_Log class that implements the same public instance methods as before:
 
-{% highlight php %}
+```php
 $log = $app->getLog();
 $app->debug();
 $app->info();
 $app->warn();
 $app->error();
 $app->fatal();
-{% endhighlight %}
+```
 
 Unlike earlier versions, the Slim_Log instance uses a log writer. The log writer implements a public `write()` instance method that accepts a mixed argument and writes the argument to the appropriate output. A log writer may send the logged message to stderr, to a file, to a database, to Twitter, to a remote API, or anywhere else you can imagine. The preferred way to customize your Slim application’s logging is to create a custom log writer that Slim’s Slim_Log instance will use instead of its own. Slim’s default log writer will send logged messages to `php://stderr`.
 

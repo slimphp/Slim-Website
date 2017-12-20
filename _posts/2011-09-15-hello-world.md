@@ -10,7 +10,7 @@ This tutorial demonstrates the typical process for writing a Slim Framework appl
 
 First, instantiate your Slim application. Provide an optional array of settings to configure the application.
 
-{% highlight php %}
+```php
 //With default settings
 $app = new Slim();
 
@@ -21,7 +21,7 @@ $app = new Slim(array(
     'log.level' => 4,
     'view' => 'MyCustomViewClassName'
 ));
-{% endhighlight %}
+```
 
 ## Step 2: Define Routes
 
@@ -29,7 +29,7 @@ Third, define the application’s routes with the methods shown in the example b
 
 I recommend PHP >= 5.3 to enjoy Slim’s support for anonymous functions. If using a lesser PHP version, the final argument may be anything that returns true for `is_callable()`.
 
-{% highlight php %}
+```php
 //GET route
 $app->get('/hello/:name', function ($name) {
     echo "Hello, $name";
@@ -49,12 +49,12 @@ $app->put('/person/:id', function ($id) {
 $app->delete('/person/:id', function ($id) {
     //Delete Person identified by $id
 });
-{% endhighlight %}
+```
 
 ## Step 3: Run The Application
 
 Finally, run your Slim application. This will usually be the final statement executed in the `index.php` file.
 
-{% highlight php %}
+```php
 $app->run();
-{% endhighlight %}
+```

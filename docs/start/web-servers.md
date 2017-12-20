@@ -12,9 +12,9 @@ front-controller file.
 Run the following command in terminal to start localhost web server,
 assuming `./public/` is public-accessible directory with `index.php` file:
 
-{% highlight bash %}
+```bash
 php -S localhost:8888 -t public public/index.php
-{% endhighlight %}
+```
 
 If you are not using `index.php` as your entry point then change appropriately.
 
@@ -23,19 +23,19 @@ If you are not using `index.php` as your entry point then change appropriately.
 Ensure your `.htaccess` and `index.php` files are in the same
 public-accessible directory. The `.htaccess` file should contain this code:
 
-{% highlight text %}
+```
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
-{% endhighlight %}
+```
 
 Make sure your Apache virtual host is configured with the `AllowOverride` option
 so that the `.htaccess` rewrite rules can be used:
 
-{% highlight text %}
+```
 AllowOverride All
-{% endhighlight %}
+```
 
 ## Nginx configuration
 
@@ -46,7 +46,7 @@ is running on port 9000. You should update the `server_name`, `error_log`,
 is the path to your application's public document root directory; your Slim app's
 `index.php` front-controller file should be in this directory.
 
-{% highlight text %}
+```
 server {
     listen 80;
     server_name example.com;
@@ -69,13 +69,13 @@ server {
         fastcgi_pass 127.0.0.1:9000;
     }
 }
-{% endhighlight %}
+```
 
 ## HipHop Virtual Machine
 
 Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the `SourceRoot` setting to point to your Slim app's document root directory.
 
-{% highlight text %}
+```
 Server {
     SourceRoot = /path/to/public/directory
 }
@@ -96,13 +96,13 @@ VirtualHost {
         }
     }
 }
-{% endhighlight %}
+```
 
 ## IIS
 
 Ensure the `Web.config` and `index.php` files are in the same public-accessible directory. The `Web.config` file should contain this code:
 
-{% highlight xml %}
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <system.webServer>
@@ -120,14 +120,14 @@ Ensure the `Web.config` and `index.php` files are in the same public-accessible 
         </rewrite>
     </system.webServer>
 </configuration>
-{% endhighlight %}
+```
 
 ## lighttpd
 
 Your lighttpd configuration file should contain this code (along with other settings you may need). This code requires lighttpd >= 1.4.24.
 
-{% highlight text %}
+```
 url.rewrite-if-not-file = ("(.*)" => "/index.php/$0")
-{% endhighlight %}
+```
 
 This assumes that Slim's `index.php` is in the root folder of your project (www root).

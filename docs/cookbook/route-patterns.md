@@ -8,7 +8,7 @@ For GET requests a permanent redirect is fine, but for other request methods lik
 
 If you want to redirect/rewrite all URLs that end in a `/` to the non-trailing `/` equivalent, then you can add this middleware:
 
-{% highlight php %}
+```php
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -30,12 +30,12 @@ $app->add(function (Request $request, Response $response, callable $next) {
 
     return $next($request, $response);
 });
-{% endhighlight %}
+```
 
 Alternatively, consider [oscarotero/psr7-middlewares' TrailingSlash](//github.com/oscarotero/psr7-middlewares#trailingslash) middleware which also allows you to force a trailing slash to be appended to all URLs:
 
-{% highlight php %}
+```php
 use Psr7Middlewares\Middleware\TrailingSlash;
 
 $app->add(new TrailingSlash(true)); // true adds the trailing slash (false removes it)
-{% endhighlight %}
+```

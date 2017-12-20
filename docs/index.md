@@ -52,8 +52,8 @@ instantiate and configure the Slim application. Next, you define your applicatio
 routes. Finally, you run the Slim application. It's that easy. Here's an
 example application:
 
-<figure>
-{% highlight php %}
+<figure markdown="1">
+```php
 <?php
 // Create and configure Slim app
 $config = ['settings' => [
@@ -68,7 +68,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 
 // Run app
 $app->run();
-{% endhighlight %}
+```
 <figcaption>Figure 1: Example Slim application</figcaption>
 </figure>
 

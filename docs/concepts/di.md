@@ -12,26 +12,26 @@ or [PHP-DI](http://php-di.org/doc/frameworks/slim.html).
 You don't _have_ to provide a dependency container. If you do, however, you must
 inject the container instance into the Slim application's constructor.
 
-{% highlight php %}
+```php
 $container = new \Slim\Container;
 $app = new \Slim\App($container);
-{% endhighlight %}
+```
 
 Add a service to Slim container:
 
-{% highlight php %}
+```php
 $container = $app->getContainer();
 $container['myService'] = function ($container) {
     $myService = new MyService();
     return $myService;
 };
-{% endhighlight %}
+```
 
 You can fetch services from your container explicitly or implicitly.
 You can fetch an explicit reference to the container instance from inside a Slim
 application route like this:
 
-{% highlight php %}
+```php
 /**
  * Example GET route
  *
@@ -46,11 +46,11 @@ $app->get('/foo', function ($req, $res, $args) {
 
     return $res;
 });
-{% endhighlight %}
+```
 
 You can implicitly fetch services from the container like this:
 
-{% highlight php %}
+```php
 /**
  * Example GET route
  *
@@ -65,11 +65,11 @@ $app->get('/foo', function ($req, $res, $args) {
 
     return $res;
 });
-{% endhighlight %}
+```
 
 To test if a service exists in the container before using it, use the `has()` method, like this:
 
-{% highlight php %}
+```php
 /**
  * Example GET route
  *
@@ -86,7 +86,7 @@ $app->get('/foo', function ($req, $res, $args) {
 
     return $res;
 });
-{% endhighlight %}
+```
 
 
 Slim uses `__get()` and `__isset()` magic methods that defer to the application's

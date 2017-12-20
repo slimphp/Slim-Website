@@ -14,16 +14,16 @@ The first thing to do is to tweak your settings (`src/settings.php` in the
 skeleton application) and ensure that you do not display full error details to the
 public.
 
-{% highlight php %}
+```php
   'displayErrorDetails' => false, // set to false in production
-{% endhighlight %}
+```
 
 You should also ensure that your PHP installation is configured to not display
 errors with the `php.ini` setting:
 
-{% highlight ini %}
+```ini
 display_errors = 0
-{% endhighlight %}
+```
 
 
 
@@ -46,13 +46,13 @@ If your shared server runs Apache, then you need to create a `.htaccess` file
 in your web server root directory (usually named `htdocs`, `public`, `public_html`
 or `www`) with the following content:
 
-{% highlight apache %}
+```apache
 <IfModule mod_rewrite.c>
    RewriteEngine on
    RewriteRule ^$ public/     [L]
    RewriteRule (.*) public/$1 [L]
 </IfModule>
-{% endhighlight %}
+```
 
 (replace 'public' with the correct name of)
 

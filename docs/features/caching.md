@@ -11,16 +11,16 @@ when and how long application output is retained by client-side caches. You may 
 
 Execute this bash command from your project's root directory:
 
-{% highlight bash %}
+```bash
 composer require slim/http-cache
-{% endhighlight %}
+```
 
 ## Usage
 
 The `slimphp/Slim-HttpCache` component contains a service provider and an application
 middleware. You should add both to your application like this:
 
-{% highlight php %}
+```php
 // Register service provider with the container
 $container = new \Slim\Container;
 $container['cache'] = function () {
@@ -35,7 +35,7 @@ $app->add(new \Slim\HttpCache\Cache('public', 86400));
 
 // Run application
 $app->run();
-{% endhighlight %}
+```
 
 ## ETag
 
@@ -43,13 +43,13 @@ Use the service provider's `withEtag()` method to create a Response object
 with the desired `ETag` header. This method accepts a PSR7 response object,
 and it returns a cloned PSR7 response with the new HTTP header.
 
-{% highlight php %}
+```php
 $app->get('/foo', function ($req, $res, $args) {
     $resWithEtag = $this->cache->withEtag($res, 'abc');
 
     return $resWithEtag;
 });
-{% endhighlight %}
+```
 
 ## Expires
 
@@ -57,13 +57,13 @@ Use the service provider's `withExpires()` method to create a Response object
 with the desired `Expires` header. This method accepts a PSR7 response object,
 and it returns a cloned PSR7 response with the new HTTP header.
 
-{% highlight php %}
+```php
 $app->get('/bar',function ($req, $res, $args) {
     $resWithExpires = $this->cache->withExpires($res, time() + 3600);
 
     return $resWithExpires;
 });
-{% endhighlight %}
+```
 
 ## Last-Modified
 
@@ -71,11 +71,11 @@ Use the service provider's `withLastModified()` method to create a Response obje
 with the desired `Last-Modified` header. This method accepts a PSR7 response object,
 and it returns a cloned PSR7 response with the new HTTP header.
 
-{% highlight php %}
+```php
 //Example route with LastModified
 $app->get('/foobar',function ($req, $res, $args) {
     $resWithLastMod = $this->cache->withLastModified($res, time() - 3600);
 
     return $resWithLastMod;
 });
-{% endhighlight %}
+```

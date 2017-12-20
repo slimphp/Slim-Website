@@ -7,14 +7,14 @@ a component such as [rka-ip-address-middleware](https://github.com/akrabat/rka-i
 
 This component can be installed via composer:
 
-{% highlight bash %}
+```bash
 composer require akrabat/rka-ip-address-middleware
-{% endhighlight %}
+```
 
 To use it, register the middleware with the <code>App</code>, providing a list
 of trusted proxies (e.g. varnish servers) if you are using them.:
 
-{% highlight php %}
+```php
 $checkProxyHeaders = true;
 $trustedProxies = ['10.0.0.1', '10.0.0.2'];
 $app->add(new RKA\Middleware\IpAddress($checkProxyHeaders, $trustedProxies));
@@ -24,7 +24,7 @@ $app->get('/', function ($request, $response, $args) {
 
     return $response;
 });
-{% endhighlight %}
+```
 
 The middleware stores the client's IP address in a request attribute, so access
 is via <code>$request->getAttribute('ip_address')</code>.
