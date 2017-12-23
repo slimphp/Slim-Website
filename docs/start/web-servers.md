@@ -30,8 +30,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
 ```
 
-Make sure your Apache virtual host is configured with the `AllowOverride` option
-so that the `.htaccess` rewrite rules can be used:
+This `.htaccess` file requires URL rewriting. Make sure to enable Apache's mod_rewrite module and your virtual host is configured with the `AllowOverride` option so that the `.htaccess` rewrite rules can be used:
 
 ```
 AllowOverride All
