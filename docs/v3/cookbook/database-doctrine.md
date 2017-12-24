@@ -17,21 +17,33 @@ composer require doctrine/orm:^2.5
 
 ## Provide database credentials
 
-Next, add the database settings alongside your Slim configuration.
+Next, add the Doctrine settings alongside your Slim configuration.
 
 <figure>
 ```php
 <?php
 
+// settings.php
+
+define('APP_ROOT', __DIR__);
+
 return [
     'settings' => [
-        'determineRouteBeforeAppMiddleware' => false,
         'displayErrorDetails' => true,
+        'determineRouteBeforeAppMiddleware' => false,
 
         'doctrine' => [
-            // list all the paths were you keep your annotated entities
-            'paths = [__DIR__ . '/../src/Domain/Entity']
-            'conn' => [
+            // if true, metadata caching is forcefully disabled
+            'dev_mode' => true,
+
+            // path where the compiled metadata info will be cached
+            // make sure the path exists and it is writable
+            'cache_dir' => APP_ROOT . '/var/doctrine',
+
+            // you should add any other path containing annotated entity classes
+            'metadata_dirs' => [APP_ROOT . '/src/Domain'],
+
+            'connection' => [
                 'driver' => 'pdo_mysql',
                 'host' => 'localhost',
                 'port' => 3306,
@@ -41,7 +53,7 @@ return [
                 'charset' => 'utf-8'
             ]
         ]
-    ],
+    ]
 ];
 ```
 <figcaption>Figure 2: Slim settings array.</figcaption>
@@ -49,61 +61,82 @@ return [
 
 ## Define the EntityManager service
 
-Now we define the `EntityManager` service, which is the primary way to interact with Doctrine. Here we show how to configure the metadata reader to work with PHP annotations, which is at the same time the most used mode and the most tricky to set up.
-
-Alternatively XML or YAML can also be used to describe the database schema.
+Now we define the `EntityManager` service, which is the primary way to interact with Doctrine.
+Here we show how to configure the metadata reader to work with PHP annotations, which is at the
+same time the most used mode and the most tricky to set up. Alternatively, XML or YAML can also
+be used to describe the database schema.
 
 <figure>
 ```php
+<?php
+
+// bootstrap.php
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\Setup;
+use Slim\Container;
 
-$container[EntityManager::class] = function ($container) {
+require_once __DIR__ . '/vendor/autoload.php';
+
+$container = new Container(require __DIR__ . '/settings.php');
+
+$container[EntityManager::class] = function (Container $container): EntityManager {
     $config = Setup::createAnnotationMetadataConfiguration(
-        $container['settings']['doctrine']['paths'], true
+        $container['settings']['doctrine']['metadata_dirs'],
+        $container['settings']['doctrine']['dev_mode']
     );
-    
+
     $config->setMetadataDriverImpl(
         new AnnotationDriver(
             new AnnotationReader,
-            $container['settings']['doctrine']['paths']
+            $container['settings']['doctrine']['metadata_dirs']
+        )
+    );
+
+    $config->setMetadataCacheImpl(
+        new FilesystemCache(
+            $container['settings']['doctrine']['cache_dir']
         )
     );
 
     return EntityManager::create(
-        $container['settings']['doctrine']['conn'], $config
+        $container['settings']['doctrine']['connection'],
+        $config
     );
 };
+
+return $container;
 ```
 <figcaption>Figure 3: Defining the EntityManager service.</figcaption>
 </figure>
 
 ## Create the Doctrine console
 
-To be able to automatically run database migrations, validate class annotations and so on you need to create the Doctrine CLI application.
-
-In order to do so create a new, plain PHP file, pass it the container and invoke `ConsoleRunner::run()` passing it the `EntityManager` we just defined, like so:
+To run database migrations, validate class annotations and so on you will use the `doctrine` CLI application that is
+already present at `vendor/bin`. But in order to work, this script needs a [`cli-config.php`](http://docs.doctrine-project.org/en/latest/reference/configuration.html#setting-up-the-commandline-tool)
+file at the root of the project telling it how to find the `EntityManager` we just set up:
 
 <figure>
 ```php
 <?php
 
-// bin/doctrine.php
+// cli-config.php
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Slim\Container;
 
-/** @var \Slim\Container $cnt */
-$container = require_once __DIR__ . '/../bootstrap.php';
+/** @var Container $container */
+$container = require_once __DIR__ . '/bootstrap.php';
 
 ConsoleRunner::run(
     ConsoleRunner::createHelperSet($container[EntityManager::class])
 );
 ```
-<figcaption>Figure 4: Creating Doctrine's console app.</figcaption>
+<figcaption>Figure 4: Enabling Doctrine's console app.</figcaption>
 </figure>
 
 Take a moment to verify that the console app works. When properly configured, its output will look more or less like this:
@@ -111,7 +144,7 @@ Take a moment to verify that the console app works. When properly configured, it
 
 <figure>
 ```bash
-$ php bin/doctrine.php
+$ php vendor/bin/doctrine
 Doctrine Command Line Interface 2.5.12
 
 Usage:
@@ -153,7 +186,7 @@ Available commands:
 <figcaption>Figure 5: Test-driving Docrine's console application.</figcaption>
 </figure>
 
-If it works, you can now create your database and load the schema by running `php bin/doctrine.php orm:schema-tool:update`
+If it works, you can now create your database and load the schema by running `php vendor/bin/doctrine orm:schema-tool:update`
 
 ## Using the EntityManager in our own code
 
