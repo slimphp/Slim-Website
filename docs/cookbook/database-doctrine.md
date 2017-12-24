@@ -9,9 +9,9 @@ This cookbook entry describes how to integrate from scratch the widely used [Doc
 The first step is importing the library into the `vendor` directory of your project using [composer](https://getcomposer.org/).
 
 <figure>
-{% highlight bash %}
+```bash
 composer require doctrine/orm:^2.5
-{% endhighlight %}
+```
 <figcaption>Figure 1: Require doctrine in your application.</figcaption>
 </figure>
 
@@ -20,7 +20,7 @@ composer require doctrine/orm:^2.5
 Next, add the database settings alongside your Slim configuration.
 
 <figure>
-{% highlight php %}
+```php
 <?php
 
 return [
@@ -43,7 +43,7 @@ return [
         ]
     ],
 ];
-{% endhighlight %}
+```
 <figcaption>Figure 2: Slim settings array.</figcaption>
 </figure>
 
@@ -54,7 +54,7 @@ Now we define the `EntityManager` service, which is the primary way to interact 
 Alternatively XML or YAML can also be used to describe the database schema.
 
 <figure>
-{% highlight php %}
+```php
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManager;
@@ -77,7 +77,7 @@ $container[EntityManager::class] = function ($container) {
         $container['settings']['doctrine']['conn'], $config
     );
 };
-{% endhighlight %}
+```
 <figcaption>Figure 3: Defining the EntityManager service.</figcaption>
 </figure>
 
@@ -88,7 +88,7 @@ To be able to automatically run database migrations, validate class annotations 
 In order to do so create a new, plain PHP file, pass it the container and invoke `ConsoleRunner::run()` passing it the `EntityManager` we just defined, like so:
 
 <figure>
-{% highlight php %}
+```php
 <?php
 
 // bin/doctrine.php
@@ -102,7 +102,7 @@ $container = require_once __DIR__ . '/../bootstrap.php';
 ConsoleRunner::run(
     ConsoleRunner::createHelperSet($container[EntityManager::class])
 );
-{% endhighlight %}
+```
 <figcaption>Figure 4: Creating Doctrine's console app.</figcaption>
 </figure>
 
@@ -110,7 +110,7 @@ Take a moment to verify that the console app works. When properly configured, it
 
 
 <figure>
-{% highlight bash %}
+```bash
 $ php bin/doctrine.php
 Doctrine Command Line Interface 2.5.12
 
@@ -149,7 +149,7 @@ Available commands:
   orm:schema-tool:drop            Drop the complete database schema of EntityManager Storage Connection or generate the corresponding SQL output.
   orm:schema-tool:update          Executes (or dumps) the SQL needed to update the database schema to match the current mapping metadata.
   orm:validate-schema             Validate the mapping files.
-{% endhighlight %}
+```
 <figcaption>Figure 5: Test-driving Docrine's console application.</figcaption>
 </figure>
 
@@ -160,7 +160,7 @@ If it works, you can now create your database and load the schema by running `ph
 Congratulations! Now you can already manage your database from the command line, and use the `EntityManager` wherever you need it.
 
 <figure>
-{% highlight php %}
+```php
 
 $container[UserRepository::class] = function ($container) {
     return new UserRepository($container[EntityManager::class]);
@@ -190,7 +190,7 @@ class UserRepository
         return $user;
     }
 }
-{% endhighlight %}
+```
 <figcaption>Figure 6: Using the EntityManager service.</figcaption>
 </figure>
 
