@@ -1,12 +1,12 @@
 ---
-title: Trailing / in route patterns
+title: '/' em padrões de rota
 ---
 
-Slim treats a URL pattern with a trailing slash as different to one without. That is, `/user` and `/user/` are different and so can have different callbacks attached.
+Slim trata um padrão de URL com uma barra final como diferente de um sem. Ou seja, `/user` e `/user/` são diferentes e, portanto, podem ter diferentes encaminhamentos em anexo.
 
-For GET requests a permanent redirect is fine, but for other request methods like POST or PUT the browser will send the second request with the GET method. To avoid this you simply need to remove the trailing slash and pass the manipulated url to the next middleware.
+Para pedidos GET, um redirecionamento permanente está correto, mas para outros métodos de solicitação como POST ou PUT, o navegador enviará o segundo pedido com o método GET. Para evitar isso, você simplesmente precisa remover a barra diagonal e passar o URL manipulado para o próximo middleware.
 
-If you want to redirect/rewrite all URLs that end in a `/` to the non-trailing `/` equivalent, then you can add this middleware:
+Se você quiser redirecionar/reescrever todos os URLs que terminam em `/` para o equivalente não-trailing `/`, você pode adicionar este middleware:
 
 ```php
 use Psr\Http\Message\RequestInterface as Request;
@@ -32,10 +32,9 @@ $app->add(function (Request $request, Response $response, callable $next) {
 });
 ```
 
-Alternatively, consider [oscarotero/psr7-middlewares' TrailingSlash](//github.com/oscarotero/psr7-middlewares#trailingslash) middleware which also allows you to force a trailing slash to be appended to all URLs:
-
+Em alternativa, considere o middleware [oscarotero/psr7-middlewares' TrailingSlash] (//github.com/oscarotero/psr7-middlewares#trailingslash) que também permite que você force uma barra final para ser anexada a todos os URLs:
 ```php
 use Psr7Middlewares\Middleware\TrailingSlash;
 
-$app->add(new TrailingSlash(true)); // true adds the trailing slash (false removes it)
+$app->add(new TrailingSlash(true)); // true adiciona a barra diagonal (false remove)
 ```
