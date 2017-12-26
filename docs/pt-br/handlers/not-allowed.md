@@ -1,19 +1,19 @@
 ---
-title: 405 Not Allowed Handler
+title: 405 Handheld Não Permitido
 ---
 
-If your Slim Framework application has a route that matches the current HTTP request URI **but NOT the HTTP request method**, the application invokes its Not Allowed handler and returns a `HTTP/1.1 405 Not Allowed` response to the HTTP client.
+Se o seu aplicativo Slim Framework tiver uma rota que corresponda ao URI da solicitação HTTP atual **, mas NÃO o método de solicitação HTTP **, o aplicativo invoca o manipulador Não Permitido e retorna uma resposta `HTTP / 1.1 405 Não Permitida 'ao cliente HTTP.
 
-## Default Not Allowed handler
+## Padrão manipulador não permitido
 
-Each Slim Framework application has a default Not Allowed handler. This handler sets the Response status to `405`, it sets the content type to `text/html`, it adds a `Allowed:` HTTP header with a comma-delimited list of allowed HTTP methods, and it writes a simple explanation to the Response body.
+Cada aplicativo Slim Framework possui um manipulador padrão não permitido. Este manipulador define o status da resposta para `405`, ele define o tipo de conteúdo como` text / html`, ele adiciona um cabeçalho HTTP `Permitido:` com uma lista delimitada por vírgulas dos métodos HTTP permitidos e ele escreve uma explicação simples para o órgão de resposta.
 
-## Custom Not Allowed handler
+## Manipulador personalizado não permitido
 
-A Slim Framework application's Not Allowed handler is a Pimple service. You can substitute your own Not Allowed handler by defining a custom Pimple factory method with the application container.
+O manipulador não permitido do aplicativo Slim Framework é um serviço de espinha dorsal. Você pode substituir o seu próprio manipulador Não Permitido, definindo um método de fábrica de espuma personalizado com o recipiente do aplicativo.
 
-```php
-// Create Slim
+`` `php
+// Criar Slim
 $app = new \Slim\App();
 // get the app's di-container
 $c = $app->getContainer();
@@ -28,12 +28,12 @@ $c['notAllowedHandler'] = function ($c) {
 };
 ```
 
-> **N.B** Check out [Not Found](/docs/handlers/not-found.html) docs for pre-slim creation method using a new instance of `\Slim\Container`
+> ** N.B ** Confira [Não Encontrado] (/docs/handlers/not-found.html) docs para método de criação pré-slim usando uma nova instância de `\Slim\Container`
 
-In this example, we define a new `notAllowedHandler` factory that returns a callable. The returned callable accepts three arguments:
+Neste exemplo, definimos uma nova fábrica `notAllowedHandler` que retorna um callable. O retornável retornável aceita três argumentos:
 
-1. A `\Psr\Http\Message\ServerRequestInterface` instance
-2. A `\Psr\Http\Message\ResponseInterface` instance
-3. A numeric array of allowed HTTP method names
+1. Uma instância `\Psr\Http\Message\ServerRequestInterface`
+2. Uma instância `\Psr\Http\Message\ResponseInterface`
+3. Um array numérico de nomes de métodos HTTP permitidos
 
-The callable **MUST** return an appropriate `\Psr\Http\Message\ResponseInterface` instance.
+O chamado ** TEM ** que retorna uma instância `\Psr\Http\Message\ResponseInterface`.
