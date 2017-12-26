@@ -1,14 +1,14 @@
 ---
-title: Retrieving Current Route
+title: Recuperando a rota atual
 ---
 
-If you ever need to get access to the current route within your application all you have to do is call the request class' `getAttribute` method with an argument of `'route'` and it will return the current route, which is an instance of the `Slim\Route` class.
+Se você precisar acessar a rota atual em seu aplicativo, basta chamar o método 'getAttribute' da classe de solicitação com um argumento de `'route' 'e ele retornará a rota atual, que é uma instância da classe `Slim\Route`.
 
-From there you can get the route's name by using `getName()` or get the methods supported by this route via `getMethods()`, etc.
+A partir daí, você pode obter o nome da rota usando `getName()` ou obter os métodos suportados por esta rota via `getMethods ()`, etc.
 
- Note: If you need to access the route from within your app middleware you must set `'determineRouteBeforeAppMiddleware'` to true in your configuration otherwise `getAttribute('route')` will return null. Also `getAttribute('route')` will return null on non existent routes.
+  Nota: Se você precisa acessar a rota a partir do middleware do seu aplicativo, você deve configurar `'eterminRouteBeforeAppMiddleware 'para verdadeiro na sua configuração, caso contrário,` getAttribute ('route') `retornará nulo. Também `getAttribute('route')` retornará nulo em rotas inexistentes.
 
-Example:
+Exemplo:
 ```php
 use Slim\App;
 use Slim\Exception\NotFoundException;
