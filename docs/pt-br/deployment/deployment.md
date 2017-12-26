@@ -1,25 +1,24 @@
 ---
-title: Deployment
+title: Implante
 ---
-Congratulations! if you have made it this far, that means you have successfully built something 
-awesome using Slim. However, the time to party has not come yet. We still have to push our 
-application to the production server.
+Parabéns! Se você chegou até aqui, isso significa que você criou com sucesso 
+algo incrível usando o Slim. No entanto, o tempo de festa ainda não chegou. Ainda 
+temos que empurrar nossa aplicação para o servidor de produção.
 
-There are many ways to do this that are beyond the scope of this documentation. In 
-this section, we provide some notes for various set-ups.
+Há muitas maneiras de fazer isso que estão além do escopo desta documentação. Nesta seção, 
+fornecemos algumas notas para várias configurações.
 
-### Disable error display in production
+### Desativar exibição de erro em produção
 
-The first thing to do is to tweak your settings (`src/settings.php` in the 
-skeleton application) and ensure that you do not display full error details to the
-public.
+A primeira coisa a fazer é ajustar suas configurações (`src/settings.php` no aplicativo de 
+esqueleto) e garantir que você não exiba detalhes de erro completo para o público.
 
 ```php
-  'displayErrorDetails' => false, // set to false in production
+  'displayErrorDetails' => false, // configurado como falso em produção
 ```
 
-You should also ensure that your PHP installation is configured to not display
-errors with the `php.ini` setting:
+Você também deve garantir que sua instalação PHP esteja configurada para não 
+exibir erros com a configuração `php.ini`:
 
 ```ini
 display_errors = 0
@@ -27,24 +26,24 @@ display_errors = 0
 
 
 
-## Deploying to your own server
+## Implantando em seu próprio servidor
 
-If you control your server, then you should set up a deployment process using any 
-one of the many deployment system such as:
+Se você controla seu servidor, então você deve configurar um processo de implantação 
+usando qualquer um dos muitos sistemas de implantação, como:
 
 * Deploybot
 * Capistrano
-* Script controlled with Phing, Make, Ant, etc.
+* Script controlado com Phing, Make, Ant, etc.
 
 
-Review the [Web Servers](/docs/start/web-servers.html) documentation to configure your webserver.
+Revise a documentação [Web Servers] (/docs/start/web-servers.html) para configurar o seu webserver.
 
 
-## Deploying to a shared server
+## Implantando para um servidor compartilhado
 
-If your shared server runs Apache, then you need to create a `.htaccess` file 
-in your web server root directory (usually named `htdocs`, `public`, `public_html`
-or `www`) with the following content:
+Se o seu servidor compartilhado executar o Apache, então você precisa criar um arquivo 
+`.htaccess` no diretório raiz do seu servidor web (normalmente chamado` htdocs`, `public`,
+`public_html`or `www`) com o seguinte conteúdo:
 
 ```apache
 <IfModule mod_rewrite.c>
@@ -54,9 +53,8 @@ or `www`) with the following content:
 </IfModule>
 ```
 
-(replace 'public' with the correct name of)
+(substituia 'public' pelo nome correto)
 
-Now upload all the files that make up your Slim project to the webserver. As you
-are on shared hosting, this is probably done via FTP and you can use any FTP client, 
-such as Filezilla to do this.
-
+Agora, carregue todos os arquivos que compõem seu projeto Slim para o servidor web. 
+Como você está em hospedagem compartilhada, isso provavelmente é feito via FTP e você 
+pode usar qualquer cliente de FTP, como o Filezilla para fazer isso.
