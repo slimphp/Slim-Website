@@ -1,18 +1,18 @@
 ---
-title: Retrieving IP address
+title: Recuperando o endereço IP
 ---
 
-The best way to retrieve the current IP address of the client is via middleware using
-a component such as [rka-ip-address-middleware](https://github.com/akrabat/rka-ip-address-middleware).
+A melhor maneira de recuperar o endereço IP atual do cliente é via middleware usando um componente como [rka-ip-address-middleware] (https://github.com/akrabat/rka-ip-address-middleware).
 
-This component can be installed via composer:
+Este componente pode ser instalado via composer:
 
 ```bash
 composer require akrabat/rka-ip-address-middleware
 ```
 
-To use it, register the middleware with the <code>App</code>, providing a list
-of trusted proxies (e.g. varnish servers) if you are using them.:
+
+Para usá-lo, registre o middleware com a aplicação <code> </ code>, fornecendo uma 
+lista de proxies confiáveis (por exemplo, servidores de vernizes) se você estiver usando-os .:
 
 ```php
 $checkProxyHeaders = true;
@@ -26,5 +26,5 @@ $app->get('/', function ($request, $response, $args) {
 });
 ```
 
-The middleware stores the client's IP address in a request attribute, so access
-is via <code>$request->getAttribute('ip_address')</code>.
+O middleware armazena o endereço IP do cliente em um atributo de solicitação, então o 
+acesso é via <code>$request->getAttribute('ip_address')</code>.
