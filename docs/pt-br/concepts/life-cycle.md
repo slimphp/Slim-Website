@@ -1,33 +1,33 @@
 ---
-title: Lifecycle
+title: Ciclo de vida
 ---
 
-## Application Lifecycle
+## Ciclo de vida do aplicativo
 
-### 1. Instantiation
+### 1. Instanciação
 
-First, you instantiate the `\Slim\App` class. This is the Slim application object. During instantiation, Slim registers default services for each application dependency. The application constructor accepts an optional settings array that configures the application's behavior.
+Em primeiro lugar, você instancia a classe `\Slim\App`. Este é o objeto da aplicação Slim. Durante a instanciação, o Slim registra os serviços padrão para cada dependência do aplicativo. O construtor de aplicativos aceita uma array de configurações opcional que configura o comportamento do aplicativo.
 
-### 2. Route Definitions
+### 2. Definições da rota
 
-Second, you define routes using the application instance's `get()`, `post()`, `put()`, `delete()`, `patch()`, `head()`, and `options()` routing methods. These instance methods register a route with the application's Router object. Each routing method returns the Route instance so you can immediately invoke the Route instance's methods to add middleware or assign a name.
+Em segundo lugar, você define rotas usando os métodos de roteamento da instância da aplicação, `get()`, `post()`, `put()`, `delete()`, `patch()`, `head()` e `options()`. Esses métodos de instância registram uma rota com o objeto do roteador do aplicativo. Cada método de roteamento retorna a instância da Rota para que você possa invocar imediatamente os métodos da instância da Rota para adicionar middleware ou atribuir um nome.
 
-### 3. Application Runner
+### 3. Runner da aplicação
 
-Third, you invoke the application instance's `run()` method. This method starts the following process:
+Em terceiro lugar, invoca o método `run()` da instância do aplicativo. Esse método inicia o processo a seguir:
 
-#### A. Enter Middleware Stack
+#### A. Digite Middleware Stack
 
-The `run()` method begins to inwardly traverse the application's middleware stack. This is a concentric structure of middleware layers that receive (and optionally manipulate) the Environment, Request, and Response objects before (and after) the Slim application runs. The Slim application is the inner-most layer of the concentric middleware structure. Each middleware layer is invoked inwardly beginning from the outer-most layer.
+O método `run()` começa a atravessar para dentro da middleware da aplicação. Esta é uma estrutura concêntrica de camadas de middleware que recebem (e, opcionalmente, manipulam) os objetos Environment, Request e Response antes (e depois) que o aplicativo Slim é executado. O aplicativo Slim é a camada mais interna da estrutura do middleware concêntrico. Cada camada de middleware é invocada internamente a partir da camada mais externa.
 
-#### B. Run Application
+#### B. Execute a aplicação
 
-After the `run()` method reaches the inner-most middleware layer, it invokes the application instance and dispatches the current HTTP request to the appropriate application route object. If a route matches the HTTP method and URI, the route's middleware and callable are invoked. If a matching route is not found, the Not Found or Not Allowed handler is invoked.
+Depois que o método `run()` atingir a camada de middleware mais interno, invoca a instância do aplicativo e envia a solicitação HTTP atual para o objeto de rota de aplicativo apropriado. Se uma rota corresponder ao método HTTP e ao URI, o middleware da rota e o chamante são invocados. Se uma rota correspondente não for encontrada, o manipulador não encontrado ou não permitido é invocado.
 
-#### D. Exit Middleware Stack
+#### D. Feche Middleware Stack
 
-After the application dispatch process completes, each middleware layer reclaims control outwardly, beginning from the inner-most layer.
+Após a conclusão do processo de despacho do aplicativo, cada camada de middleware recupera o controle externo, começando pela camada mais interna.
 
-#### E. Send HTTP Response
+#### E. Envie resposta HTTP
 
-After the outer-most middleware layer cedes control, the application instance prepares, serializes, and returns the HTTP response. The HTTP response headers are set with PHP's native `header()` method, and the HTTP response body is output to the current output buffer.
+Depois que a camada de middleware mais externa passa o controle, a instância do aplicativo prepara, serializa e retorna a resposta HTTP. Os cabeçalhos de resposta HTTP são configurados com o método `head()` nativo do PHP e o corpo de resposta HTTP é emitido para o buffer de saída atual.
