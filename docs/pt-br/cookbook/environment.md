@@ -1,67 +1,67 @@
 ---
-title: Getting and Mocking the Environment
+title: Obtendo e zombando do meio ambiente
 ---
 
-The Environment object encapsulates the `$_SERVER` superglobal array and decouples the Slim application from the PHP global environment. Decoupling the Slim application from the PHP global environment lets us create HTTP requests that may (or may not) resemble the global environment. This is particuarly useful for unit testing and initiating sub-requests. You can fetch the current Environment object anywhere in your Slim application like this:
+O objeto Ambiente encapsula a matriz superglobal `$ _SERVER` e dissocia a aplicação Slim do ambiente global do PHP. Desacoplar o aplicativo Slim do ambiente global do PHP nos permite criar pedidos HTTP que podem (ou não) se assemelhar ao ambiente global. Isso é particularmente útil para testar unidades e iniciar sub-solicitações. Você pode buscar o objeto Ambiente atual em qualquer lugar em sua aplicação Slim, como este:
 
 ```php
 $container = $app->getContainer();
 $environment = $container['environment'];
 ```
 
-## Environment Properties
+## Propriedades do ambiente
 
-Each Slim application has an Environment object with various properties that determine application behavior. Many of these properties mirror those found in the `$_SERVER` superglobal array. Some properties are required. Other properties are optional.
+Cada aplicativo Slim possui um objeto Environment com várias propriedades que determinam o comportamento do aplicativo. Muitas dessas propriedades espelham aquelas encontradas na matriz superglobal `$ _SERVER`. Algumas propriedades são necessárias. Outras propriedades são opcionais.
 
-### Required Properties
+### Propriedades obrigatórias
 
 REQUEST_METHOD
-:   The HTTP request method. This must be one of "GET", "POST", "PUT", "DELETE", "HEAD", "PATCH", or "OPTIONS".
+: O método de solicitação HTTP. Este deve ser um de "GET", "POST", "PUT", "DELETE", "HEAD", "PATCH" ou "OPTIONS".
 
 SCRIPT_NAME
-:   The absolute path name to the front-controller PHP script relative to your document root, disregarding any URL rewriting performed by your web server.
+: O nome do caminho absoluto para o script PHP do controlador anterior relativo à sua raiz do documento, desconsiderando qualquer reescrita de URL executada pelo seu servidor web.
 
 REQUEST_URI
-:   The absolute path name of the HTTP request URI, including any URL rewriting changes performed by your web server.
+: O nome do caminho absoluto da URI de solicitação HTTP, incluindo quaisquer alterações de reescrita de URL realizadas pelo seu servidor web.
 
 QUERY_STRING
-:   The part of the HTTP request’s URI path after, but not including, the “?”. This may be an empty string if the current HTTP request does not specify a query string.
+: A parte do caminho URI da solicitação HTTP depois, mas não incluindo, o "?". Esta pode ser uma string vazia se a solicitação HTTP atual não especificar uma seqüência de consulta.
 
-SERVER_NAME
-:   The name of the server host under which the current script is executing. If the script is running on a virtual host, this will be the value defined for that virtual host.
+NOME DO SERVIDOR
+: O nome do host do servidor sob o qual o script atual está sendo executado. Se o script estiver sendo executado em um host virtual, esse será o valor definido para esse host virtual.
 
-SERVER_PORT
-:   The port on the server machine being used by the web server for communication. For default setups, this will be '80'; using SSL, for instance, will change this to whatever your defined secure HTTP port is.
+PORTA DO SERVIDOR
+: A porta na máquina do servidor utilizada pelo servidor web para comunicação. Para configurações padrão, isso será '80'; O uso de SSL, por exemplo, irá mudar isso para qualquer que seja a sua porta HTTP segura definida.
 
 HTTPS
-:   Set to a non-empty value if the script was queried through the HTTPS protocol.
+: Definir para um valor não vazio se o script foi consultado através do protocolo HTTPS.
 
-### Optional Properties
+### Propriedades opcionais
 
-CONTENT_TYPE
-:   The HTTP request content type (e.g., `application/json;charset=utf8`)
+TIPO DE CONTEÚDO
+: O tipo de conteúdo da solicitação HTTP (por exemplo, `application/json; charset = utf8`)
 
-CONTENT_LENGTH
-:   The HTTP request content length. This must be an integer if present.
+COMPRIMENTO DO CONTEÚDO
+: O comprimento do conteúdo da solicitação HTTP. Este deve ser um número inteiro se presente.
 
 HTTP_*
-:   The HTTP request headers sent by the client. These values are identical to their counterparts in the `$_SERVER` superglobal array. If present, these values must retain the "HTTP_" prefix.
+: Os cabeçalhos de solicitação HTTP enviados pelo cliente. Esses valores são idênticos aos seus equivalentes na matriz superglobal `$ _SERVER`. Se presente, esses valores devem reter o prefixo "HTTP_".
 
 PHP_AUTH_USER
-:   The HTTP `Authentication` header's decoded username.
+: O nome de usuário decodificado do cabeçalho da autenticação HTTP.
 
 PHP_AUTH_PW
-:   The HTTP `Authentication` header's decoded password.
+: A senha decodificada do cabeçalho da autenticação HTTP.
 
 PHP_AUTH_DIGEST
-:   The raw HTTP `Authentication` header as sent by the HTTP client.
+: O cabeçalho do HTTP `Authentication 'bruto como enviado pelo cliente HTTP.
 
 AUTH_TYPE
-:   The HTTP `Authentication` header's authentication type (e.g., "Basic" or "Digest").
+: O tipo de autenticação do cabeçalho do HTTP `Authentication` (por exemplo," Basic "ou" Digest ").
 
-## Mock Environments
+## Ambientes simulados
 
-Each Slim application instantiates an Environment object using information from the current global environment. However, you may also create mock environment objects with custom information. Mock Environment objects are only useful when writing unit tests.
+Cada aplicativo Slim instancia um objeto Environment usando informações do ambiente global atual. No entanto, você também pode criar objetos de simulação de ambiente com informações personalizadas. Os objetos dos ambientes simulados só são úteis quando se escrevem testes unitários.
 
 ```php
 $env = \Slim\Http\Environment::mock([
