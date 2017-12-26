@@ -1,5 +1,5 @@
 ---
-title: Branching Strategy
+title: Estratégia de ramificação
 ---
 
-The Slim Framework uses a simple branching strategy. There is a `3.x` branch, and the `3.x` branch `HEAD` reference points to the latest unstable code. Each stable release is denoted with a numeric tag (e.g., `3.0.0`).
+O Slim Framework usa uma estratégia de ramificação simples. Existe um ramo `3.x`, e os pontos de referência` 3.x` branch HEAD` para o último código instável. Cada versão estável é denotada com uma etiqueta numérica (por exemplo, `3.0.0`).
