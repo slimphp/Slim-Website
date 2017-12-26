@@ -1,25 +1,25 @@
 ---
-title: Setting up CORS
+title: Configurando CORS
 ---
 
-CORS - Cross origin resource sharing
+CORS - Cross origin resource sharing (compartilhamento de recursos de origem cruzada)
 
-A good flowchart for implementing CORS support Reference: 
+Um bom fluxograma para implementar o suporte CORS Referência:
 
-[CORS server flowchart](http://www.html5rocks.com/static/images/cors_server_flowchart.png)
+[Fluxograma do servidor CORS] (http://www.html5rocks.com/static/images/cors_server_flowchart.png)
 
-You can test your CORS Support here: http://www.test-cors.org/
+Você pode testar o suporte CORS aqui: http://www.test-cors.org/
 
-You can read the specification here: https://www.w3.org/TR/cors/
+Você pode ler as especificações aqui: https://www.w3.org/TR/cors/
 
 
-## The simple solution
+## A solução simples
 
-For simple CORS requests, the server only needs to add the following header to its response:
+Para pedidos CORS simples, o servidor só precisa adicionar o seguinte cabeçalho à sua resposta:
 
 `Access-Control-Allow-Origin: <domain>, ... | *`
 
-The following code should enable lazy CORS.
+O código a seguir deve permitir CORS preguiçoso.
 
 ```php
 $app->options('/{routes:.+}', function ($request, $response, $args) {
@@ -40,22 +40,22 @@ $app->add(function ($req, $res, $next) {
 
 ## Access-Control-Allow-Methods
 
-The following middleware can be used to query Slim's router and get a list of methods a particular pattern implements.
+O seguinte middleware pode ser usado para consultar o roteador do Slim e obter uma lista de métodos que um determinado padrão implementa.
 
-Here is a complete example application:
+Aqui está um exemplo completo de aplicação:
 
 ```php
 require __DIR__ . "/vendor/autoload.php";
 
-// This Slim setting is required for the middleware to work
+// Esta configuração Slim é necessária para que o middleware funcione
 $app = new Slim\App([
     "settings"  => [
         "determineRouteBeforeAppMiddleware" => true,
     ]
 ]);
 
-// This is the middleware
-// It will add the Access-Control-Allow-Methods header to every request
+// Este é o middleware
+// Adicionará o cabeçalho do Access-Control-Allow-Methods a cada solicitação
 
 $app->add(function($request, $response, $next) {
     $route = $request->getAttribute("route");
@@ -90,16 +90,16 @@ $app->post("/api/{id}", function($request, $response, $arguments) {
 $app->map(["DELETE", "PATCH"], "/api/{id}", function($request, $response, $arguments) {
 });
 
-// Pay attention to this when you are using some javascript front-end framework and you are using groups in slim php
+// Preste atenção nisso quando estiver usando algum framework de front-end do javascript e você estiver usando grupos em slim php
 $app->group('/api', function () {
-    // Due to the behaviour of browsers when sending PUT or DELETE request, you must add the OPTIONS method. Read about preflight.
+    // Devido ao comportamento dos navegadores ao enviar a solicitação PUT ou DELETE, você deve adicionar o método OPTIONS. Leia sobre o teste prévio.
     $this->map(['PUT', 'OPTIONS'], '/{user_id:[0-9]+}', function ($request, $response, $arguments) {
-        // Your code here...
+        // Seu codigo aqui...
     });
 });
 
 $app->run();
 ```
 
-A big thank you to [tuupola](https://github.com/tuupola) for coming up with this!
+Um grande agradecimento a [tuupola] (https://github.com/tuupola) por ter chegado com isso!
 
