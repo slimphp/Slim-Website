@@ -1,37 +1,39 @@
 ---
-title: Uploading files using POST forms
+title: Fazendo upload de arquivos usando formulários POST
 ---
 
-Files that are uploaded using forms in POST requests can be retrieved with the
-[`getUploadedFiles`](/docs/objects/request.html#uploaded-files) method of the
-`Request` object.
+Os arquivos que são enviados usando os formulários nas solicitações POST podem 
+ser recuperados com o método [`getUploadedFiles`] (/docs/objects/request.html#uploaded-files) 
+do objeto` Request`.
 
-When uploading files using a POST request, make sure your file upload form has the
-attribute `enctype="multipart/form-data"` otherwise `getUploadedFiles()` will return an empty array.
+Ao fazer o upload de arquivos usando uma solicitação POST, verifique se o formulário de 
+upload do arquivo possui o atributo `enctype ="multipart/form-data"` caso contrário 
+`getUploadedFiles()` retornará uma array vazio.
 
-If multiple files are uploaded for the same input name, add brackets after the input name in the HTML, otherwise
-only one uploaded file will be returned for the input name by `getUploadedFiles()`.
+Se vários arquivos forem carregados para o mesmo nome de entrada, adicione colchetes 
+após o nome de entrada no HTML, caso contrário, apenas um arquivo enviado será retornado 
+para o nome de entrada por `getUploadedFiles()`.
 
-Below is an example HTML form that contains both single and multiple file uploads.
+Abaixo está um exemplo de formulário HTML que contém os uploads de arquivos únicos e múltiplos.
 
 <figure markdown="1">
 ```php
-<!-- make sure the attribute enctype is set to multipart/form-data -->
+<!-- Certifique-se de que o atributo enctype esteja configurado para multipart / form-data -->
 <form method="post" enctype="multipart/form-data">
-    <!-- upload of a single file -->
+    <!-- upload de um único arquivo -->
     <p>
         <label>Add file (single): </label><br/>
         <input type="file" name="example1"/>
     </p>
 
-    <!-- multiple input fields for the same input name, use brackets -->
+    <!-- vários campos de entrada para o mesmo nome de entrada, use colchetes -->
     <p>
         <label>Add files (up to 2): </label><br/>
         <input type="file" name="example2[]"/><br/>
         <input type="file" name="example2[]"/>
     </p>
 
-    <!-- one file input field that allows multiple files to be uploaded, use brackets -->
+    <!-- um campo de entrada de arquivo que permite que vários arquivos sejam carregados, use colchetes -->
     <p>
         <label>Add files (multiple): </label><br/>
         <input type="file" name="example3[]" multiple="multiple"/>
@@ -42,11 +44,11 @@ Below is an example HTML form that contains both single and multiple file upload
     </p>
 </form>
 ```
-<figcaption>Figure 1: Example HTML form for file uploads</figcaption>
+<figcaption>Figura 1: Exemplo de formulário HTML para uploads de arquivos</figcaption>
 </figure>
 
-Uploaded files can be moved to a directory using the `moveTo` method. Below is an example application
-that handles the uploaded files of the HTML form above.
+Os arquivos carregados podem ser movidos para um diretório usando o método `moveTo`. Abaixo 
+está um exemplo de aplicativo que lida com os arquivos carregados do formulário HTML acima.
 
 <figure markdown="1">
 ```php
@@ -68,7 +70,7 @@ $app->post('/', function(Request $request, Response $response) {
 
     $uploadedFiles = $request->getUploadedFiles();
 
-    // handle single input with single file upload
+    // lida com entrada única com upload de arquivo único
     $uploadedFile = $uploadedFiles['example1'];
     if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
         $filename = moveUploadedFile($directory, $uploadedFile);
@@ -76,7 +78,7 @@ $app->post('/', function(Request $request, Response $response) {
     }
 
 
-    // handle multiple inputs with the same key
+    // lida com várias entradas com a mesma tecla
     foreach ($uploadedFiles['example2'] as $uploadedFile) {
         if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
             $filename = moveUploadedFile($directory, $uploadedFile);
@@ -84,7 +86,7 @@ $app->post('/', function(Request $request, Response $response) {
         }
     }
 
-    // handle single input with multiple file uploads
+    // lidar com entrada única com vários carregamentos de arquivos
     foreach ($uploadedFiles['example3'] as $uploadedFile) {
         if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
             $filename = moveUploadedFile($directory, $uploadedFile);
@@ -92,7 +94,7 @@ $app->post('/', function(Request $request, Response $response) {
         }
     }
 
-    // handle single input with multiple file uploads
+    // lidar com entrada única com vários carregamentos de arquivos
     foreach ($uploadedFiles['example3'] as $uploadedFile) {
         if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
             $filename = moveUploadedFile($directory, $uploadedFile);
@@ -102,17 +104,17 @@ $app->post('/', function(Request $request, Response $response) {
 });
 
 /**
- * Moves the uploaded file to the upload directory and assigns it a unique name
- * to avoid overwriting an existing uploaded file.
- *
- * @param string $directory directory to which the file is moved
- * @param UploadedFile $uploaded file uploaded file to move
- * @return string filename of moved file
- */
+  * Move o arquivo carregado para o diretório de upload e atribui-lhe um nome exclusivo
+  * para evitar substituir um arquivo carregado existente.
+  *
+  * @param string $directory diretório para o qual o arquivo é movido
+  * @param UploadedFile $uploaded file uploaded file to move
+  * @return string filename do arquivo movido
+  */
 function moveUploadedFile($directory, UploadedFile $uploadedFile)
 {
     $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
-    $basename = bin2hex(random_bytes(8)); // see http://php.net/manual/en/function.random-bytes.php
+    $basename = bin2hex(random_bytes(8)); // veja http://php.net/manual/en/function.random-bytes.php
     $filename = sprintf('%s.%0.8s', $basename, $extension);
 
     $uploadedFile->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
@@ -122,9 +124,9 @@ function moveUploadedFile($directory, UploadedFile $uploadedFile)
 
 $app->run();
 ```
-<figcaption>Figure 2: Example Slim applcation to handle the uploaded files</figcaption>
+<figcaption>Figura 2: Exemplo de aplicação Slim para lidar com os arquivos carregados</figcaption>
 </figure>
 
-See also
+Veja também
 --------
 * [https://akrabat.com/psr-7-file-uploads-in-slim-3/](https://akrabat.com/psr-7-file-uploads-in-slim-3/)
