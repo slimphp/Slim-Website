@@ -1,23 +1,23 @@
 ---
-title: Dependency Container
+title: Contêiner de Dependência
 ---
 
-Slim uses a dependency container to prepare, manage, and inject application
-dependencies. Slim supports containers that implement [PSR-11](http://www.php-fig.org/psr/psr-11/) or the [Container-Interop](https://github.com/container-interop/container-interop) interface. You can use Slim's built-in container (based on [Pimple](http://pimple.sensiolabs.org/))
-or third-party containers like [Acclimate](https://github.com/jeremeamia/acclimate-container)
-or [PHP-DI](http://php-di.org/doc/frameworks/slim.html).
+Slim usa um contêiner de dependência para preparar, gerenciar e injetar dependências 
+de aplicativos. Slim suporta recipientes que implementam [PSR-11](http://www.php-fig.org/psr/psr-11/) ou o interface [Container-Interop](https://github.com/container-interop/container-interop). Você pode usar o recipiente embutido do Slim (baseado em [Pimple](http://pimple.sensiolabs.org/))
+ou contêineres de terceiros como [Acclimate](https://github.com/jeremeamia/acclimate-container)
+ou [PHP-DI](http://php-di.org/doc/frameworks/slim.html).
 
-## How to use the container
+## Como usar o contêiner
 
-You don't _have_ to provide a dependency container. If you do, however, you must
-inject the container instance into the Slim application's constructor.
+Você não _tem_ que fornecer um contêiner de dependência. Se você o fizer no entanto, você deve
+injetar a instância do recipiente no construtor do aplicativo Slim.
 
 ```php
 $container = new \Slim\Container;
 $app = new \Slim\App($container);
 ```
 
-Add a service to Slim container:
+Adicione um serviço ao contentor Slim:
 
 ```php
 $container = $app->getContainer();
@@ -27,9 +27,9 @@ $container['myService'] = function ($container) {
 };
 ```
 
-You can fetch services from your container explicitly or implicitly.
-You can fetch an explicit reference to the container instance from inside a Slim
-application route like this:
+Você pode buscar serviços do seu contêiner de forma explícita ou implícita.
+Você pode buscar uma referência explícita para a instância do contêiner dentro de uma
+rota de aplicação do Slim como esta:
 
 ```php
 /**
@@ -48,7 +48,7 @@ $app->get('/foo', function ($req, $res, $args) {
 });
 ```
 
-You can implicitly fetch services from the container like this:
+Você pode implicitamente buscar serviços do contêiner como este:
 
 ```php
 /**
@@ -67,7 +67,7 @@ $app->get('/foo', function ($req, $res, $args) {
 });
 ```
 
-To test if a service exists in the container before using it, use the `has()` method, like this:
+Para testar se um serviço existe no recipiente antes de usá-lo, use o método `had ()`, como este:
 
 ```php
 /**
@@ -89,15 +89,15 @@ $app->get('/foo', function ($req, $res, $args) {
 ```
 
 
-Slim uses `__get()` and `__isset()` magic methods that defer to the application's
-container for all properties that do not already exist on the application instance.
+Slim usa métodos de mágica `__get ()` e `__isset ()` que se adiam ao recipiente do 
+aplicativo para todas as propriedades que ainda não existem na instância do aplicativo.
 
-## Required services
+## Serviços obrigatórios
 
-Your container MUST implement these required services. If you use Slim's built-in container, these are provided for you. If you choose a third-party container, you must define these required services on your own.
+Seu recipiente DEVE implementar esses serviços necessários. Se você usa o recipiente embutido do Slim, estes são fornecidos para você. Se você escolher um contêiner de terceiros, você deve definir esses serviços necessários por conta própria.
 
 settings
-:   Associative array of application settings, including keys:
+:   Conjunto associativo de configurações de aplicativos, incluindo chaves:
     
     * `httpVersion`
     * `responseChunkSize`
@@ -108,29 +108,29 @@ settings
     * `routerCacheFile`.
 
 environment
-:   Instance of `\Slim\Interfaces\Http\EnvironmentInterface`.
+:   Instancia de `\Slim\Interfaces\Http\EnvironmentInterface`.
 
 request
-:   Instance of `\Psr\Http\Message\ServerRequestInterface`.
+:   Instancia de `\Psr\Http\Message\ServerRequestInterface`.
 
 response
-:   Instance of `\Psr\Http\Message\ResponseInterface`.
+:   Instancia de `\Psr\Http\Message\ResponseInterface`.
 
 router
-:   Instance of `\Slim\Interfaces\RouterInterface`.
+:   Instancia de `\Slim\Interfaces\RouterInterface`.
 
 foundHandler
-:   Instance of `\Slim\Interfaces\InvocationStrategyInterface`.
+:   Instancia de `\Slim\Interfaces\InvocationStrategyInterface`.
 
 phpErrorHandler
-:   Callable invoked if a PHP 7 Error is thrown. The callable **MUST** return an instance of `\Psr\Http\Message\ResponseInterface` and accept three arguments:
+:   Chamada invocada se um erro PHP 7 for acionado. O chamado ** TEM ** que retorna uma instância de `\Psr\Http\Message\ResponseInterface` e aceita três argumentos:
 
 1. `\Psr\Http\Message\ServerRequestInterface`
 2. `\Psr\Http\Message\ResponseInterface`
 3. `\Error`
 
 errorHandler
-:   Callable invoked if an Exception is thrown. The callable **MUST** return an instance of `\Psr\Http\Message\ResponseInterface` and accept three arguments:
+:   Chamada invocada se uma Exceção for acionada. O chamado ** TEM ** que retorna uma instância de `\Psr\Http\Message\ResponseInterface` e aceita três argumentos:
 
 1. `\Psr\Http\Message\ServerRequestInterface`
 2. `\Psr\Http\Message\ResponseInterface`
@@ -143,11 +143,11 @@ notFoundHandler
 2. `\Psr\Http\Message\ResponseInterface`
 
 notAllowedHandler
-:   Callable invoked if an application route matches the current HTTP request path but not its method. The callable **MUST** return an instance of `\Psr\Http\Message\ResponseInterface` and accept three arguments:
+:   Chamada invocada se uma rota de aplicação corresponder ao caminho de solicitação HTTP atual, mas não ao método. A chamada ** TEM ** que retorna uma instância de `\Psr\Http\Message\ResponseInterface` e aceita três argumentos:
 
 1. `\Psr\Http\Message\ServerRequestInterface`
 2. `\Psr\Http\Message\ResponseInterface`
-3. Array of allowed HTTP methods
+3. Array de métodos HTTP permitidos
 
 callableResolver
-:   Instance of `\Slim\Interfaces\CallableResolverInterface`.
+:   Instancia de `\Slim\Interfaces\CallableResolverInterface`.
