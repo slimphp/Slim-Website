@@ -1,27 +1,28 @@
 ---
-title: Web Servers
+title: Servidores Web
 ---
 
-It is typical to use the front-controller pattern to funnel appropriate HTTP
-requests received by your web server to a single PHP file. The instructions
-below explain how to tell your web server to send HTTP requests to your PHP
-front-controller file.
+É típico usar o padrão do controlador frontal para canalizar solicitações HTTP 
+apropriadas recebidas pelo seu servidor web para um único arquivo PHP. As 
+instruções abaixo explicam como dizer ao seu servidor web que envie solicitações 
+HTTP ao seu arquivo do controlador frontal do PHP.
 
-## PHP built-in server
+## Servidor embutido PHP
 
-Run the following command in terminal to start localhost web server,
-assuming `./public/` is public-accessible directory with `index.php` file:
+Execute o seguinte comando no terminal para iniciar o servidor web localhost, 
+assumindo que `./Public/` seja um diretório acessível ao público com o arquivo 
+`index.php`:
 
 ```bash
 php -S localhost:8888 -t public public/index.php
 ```
 
-If you are not using `index.php` as your entry point then change appropriately.
+Se você não estiver usando `index.php` como seu ponto de entrada, mude adequadamente.
 
-## Apache configuration
+# Configuração do Apache
 
-Ensure your `.htaccess` and `index.php` files are in the same
-public-accessible directory. The `.htaccess` file should contain this code:
+Certifique-se de que os arquivos `.htaccess` e `index.php` estejam no mesmo diretório 
+acessível ao público. O arquivo `.htaccess` deve conter este código:
 
 ```
 RewriteEngine On
@@ -30,21 +31,21 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
 ```
 
-Make sure your Apache virtual host is configured with the `AllowOverride` option
-so that the `.htaccess` rewrite rules can be used:
+Verifique se o seu host virtual Apache está configurado com a opção `AllowOverride` para 
+que as regras de reescrita` .htaccess` possam ser usadas:
 
 ```
 AllowOverride All
 ```
 
-## Nginx configuration
+## Configuração Nginx
 
-This is an example Nginx virtual host configuration for the domain `example.com`.
-It listens for inbound HTTP connections on port 80. It assumes a PHP-FPM server
-is running on port 9000. You should update the `server_name`, `error_log`,
-`access_log`, and `root` directives with your own values. The `root` directive
-is the path to your application's public document root directory; your Slim app's
-`index.php` front-controller file should be in this directory.
+Este é um exemplo de configuração do host virtual Nginx para o domínio `example.com`.
+Ele escuta as conexões HTTP de entrada na porta 80. Assume que um servidor PHP-FPM está 
+sendo executado na porta 9000. Você deve atualizar as diretivas `server_name`,` error_log`, 
+`access_log` e `root` com seus próprios valores. A diretiva `root` é o caminho para o 
+diretório raiz do documento público do seu aplicativo; O arquivo do controlador frontal 
+do `index.php` do seu Slim deve estar neste diretório.
 
 ```
 server {
@@ -71,9 +72,9 @@ server {
 }
 ```
 
-## HipHop Virtual Machine
+## Máquina Virtual HipHop
 
-Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the `SourceRoot` setting to point to your Slim app's document root directory.
+Seu arquivo de configuração da máquina virtual HipHop deve conter esse código (juntamente com outras configurações que você pode precisar). Certifique-se de alterar a configuração `SourceRoot` para apontar para o diretório raiz do documento do seu aplicativo Slim.
 
 ```
 Server {
@@ -100,8 +101,8 @@ VirtualHost {
 
 ## IIS
 
-Ensure the `Web.config` and `index.php` files are in the same public-accessible directory. The `Web.config` file should contain this code:
 
+Certifique-se de que os arquivos `Web.config` e` index.php` estejam no mesmo diretório acessível ao público. O arquivo `Web.config` deve conter este código:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
@@ -124,10 +125,10 @@ Ensure the `Web.config` and `index.php` files are in the same public-accessible 
 
 ## lighttpd
 
-Your lighttpd configuration file should contain this code (along with other settings you may need). This code requires lighttpd >= 1.4.24.
+Seu arquivo de configuração lighttpd deve conter esse código (juntamente com outras configurações que você pode precisar). Este código requer lighttpd> = 1.4.24.
 
 ```
 url.rewrite-if-not-file = ("(.*)" => "/index.php/$0")
 ```
 
-This assumes that Slim's `index.php` is in the root folder of your project (www root).
+Isso pressupõe que o `index.php` do Slim está na pasta raiz do seu projeto (www root).
