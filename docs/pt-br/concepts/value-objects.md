@@ -1,32 +1,34 @@
 ---
-title: PSR 7 and Value Objects
+title: PSR 7 e Value Objects
 ---
 
-Slim supports [PSR-7](https://github.com/php-fig/http-message) interfaces for
-its Request and Response objects. This makes Slim flexible because it can
-use _any_ PSR-7 implementation. For example, a Slim application
-route does not _have_ to return an instance of `\Slim\Http\Response`. It could,
-for example, return an instance of `\GuzzleHttp\Psr7\CachingStream` or any instance
-returned by the `\GuzzleHttp\Psr7\stream_for()` function.
+Slim suporta interfaces [PSR-7] (https://github.com/php-fig/http-message) para 
+seus objetos de solicitação e resposta. Isso torna o Slim flexível porque pode 
+usar _qualquer_ implementação do PSR-7. Por exemplo, uma rota de aplicativo Slim 
+não deve retornar uma instância de `\Slim\Http\Response`. Poderia em vez, por exemplo, 
+retornar uma instância de `\GuzzleHttp\Psr7\CachingStream` ou qualquer instância 
+retornada pela função `\GuzzleHttp\Psr7\stream_for()`.
 
-Slim provides its own PSR-7 implementation so that it works out of the box. However,
-you are free to replace Slim's default PSR 7 objects with a third-party implementation.
-Just override the application container's `request` and `response` services so
-they return an instance of `\Psr\Http\Message\ServerRequestInterface` and
-`\Psr\Http\Message\ResponseInterface`, respectively.
+O Slim fornece sua própria implementação do PSR-7 para que ele funcione fora da caixa. 
+No entanto, você pode substituir os objetos PSR 7 padrão do Slim por uma implementação 
+de terceiros. Basta substituir os serviços `request` e` response` do contêiner do 
+aplicativo para que eles retornem uma instância de `\Psr\Http\Message\ServerRequestInterface` 
+e `\Psr\Http\Message\ResponseInterface`, respectivamente.
 
-## Value objects
 
-Slim's Request and Response objects are [_immutable value objects_](http://en.wikipedia.org/wiki/Value_object).
-They can be "changed" only by requesting a cloned version that has updated
-property values. Value objects have a nominal overhead because they must be
-cloned when their properties are updated. This overhead does not affect
-performance in any meaningful way.
 
-You can request a copy of a value object by invoking any of its PSR 7
-interface methods (these methods typically have a `with` prefix). For example,
-a PSR 7 Response object has a `withHeader($name, $value)` method that returns a
-cloned value object with the new HTTP header.
+## Objetos de valor
+
+Os objetos de pedido e resposta do Slim são [_objetos de valor imutáveis_] (http://en.wikipedia.org/wiki/Value_object). 
+Eles podem ser "alterados" apenas solicitando uma versão clonada que tenha 
+atualizado valores de propriedade. Os objetos de valor têm uma sobrecarga 
+nominal porque devem ser clonados quando suas propriedades são atualizadas. 
+Esta sobrecarga não afeta o desempenho de forma significativa.
+
+Você pode solicitar uma cópia de um objeto de valor invocando qualquer um dos 
+seus métodos de interface PSR 7 (esses métodos tipicamente têm um prefixo `with`). 
+Por exemplo, um objeto de resposta do PSR 7 possui um método `withHeader ($name, $value)` 
+que retorna um objeto de valor clonado com o novo cabeçalho HTTP.
 
 ```php
 <?php
@@ -40,8 +42,7 @@ $app->get('/foo', function ($req, $res, $args) {
 $app->run();
 ```
 
-The PSR 7 interface provides these methods to transform Request and Response
-objects:
+A interface PSR 7 fornece esses métodos para transformar objetos de solicitação e resposta:
 
 * `withProtocolVersion($version)`
 * `withHeader($name, $value)`
@@ -49,7 +50,7 @@ objects:
 * `withoutHeader($name)`
 * `withBody(StreamInterface $body)`
 
-The PSR 7 interface provides these methods to transform Request objects:
+A interface PSR 7 fornece esses métodos para transformar objetos de solicitação:
 
 * `withMethod($method)`
 * `withUri(UriInterface $uri, $preserveHost = false)`
@@ -60,8 +61,8 @@ The PSR 7 interface provides these methods to transform Request objects:
 * `withAttribute($name, $value)`
 * `withoutAttribute($name)`
 
-The PSR 7 interface provides these methods to transform Response objects:
+A interface PSR 7 fornece esses métodos para transformar objetos de resposta:
 
 * `withStatus($code, $reasonPhrase = '')`
 
-Refer to the [PSR-7 documentation](http://www.php-fig.org/psr/psr-7/) for more information about these methods.
+Consulte a [documentação do PSR-7] (http://www.php-fig.org/psr/psr-7/) para obter mais informação sobre esses métodos.

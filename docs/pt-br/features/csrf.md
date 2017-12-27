@@ -1,64 +1,63 @@
 ---
-title: CSRF Protection
+title: Proteção CSRF
 ---
 
-Slim 3 uses the optional standalone [slimphp/Slim-Csrf](https://github.com/slimphp/Slim-Csrf)
-PHP component to protect your application from CSRF (cross-site request forgery).
-This component generates a unique token per request that validates subsequent
-POST requests from client-side HTML forms.
+O Slim 3 usa o componente opcional opcional 
+[slimphp / Slim-Csrf] (https://github.com/slimphp/Slim-Csrf) para proteger seu 
+aplicativo do CSRF (falsificação de solicitação entre sites). Esse componente 
+gera um token exclusivo por solicitação que valida os pedidos POST subseqüentes 
+dos formulários HTML do lado do cliente.
 
-## Installation
+## Instalação
 
-Execute this bash command from your project's root directory:
+Execute este comando bash do diretório raiz do seu projeto:
 
 ```bash
 composer require slim/csrf
 ```
 
-## Usage
+## Usar
 
-The `slimphp/Slim-Csrf` component contains an application middleware. Add it
-to your application like this:
+O componente `slim php / Slim-Csrf` contém um middleware de aplicativo. 
+Adicione-o ao seu aplicativo assim:
 
 ```php
-// Add middleware to the application
+// Adiciona middleware ao aplicativo
 $app = new \Slim\App;
 $app->add(new \Slim\Csrf\Guard);
 
-// Create your application routes...
+// Crie suas rotas de aplicação ...
 
-// Run application
+// Execute o aplicativo
 $app->run();
 ```
 
-## Fetch the CSRF token name and value
+## Obtenha o nome e o valor do token CSRF
 
-The latest CSRF token's name and value are available as attributes on the
-PSR7 request object. The CSRF token name and value are unique for each request.
-You can fetch the current CSRF token name and value like this.
+O nome e o valor do token CSRF mais recentes estão disponíveis como atributos 
+no objeto de solicitação PSR7. O nome e o valor do token CSRF são únicos para 
+cada solicitação. Você pode buscar o nome e o valor do token CSRF atual assim.
 
 ```php
 $app->get('/foo', function ($req, $res, $args) {
-    // CSRF token name and value
+    // Nome e valor do token CSRF
     $nameKey = $this->csrf->getTokenNameKey();
     $valueKey = $this->csrf->getTokenValueKey();
     $name = $req->getAttribute($nameKey);
     $value = $req->getAttribute($valueKey);
 
-    // Render HTML form which POSTs to /bar with two hidden input fields for the
-    // name and value:
+    // Render HTML form, que POSTs para /bar com dois campos de entrada 
+	// escondidos para o nome e valor:
     // <input type="hidden" name="<?= $nameKey ?>" value="<?= $name ?>">
     // <input type="hidden" name="<?= $valueKey ?>" value="<?= $value ?>">
 });
 
 $app->post('/bar', function ($req, $res, $args) {
-    // CSRF protection successful if you reached
-    // this far.
+    // CSRF proteção bem sucedida se você chegou aqui.
 });
 ```
+Você deve passar o nome e o valor do token CSRF para o modelo para que eles 
+possam ser submetidos com solicitações de formulário HTML POST. Eles geralmente 
+são armazenados como um campo oculto com formulários HTML.
 
-You should pass the CSRF token name and value to the template so they
-may be submitted with HTML form POST requests. They are often stored as a hidden
-field with HTML forms.
-
-For more use cases and documentation please check [slimphp/Slim-Csrf](https://github.com/slimphp/Slim-Csrf)'s page.
+Para mais casos de uso e documentação, verifique a página [slimphp / Slim-Csrf] (https://github.com/slimphp/Slim-Csrf).

@@ -2,64 +2,63 @@
 title: Middleware
 ---
 
-You can run code _before_ and _after_ your Slim application to manipulate the
-Request and Response objects as you see fit. This is called _middleware_.
-Why would you want to do this? Perhaps you want to protect your app
-from cross-site request forgery. Maybe you want to authenticate requests
-before your app runs. Middleware is perfect for these scenarios.
+Você pode executar o código seu aplicativo Slim _antes_ e _depois_ para manipular os
+objetos de solicitação e resposta como você entender. Isso é chamado de _middleware_.
+Por que você quer fazer isso? Talvez você queira proteger seu aplicativo
+de falsificação de solicitação entre locais. Talvez você queira autenticar pedidos
+antes do seu aplicativo funcionar. Middleware é perfeito para esses cenários.
 
-## What is middleware?
+## O que é middleware?
 
-Technically speaking, a middleware is a _callable_ that accepts three arguments:
+Tecnicamente falando, um middleware é um _callable_ que aceita três argumentos:
 
-1. `\Psr\Http\Message\ServerRequestInterface` - The PSR7 request object
-2. `\Psr\Http\Message\ResponseInterface` - The PSR7 response object
-3. `callable` - The next middleware callable
+1. `\Psr\Http\Message\ServerRequestInterface` - O objeto de solicitação PSR7
+2. `\Psr\Http\Message\ResponseInterface` - O objeto de resposta PSR7
+3. `callable` - O próximo middleware que pode ser chamado
 
-It can do whatever is appropriate with these objects. The only hard requirement
-is that a middleware **MUST** return an instance of `\Psr\Http\Message\ResponseInterface`.
-Each middleware **SHOULD** invoke the next middleware and pass it Request and
-Response objects as arguments.
+Ele pode fazer o que for apropriado com esses objetos. O único requisito difícil
+é que um middleware **DEVE** retornar uma instância de `\Psr\Http\Message\ResponseInterface`.
+Cada middleware **DEVE** invocar o próximo middleware e passá-lo como argumentos 
+de Pedido e Objetos de resposta .
 
-## How does middleware work?
+## Como o middleware funciona?
 
-Different frameworks use middleware differently. Slim adds middleware as concentric
-layers surrounding your core application. Each new middleware layer surrounds
-any existing middleware layers. The concentric structure expands outwardly as
-additional middleware layers are added.
+Diferentes frameworks usam o middleware de forma diferente. Slim adiciona middleware como camadas 
+concêntricas em torno do seu core do applicativo. Cada nova camada de middleware envolve
+quaisquer camadas de middleware existentes. A estrutura concêntrica se expande para fora enquanto
+as camadas de middleware adicionais são adicionadas.
 
-The last middleware layer added is the first to be executed.
+A última camada de middleware adicionada é a primeira a ser executada.
 
-When you run the Slim application, the Request and Response objects traverse the
-middleware structure from the outside in. They first enter the outer-most middleware,
-then the next outer-most middleware, (and so on), until they ultimately arrive
-at the Slim application itself. After the Slim application dispatches the
-appropriate route, the resultant Response object exits the Slim application and
-traverses the middleware structure from the inside out. Ultimately, a final
-Response object exits the outer-most middleware, is serialized into a raw HTTP
-response, and is returned to the HTTP client. Here's a diagram that illustrates
-the middleware process flow:
+Quando você executa o aplicativo Slim, os objetos de Solicitação e Resposta atravessam a 
+estrutura do middleware de fora. Entraram primeiro no middleware externo, depois no próximo 
+middleware externo, (e assim por diante), até chegarem ao Slim aplicação em si. Depois que 
+o aplicativo Slim despachar a rota apropriada, o objeto de resposta resultante sai do 
+aplicativo Slim e atravessa a estrutura do middleware de dentro para fora. Em última 
+análise, um objeto de resposta final sai do middleware externo, é serializado em uma 
+resposta HTTP bruta e é retornado para o cliente HTTP. Aqui está um diagrama que ilustra o 
+fluxo de processo do middleware:
 
 <div style="padding: 2em 0; text-align: center">
     <img src="/docs/images/middleware.png" alt="Middleware architecture" style="max-width: 80%;"/>
 </div>
 
-## How do I write middleware?
+## Como faço para escrever middleware?
 
-Middleware is a callable that accepts three arguments: a Request object, a Response object, and the next middleware. Each middleware **MUST** return an instance of `\Psr\Http\Message\ResponseInterface`.
+Middleware é um callable que aceita três argumentos: um objeto Request, um objeto Response e o próximo middleware. Cada middleware ** DEVE ** retornar uma instância de `\Psr\Http\Message\ResponseInterface`.
 
-### Closure middleware example.
+### Exemplo de middleware de encerramento.
 
-This example middleware is a Closure.
+Este exemplo de middleware é um encerramento.
 
 ```php
 <?php
 /**
- * Example middleware closure
+ * Exemplo de middleware de encerramento.
  *
- * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
- * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 response
- * @param  callable                                 $next     Next middleware
+ * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 requesto
+ * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 resposta
+ * @param  callable                                 $next     Proximo middleware
  *
  * @return \Psr\Http\Message\ResponseInterface
  */
@@ -72,20 +71,20 @@ function ($request, $response, $next) {
 };
 ```
 
-### Invokable class middleware example
+### Exemplo de middleware de classe invocável
 
-This example middleware is an invokable class that implements the magic `__invoke()` method.
+Este exemplo de middleware é uma classe invocável que implementa o método mágico ``__invoke()`.
 
 ```php
 <?php
 class ExampleMiddleware
 {
     /**
-     * Example middleware invokable class
+     * Exemplo de middleware de classe invocável
      *
-     * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
-     * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 response
-     * @param  callable                                 $next     Next middleware
+     * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 requesto
+     * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 resposta
+     * @param  callable                                 $next     Proximo middleware
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -100,34 +99,34 @@ class ExampleMiddleware
 }
 ```
 
-To use this class as a middleware, you can use `->add( new ExampleMiddleware() );` function chain after the `$app`, `Route`,  or `group()`, which in the code below, any one of these, could represent $subject.
+Para usar esta classe como um middleware, você pode usar a cadeia de função `->add( new ExampleMiddleware() );` após o `$ app`,` Route`, ou `group ()`, que no código abaixo, qualquer um desses, poderia representar $subject.
 
 ```php
 $subject->add( new ExampleMiddleware() );
 ```
 
-## How do I add middleware?
+## Como faço para adicionar middleware?
 
-You may add middleware to a Slim application, to an individual Slim application route or to a route group. All scenarios accept the same middleware and implement the same middleware interface.
+Você pode adicionar middleware a um aplicativo Slim, a uma rota de aplicação Slim individual ou a um grupo de rota. Todos os cenários aceitam o mesmo middleware e implementam a mesma interface de middleware.
 
-### Application middleware
+### Middleware de aplicativos
 
-Application middleware is invoked for every *incoming* HTTP request. Add application middleware with the Slim application instance's `add()` method. This example adds the Closure middleware example above:
+O middleware do aplicativo é invocado para cada solicitação HTTP *recebida*. Adicione o middleware do aplicativo com o método `add()` da instância do aplicativo Slim. Este exemplo adiciona o exemplo de middleware de encerramento acima:
 
 ```php
 <?php
 $app = new \Slim\App();
 
 $app->add(function ($request, $response, $next) {
-	$response->getBody()->write('BEFORE');
+	$response->getBody()->write('ANTES');
 	$response = $next($request, $response);
-	$response->getBody()->write('AFTER');
+	$response->getBody()->write('DEPOIS');
 
 	return $response;
 });
 
 $app->get('/', function ($request, $response, $args) {
-	$response->getBody()->write(' Hello ');
+	$response->getBody()->write(' Oi ');
 
 	return $response;
 });
@@ -135,28 +134,28 @@ $app->get('/', function ($request, $response, $args) {
 $app->run();
 ```
 
-This would output this HTTP response body:
+Isso emitiria este corpo de resposta HTTP:
 
-    BEFORE Hello AFTER
+    ANTES Oi DEPOIS
 
-### Route middleware
+### Middleware de rota
 
-Route middleware is invoked _only if_ its route matches the current HTTP request method and URI. Route middleware is specified immediately after you invoke any of the Slim application's routing methods (e.g., `get()` or `post()`). Each routing method returns an instance of `\Slim\Route`, and this class provides the same middleware interface as the Slim application instance. Add middleware to a Route with the Route instance's `add()` method. This example adds the Closure middleware example above:
+O middleware de rota é invocado apenas se a sua rota corresponder ao método de solicitação HTTP atual e ao URI. O middleware de rota é especificado imediatamente depois de invocar qualquer um dos métodos de roteamento do aplicativo Slim (por exemplo, `get()` ou `post()`). Cada método de roteamento retorna uma instância de `\Slim\Route`, e esta classe fornece a mesma interface de middleware que a instância do aplicativo Slim. Adicione o middleware a uma Route com o método `add()` da instância da Route. Este exemplo adiciona o exemplo de middleware de encerramento acima:
 
 ```php
 <?php
 $app = new \Slim\App();
 
 $mw = function ($request, $response, $next) {
-    $response->getBody()->write('BEFORE');
+    $response->getBody()->write('ANTES');
     $response = $next($request, $response);
-    $response->getBody()->write('AFTER');
+    $response->getBody()->write('DEPOIS');
 
     return $response;
 };
 
 $app->get('/', function ($request, $response, $args) {
-	$response->getBody()->write(' Hello ');
+	$response->getBody()->write(' Oi ');
 
 	return $response;
 })->add($mw);
@@ -164,15 +163,15 @@ $app->get('/', function ($request, $response, $args) {
 $app->run();
 ```
 
-This would output this HTTP response body:
+Isso emitiria este corpo de resposta HTTP:
 
-    BEFORE Hello AFTER
+    ANTES Oi DEPOIS
 
-### Group Middleware
+### Middleware de grupo
 
-In addition to the overall application, and standard routes being able to accept middleware, the `group()` multi-route definition functionality, also allows individual routes internally. Route group middleware is invoked _only if_ its route matches one of the defined HTTP request methods and URIs from the group. To add middleware within the callback, and entire-group middleware to be set by chaining `add()` after the `group()` method.
+Além da aplicação geral, e as rotas padrão que podem aceitar o middleware, a funcionalidade de definição de multi-rotas group () `, também permite rotas individuais internamente. O middleware do grupo de rotas é invocado apenas se a sua rota corresponder a um dos métodos de solicitação HTTP definidos e URIs do grupo. Para adicionar middleware dentro do callback, e o middleware de grupo inteiro a ser configurado encadeando `add ()` após o método `group ()`.
 
-Sample Application, making use of callback middleware on a group of url-handlers
+Exemplo de Aplicação, fazendo uso do middleware de retorno de chamada em um grupo de manipuladores de url
 ```php
 <?php
 
@@ -181,7 +180,7 @@ require_once __DIR__.'/vendor/autoload.php';
 $app = new \Slim\App();
 
 $app->get('/', function ($request, $response) {
-    return $response->getBody()->write('Hello World');
+    return $response->getBody()->write('Oi Mundo');
 });
 
 $app->group('/utils', function () use ($app) {
@@ -192,45 +191,44 @@ $app->group('/utils', function () use ($app) {
         return $response->getBody()->write(time());
     });
 })->add(function ($request, $response, $next) {
-    $response->getBody()->write('It is now ');
+    $response->getBody()->write('São agora ');
     $response = $next($request, $response);
-    $response->getBody()->write('. Enjoy!');
+    $response->getBody()->write('. Disfrute!');
 
     return $response;
 });
 ```
 
-When calling the `/utils/date` method, this would output a string similar to the below
+Ao chamar o método `/utils/date`, isso emitiria uma string semelhante à abaixo
 
-    It is now 2015-07-06 03:11:01. Enjoy!
+    São agora 2015-07-06 03:11:01. Disfrute!
 
-visiting `/utils/time` would output a string similar to the below
+visitando `/utils/time` emitiria uma string semelhante à abaixo
 
-    It is now 1436148762. Enjoy!
+    São agora 1436148762. Disfrute!
 
-but visiting `/` *(domain-root)*, would be expected to generate the following output as no middleware has been assigned
+mas visitando `/` *(domínio-raiz)*, seria esperado gerar a seguinte saída, pois nenhum middleware foi atribuído
 
-    Hello World
+    Oi Mundo
 
-### Passing variables from middleware
-The easiest way to pass attributes from middleware is to use the request's
-attributes.
+### Passando variáveis do middleware
+A maneira mais fácil de passar atributos do middleware é usar os atributos do pedido.
 
-Setting the variable in the middleware:
+Configurando a variável no middleware:
 
 ```php
 $request = $request->withAttribute('foo', 'bar');
 ```
 
-Getting the variable in the route callback:
+Obtendo a variável no retorno de chamada da rota:
 
 ```php
 $foo = $request->getAttribute('foo');
 ```
 
-## Finding available middleware
+## Encontrando o middleware disponível
 
-You may find a PSR 7 Middleware class already written that will satisfy your needs. Here are a few unofficial lists to search.
+Você pode encontrar uma classe MiddleRock PSR 7 já escrita que irá satisfazer suas necessidades. Aqui estão algumas listas não oficiais para pesquisar.
 
 * [oscarotero/psr7-middlewares](https://github.com/oscarotero/psr7-middlewares)
 * [Middleware for Slim Framework v3.x wiki](https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x)

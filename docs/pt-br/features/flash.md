@@ -1,8 +1,8 @@
 ---
-title: Flash Messages
+title: Mensagens Flash
 ---
 
-## Install
+## Instalar
 
 Via Composer
 
@@ -10,34 +10,34 @@ Via Composer
 $ composer require slim/flash
 ```
 
-Requires Slim 3.0.0 or newer.
+Requer Slim 3.0.0 or mais novo.
 
-## Usage
+## Usagem
 
 ```php
-// Start PHP session
-session_start(); //by default requires session storage
+// Iniciar sessão do PHP
+session_start(); // por padrão requer armazenamento de sessão
 
 $app = new \Slim\App();
 
-// Fetch DI Container
+// Buscar recipiente DI
 $container = $app->getContainer();
 
-// Register provider
+// Provedor de registro
 $container['flash'] = function () {
     return new \Slim\Flash\Messages();
 };
 
 $app->get('/foo', function ($req, $res, $args) {
-    // Set flash message for next request
+    // Definir mensagem flash para o próximo pedido
     $this->flash->addMessage('Test', 'This is a message');
 
-    // Redirect
+    // Redirecionar
     return $res->withStatus(302)->withHeader('Location', '/bar');
 });
 
 $app->get('/bar', function ($req, $res, $args) {
-    // Get flash messages from previous request
+    // Obter mensagens instantâneas do pedido anterior
     $messages = $this->flash->getMessages();
     print_r($messages);
 });
@@ -45,4 +45,4 @@ $app->get('/bar', function ($req, $res, $args) {
 $app->run();
 ```
 
-Please note that a message could be a string, object or array. Please check what your storage can handle.
+Observe que uma mensagem pode ser uma string, objeto ou array. Verifique o que e quanto o seu armazenamento pode lidar.

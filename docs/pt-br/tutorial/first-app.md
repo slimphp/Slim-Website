@@ -1,17 +1,16 @@
 ---
-title: First Application Walkthrough
+title: Primeiro passo a passo da aplicação
 ---
 
-If you're looking for a tour through all the ingredients for setting up a very simple Slim application (this one doesn't use Twig, but does use Monolog and a PDO database connection) then you're in the right place.  Either walk through the tutorial to build the example application, or adapt each step for your own needs.
+Se você está procurando um passeio através de todos os ingredientes para configurar um aplicativo Slim muito simples (este não usa Twig, mas usa Monolog e uma conexão de banco de dados PDO), então você está no lugar certo. Ou passeie pelo tutorial para criar o exemplo de aplicação, ou adapte cada passo para suas próprias necessidades.
 
-Before you start: There is also a [skeleton project](https://github.com/slimphp/Slim-Skeleton) which will give you a quick-start for a sample application, so use that if you'd rather just have something working rather than exploring how all the moving parts work.
+Antes de começar: Há também um [projeto de esqueleto] (https://github.com/slimphp/Slim-Skeleton) que lhe dará um início rápido para um aplicativo de exemplo, então use isso se preferir apenas algo funcionando em vez de explorar como funcionam todas as partes móveis.
 
-> This tutorial walks through building an example application.  The [code for the application is available](https://github.com/slimphp/Tutorial-First-Application) if you want to refer to it.
+> Este tutorial atravessa a construção de um exemplo de aplicação. O [código para o aplicativo está disponível] (https://github.com/slimphp/Tutorial-First-Application) se você quiser se referir a ele.
 
-## Getting Set Up
+## Como configurar
 
-Start by making a folder for your project (mine is called `project`, because naming things is hard).  I like to reserve the top level for things-that-are-not-code and then have a folder for source code, and a folder inside that which is my webroot, so my initial structure looks like this:
-
+Comece fazendo uma pasta para o seu projeto (o meu é chamado de `projeto ', porque nomear coisas é difícil). Eu gosto de reservar o nível superior para coisas-que-são-não-código e, em seguida, tenho uma pasta para código-fonte e uma pasta dentro daquilo que é o meu webroot, então minha estrutura inicial parece assim:
 ```
 .
 ├── project
@@ -19,30 +18,27 @@ Start by making a folder for your project (mine is called `project`, because nam
 │       └── public
 ```
 
-### Installing Slim Framework
+### Instalando o Slim Framework
 
-[Composer](https://getcomposer.org) is the best way to install Slim Framework.  If you don't have it already, you can follow the [installation instructions](https://getcomposer.org/download/), in my project I've just downloaded the `composer.phar` into my `src/` directory and I'll use it locally.  So my first command looks like this (I'm in the `src/` directory):
-
+[Composer] (https://getcomposer.org) é a melhor maneira de instalar o Slim Framework. Se você não tiver já, você pode seguir as [instruções de instalação] (https://getcomposer.org/download/), no meu projeto acabei de baixar o `composer.phar` no meu `src/` diretório e eu vou usá-lo localmente. Então, meu primeiro comando parece assim (estou no diretório `src/`):
     php composer.phar require slim/slim
 
-This does two things:
+Isso faz duas coisas:
 
-* Add the Slim Framework dependency to `composer.json` (in my case it creates the file for me as I don't already have one, it's safe to run this if you do already have a `composer.json` file)
-* Run `composer install` so that those dependencies are actually available to use in your application
+* Adicione a dependência do Slim Framework ao `composer.json` (no meu caso, ele cria o arquivo para mim, já que eu não tenho um, é seguro executar isso se você já possui um arquivo` composer.json`)
+* Execute o `composer install` para que essas dependências estejam realmente disponíveis para usar em seu aplicativo
 
-If you look inside the project directory now, you'll see that you have a `vendor/` folder with all the library code in it.  There are also two new files: `composer.json` and `composer.lock`.  This would be a great time to get our source control setup correct as well: when working with composer, we always exclude the `vendor/` directory, but both `composer.json` and `composer.lock` should be included under source control.  Since I'm using `composer.phar` in this directory I'm going to include it in my repo as well; you could equally install the `composer` command on all the systems that need it.
+Se você olha dentro do diretório do projeto agora, verá que você possui uma pasta `vendor/` com todo o código da biblioteca nele. Existem também dois novos arquivos: `composer.json` e` composer.lock`. Este seria um ótimo momento para configurar nossa configuração de controle de origem também: ao trabalhar com o compositor, sempre excluímos o diretório `vendor/`, mas ambos `composer.json` e` composer.lock` devem ser incluídos no controle de origem . Uma vez que estou usando `composer.phar` neste diretório, vou incluí-lo no meu retomado também; Você poderia igualmente instalar o comando `composer` em todos os sistemas que precisam dele.
 
-To set up the git ignore correctly, create a file called `src/.gitignore` and add the following single line to the file:
-
+Para configurar o git ignorar corretamente, crie um arquivo chamado `src/.gitignore` e adicione a seguinte linha única ao arquivo:
     vendor/*
 
 
-Now git won't prompt you to add the files in `vendor/` to the repository - we don't want to do this because we're letting composer manage these dependencies rather than including them in our source control repository.
+Agora, o git não solicitará que você adicione os arquivos em `vendor /` ao repositório - não queremos fazer isso porque estamos deixando o compositor gerenciar essas dependências em vez de incluí-las em nosso repositório de controle de origem.
 
-### Create The Application
+### Criar a aplicação
 
-There's a really excellent and minimal example of an `index.php` for Slim Framework on the [project homepage](http://www.slimframework.com) so we'll use that as our starting point.  Put the following code into `src/public/index.php`:
-
+Existe um exemplo realmente excelente e mínimo de um `index.php` para o Slim Framework na [homepage do projeto] (http://www.slimframework.com) para que usemos isso como nosso ponto de partida. Coloque o seguinte código em `src / public / index.php`:
 ```php
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
@@ -61,51 +57,47 @@ $app->run();
 
 ```
 
-We just pasted a load of code ... let's take a look at what it does.
+Nós apenas colamos um monte de código ... vamos dar uma olhada no que faz.
 
-The `use` statements at the top of the script are just bringing the `Request` and `Response` classes into our script so we don't have to refer to them by their long-winded names.  Slim framework supports PSR-7 which is the PHP standard for HTTP messaging, so you'll notice as you build your application that the `Request` and `Response` objects are something you see often.  This is a modern and excellent approach to writing web applications.
+As instruções `use` na parte superior do script estão apenas trazendo as classes` Request` e `Response` para o nosso script, então não temos que nos referir a eles por seus nomes longos. Slim framework suporta o PSR-7, que é o padrão PHP para mensagens HTTP, então você notará como você constrói seu aplicativo que os objetos `Request` e` Response` são algo que você vê com freqüência. Esta é uma abordagem moderna e excelente para escrever aplicativos da web.
 
-Next we include the `vendor/autoload.php` file - this is created by Composer and allows us to refer to the Slim and other related dependencies we installed earlier.  Look out that if you're using the same file structure as me then the `vendor/` directory is one level up from your `index.php` and you may need to adjust the path as I did above.
+Em seguida, incluímos o arquivo `vendor/autoload.php` - isso é criado pelo Composer e nos permite consultar o Slim e outras dependências relacionadas que instalamos anteriormente. Tenha em atenção que, se você estiver usando a mesma estrutura de arquivos que eu, o diretório `vendor/` é um nível acima do seu `index.php` e talvez seja necessário ajustar o caminho como fiz acima.
 
-Finally we create the `$app` object which is the start of the Slim goodness.  The `$app->get()` call is our first "route" - when we make a GET request to `/hello/someone` then this is the code that will respond to it.  **Don't forget** you need that final `$app->run()` line to tell Slim that we're done configuring and it's time to get on with the main event.
+Finalmente, criamos o objeto `$app` que é o início do Slim. A chamada `$app->get()` é nossa primeira "rota" - quando fazemos uma solicitação GET para `/hello/someone`, então esse é o código que irá responder a ela. ** Não esqueça ** você precisa da linha final `$app->run()` para dizer ao Slim que acabamos de configurar e é hora de continuar com o evento principal.
 
-Now we have an application, we'll need to run it.  I'll cover two options: the built-in PHP webserver, and an Apache virtual host setup.
+Agora temos um aplicativo, nós precisaremos executá-lo. Eu abordarei duas opções: o servidor web PHP integrado e uma configuração de host virtual do Apache.
 
-### Run Your Application With PHP's Webserver
+### Execute sua aplicação com o servidor Web do PHP
 
-This is my preferred "quick start" option because it doesn't rely on anything else!  From the `src/public` directory run the command:
-
+Esta é a minha opção preferida de "início rápido" porque não confia em mais nada! No diretório `src / public`, execute o comando:
     php -S localhost:8080
 
-This will make your application available at http://localhost:8080 (if you're already using port 8080 on your machine, you'll get a warning.  Just pick a different port number, PHP doesn't care what you bind it to).
+Isso fará com que seu aplicativo esteja disponível em http: //localhost:8080 (se você já estiver usando a porta 8080 em sua máquina, você receberá um aviso. Apenas escolha um número de porta diferente, o PHP não se importa com o que você liga para).
 
-**Note** you'll get an error message about "Page Not Found" at this URL - but it's an error message **from** Slim, so this is expected.  Try http://localhost:8080/hello/joebloggs instead :)
+** Nota ** você receberá uma mensagem de erro sobre "Página não encontrada" neste URL - mas é uma mensagem de erro ** de ** Slim, então isso é esperado. Tente http: //localhost:8080/hello/joebloggs em vez disso :)
 
-### Run Your Application With Apache or nginx
+### Execute sua aplicação com o Apache ou o nginx
 
-To get this set up on a standard LAMP stack, we'll need a couple of extra ingredients: some virtual host configuration, and one rewrite rule.
+Para obter esta configuração em uma pilha LAMP padrão, precisaremos de alguns ingredientes extras: alguma configuração de host virtual e uma regra de reescrita.
 
-The vhost configuration should be fairly straightforward; we don't need anything special here.  Copy your existing default vhost configuration and set the `ServerName` to be how you want to refer to your project.  For example you can set:
-
+A configuração mais rápida deve ser bastante direta; não precisamos de nada especial aqui. Copie sua configuração de vhost padrão existente e configure o `ServerName` para ser como você deseja se referir ao seu projeto. Por exemplo, você pode definir:
     ServerName slimproject.dev
 
     or for nginx:
 
     server_name slimproject.dev;
 
-Then you'll also want to set the `DocumentRoot` to point to the `public/` directory of your project, something like this (edit the existing line):
-
+Então você também deseja configurar o `DocumentRoot` para apontar para o diretório` public/ `do seu projeto, algo assim (edite a linha existente):
     DocumentRoot    /home/lorna/projects/slim/project/src/public/
 
-    or for nginx:
+    ou para nginx:
 
     root    /home/lorna/projects/slim/project/src/public/
 
 
-**Don't forget** to restart your server process now you've changed the configuration!
+** Não esqueça ** para reiniciar seu processo de servidor agora você mudou a configuração!
 
-I also have a `.htaccess` file in my `src/public` directory; this relies on Apache's rewrite module being enabled and simply makes all web requests go to index.php so that Slim can then handle all the routing for us.  Here's my `.htaccess` file:
-
+Eu também tenho um arquivo `.htaccess` no meu diretório` src/public`; Isso depende do módulo de reescrita do Apache sendo habilitado e simplesmente faz todos os pedidos da web ir para index.php para que Slim possa lidar com todo o roteamento para nós. Aqui está o arquivo `.htaccess`:
 ```
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -113,27 +105,26 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . index.php [L]
 ```
 
-nginx does not use `.htaccess` files, so you will need to add the following to your server configuration in the `location` block:
-
+O nginx não usa os arquivos `.htaccess`, então você precisará adicionar o seguinte à configuração do servidor no bloco` location`:
 ```
 if (!-e $request_filename){
     rewrite ^(.*)$ /index.php break;
 }
 ```
 
-*NOTE:* If you want your entry point to be something other than index.php you will need your config to change as well. `api.php` is also commonly used as an entry point, so your set up should match accordingly. This example assumes your are using index.php.
+* NOTA: * Se você deseja que seu ponto de entrada seja algo diferente de index.php, você também precisará sua configuração para mudar. `api.php` também é comumente usado como um ponto de entrada, então sua configuração deve corresponder de acordo. Este exemplo assume que você está usando index.php.
 
-With this setup, just remember to use http://slimproject.dev instead of http://localhost:8080 in the other examples in this tutorial.  The same health warning as above applies: you'll see an error page at http://slimproject.dev but crucially it's *Slim's* error page.  If you go to http://slimproject.dev/hello/joebloggs then something better should happen.
+Com esta configuração, lembre-se de usar http://slimproject.dev em vez de http: // localhost: 8080 nos outros exemplos neste tutorial. O mesmo aviso de saúde acima é aplicável: você verá uma página de erro em http://slimproject.dev, mas crucial é a página de erro * Slim *. Se você for http://slimproject.dev/hello/joebloggs, então algo melhor deve acontecer.
 
-## Configuration and Autoloaders
+## Configuração e Autoloaders
 
-Now we've set up the platform, we can start getting everything we need in place in the application itself.
+Agora nós configuramos a plataforma, podemos começar a obter tudo o que precisamos no lugar na própria aplicação.
 
-### Add Config Settings to Your Application
+### Adicionar configurações de configuração à sua aplicação
 
-The initial example uses all the Slim defaults, but we can easily add configuration to our application when we create it.  There are a few options but here I've just created an array of config options and then told Slim to take its settings from here when I create it.
+O exemplo inicial usa todos os padrões Slim, mas podemos adicionar facilmente configuração ao nosso aplicativo quando o criamos. Existem algumas opções, mas aqui eu acabei de criar uma série de opções de configuração e depois disse a Slim para tomar suas configurações a partir daqui quando eu criá-la.
 
-First the configuration itself:
+Primeiro, a própria configuração:
 
 ```php
 $config['displayErrorDetails'] = true;
@@ -145,23 +136,22 @@ $config['db']['pass']   = 'password';
 $config['db']['dbname'] = 'exampleapp';
 ```
 
-The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you're using the built in PHP webserver then you'll see them in the console output which is helpful). The second line allows the web server to set the Content-Length header which makes Slim behave more predictably.
+A primeira linha é a mais importante! Vire isso no modo de desenvolvimento para obter informações sobre erros (sem ele, o Slim irá, pelo menos, registrar erros, então, se você estiver usando o servidor web incorporado no PHP, você os verá na saída do console, que é útil). A segunda linha permite que o servidor da Web configure o cabeçalho Content-Length que faz com que Slim se comporte mais previsivelmente.
 
-The other settings here are not specific keys/values, they're just some data that I want to be able to access later.
+As outras configurações aqui não são chaves/valores específicos, são apenas alguns dados que eu quero poder acessar mais tarde.
 
-Now to feed this into Slim, we need to *change* where we create the `Slim/App` object so that it now looks like this:
-
+Agora, para alimentar isso em Slim, precisamos * mudar * onde criamos o objeto `Slim/App` para que ele agora se pareça com isto:
 ```php
 $app = new \Slim\App(['settings' => $config]);
 ```
 
-We'll be able to access any settings we put into that `$config` array from our application later on.
+Poderemos acessar todas as configurações que colocamos na matriz `$ config` do nosso aplicativo mais tarde.
 
-## Set up Autoloading for Your Own Classes
+## Configurar autoloading para suas próprias classes
 
-Composer can handle the autoloading of your own classes just as well as the vendored ones. For an in-depth guide, take a look at [using Composer to manage autoloading rules](https://getcomposer.org/doc/04-schema.md#autoload).
+O compositor pode lidar com o carregamento automático de suas próprias classes, assim como os vendidos. Para obter um guia detalhado, veja [usando o Composer para gerenciar as regras de autoloading] (https://getcomposer.org/doc/04-schema.md#autoload).
 
-My setup is pretty simple since I only have a few extra classes, they're just in the global namespace, and the files are in the `src/classes/` directory.  So to autoload them, I add this `autoload` section to my `composer.json` file:
+Minha configuração é bastante simples, já que eu só tenho algumas classes extras, elas estão apenas no espaço para nome global e os arquivos estão no diretório `src/classes/`. Então, para autoload, eu adiciono esta seção 'autoload` ao meu arquivo `composer.json`:
 
 ```javascript
 {
@@ -179,27 +169,27 @@ My setup is pretty simple since I only have a few extra classes, they're just in
 }
 ```
 
-## Add Dependencies
+## Adicionar Dependências
 
-Most applications will have some dependencies, and Slim handles them nicely using a DIC (Dependency Injection Container) built on [Pimple](http://pimple.sensiolabs.org/).  This example will use both [Monolog](https://github.com/Seldaek/monolog) and a [PDO](http://php.net/manual/en/book.pdo.php) connection to MySQL.
+A maioria dos aplicativos terá algumas dependências, e Slim os controla bem usando um DIC (Dependency Injection Container) criado em [Pimple] (http://pimple.sensiolabs.org/). Este exemplo usará a conexão [Monolog] (https://github.com/Seldaek/monolog) e [PDO] (http://php.net/manual/en/book.pdo.php) para o MySQL.
 
-The idea of the dependency injection container is that you configure the container to be able to load the dependencies that your application needs, when it needs them.  Once the DIC has created/assembled the dependencies, it stores them and can supply them again later if needed.
+A idéia do recipiente de injeção de dependência é que você configura o recipiente para poder carregar as dependências que seu aplicativo precisa, quando ele precisar deles. Uma vez que a DIC criou/montou as dependências, as armazena e pode fornecê-las novamente mais tarde, se necessário.
 
-To get the container, we can add the following after the line where we create `$app` and before we start to register the routes in our application:
+Para obter o contêiner, podemos adicionar o seguinte após a linha onde criamos `$app` e antes de começar a registrar as rotas em nosso aplicativo:
 
 ```php
 $container = $app->getContainer();
 ```
 
-Now we have the `Slim\Container` object, we can add our services to it.
+Agora temos o objeto `Slim\Container`, podemos adicionar nossos serviços a ele.
 
-### Use Monolog In Your Application
+### Use Monolog em sua aplicação
 
-If you're not already familiar with Monolog, it's an excellent logging framework for PHP applications, which is why I'm going to use it here.  First of all, get the Monolog library installed via Composer:
+Se você ainda não está familiarizado com o Monolog, é uma excelente estrutura de log para aplicativos PHP, e é por isso que vou usá-lo aqui. Antes de tudo, obtenha a biblioteca Monolog instalada via compositor:
+    
+	php composer.phar require monolog/monolog
 
-    php composer.phar require monolog/monolog
-
-The dependency is named `logger` and the code to add it looks like this:
+A dependência é denominada `logger` e o código para adicionar isso parece assim:
 
 ```php
 $container['logger'] = function($c) {
@@ -210,14 +200,14 @@ $container['logger'] = function($c) {
 };
 ```
 
-We're adding an element to the container, which is itself an anonymous function (the `$c` that is passed in is the container itself so you can access other dependencies if you need to).  This will be called when we try to access this dependency for the first time; the code here does the setup of the dependency.  Next time we try to access the same dependency, the same object that was created the first time will be used the next time.
+Estamos adicionando um elemento ao contêiner, que é em si uma função anônima (o `$c` que é aprovado é o próprio contêiner para que você possa acessar outras dependências se precisar). Isso será chamado quando tentarmos acessar essa dependência pela primeira vez; O código aqui faz a configuração da dependência. Na próxima vez que tentarmos acessar a mesma dependência, o mesmo objeto que foi criado a primeira vez será usado na próxima vez.
 
-My Monolog config here is fairly light; just setting up the application to log all errors to a file called `logs/app.log` (remember this path is from the point of view of where the script is running, i.e. `index.php`).
+Meu Monolog config aqui é bastante leve; basta configurar o aplicativo para registrar todos os erros em um arquivo chamado `logs/app.log` (lembre-se que este caminho é do ponto de vista de onde o script está sendo executado, ou seja,` index.php`).
 
-With the logger in place, I can use it from inside my route code with a line like this:
+Com o registrador no lugar, eu posso usá-lo dentro do meu código de rota com uma linha como esta:
 
 ```php
-    $this->logger->addInfo('Something interesting happened');
+    $this->logger->addInfo('Algo interessante aconteceu');
 ```
 
 Having good application logging is a really important foundation for any application so I'd always recommend putting something like this in place.  This allows you to add as much or as little debugging as you want, and by using the appropriate log levels with each message, you can have as much or as little detail as is appropriate for what you're doing in any one moment.
@@ -239,22 +229,21 @@ $container['db'] = function ($c) {
 };
 ```
 
-Remember the config that we added into our app earlier?  Well, this is where we use it - the container knows how to access our settings, and so we can grab our configuration very easily from here.  With the config, we create the `PDO` object (remember this will throw a `PDOException` if it fails and you might like to handle that here) so that we can connect to the database.  I've included two `setAttribute()` calls that really aren't necessary but I find these two settings make PDO itself much more usable as a library so I left the settings in this example so you can use them too!  Finally, we return our connection object.
+Lembre-se da configuração que adicionamos ao nosso aplicativo anteriormente? Bem, é aqui que o usamos - o contêiner sabe como acessar nossas configurações, e assim podemos agarra nossa configuração com facilidade a partir daqui. Com a configuração, criamos o objeto `PDO` (lembre-se que isso irá lançar um` PDOException` se ele falhar e você pode gostar de lidar com isso aqui) para que possamos nos conectar ao banco de dados. Eu incluí duas chamadas `setAttribute ()` que realmente não são necessárias, mas acho que essas duas configurações tornam a própria PDO muito mais útil como uma biblioteca, então eu deixei as configurações neste exemplo para que você possa usá-las também! Finalmente, devolvemos nosso objeto de conexão.
 
-Again, we can access our dependencies with just `$this->` and then the name of the dependency we want which in this case is `$this->db`, so there is code in my application that looks something like:
+Mais uma vez, podemos acessar nossas dependências com apenas `$ this->` e, em seguida, o nome da dependência que queremos, que neste caso é `$ this-> db`, então há código na minha aplicação que se parece com:
 
 ```php
     $mapper = new TicketMapper($this->db);
 ```
 
-This will fetch the `db` dependency from the DIC, creating it if necessary, and in this example just allows me to pass the `PDO` object straight into my mapper class.
+Isso irá buscar a dependência `db` do DIC, criando-o, se necessário, e neste exemplo apenas me permite passar o objeto` PDO` diretamente na minha classe de mapeador.
 
-## Create Routes
+## Criar rotas
 
-"Routes" are the URL patterns that we'll describe and attach functionality to.  Slim doesn't use any automatic mapping or URL formulae so you can make any route pattern you like map onto any function you like, it's very flexible.  Routes can be linked to a particular HTTP verb (such as GET or POST), or more than one verb.
+"Rotas" são os padrões de URL aos quais descreveremos e atribuir funcionalidades. Slim não usa qualquer mapeamento automático ou fórmulas de URL para que você possa fazer qualquer padrão de rota que você gosta de mapa em qualquer função que você gosta, é muito flexível. As rotas podem ser vinculadas a um verbo HTTP particular (como GET ou POST), ou mais de um verbo.
 
-As a first example, here's the code for making a GET request to `/tickets` which lists the tickets in my bug tracker example application.  It just spits out the variables since we haven't added any views to our application yet:
-
+Como primeiro exemplo, aqui está o código para fazer uma solicitação GET para `/ tickets` que lista os ingressos no meu aplicativo de exemplo do rastreador de bugs. Ele apenas escreve as variáveis, já que ainda não adicionamos nenhuma visão para nossa aplicação:
 ```php
 $app->get('/tickets', function (Request $request, Response $response) {
     $this->logger->addInfo("Ticket list");
@@ -266,24 +255,23 @@ $app->get('/tickets', function (Request $request, Response $response) {
 });
 ```
 
-The use of `$app->get()` here means that this route is only available for GET requests; there's an equivalent `$app->post()` call that also takes the route pattern and a callback for POST requests.  There are also [methods for other verbs](http://www.slimframework.com/docs/objects/router.html) - and also the `map()` function for situations where more than one verb should use the same code for a particular route.
+O uso de `$app->get()` aqui significa que esta rota está disponível apenas para pedidos GET; existe uma chamada equivalente de "$app->post()` que também leva o padrão de rota e um retorno de chamada para pedidos POST. Há também [métodos para outros verbos] (http://www.slimframework.com/docs/objects/router.html) - e também a função `map()` para situações em que mais de um verbo deve usar o mesmo código para uma rota particular.
 
-Slim routes match in the order they are declared, so if you have a route which could overlap another route, you need to put the most specific one first.  Slim will throw an exception if there's a problem, for example in this application I have both `/ticket/new` and `/ticket/{id}` and they need to be declared in that order otherwise the routing will think that "new" is an ID!
+As rotas Slim correspondem na ordem em que são declaradas, então, se você tiver uma rota que possa sobrepor uma outra rota, é necessário colocar primeiro o mais específico. Slim lançará uma exceção se houver um problema, por exemplo, neste aplicativo eu tenho `/ticket/new` e`/ticket/{id} `e eles precisam ser declarados nessa ordem, caso contrário, o roteamento irá pensar que" novo " "é um ID!
 
-In this example application, all the routes are in `index.php` but in practice this can make for a rather long and unwieldy file!  It's fine to refactor your application to put routes into a different file or files, or just register a set of routes with callbacks that are actually declared elsewhere.
+Neste aplicativo de exemplo, todas as rotas estão em `index.php`, mas na prática isso pode fazer um arquivo bastante longo e pesado. É bom refinar sua aplicação para colocar rotas em um arquivo ou arquivos diferentes, ou apenas registrar um conjunto de rotas com retorno de chamada que são realmente declarados em outro lugar.
 
-All route callbacks accept three parameters (the third one is optional):
+Todos os retornos de rotas aceitam três parâmetros (o terceiro é opcional):
 
- * Request: this contains all the information about the incoming request, headers, variables, etc.
- * Response: we can add output and headers to this and, once complete, it will be turned into the HTTP response that the client receives
- * Arguments: the named placeholders from the URL (more on those in just a moment), this is optional and is usually omitted if there aren't any
+ * Solicitação: contém todas as informações sobre o pedido recebido, cabeçalhos, variáveis, etc.
+ * Resposta: podemos adicionar saída e cabeçalhos para isso e, uma vez concluída, será transformada na resposta HTTP que o cliente recebe
+ * Argumentos: os marcadores de lugar nomeados da URL (mais sobre aqueles em apenas um momento), isso é opcional e geralmente é omitido se não houver
 
-This emphasis on Request and Response illustrates Slim 3 being based on the PSR-7 standard for HTTP Messaging.  Using the Request and Response object also makes the application more testable as we don't need to make **actual** requests and responses, we can just set up the objects as desired.
+Essa ênfase em Solicitação e Resposta ilustra o Slim 3 baseado no padrão PSR-7 para mensagens HTTP. O uso do objeto Solicitação e Resposta também torna o aplicativo mais testável, pois não precisamos fazer ** solicitações e respostas ** reais, podemos configurar os objetos conforme desejado.
 
-### Routes with Named Placeholders
+### Rotas com espaços reservados nomeados
 
-Sometimes, our URLs have variables in them that we want to use in our application.  In my bug tracking example, I want to have URLs like `/ticket/42` to refer to the ticket - and Slim has an easy way of parsing out the "42" bit and making it available for easy use in the code.  Here's the route that does exactly that:
-
+Às vezes, nossos URLs têm variáveis ​​neles que queremos usar em nosso aplicativo. No meu exemplo de rastreamento de bugs, eu quero que os URLs como `/ticket/42` se referem ao ticket - e o Slim possui uma maneira fácil de analisar o bit" 42 "e torná-lo disponível para fácil uso no código. Aqui está a rota que faz exatamente isso:
 ```php
 $app->get('/ticket/{id}', function (Request $request, Response $response, $args) {
     $ticket_id = (int)$args['id'];
@@ -295,24 +283,24 @@ $app->get('/ticket/{id}', function (Request $request, Response $response, $args)
 });
 ```
 
-Look at where the route itself is defined: we write it as `/ticket/{id}`.  When we do this, the route will take the portion of the URL from where the `{id}` is declared, and it becomes available as `$args['id']` inside the callback.
+Observe onde a própria rota está definida: nós a escrevemos como `/ticket/{id}`. Quando fizermos isso, a rota irá levar a parte do URL de onde o `{id}` é declarado e fica disponível como '$ args [' id '] `dentro do retorno de chamada.
 
-### Using GET Parameters
+### Usando parâmetros GET
 
-Since GET and POST send data in such different ways, then the way that we get that data from the Request object differs hugely in Slim.
+Uma vez que GET e POST enviam dados de maneiras tão diferentes, a maneira como obtemos esses dados do objeto Request difere enormemente em Slim.
 
-It is possible to get all the query parameters from a request by doing `$request->getQueryParams()` which will return an associative array.  So for the URL `/tickets?sort=date&order=desc` we'd get an associative array like:
+É possível obter todos os parâmetros de consulta de uma solicitação fazendo '$request->getQueryParams () `que retornará uma matriz associativa. Então, para a URL `/ tickets? Sort = date & order = desc`, obteríamos um array associativo:
 
     ['sort' => 'date', 'order' => 'desc']
 
-These can then be used (after validating of course) inside your callback.
+Estes podem então ser usados (depois de validar, é claro) dentro de seu retorno de chamada.
 
 
-### Working with POST Data
+### Trabalhando com dados POST
 
-When working with incoming data, we can find this in the body.  We've already seen how we can parse data from the URL and how to obtain the GET variables by doing `$request->getQueryParams()` but what about POST data?  The POST request data can be found in the body of the request, and Slim has some good built in helpers to make it easier to get the information in a useful format.
+Ao trabalhar com dados recebidos, podemos encontrar isso no corpo. Já vimos como podemos analisar dados do URL e como obter as variáveis GET fazendo '$request->getQueryParams() `, mas o que é sobre os dados POST? Os dados do pedido POST podem ser encontrados no corpo da solicitação, e o Slim possui alguns bons criados em ajudantes para facilitar a obtenção das informações em um formato útil.
 
-For data that comes from a web form, Slim will turn that into an array.  My tickets example application has a form for creating new tickets that just sends two fields: "title" and "description".  Here is the first part of the route that receives that data, note that for a POST route use `$app->post()` rather than `$app->get()`:
+Para os dados que vêm de um formulário da Web, o Slim irá transformá-lo em uma matriz. O aplicativo de exemplo de meus ingressos tem um formulário para criar novos tickets que apenas envia dois campos: "título" e "descrição". Aqui está a primeira parte da rota que recebe esses dados, observe que para uma rota POST use `$app->post()` em vez de `$app->get()`:
 
 ```php
 $app->post('/ticket/new', function (Request $request, Response $response) {
@@ -323,25 +311,24 @@ $app->post('/ticket/new', function (Request $request, Response $response) {
     // ...
 ```
 
-The call to `$request->getParsedBody()` asks Slim to look at the request and the `Content-Type` headers of that request, then do something smart and useful with the body.  In this example it's just a form post and so the resulting `$data` array looks very similar to what we'd expect from `$_POST` - and we can go ahead and use the [filter](https://php.net/manual/en/book.filter.php) extension to check the value is acceptable before we use it.  A huge advantage of using the built in Slim methods is that we can test things by injecting different request objects - if we were to use `$_POST` directly, we aren't able to do that.
+A chamada para `$request->getParsedBody()` pede a Slim para ver os encaminhamentos do pedido e do tipo Content-Type desse pedido, então faça algo inteligente e útil com o corpo. Neste exemplo, é apenas uma publicação de formulário e, portanto, a matriz resultante de "dados" parece muito semelhante à que esperamos de `$ _POST` - e podemos seguir em frente e usar o [filtro] (https://php.net/manual/en/book.filter.php) para verificar se o valor é aceitável antes de usá-lo. Uma grande vantagem de usar os métodos incorporados em Slim é que podemos testar as coisas injetando objetos de solicitação diferentes - se usássemos `$_POST` diretamente, não podemos fazer isso.
 
-What's really neat here is that if you're building an API or writing AJAX endpoints, for example, it's super easy to work with data formats that arrive by POST but which aren't a web form.  As long as the `Content-Type` header is set correctly, Slim will parse a JSON payload into an array and you can access it exactly the same way: by using `$request->getParsedBody()`.
+O que realmente é bom aqui é que, se você estiver construindo uma API ou escrevendo pontos de extremidade AJAX, por exemplo, é super fácil trabalhar com formatos de dados que chegam no POST, mas que não são um formulário da Web. Enquanto o cabeçalho `Content-Type` estiver configurado corretamente, o Slim irá analisar uma carga útil JSON em uma matriz e você pode acessá-la exatamente da mesma maneira: usando` $ request-> getParsedBody () `.
 
-## Views and Templates
+## Exibições e modelos
 
-Slim doesn't have an opinion on the views that you should use, although there are some options that are ready to plug in.  Your best choices are either Twig or plain old PHP.  Both options have pros and cons: if you're already familiar with Twig then it offers lots of excellent features and functionality such as layouts - but if you're not already using Twig, it can be a large learning curve overhead to add to a microframework project.  If you're looking for something dirt simple then the PHP views might be for you!  I picked PHP for this example project, but if you're familiar with Twig then feel free to use that; the basics are mostly the same.
+Slim não tem uma opinião sobre as visualizações que você deve usar, embora existam algumas opções que estão prontas para se conectar. Suas melhores escolhas são o Twig ou o antigo PHP antigo. Ambas as opções têm prós e contras: se você já está familiarizado com o Twig, ele oferece muitos recursos e funcionalidades excelentes, tais como layouts - mas, se você ainda não estiver usando o Twig, pode ser uma grande curva de aprendizado sobrecarga para adicionar a um projeto de microframework. Se você está procurando por algo simples, então as visualizações do PHP podem ser para você! Escolhi o PHP para este projeto de exemplo, mas se você estiver familiarizado com Twig, então sinta-se livre para usar isso; O básico é principalmente o mesmo.
 
-Since we'll be using the PHP views, we'll need to add this dependency to our project via Composer.  The command looks like this (similar to the ones you've already seen):
-
+Como estaremos usando as visualizações do PHP, precisaremos adicionar essa dependência ao nosso projeto via Composer. O comando parece assim (semelhante ao que você já viu):
     php composer.phar require slim/php-view
 
-In order to be able to render the view, we'll first need to create a view and make it available to our application; we do that by adding it to the DIC.  The code we need goes with the other DIC additions near the top of `src/public/index.php` and it looks like this:
+Para poder renderizar a vista, primeiro precisamos criar uma visualização e disponibilizá-la à nossa aplicação; Nós fazemos isso adicionando-o ao DIC. O código que precisamos vai com as outras adições DIC perto do topo do `src/public/index.php` e parece assim:
 
 ```php
 $container['view'] = new \Slim\Views\PhpRenderer('../templates/');
 ```
 
-Now we have a `view` element in the DIC, and by default it will look for its templates in the `src/templates/` directory.  We can use it to render templates in our actions - here's the ticket list route again, this time including the call to pass data into the template and render it:
+Agora, temos um elemento `view` no DIC e, por padrão, procurará seus modelos no diretório` src / templates / `. Podemos usá-lo para renderizar modelos em nossas ações - aqui está a rota da lista de ingresso novamente, desta vez incluindo a chamada para passar dados para o modelo e processá-lo:
 
 ```php
 $app->get('/tickets', function (Request $request, Response $response) {
@@ -354,23 +341,22 @@ $app->get('/tickets', function (Request $request, Response $response) {
 });
 ```
 
-The only new part here is the penultimate line where we set the `$response` variable.  Now that the `view` is in the DIC, we can refer to it as `$this->view`.  Calling `render()` needs us to supply three arguments: the `$response` to use, the template file (inside the default templates directory), and any data we want to pass in.  Response objects are *immutable* which means that the call to `render()` won't update the response object; instead it will return us a new object which is why it needs to be captured like this.  This is always true when you operate on the response object.
+A única parte nova aqui é a penúltima linha onde definimos a variável `$ response`. Agora que o `view` está no DIC, podemos nos referir a isso como '$this->view`. Chamar `render()` precisa de nós para fornecer três argumentos: a `$response` para usar, o arquivo de modelo (dentro do diretório de templates padrão) e qualquer dado que desejemos passar. Os objetos de resposta são * imutáveis ​​* o que significa que a chamada para `render()` não atualizará o objeto de resposta; em vez disso, nos devolverá um novo objeto, pelo que ele precisa ser capturado assim. Isso sempre é verdade quando você opera no objeto de resposta.
 
-When passing the data to templates, you can add as many elements to the array as you want to make available in the template.  The keys of the array are the variables that the data will exist in once we get to the template itself.
+Ao passar os dados aos modelos, você pode adicionar tantos elementos à matriz quanto desejar disponibilizar no modelo. As chaves da matriz são as variáveis ​​que os dados existirão uma vez que chegarmos ao próprio modelo.
 
-As an example, here's a snippet from the template that displays the ticket list (i.e. the code from `src/templates/tickets.phtml` - which uses [Pure.css](http://purecss.io/) to help cover my lack of frontend skills):
-
+Como exemplo, aqui está um trecho do modelo que exibe a lista de passagens (ou seja, o código de `src/templates/tickets.phtml` - que usa [Pure.css] (http://purecss.io/) para ajudar a cobrir minha falta de habilidades frontend):
 ```php
-<h1>All Tickets</h1>
+<h1>Todos os Tickets</h1>
 
-<p><a href="/ticket/new">Add new ticket</a></p>
+<p><a href="/ticket/new">Adicionar ticket</a></p>
 
 <table class="pure-table">
     <tr>
-        <th>Title</th>
-        <th>Component</th>
-        <th>Description</th>
-        <th>Actions</th>
+        <th>Titulo</th>
+        <th>Componente</th>
+        <th>Descrição</th>
+        <th>Ações</th>
     </tr>
 
 <?php foreach ($tickets as $ticket): ?>
@@ -388,30 +374,29 @@ As an example, here's a snippet from the template that displays the ticket list 
 </table>
 ```
 
-In this case, `$tickets` is actually a `TicketEntity` class with getters and setters, but if you passed in an array, you'd be able to access it using array rather than object notation here.
+Neste caso, `$ tickets` é na verdade uma classe` TicketEntity` com getters e setters, mas se você passou em uma matriz, você poderá acessá-lo usando a matriz em vez da notação de objeto aqui.
 
-Did you notice something fun going on with `$router->pathFor()` right at the end of the example?  Let's talk about named routes next :)
+Você notou algo divertido acontecendo com `$router->pathFor()` no final do exemplo? Vamos falar sobre rotas nomeadas em seguida :)
 
 ### Easy URL Building with Named Routes
 
-When we create a route, we can give it a name by calling `->setName()` on the route object.  In this case, I am adding the name to the route that lets me view an individual ticket so that I can quickly create the right URL for a ticket by just giving the name of the route, so my code now looks something like this (just the changed bits shown here):
-
+Quando criamos uma rota, podemos dar um nome chamando `->setName()` no objeto de rota. Neste caso, eu estou adicionando o nome à rota que me permite visualizar um ticket individual para que eu possa rapidamente criar o URL certo para um ingresso apenas dando o nome da rota, então meu código agora parece algo assim (apenas Os bits alterados são mostrados aqui):
 ```php
 $app->get('/ticket/{id}', function (Request $request, Response $response, $args) {
     // ...
 })->setName('ticket-detail');
 ```
 
-To use this in my template, I need to make the router available in the template that's going to want to create this URL, so I've amended the `tickets/` route to pass a router through to the template by changing the render line to look like this:
+Para usar isso no meu modelo, preciso disponibilizar o roteador no modelo que vai querer criar esse URL, então alterei a rota `tickets/` para passar um roteador para o modelo alterando a linha de renderização para se parecer com isto:
 
 ```php
     $response = $this->view->render($response, 'tickets.phtml', ['tickets' => $tickets, 'router' => $this->router]);
 ```
 
-With the `/tickets/{id}` route having a friendly name, and the router now available in our template, this is what makes the `pathFor()` call in our template work.  By supplying the `id`, this gets used as a named placeholder in the URL pattern, and the correct URL for linking to that route with those values is created.  This feature is brilliant for readable template URLs and is even better if you ever need to change a URL format for any reason - no need to grep templates to see where it's used.  This approach is definitely recomended, especially for links you'll use a lot.
+Com a rota `/tickets/{id}` com um nome amigável e o roteador agora disponível no nosso modelo, isso é o que faz com que a chamada `pathFor ()` no nosso modelo funcione. Ao fornecer o `id`, isso é usado como um marcador de posição nomeado no padrão de URL, e o URL correto para ligação a essa rota com esses valores é criado. Este recurso é brilhante para URLs de modelo legíveis e é ainda melhor se você precisar alterar um formato de URL por qualquer motivo - não é necessário criar modelos grep para ver onde ele é usado. Esta abordagem é definitivamente recomendada, especialmente para links que você usará muito.
 
-## Where Next?
+## Onde Próximo?
 
-This article gave a walkthrough of how to get set up with a simple application of your own, which I hope will let you get quickly started, see some working examples, and build something awesome.
+Este artigo deu um passo a passo sobre como configurar um aplicativo simples, o que espero que você comece rapidamente, veja alguns exemplos de trabalho e crie algo incrível.
 
-From here, I'd recommend you take a look at the other parts of the project documentation for anything you need that wasn't already covered or that you want to see an alternative example of.  A great next step would be to take a look at the [Middleware](https://www.slimframework.com/docs/concepts/middleware.html) section - this technique is how we layer up our application and add functionality such as authentication which can be applied to multiple routes.
+A partir daqui, eu recomendo que você dê uma olhada nas outras partes da documentação do projeto para qualquer coisa que você precisa, que já não estava coberta ou que você quer ver um exemplo alternativo de. Um ótimo próximo passo seria dar uma olhada na seção [Middleware] (https://www.slimframework.com/docs/concepts/middleware.html) - esta técnica é a forma como formamos o nosso aplicativo e adicionamos funcionalidades como autenticação que pode ser aplicada em rotas múltiplas.

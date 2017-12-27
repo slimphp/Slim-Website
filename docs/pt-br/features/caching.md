@@ -1,47 +1,50 @@
 ---
-title: HTTP Caching
+title: Cache HTTP
 ---
 
-Slim 3 uses the optional standalone [slimphp/Slim-HttpCache](https://github.com/slimphp/Slim-HttpCache) PHP component
-for HTTP caching. You can use this component to create and return responses that
-contain `Cache`, `Expires`, `ETag`, and `Last-Modified` headers that control
-when and how long application output is retained by client-side caches. You may have to set your php.ini setting "session.cache_limiter" to an empty string in order to get this working without interferences.
+O Slim 3 usa o componente PHP autônomo 
+[slimphp / Slim-HttpCache] (https://github.com/slimphp/Slim-HttpCache) para o 
+armazenamento em cache HTTP. Você pode usar esse componente para criar e retornar 
+respostas que contenham cabeçalhos 'Cache`, `Expiração',` ETag` e `Last-Modified` 
+que controlam quando e por quanto tempo a saída do aplicativo é mantida por caches 
+do lado do cliente. Talvez você precise configurar sua configuração php.ini 
+"session.cache_limiter" para uma string vazia para que isso funcione sem interferências.
 
-## Installation
+## Instalação
 
-Execute this bash command from your project's root directory:
+Execute este comando bash do diretório raiz do seu projeto:
 
 ```bash
 composer require slim/http-cache
 ```
 
-## Usage
+## Usar
 
-The `slimphp/Slim-HttpCache` component contains a service provider and an application
-middleware. You should add both to your application like this:
+O componente `slim php / Slim-Http Cache` contém um provedor de serviços e um middleware 
+de aplicativos. Você deve adicionar ambos ao seu aplicativo como este:
 
 ```php
-// Register service provider with the container
+// Registre o provedor de serviços com o recipiente
 $container = new \Slim\Container;
 $container['cache'] = function () {
     return new \Slim\HttpCache\CacheProvider();
 };
 
-// Add middleware to the application
+// Adicionar middleware ao aplicativo
 $app = new \Slim\App($container);
 $app->add(new \Slim\HttpCache\Cache('public', 86400));
 
-// Create your application routes...
+// Crie suas rotas de aplicação ...
 
-// Run application
+// Execute o aplicativo
 $app->run();
 ```
 
 ## ETag
 
-Use the service provider's `withEtag()` method to create a Response object
-with the desired `ETag` header. This method accepts a PSR7 response object,
-and it returns a cloned PSR7 response with the new HTTP header.
+Use o método `withEtag ()` do provedor de serviços para criar um objeto de resposta com 
+o cabeçalho `ETag` desejado. Este método aceita um objeto de resposta PSR7 e retorna uma 
+resposta PSR7 clonada com o novo cabeçalho HTTP.
 
 ```php
 $app->get('/foo', function ($req, $res, $args) {
@@ -51,11 +54,11 @@ $app->get('/foo', function ($req, $res, $args) {
 });
 ```
 
-## Expires
+## Expira
 
-Use the service provider's `withExpires()` method to create a Response object
-with the desired `Expires` header. This method accepts a PSR7 response object,
-and it returns a cloned PSR7 response with the new HTTP header.
+Use o método `withExpires ()` do provedor de serviços para criar um objeto de resposta 
+com o cabeçalho 'Expirar' desejado. Este método aceita um objeto de resposta PSR7 e retorna 
+uma resposta PSR7 clonada com o novo cabeçalho HTTP.
 
 ```php
 $app->get('/bar',function ($req, $res, $args) {
@@ -67,12 +70,12 @@ $app->get('/bar',function ($req, $res, $args) {
 
 ## Last-Modified
 
-Use the service provider's `withLastModified()` method to create a Response object
-with the desired `Last-Modified` header. This method accepts a PSR7 response object,
-and it returns a cloned PSR7 response with the new HTTP header.
+Use o método `withLastModified ()` do provedor de serviços para criar um objeto de 
+resposta com o cabeçalho `Last-Modified 'desejado. Este método aceita um objeto de resposta 
+PSR7 e retorna uma resposta PSR7 clonada com o novo cabeçalho HTTP.
 
 ```php
-//Example route with LastModified
+//Exemplo de rota com LastModified
 $app->get('/foobar',function ($req, $res, $args) {
     $resWithLastMod = $this->cache->withLastModified($res, time() - 3600);
 

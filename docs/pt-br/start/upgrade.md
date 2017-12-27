@@ -1,21 +1,21 @@
 ---
-title: Upgrade Guide
+title: Guia de atualização
 ---
 
-If you are upgrading from version 2 to version 3, these are the significant changes that
-you need to be aware of.
+Se você estiver atualizando da versão 2 para a versão 3, estas são as mudanças significativas que
+você precisa estar ciente.
 
-## New PHP version
-Slim 3 requires PHP 5.5+
+## Nova versão do PHP
+Slim 3 requer PHP 5.5+
 
-## Class \Slim\Slim renamed \Slim\App
-Slim 3 uses `\Slim\App` for the [Application](/docs/objects/application.html) object usually named `$app`.
+## Class \Slim\Slim renomeou \Slim\App
+Slim 3 usa `\Slim\App` para o objeto [Application] (/docs/objects/application.html) normalmente chamado `$app`.
 
 ```php
 $app = new \Slim\App();
 ```
 
-## New Route Function Signature
+## Nova Função da Rota de Assinatura
 
 ```php
 $app->get('/', function (Request $req,  Response $res, $args = []) {
@@ -23,49 +23,49 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 });
 ```
 
-## Request and response objects are no longer accessible via the Application object
-As mentioned above, Slim 3 passes the `Request` and `Response` objects as arguments to the route handling function. Since they are now accessible directly in the body of a route function, `request` and `response` are no longer properties of the `/Slim/App` ([Application](/docs/objects/application.html) object) instance.
+## Os objetos de solicitação e resposta não são mais acessíveis através do objeto do aplicativo
+Como mencionado acima, o Slim 3 passa os objetos `Request` e` Response` como argumentos para a função de tratamento de rotas. Uma vez que agora estão acessíveis diretamente no corpo de uma função de rota, `request` e` response` não são propriedades da instância `/Slim/App` ([Aplicação] (/docs/objects/application.html)).
 
-## Getting _GET and _POST variables
+## Obtendo variáveis _GET e _POST
 ```php
 $app->get('/', function (Request $req,  Response $res, $args = []) {
-    $myvar1 = $req->getParam('myvar'); //checks both _GET and _POST [NOT PSR-7 Compliant]
-    $myvar2 = $req->getParsedBody()['myvar']; //checks _POST  [IS PSR-7 compliant]
-    $myvar3 = $req->getQueryParams()['myvar']; //checks _GET [IS PSR-7 compliant]
+    $myvar1 = $req->getParam('myvar'); // verifica tanto o _GET quanto o _POST [NÃO compatíveis com o PSR-7]
+    $myvar2 = $req->getParsedBody()['myvar']; // verifica _POST [É compatível com PSR-7]
+    $myvar3 = $req->getQueryParams()['myvar']; // verifica _GET [É compatível com PSR-7]
 });
 ```
 
 
-## Hooks
-Hooks are no longer part of Slim as of v3.  You should consider reimplementing any functionality associated with the [default hooks in Slim v2](http://docs.slimframework.com/hooks/defaults/) as [middleware](/docs/concepts/middleware.html) instead.  If you need the ability to apply custom hooks at arbitrary points in your code (for example, within a route), you should consider a third-party package such as [Symfony's EventDispatcher](http://symfony.com/doc/current/components/event_dispatcher/introduction.html) or [Zend Framework's EventManager](https://zend-eventmanager.readthedocs.org/en/latest/).
+## Ganchos
+Os ganchos já não fazem parte do Slim a partir da v3. Você deve considerar a reimplementação de qualquer funcionalidade associada aos [ganchos padrão no Slim v2] (http://docs.slimframework.com/hooks/defaults/) como [middleware] (/docs/concepts/middleware.html) em vez disso. Se você precisar da habilidade de aplicar ganchos personalizados em pontos arbitrários em seu código (por exemplo, dentro de uma rota), você deve considerar um pacote de terceiros como [EventDispatcher do Symfony] (http://symfony.com/doc/current /components/event_dispatcher/introduction.html) ou [EventManager do Zend Framework] (https://zend-eventmanager.readthedocs.org/en/latest/).
 
 ## Removal HTTP Cache
-In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache](https://github.com/slimphp/Slim-HttpCache).
+No Slim v3, removemos o HTTP-Caching em seu próprio módulo [Slim\Http\Cache] (https://github.com/slimphp/Slim-HttpCache).
 
-## Removal of Stop/Halt
-Slim Core has removed Stop/Halt.
-In your applications, you should transition to using the withStatus() and withBody() methods.
+## Remoção de Stop/Halt
+Slim Core removeu Stop/Halt.
+Em seus aplicativos, você deve fazer a transição para usar os métodos withStatus() e withBody().
 
-## Removal of autoloader
-`Slim::registerAutoloader()` have been removed, we have fully moved to composer.
+## Remoção do carregador automático
+`Slim::registerAutoloader()` foi removido, nós nos mudamos completamente ao compositor.
 
-## Changes to container
-`$app->container->singleton(...)` is now `$container = $app->getContainer(); $container['...'] = function () {};` Please read Pimple docs for more info
+## Mudanças no recipiente
+`$app->container->singleton(...)` é agora `$container = $app->getContainer(); $container ['...'] = function() {}; `Por favor, leia Pimple docs para mais informações
 
-## Removal of configureMode()
-`$app->configureMode(...)` has been removed in v3.
+## Remoção de configureMode()
+`$app->configureMode(...)` foi removido na v3.
 
-## Removal of PrettyExceptions
-PrettyExceptions cause lots of issues for many people, so these have been removed.
+## Remoção de PrettyExceptions
+PrettyExceptions causa muitos problemas para muitas pessoas, então estas foram removidas.
 
-## Route::setDefaultConditions(...) has been removed
-We have switched routers which enable you to keep the default conditions regex inside of the route pattern.
+## Route :: setDefaultConditions(...) foi removido
+Nós trocamos roteadores que permitem que você mantenha as condições padrão regex dentro do padrão de rota.
 
-## Changes to redirect
-In Slim v2.x one would use the helper function `$app->redirect();` to trigger a redirect request.
-In Slim v3.x one can do the same with using the Response class like so.
+## Mudanças no redirecionamento
+No Slim v2.x, seria usada a função helper `$app->redirect();` para ativar uma solicitação de redirecionamento.
+No Slim v3.x pode-se fazer o mesmo com a utilização da classe Response assim.
 
-Example:
+Exemplo:
 
 ```php
 $app->get('/', function ($req, $res, $args) {
@@ -73,24 +73,25 @@ $app->get('/', function ($req, $res, $args) {
 });
 ```
 
-## Middleware Signature
-The middleware signature has changed from a class to a function.
+## Assinatura Middleware
+A assinatura do middleware mudou de uma classe para uma função.
 
-New signature:
+Nova assinatura:
 
 ```php
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 $app->add(function (Request $req,  Response $res, callable $next) {
-    // Do stuff before passing along
+    // Faça coisas antes de Require the Composer autoloader into your PHP script, and you are ready
+to start using Slim.passar
     $newResponse = $next($req, $res);
-    // Do stuff after route is rendered
+    // Faça coisas após a rota ser renderizada
     return $newResponse; // continue
 });
 ```
 
-You can still use a class:
+Você ainda pode usar uma classe:
 
 ```php
 namespace My;
@@ -101,69 +102,69 @@ use Psr\Http\Message\ResponseInterface as Response;
 class Middleware
 {
     function __invoke(Request $req,  Response $res, callable $next) {
-        // Do stuff before passing along
+        // Faça coisas antes de passar
         $newResponse = $next($req, $res);
-        // Do stuff after route is rendered
+        // Faça coisas após a rota ser renderizada
         return $newResponse; // continue
     }
 }
 
 
-// Register
+// Registar
 $app->add(new My\Middleware());
-// or
+// ou
 $app->add(My\Middleware::class);
 
 ```
 
 
-## Middleware Execution
-Application middleware is executed as Last In First Executed (LIFE).
+Execução do middleware
+O middleware do aplicativo é executado como Last In First Excedido (LIFE).
 
-## Flash Messages
-Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/features/flash.html) package.
+## Mensagens instantâneas
+As mensagens instantâneas não são mais uma parte do núcleo Slim v3, mas, em vez disso, foram movidas para separar o pacote [Slim Flash] (/ docs / features / flash.html).
 
-## Cookies
-In v3.0 cookies has been removed from core. See [FIG Cookies](https://github.com/dflydev/dflydev-fig-cookies) for a PSR-7 compatible cookie component.
+## Biscoitos
+Nos cookies do v3.0 foi removido do núcleo. Veja [Cookies FIG] (https://github.com/dflydev/dflydev-fig-cookies) para um componente de cookie compatível com o PSR-7.
 
-## Removal of Crypto
-In v3.0 we have removed the dependency for crypto in core.
+## Remoção de Crypto
+Na v3.0, removemos a dependência do cripto no núcleo.
 
-## New Router
-Slim now utilizes [FastRoute](https://github.com/nikic/FastRoute), a new, more powerful router!
+## Novo Router
+Slim agora utiliza [FastRoute] (https://github.com/nikic/FastRoute), um novo e mais potente roteador!
 
-This means that the specification of route patterns has changed with named parameters now in braces and square brackets used for optional segments:
+Isso significa que a especificação dos padrões de rota mudou com os parâmetros nomeados agora em chaves e colchetes usados para segmentos opcionais:
 
 ```php
-// named parameter:
+// parâmetro nomeado:
 $app->get('/hello/{name}', /*...*/);
 
-// optional segment:
+// segmento opcional:
 $app->get('/news[/{year}]', /*...*/);
 ```
 
 ## Route Middleware
-The syntax for adding route middleware has changed slightly.
-In v3.0:
+A sintaxe para adicionar middleware de rota mudou ligeiramente.
+Na v3.0:
 
 ```php
 $app->get(…)->add($mw2)->add($mw1);
 ```
 
-## Getting the current route
-The route is an attribute of the Request object in v3.0:
+## Obtendo a rota atual
+A rota é um atributo do objeto Pedido na v3.0:
 
 ```php
 $request->getAttribute('route');
 ```
 
-When getting the current route in middleware, the value for
-`determineRouteBeforeAppMiddleware` must be set to `true` in the Application
-configuration, otherwise the getAttribute call returns `null`.
+Ao obter a rota atual no middleware, o valor para `determineRouteBeforeAppMiddleware` 
+deve ser definido como` true` na configuração do aplicativo, caso contrário a chamada 
+getAttribute retorna 'null`.
 
-## urlFor() is now pathFor() in the router
+## urlFor() é agora pathFor() no roteador
 
-`urlFor()` has been renamed `pathFor()` and can be found in the `router` object:
+`urlFor()` foi renomeado `pathFor()` e pode ser encontrado no objeto `router`:
 
 ```php
 $app->get('/', function ($request, $response, $args) {
@@ -173,10 +174,10 @@ $app->get('/', function ($request, $response, $args) {
 })->setName('home');
 ```
 
-Also, `pathFor()` is base path aware.
+Além disso, `pathFor()` é o caminho base do conhecimento.
 
-## Container and DI ... Constructing
-Slim uses Pimple as a Dependency Injection Container.
+## Container e DI ... Construindo
+Slim usa Pimple como um Contentor de Injeção de Dependência.
 
 ```php
 
@@ -187,13 +188,13 @@ $app = new Slim\App(
     )
 );
 
-// Slim will grab the Home class from the container defined below and execute its index method.
-// If the class is not defined in the container Slim will still contruct it and pass the container as the first arugment to the constructor!
+// Slim irá pegar a classe Home do contêiner definido abaixo e executar seu método de índice.
+// Se a classe não está definida no contêiner, Slim ainda irá construí-la e passar o contêiner como o primeiro argumento para o construtor!
 $app->get('/', Home::class . ':index');
 
 
-// In container.config.php
-// We are using the SlimTwig here
+// Em container.config.php
+// Estamos usando o SlimTwig aqui
 return [
     'settings' => [
         'viewTemplatesDirectory' => '../templates',
@@ -211,7 +212,7 @@ return [
             ]
         );
 
-        // Instantiate and add Slim specific extension
+        // Instantiate e adicione extensão específica Slim
         $view->addExtension(
             new TwigExtension(
                 $c['router'],
@@ -232,26 +233,26 @@ return [
 
 ```
 
-## PSR-7 Objects
+## Objetos PSR-7
 
-### Request, Response, Uri & UploadFile are immutable.
-This means that when you change one of these objects, the old instance is not updated.
+### Solicitação, Resposta, Uri & UploadFile são imutáveis.
+Isso significa que quando você muda um desses objetos, a instância antiga não é atualizada.
 
 ```php
-// This is WRONG. The change will not pass through.
+// Isto está ERRADO. A mudança não irá passar.
 $app->add(function (Request $request, Response $response, $next) {
     $request->withAttribute('abc', 'def');
     return $next($request, $response);
 });
 
-// This is correct.
+// Isto está certo.
 $app->add(function (Request $request, Response $response, $next) {
     $request = $request->withAttribute('abc', 'def');
     return $next($request, $response);
 });
 ```
 
-### Message bodies are streams
+### Os corpos das mensagens são fluxos
 
 ```php
 // ...
@@ -265,12 +266,12 @@ $response = (new Response())
 // ...
 ```
 
-For text:
+Para texto:
 ```php
 // ...
-$response = (new Response())->getBody()->write('Hello world!')
+$response = (new Response())->getBody()->write('Oi Mundo!')
 
-// Or Slim specific: Not PSR-7 compliant.
-$response = (new Response())->write('Hello world!');
+// Ou especifico Slim: não é compatível com o PSR-7.
+$response = (new Response())->write('Oi Mundo!');
 // ...
 ```

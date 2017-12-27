@@ -1,21 +1,21 @@
 ---
-title: 404 Not Found Handler
+title: 404 Manejador não encontrado
 ---
 
-If your Slim Framework application does not have a route that matches the current HTTP request URI, the application invokes its Not Found handler and returns a `HTTP/1.1 404 Not Found` response to the HTTP client.
+Se o seu aplicativo Slim Framework não tiver uma rota que corresponda ao URI da solicitação HTTP atual, o aplicativo invoca o manipulador Not Found e retorna uma resposta `HTTP / 1.1 404 Not Found` para o cliente HTTP.
 
-## Default Not Found handler
+## Manipulador Padrão Não Encontrado
 
-Each Slim Framework application has a default Not Found handler. This handler sets the Response status to `404`, it sets the content type to `text/html`, and it writes a simple explanation to the Response body.
+Cada aplicativo Slim Framework possui um manipulador padrão não encontrado. Este manipulador define o status de Resposta para '404', ele define o tipo de conteúdo para `text / html` e ele escreve uma explicação simples para o órgão de Resposta.
 
-## Custom Not Found handler
+## Manipulador Personalizado Não Encontrado
 
-A Slim Framework application's Not Found handler is a Pimple service. You can substitute your own Not Found handler by defining a custom Pimple factory method with the application container.
+O manipulador Not Found de um aplicativo Slim Framework é um serviço Pimple. Você pode substituir o seu próprio manipulador não encontrado, definindo um método personalizado da fábrica de espinhas com o recipiente da aplicação.
 
 ```php
 $c = new \Slim\Container(); //Create Your container
 
-//Override the default Not Found Handler
+//Substitua o manipulador padrão não encontrado 
 $c['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
         return $c['response']
@@ -25,15 +25,15 @@ $c['notFoundHandler'] = function ($c) {
     };
 };
 
-//Create Slim
+//Crear Slim
 $app = new \Slim\App($c);
 
-//... Your code
+//... Seu codigo
 ```
 
-In this example, we define a new `notFoundHandler` factory that returns a callable. The returned callable accepts two arguments:
+Neste exemplo, definimos uma nova fábrica `notFoundHandler` que retorna um callable. O retornável retornável aceita dois argumentos:
 
-1. A `\Psr\Http\Message\ServerRequestInterface` instance
-2. A `\Psr\Http\Message\ResponseInterface` instance
+1. Uma instância `\Psr\Http\Message\ServerRequestInterface`
+2. Uma instância `\Psr\Http\Message\ResponseInterface`
 
-The callable **MUST** return an appropriate `\Psr\Http\Message\ResponseInterface` instance.
+O callable ** DEVE ** retorna uma instância apropriada `\Psr\Http\Message\ResponseInterface`.

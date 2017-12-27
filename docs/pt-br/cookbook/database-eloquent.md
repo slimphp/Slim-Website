@@ -1,28 +1,29 @@
 ---
-title: Using Eloquent with Slim
+title: Usando Eloquent com Slim
 ---
 
-You can use a database ORM such as [Eloquent](https://laravel.com/docs/5.1/eloquent) to connect your SlimPHP application to a database.
+Você pode usar um ORM de banco de dados, como [Eloquent] (https://laravel.com/docs/5.1/eloquent) para conectar seu aplicativo SlimPHP a um banco de dados.
 
-## Adding Eloquent to your application
+## Adicionando Eloquent à sua aplicação
 
 <figure markdown="1">
+
 ```bash
 composer require illuminate/database "~5.1"
 ```
-<figcaption>Figure 1: Add Eloquent to your application.</figcaption>
+<figcaption>Figura 1: Adicione Eloquent ao seu aplicativo.</figcaption>
 </figure>
 
 ## Configure Eloquent
 
-Add the database settings to Slim's settings array.
+Adicione as configurações do banco de dados ao array de configurações do Slim.
 
 <figure markdown="1">
 ```php
 <?php
 return [
     'settings' => [
-        // Slim Settings
+        // Configurações de Slim
         'determineRouteBeforeAppMiddleware' => false,
         'displayErrorDetails' => true,
         'db' => [
@@ -38,10 +39,10 @@ return [
     ],
 ];
 ```
-<figcaption>Figure 2: Settings array.</figcaption>
+<figcaption>Figura 2: Array de Configurações.</figcaption>
 </figure>
 
-In your `dependencies.php` or wherever you add your Service Factories:
+No seu `dependencies.php` ou onde você adiciona suas Fábricas de Serviço:
 
 <figure markdown="1">
 ```php
@@ -56,10 +57,10 @@ $container['db'] = function ($container) {
     return $capsule;
 };
 ```
-<figcaption>Figure 3: Configure Eloquent.</figcaption>
+<figcaption>Figura 3: Configure Eloquent.</figcaption>
 </figure>
 
-## Pass a controller an instance of your table
+## Passe um controlador a uma instância da sua tabela
 
 <figure markdown="1">
 ```php
@@ -70,10 +71,10 @@ $container[App\WidgetController::class] = function ($c) {
     return new \App\WidgetController($view, $logger, $table);
 };
 ```
-<figcaption>Figure 4: Pass table object into a controller.</figcaption>
+<figcaption>Figura 4: Passe o objeto da tabela em um controlador.</figcaption>
 </figure>
 
-## Query the table from a controller
+## Consultar a tabela a partir de um controlador
 
 <figure markdown="1">
 ```php
@@ -115,10 +116,10 @@ class WidgetController
     }
 }
 ```
-<figcaption>Figure 5: Sample controller querying the table.</figcaption>
+<figcaption>Figura 5: Controlador de amostras consultando a tabela.</figcaption>
 </figure>
 
-### Query the table with where
+### Consulte a tabela com 'where()'
 
 <figure markdown="1">
 ```php
@@ -126,10 +127,10 @@ class WidgetController
 $records = $this->table->where('name', 'like', '%foo%')->get();
 ...
 ```
-<figcaption>Figure 6: Query searching for names matching foo.</figcaption>
+<figcaption>Figura 6: Consulta procurando nomes que correspondam a foo.</figcaption>
 </figure>
 
-### Query the table by id
+### Consulta a tabela por id
 
 <figure markdown="1">
 ```php
@@ -137,9 +138,9 @@ $records = $this->table->where('name', 'like', '%foo%')->get();
 $record = $this->table->find(1);
 ...
 ```
-<figcaption>Figure 7: Selecting a row based on id.</figcaption>
+<figcaption>Figura 7: Selecionando uma linha com base no id.</figcaption>
 </figure>
 
-## More information
+## Mais informação
 
-[Eloquent](https://laravel.com/docs/5.1/eloquent) Documentation
+[Eloquent](https://laravel.com/docs/5.1/eloquent) Documentação

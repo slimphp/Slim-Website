@@ -1,16 +1,16 @@
 ---
-title: System Error Handler
+title: Manipulador de erros do sistema
 ---
 
-Things go wrong. You can't predict errors, but you can anticipate them. Each Slim Framework application has an error handler that receives all uncaught PHP exceptions. This error handler also receives the current HTTP request and response objects, too. The error handler must prepare and return an appropriate Response object to be returned to the HTTP client.
+As coisas correm errado. Você não pode prever erros, mas você pode antecipar os mesmos. Cada aplicativo Slim Framework possui um manipulador de erros que recebe todas as exceções PHP não detectadas. Este manipulador de erro também recebe os objetos de solicitação e resposta HTTP atuais também. O manipulador de erros deve preparar e retornar um objeto de resposta apropriado para ser retornado ao cliente HTTP.
 
-## Default error handler
+## Manipulador de erros padrão
 
-The default error handler is very basic. It sets the Response status code to `500`, it sets the Response content type to `text/html`, and appends a generic error message into the Response body.
+O manipulador de erros padrão é muito básico. Estabelece o código de status de resposta para `500`, ele define o tipo de conteúdo de resposta para` text / html` e anexa uma mensagem de erro genérica ao corpo de resposta.
 
-This is _probably_ not appropriate for production applications. You are strongly encouraged to implement your own Slim application error handler.
+Isto é _provavelmente_ não apropriado para aplicações de produção. Você é fortemente encorajado a implementar seu próprio manipulador de erro de aplicativo Slim.
 
-The default error handler can also include detailed error diagnostic information. To enable this you need to set the `displayErrorDetails` setting to true:
+O manipulador de erro padrão também pode incluir informações detalhadas de diagnóstico de erro. Para habilitar isso, você precisa definir a configuração `displayErrorDetails` como verdadeira:
 
 ```php
 $configuration = [
@@ -22,13 +22,13 @@ $c = new \Slim\Container($configuration);
 $app = new \Slim\App($c);
 ```
 
-## Custom error handler
+## Manipulador de erros personalizado
 
-A Slim Framework application's error handler is a Pimple service. You can substitute your own error handler by defining a custom Pimple factory method with the application container.
+O manipulador de erros do aplicativo Slim Framework é um serviço Pimple. Você pode substituir o seu próprio manipulador de erros, definindo um método de fábrica de espuma personalizada com o recipiente da aplicação.
 
-There are two ways to inject handlers:
+Existem duas maneiras de administrar injetores:
 
-### Pre App
+### Pré-Aplicação
 
 ```php
 $c = new \Slim\Container();
@@ -42,7 +42,7 @@ $c['errorHandler'] = function ($c) {
 $app = new \Slim\App($c);
 ```
 
-### Post App
+### Pós-App
 
 ```php
 $app = new \Slim\App();
@@ -56,17 +56,17 @@ $c['errorHandler'] = function ($c) {
 };
 ```
 
-In this example, we define a new `errorHandler` factory that returns a callable. The returned callable accepts three arguments:
+Neste exemplo, definimos uma nova fábrica `errorHandler` que retorna um callable. O retornável aceita três argumentos:
 
-1. A `\Psr\Http\Message\ServerRequestInterface` instance
-2. A `\Psr\Http\Message\ResponseInterface` instance
-3. A `\Exception` instance
+1. Uma instância `\Psr\Http\Message\ServerRequestInterface`
+2. Uma instância `\Psr\Http\Message\ResponseInterface`
+3. Uma instância `\Exception`
 
-The callable **MUST** return a new `\Psr\Http\Message\ResponseInterface` instance as is appropriate for the given exception.
+O chamado ** DEVE ** retorna uma nova instância `\Psr\Http\Message\ResponseInterface` conforme apropriado para a exceção dada.
 
-### Class-based error handler
+### Controlador de erros baseado em classe
 
-Error handlers may also be defined as an invokable class.
+Os manipuladores de erros também podem ser definidos como uma classe invocável.
 
 ```php
 class CustomHandler {
@@ -79,7 +79,7 @@ class CustomHandler {
 }
 ```
 
-and attached like so:
+e ligados da seguinte forma:
 
 ```php
 $app = new \Slim\App();
@@ -89,25 +89,23 @@ $c['errorHandler'] = function ($c) {
 };
 ```
 
-This allows us to define more sophisticated handlers or extend/override the
-built-in `Slim\Handlers\*` classes.
+Isso nos permite definir manipuladores mais sofisticados ou ampliar/substituir as classes `Slim\Handlers\*` incorporadas.
 
-### Handling other errors
+### Manipulando outros erros
 
-**Please note**: The following four types of exceptions will not be handled by a custom `errorHandler`:
+** Observe **: Os quatro tipos de exceções seguintes não serão tratados por um `errorHandler 'personalizado:
 
-- `Slim\Exception\MethodNotAllowedException`: This can be handled via a custom [`notAllowedHandler`](/docs/handlers/not-allowed.html).
-- `Slim\Exception\NotFoundException`: This can be handled via a custom [`notFoundHandler`](/docs/handlers/not-found.html).
-- Runtime PHP errors (PHP 7+ only): This can be handled via a custom [`phpErrorHandler`](/docs/handlers/php-error.html).
-- `Slim\Exception\SlimException`: This type of exception is internal to Slim, and its handling cannot be overridden.
+- `Slim\Exception\MethodNotAllowedException`: Isso pode ser tratado através de um [`notAllowedHandler'] personalizado (/docs/handlers/not-allowed.html).
+- `Slim\Exception\NotFoundException`: Isso pode ser tratado por meio de um [`notFoundHandler'] personalizado (/docs/handlers/not-found.html).
+- Erros de PHP em tempo de execução (apenas no PHP 7+): isso pode ser tratado através de um [`phpErrorHandler`] personalizado (/docs/handlers/php-error.html).
+- `Slim\Exception\SlimException`: Este tipo de exceção é interno ao Slim, e seu processamento não pode ser substituído.
 
-### Disabling
+### Desabilitando
 
-To completely disable Slim's error handling, simply remove the error handler from the container:
-
+Para desabilitar completamente o tratamento de erros do Slim, basta remover o manipulador de erros do contêiner:
 ```php
 unset($app->getContainer()['errorHandler']);
 unset($app->getContainer()['phpErrorHandler']);
 ```
 
-You are now responsible for handling any exceptions that occur in your application as they will not be handled by Slim.
+Agora você é responsável por lidar com quaisquer exceções que ocorrem em seu aplicativo, pois não serão manipuladas pelo Slim.
