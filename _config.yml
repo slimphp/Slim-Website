@@ -16,9 +16,10 @@ plugins:
 defaults:
   -
     scope:
-      path: ""
+      path: "docs"
       type: "pages"
     values:
+      layout: docs
       docs:
         - title: Get Started
           items:
@@ -99,7 +100,86 @@ defaults:
             - [/docs/contributors/guidelines.md, Guidelines]
   -
     scope:
-      path: "docs"
+      path: "docs/pt-br"
       type: "pages"
     values:
       layout: docs
+      docs:
+        - title: Começando
+          items:
+            - [/docs/pt-br, Início]
+            - [/docs/pt-br/start/installation.md, Instalação]
+            - [/docs/pt-br/start/upgrade.md, Guia de Atualização]
+            - [/docs/pt-br/start/web-servers.md, Web Servers]
+            - [/docs/pt-br/deployment/deployment.md, Deployment]
+        - title: Tutorial
+          items:
+            - [/docs/pt-br/tutorial/first-app.md, Primeira Aplicação]
+
+        - title: Conceitos
+          items:
+            - [/docs/pt-br/concepts/value-objects.md, PSR 7]
+            - [/docs/pt-br/concepts/middleware.md, Middleware]
+            - [/docs/pt-br/concepts/di.md, Container de Dependência]
+        - title: O objeto Application
+          items:
+            - [/docs/pt-br/objects/application.md, Visão geral]
+            - [/docs/pt-br/objects/application.md#application-configuration, Configuração]
+            - [/docs/pt-br/objects/application.md#slim-default-settings, Configurações padrão]
+        - title: O objeto Request
+          items:
+            - [/docs/pt-br/objects/request.md, Visão geral]
+            - [/docs/pt-br/objects/request.md#the-request-method, Método]
+            - [/docs/pt-br/objects/request.md#the-request-headers, Cabeçalhos]
+            - [/docs/pt-br/objects/request.md#the-request-body, Corpo]
+            - [/docs/pt-br/objects/request.md#uploaded-files, Arquivos Carregados]
+            - [/docs/pt-br/objects/request.md#request-helpers, Auxiliares]
+            - [/docs/pt-br/objects/request.md#route-object, Objeto Rote]
+            - [/docs/pt-br/objects/request.md#media-type-parsers, Media type parsers]
+        - title: O objeto Response
+          items:
+            - [/docs/pt-br/objects/response.md, Visão geral]
+            - [/docs/pt-br/objects/response.md#the-response-status, Status]
+            - [/docs/pt-br/objects/response.md#the-response-headers, Cabeçalhos]
+            - [/docs/pt-br/objects/response.md#the-response-body, Corpo]
+            - [/docs/pt-br/objects/response.md#returning-json, JSON]
+        - title: Roteamento
+          items:
+            - [/docs/pt-br/objects/router.md, Visão geral]
+            - [/docs/pt-br/objects/router.md#how-to-create-routes, Criar Rotas]
+            - [/docs/pt-br/objects/router.md#route-callbacks, Callbacks]
+            - [/docs/pt-br/objects/router.md#route-strategies, Estratégias]
+            - [/docs/pt-br/objects/router.md#route-placeholders, Placeholders]
+            - [/docs/pt-br/objects/router.md#route-names, Nomes]
+            - [/docs/pt-br/objects/router.md#route-groups, Grupos]
+            - [/docs/pt-br/objects/router.md#route-middleware, Middleware]
+            - [/docs/pt-br/objects/router.md#container-resolution, Resolução de Container]
+        - title: Manipulando Erro
+          items:
+            - [/docs/pt-br/handlers/error.md, Manipuladores de Erro]
+            - [/docs/pt-br/handlers/not-found.md, 404 Not Found]
+            - [/docs/pt-br/handlers/not-allowed.md, 405 Not Allowed]
+            - [/docs/pt-br/handlers/php-error.md, PHP Runtime Error]
+        - title: Cook book
+          items:
+            - [/docs/pt-br/cookbook/route-patterns.md, Trailing / in routes]
+            - [/docs/pt-br/cookbook/ip-address.md, Recuperando o endereço IP]
+            - [/docs/pt-br/cookbook/retrieving-current-route.md, Recuperando a rota atual]
+            - [/docs/pt-br/cookbook/database-eloquent.md, Utilizando o Eloquent com Slim]
+            - [/docs/pt-br/cookbook/enable-cors.md, Habilitando CORS]
+            - [/docs/pt-br/cookbook/environment.md, Getting and Mocking the Environment]
+            - [/docs/pt-br/cookbook/uploading-files.md, Upload de arquivo com formulários POST]
+            - [/docs/pt-br/cookbook/action-domain-responder.md, Action-Domain-Responder with Slim]
+        - title: Add Ons
+          items:
+            - [/docs/pt-br/features/templates.md, Templates]
+            - [/docs/pt-br/features/caching.md, HTTP Caching]
+            - [/docs/pt-br/features/csrf.md, Proteção CSRF]
+            - [/docs/pt-br/features/flash.md, Mensagens Flash]
+            - ['https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x', 3rd Party]
+
+        - title: Contribuindo
+          items:
+            - [/docs/pt-br/contributors/strategy.md, Estratégia de Ramificação]
+            - [/docs/pt-br/contributors/guidelines.md, Diretrizes]
+
