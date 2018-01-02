@@ -4,7 +4,7 @@ title: Setting up CORS
 
 CORS - Cross origin resource sharing
 
-A good flowchart for implementing CORS support Reference: 
+A good flowchart for implementing CORS support Reference:
 
 [CORS server flowchart](http://www.html5rocks.com/static/images/cors_server_flowchart.png)
 
@@ -31,11 +31,20 @@ $app->add(function ($req, $res, $next) {
     return $response
             ->withHeader('Access-Control-Allow-Origin', 'http://mysite')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 });
-
 ```
 
+Add the following route as the last route:
+
+```php
+// Catch-all route to serve a 404 Not Found page if none of the routes match
+// NOTE: make sure this route is defined last
+$app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($req, $res) {
+    $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
+    return $handler($req, $res);
+});
+```
 
 
 ## Access-Control-Allow-Methods
@@ -74,7 +83,7 @@ $app->add(function($request, $response, $next) {
     } else {
         $methods[] = $request->getMethod();
     }
-    
+
     $response = $next($request, $response);
 
 
@@ -102,4 +111,3 @@ $app->run();
 ```
 
 A big thank you to [tuupola](https://github.com/tuupola) for coming up with this!
-
