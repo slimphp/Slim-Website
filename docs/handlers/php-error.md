@@ -24,7 +24,7 @@ method with the application container.
 $app = new \Slim\App();
 // get the app's di-container
 $c = $app->getContainer();
-$c['phpErrorHandler'] = function ($c) {
+$c['errorHandler'] = function ($c) {
     return function ($request, $response, $error) use ($c) {
         return $c['response']
             ->withStatus(500)
