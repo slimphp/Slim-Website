@@ -115,7 +115,7 @@ function moveUploadedFile($directory, UploadedFile $uploadedFile)
 
 $app->run();
 ```
-<figcaption>Figure 2: Example Slim applcation to handle the uploaded files</figcaption>
+<figcaption>Figure 2: Example Slim application to handle the uploaded files</figcaption>
 </figure>
 
 See also
