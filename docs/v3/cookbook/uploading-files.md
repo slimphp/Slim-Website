@@ -3,7 +3,7 @@ title: Uploading files using POST forms
 ---
 
 Files that are uploaded using forms in POST requests can be retrieved with the
-[`getUploadedFiles`](/docs/objects/request.html#uploaded-files) method of the
+[`getUploadedFiles`](/docs/v3/objects/request.html#uploaded-files) method of the
 `Request` object.
 
 When uploading files using a POST request, make sure your file upload form has the

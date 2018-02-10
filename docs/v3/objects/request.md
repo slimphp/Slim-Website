@@ -309,7 +309,7 @@ Each object in the `$files` array is a instance of
 * `getClientFilename()`
 * `getClientMediaType()`
 
-See the [cookbook](/docs/cookbook/uploading-files.html) on how to upload files using a POST form.
+See the [cookbook](/docs/v3/cookbook/uploading-files.html) on how to upload files using a POST form.
 
 ## Request Helpers
 

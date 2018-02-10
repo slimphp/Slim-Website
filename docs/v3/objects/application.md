@@ -19,7 +19,7 @@ $app->run();
 
 ## Application Configuration
 
-The Application accepts just one argument. This can be either a [Container](/docs/concepts/di.html) instance or
+The Application accepts just one argument. This can be either a [Container](/docs/v3/concepts/di.html) instance or
 an array to configure the default container that is created automatically.
 
 There are also a number of settings that are used by Slim. These are stored in the `settings`
@@ -82,7 +82,7 @@ Slim has the following default settings that you can override:
 
 <dl>
 <dt><code>httpVersion</code></dt>
-    <dd>The protocol version used by the <a href="/docs/objects/response.html">Response</a>
+    <dd>The protocol version used by the <a href="/docs/v3/objects/response.html">Response</a>
         object.
         <br>(Default: <code>'1.1'</code>)</dd>
 <dt><code>responseChunkSize</code></dt>
@@ -101,7 +101,7 @@ Slim has the following default settings that you can override:
     <br>(Default: <code>false</code>)</dd>
 <dt><code>displayErrorDetails</code></dt>
     <dd>When true, additional information about exceptions are displayed by the
-    <a href="/docs/handlers/error.html">default error handler</a>.
+    <a href="/docs/v3/handlers/error.html">default error handler</a>.
     <br>(Default: <code>false</code>)</dd>
 <dt><code>addContentLengthHeader</code></dt>
     <dd>When true, Slim will add a <code>Content-Length</code> header to the response.

@@ -96,9 +96,9 @@ built-in `Slim\Handlers\*` classes.
 
 **Please note**: The following four types of exceptions will not be handled by a custom `errorHandler`:
 
-- `Slim\Exception\MethodNotAllowedException`: This can be handled via a custom [`notAllowedHandler`](/docs/handlers/not-allowed.html).
-- `Slim\Exception\NotFoundException`: This can be handled via a custom [`notFoundHandler`](/docs/handlers/not-found.html).
-- Runtime PHP errors (PHP 7+ only): This can be handled via a custom [`phpErrorHandler`](/docs/handlers/php-error.html).
+- `Slim\Exception\MethodNotAllowedException`: This can be handled via a custom [`notAllowedHandler`](/docs/v3/handlers/not-allowed.html).
+- `Slim\Exception\NotFoundException`: This can be handled via a custom [`notFoundHandler`](/docs/v3/handlers/not-found.html).
+- Runtime PHP errors (PHP 7+ only): This can be handled via a custom [`phpErrorHandler`](/docs/v3/handlers/php-error.html).
 - `Slim\Exception\SlimException`: This type of exception is internal to Slim, and its handling cannot be overridden.
 
 ### Disabling

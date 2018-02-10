@@ -34,7 +34,7 @@ $c['phpErrorHandler'] = function ($c) {
 };
 ```
 
-> **N.B** Check out [Not Found](/docs/handlers/not-found.html) docs for
+> **N.B** Check out [Not Found](/docs/v3/handlers/not-found.html) docs for
 > pre-slim creation method using a new instance of `\Slim\Container`
 
 In this example, we define a new `phpErrorHandler` factory that returns a

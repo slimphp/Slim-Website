@@ -266,7 +266,7 @@ $app->get('/tickets', function (Request $request, Response $response) {
 });
 ```
 
-The use of `$app->get()` here means that this route is only available for GET requests; there's an equivalent `$app->post()` call that also takes the route pattern and a callback for POST requests.  There are also [methods for other verbs](http://www.slimframework.com/docs/objects/router.html) - and also the `map()` function for situations where more than one verb should use the same code for a particular route.
+The use of `$app->get()` here means that this route is only available for GET requests; there's an equivalent `$app->post()` call that also takes the route pattern and a callback for POST requests.  There are also [methods for other verbs](http://www.slimframework.com/docs/v3/objects/router.html) - and also the `map()` function for situations where more than one verb should use the same code for a particular route.
 
 Slim routes match in the order they are declared, so if you have a route which could overlap another route, you need to put the most specific one first.  Slim will throw an exception if there's a problem, for example in this application I have both `/ticket/new` and `/ticket/{id}` and they need to be declared in that order otherwise the routing will think that "new" is an ID!
 
@@ -414,4 +414,4 @@ With the `/tickets/{id}` route having a friendly name, and the router now availa
 
 This article gave a walkthrough of how to get set up with a simple application of your own, which I hope will let you get quickly started, see some working examples, and build something awesome.
 
-From here, I'd recommend you take a look at the other parts of the project documentation for anything you need that wasn't already covered or that you want to see an alternative example of.  A great next step would be to take a look at the [Middleware](https://www.slimframework.com/docs/concepts/middleware.html) section - this technique is how we layer up our application and add functionality such as authentication which can be applied to multiple routes.
+From here, I'd recommend you take a look at the other parts of the project documentation for anything you need that wasn't already covered or that you want to see an alternative example of.  A great next step would be to take a look at the [Middleware](https://www.slimframework.com/docs/v3/concepts/middleware.html) section - this technique is how we layer up our application and add functionality such as authentication which can be applied to multiple routes.

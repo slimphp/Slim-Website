@@ -307,11 +307,11 @@ Note inside the group closure, `$this` is used instead of `$app`. Slim binds the
 
 ## Route middleware
 
-You can also attach middleware to any route or route group. [Learn more](/docs/concepts/middleware.html).
+You can also attach middleware to any route or route group. [Learn more](/docs/v3/concepts/middleware.html).
 
 ## Router caching
 
-It's possible to enable router cache by setting valid filename in default Slim settings. [Learn more](/docs/objects/application.html#slim-default-settings).
+It's possible to enable router cache by setting valid filename in default Slim settings. [Learn more](/docs/v3/objects/application.html#slim-default-settings).
 
 ## Container Resolution
 

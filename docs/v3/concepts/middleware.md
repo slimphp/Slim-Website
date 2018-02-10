@@ -41,7 +41,7 @@ response, and is returned to the HTTP client. Here's a diagram that illustrates
 the middleware process flow:
 
 <div style="padding: 2em 0; text-align: center">
-    <img src="/docs/images/middleware.png" alt="Middleware architecture" style="max-width: 80%;"/>
+    <img src="/docs/v3/images/middleware.png" alt="Middleware architecture" style="max-width: 80%;"/>
 </div>
 
 ## How do I write middleware?

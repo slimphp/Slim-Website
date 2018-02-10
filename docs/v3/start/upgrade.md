@@ -9,7 +9,7 @@ you need to be aware of.
 Slim 3 requires PHP 5.5+
 
 ## Class \Slim\Slim renamed \Slim\App
-Slim 3 uses `\Slim\App` for the [Application](/docs/objects/application.html) object usually named `$app`.
+Slim 3 uses `\Slim\App` for the [Application](/docs/v3/objects/application.html) object usually named `$app`.
 
 ```php
 $app = new \Slim\App();
@@ -24,7 +24,7 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 ```
 
 ## Request and response objects are no longer accessible via the Application object
-As mentioned above, Slim 3 passes the `Request` and `Response` objects as arguments to the route handling function. Since they are now accessible directly in the body of a route function, `request` and `response` are no longer properties of the `/Slim/App` ([Application](/docs/objects/application.html) object) instance.
+As mentioned above, Slim 3 passes the `Request` and `Response` objects as arguments to the route handling function. Since they are now accessible directly in the body of a route function, `request` and `response` are no longer properties of the `/Slim/App` ([Application](/docs/v3/objects/application.html) object) instance.
 
 ## Getting _GET and _POST variables
 ```php
@@ -37,7 +37,7 @@ $app->get('/', function (Request $req,  Response $res, $args = []) {
 
 
 ## Hooks
-Hooks are no longer part of Slim as of v3.  You should consider reimplementing any functionality associated with the [default hooks in Slim v2](http://docs.slimframework.com/hooks/defaults/) as [middleware](/docs/concepts/middleware.html) instead.  If you need the ability to apply custom hooks at arbitrary points in your code (for example, within a route), you should consider a third-party package such as [Symfony's EventDispatcher](http://symfony.com/doc/current/components/event_dispatcher/introduction.html) or [Zend Framework's EventManager](https://zend-eventmanager.readthedocs.org/en/latest/).
+Hooks are no longer part of Slim as of v3.  You should consider reimplementing any functionality associated with the [default hooks in Slim v2](http://docs.slimframework.com/hooks/defaults/) as [middleware](/docs/v3/concepts/middleware.html) instead.  If you need the ability to apply custom hooks at arbitrary points in your code (for example, within a route), you should consider a third-party package such as [Symfony's EventDispatcher](http://symfony.com/doc/current/components/event_dispatcher/introduction.html) or [Zend Framework's EventManager](https://zend-eventmanager.readthedocs.org/en/latest/).
 
 ## Removal HTTP Cache
 In Slim v3 we have removed the HTTP-Caching into its own module [Slim\Http\Cache](https://github.com/slimphp/Slim-HttpCache).
@@ -121,7 +121,7 @@ $app->add(My\Middleware::class);
 Application middleware is executed as Last In First Executed (LIFE).
 
 ## Flash Messages
-Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/features/flash.html) package.
+Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/v3/features/flash.html) package.
 
 ## Cookies
 In v3.0 cookies has been removed from core. See [FIG Cookies](https://github.com/dflydev/dflydev-fig-cookies) for a PSR-7 compatible cookie component.
