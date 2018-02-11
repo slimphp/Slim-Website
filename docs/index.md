@@ -4,7 +4,7 @@ title: Documentation
 
 <div class="alert alert-info">
     <p>
-        This documentation is for <strong>Slim 3</strong>. The Slim 2 documentation is available at <a href="https://docs.slimframework.com/">docs.slimframework.com</a>.
+        This documentation is for <strong>Slim 3</strong>. Looking for <a href="/docs/v2">Slim 2 Docs</a>?.
     </p>
 </div>
 
