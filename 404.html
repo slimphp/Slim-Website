@@ -11,6 +11,6 @@ Page not found! :(
 
 <script>
     if( window.location.pathname.indexOf('/docs/') >= 0){
-        window.location = '/docs/v3';
+        window.location = '/docs/v3' + window.location.pathname.substr(5);
     }
 </script>
