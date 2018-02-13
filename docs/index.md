@@ -4,7 +4,7 @@ title: Documentation
 
 <div class="alert alert-info">
     <p>
-        This documentation is for <strong>Slim 3</strong>. The Slim 2 documentation is available at <a href="https://docs.slimframework.com/">docs.slimframework.com</a>.
+        This documentation is for <strong>Slim 3</strong>. Looking for <a href="/docs/v2">Slim 2 Docs</a>?.
     </p>
 </div>
 
@@ -42,7 +42,7 @@ provides only a minimal set of tools that do what you need and nothing else.
 ## How does it work?
 
 First, you need a web server like Nginx or Apache. You should [configure
-your web server](/docs/start/web-servers.html) so that it sends all appropriate
+your web server](/docs/v3/start/web-servers.html) so that it sends all appropriate
 requests to one "front-controller" PHP file. You instantiate and run your Slim
 app in this PHP file.
 
@@ -79,7 +79,7 @@ and Response objects. These objects represent the actual HTTP request received
 by the web server and the eventual HTTP response returned to the client.
 
 Every Slim app route is given the current Request and Response objects as arguments
-to its callback routine. These objects implement the popular [PSR 7](/docs/concepts/value-objects.html) interfaces. The Slim app route can inspect
+to its callback routine. These objects implement the popular [PSR 7](/docs/v3/concepts/value-objects.html) interfaces. The Slim app route can inspect
 or manipulate these objects as necessary. Ultimately, each Slim app route
 **MUST** return a PSR 7 Response object.
 
