@@ -1,3 +1,6 @@
+---
+title: Native
+---
 A Slim application does not presume anything about sessions. If you prefer to use a PHP session, you must configure
 and start a native PHP session with `session_start()` before you instantiate the Slim application.
 

@@ -1,3 +1,6 @@
+---
+title: Overview
+---
 <div class="alert alert-info">
     <strong>Heads Up!</strong> Flash messages require sessions. If you do not use the
     <code>\Slim\Middleware\SessionCookie</code> middleware, you must start a native PHP session yourself.

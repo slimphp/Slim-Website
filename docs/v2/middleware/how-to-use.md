@@ -1,3 +1,6 @@
+---
+title: How to use
+---
 Use the Slim application’s `add()` instance method to add new middleware to a Slim application. New middleware will
 surround previously added middleware, or the Slim application itself if no middleware has yet been added.
 

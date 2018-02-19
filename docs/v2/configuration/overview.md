@@ -1,3 +1,7 @@
+---
+title: Configuration Overview
+---
+
 There are two ways to apply settings to the Slim application. First during Slim application instantiation and second
 after instantiation. All settings can be applied at instantiation time by passing Slim’s constructor an associative
 array. All settings can be retrieved and modified after instantiation, however some of them can not be done simply by

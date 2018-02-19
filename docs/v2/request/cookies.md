@@ -1,3 +1,6 @@
+---
+title: Cookies
+---
 ### Get Cookies
 
 A Slim application will automatically parse cookies sent with the current HTTP request. You can fetch cookie values

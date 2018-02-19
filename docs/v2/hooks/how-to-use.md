@@ -1,3 +1,6 @@
+---
+title: How to use
+---
 A callable is assigned to a hook using the Slim application’s `hook()` method:
 
     <?php

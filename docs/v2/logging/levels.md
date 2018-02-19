@@ -1,3 +1,6 @@
+---
+title: Levels
+---
 
 <div class="alert alert-info">
     <strong>Heads Up!</strong> Use the <code>\Slim\Log</code> constants when setting the log level instead

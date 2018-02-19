@@ -1,3 +1,6 @@
+---
+title: Overview
+---
 Each Slim application instance has one request object. The request object is an abstraction of the current
 HTTP request and allows you to easily interact with the Slim application's environment variables. Although each
 Slim application includes a default request object, the `\Slim\Http\Request` class is idempotent; you may

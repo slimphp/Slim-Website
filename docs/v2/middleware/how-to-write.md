@@ -1,3 +1,6 @@
+---
+title: How to write
+---
 Slim application middleware must subclass `\Slim\Middleware` and implement a public `call()` method. The `call()`
 method does not accept arguments. Middleware may implement its own constructor, properties, and methods. I encourage
 you to look at Slim’s built-in middleware for working examples (e.g. Slim/Middleware/ContentTypes.php or

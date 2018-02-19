@@ -1,3 +1,6 @@
+---
+title: Rewriting
+---
 I strongly encourage you to use a web server that supports URL rewriting; this will let you enjoy clean, human-friendly
 URLs with your Slim application. To enable URL rewriting, you should use the appropriate tools provided by your
 web server to forward all HTTP requests to the PHP file in which you instantiate and run your Slim application.

@@ -1,3 +1,6 @@
+---
+title: XHR
+---
 When using a Javascript framework like MooTools or jQuery to execute an XMLHttpRequest, the XMLHttpRequest will
 usually be sent with a **X-Requested-With** HTTP header. The Slim application will detect the HTTP
 request’s **X-Requested-With** header and flag the request as such. If for some reason an XMLHttpRequest cannot

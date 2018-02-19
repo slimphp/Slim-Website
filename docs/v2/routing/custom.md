@@ -1,3 +1,6 @@
+---
+title: Custom
+---
 ### One route, multiple HTTP methods
 
 Sometimes you may need a route to respond to multiple HTTP methods; sometimes you may need a route to respond to a

@@ -1,3 +1,6 @@
+---
+title: Overview
+---
 A Slim application provides a set of hooks to which you can register your own callbacks.
 
 ### What is a hook?

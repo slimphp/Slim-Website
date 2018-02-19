@@ -1,3 +1,6 @@
+---
+title: Content Types
+---
 
 How to Deal with Content-Types
 

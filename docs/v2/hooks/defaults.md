@@ -1,3 +1,6 @@
+---
+title: Defaults
+---
 These are the default hooks always invoked in a Slim application.
 
 slim.before

@@ -1,3 +1,6 @@
+---
+title: Rendering
+---
 You can use the Slim application’s `render()` method to ask the current view object to render a template with a
 given set of variables. The Slim application's `render()` method will `echo()` the output returned from the view
 object to be captured by an output buffer and appended automatically to the response object’s body. This assumes

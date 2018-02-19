@@ -1,3 +1,6 @@
+---
+title: Debug
+---
 You can enable debugging during application instantiation with this setting:
 
     <?php

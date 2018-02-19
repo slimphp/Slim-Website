@@ -1,3 +1,6 @@
+---
+title: POST
+---
 Use the Slim application's `post()` method to map a callback function to a resource URI that is requested with
 the HTTP POST method.
 
