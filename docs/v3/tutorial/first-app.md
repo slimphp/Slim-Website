@@ -87,11 +87,11 @@ To get this set up on a standard LAMP stack, we'll need a couple of extra ingred
 
 The vhost configuration should be fairly straightforward; we don't need anything special here.  Copy your existing default vhost configuration and set the `ServerName` to be how you want to refer to your project.  For example you can set:
 
-    ServerName slimproject.dev
+    ServerName slimproject.local
 
     or for nginx:
 
-    server_name slimproject.dev;
+    server_name slimproject.local;
 
 Then you'll also want to set the `DocumentRoot` to point to the `public/` directory of your project, something like this (edit the existing line):
 
@@ -123,7 +123,7 @@ if (!-e $request_filename){
 
 *NOTE:* If you want your entry point to be something other than index.php you will need your config to change as well. `api.php` is also commonly used as an entry point, so your set up should match accordingly. This example assumes your are using index.php.
 
-With this setup, just remember to use http://slimproject.dev instead of http://localhost:8080 in the other examples in this tutorial.  The same health warning as above applies: you'll see an error page at http://slimproject.dev but crucially it's *Slim's* error page.  If you go to http://slimproject.dev/hello/joebloggs then something better should happen.
+With this setup, just remember to use http://slimproject.local instead of http://localhost:8080 in the other examples in this tutorial.  The same health warning as above applies: you'll see an error page at http://slimproject.local but crucially it's *Slim's* error page.  If you go to http://slimproject.local/hello/joebloggs then something better should happen.
 
 ## Configuration and Autoloaders
 
