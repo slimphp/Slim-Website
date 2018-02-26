@@ -1,3 +1,6 @@
+---
+title: PATCH
+---
 Use the Slim application's `patch()` method to map a callback function to a resource URI that is requested with
 the HTTP PATCH method.
 

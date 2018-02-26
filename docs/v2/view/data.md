@@ -1,3 +1,6 @@
+---
+title: Data
+---
 <div class="alert alert-info">
     <strong>Heads Up!</strong> Rarely will you set or append data directly on the view object. Usually, you
     pass data to the view with the Slim application's `render()` method.

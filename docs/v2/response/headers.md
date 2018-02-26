@@ -1,3 +1,6 @@
+---
+title: Headers
+---
 The HTTP response returned to the HTTP client will have a header. The HTTP header is a list of keys and values that
 provide metadata about the HTTP response. You can use the Slim application’s response object to set the HTTP
 response’s header. The response object has a public property `headers` that is an instance of `\Slim\Helper\Set`;

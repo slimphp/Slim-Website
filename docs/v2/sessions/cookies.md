@@ -1,3 +1,6 @@
+---
+title: Cookies
+---
 You may also use the `\Slim\Middleware\SessionCookie` middleware to persist session data in encrypted, hashed
 HTTP cookies. To enable the session cookie middleware, add the `\Slim\Middleware\SessionCookie` middleware to your
 Slim application:

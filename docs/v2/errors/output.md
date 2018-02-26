@@ -1,3 +1,6 @@
+---
+title: Output
+---
 The Slim application's environment will always contain a key **slim.errors** with a value that is a writable
 resource to which log and error messages may be written. The Slim application’s log object will write log messages
 to **slim.errors** whenever an Exception is caught or the log object is manually invoked.

@@ -1,3 +1,6 @@
+---
+title: Parameters
+---
 You can embed parameters into route resource URIs. In this example, I have two parameters in my
 route URI, “:one” and “:two”.
 

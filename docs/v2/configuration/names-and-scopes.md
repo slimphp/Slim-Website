@@ -1,3 +1,6 @@
+---
+title: Names and Scopes
+---
 When you build a Slim application you will enter various scopes in your code (e.g. global scope and function scope).
 You will likely need a reference to your Slim application in each scope. There are several ways to do this:
 

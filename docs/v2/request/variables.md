@@ -1,3 +1,6 @@
+---
+title: Variables
+---
 An HTTP request may have associated variables (not to be confused with route variables). The GET, POST, or PUT
 variables sent with the current HTTP request are exposed via the Slim application’s request object.
 

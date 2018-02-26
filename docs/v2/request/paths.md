@@ -1,3 +1,6 @@
+---
+title: Paths
+---
 Every HTTP request received by a Slim application will have a root URI and a resource URI.
 
 ### Root URI

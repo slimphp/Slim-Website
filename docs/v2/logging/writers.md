@@ -1,3 +1,6 @@
+---
+title: Writers
+---
 The Slim application’s log object has a log writer. The log writer is responsible for sending a logged message to
 the appropriate output (e.g. STDERR, a log file, a remote web service, Twitter, or a database). Out of the box,
 the Slim application’s log object has a log writer of class `\Slim\LogFileWriter`; this log writer directs output

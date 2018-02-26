@@ -1,3 +1,6 @@
+---
+title: Cookies
+---
 The Slim application provides helper methods to send cookies with the HTTP response.
 
 ### Set Cookie

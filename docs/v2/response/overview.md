@@ -1,3 +1,6 @@
+---
+title: Overview
+---
 Each Slim application instance has one response object. The response object is an abstraction of your Slim application's
 HTTP response that is returned to the HTTP client. Although each Slim application includes a default response object,
 the `\Slim\Http\Response` class is idempotent; you may instantiate the class at will (in middleware or elsewhere in

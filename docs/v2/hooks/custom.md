@@ -1,3 +1,6 @@
+---
+title: Custom
+---
 Custom hooks may be created and invoked in a Slim application. When a custom hook is invoked with `applyHook()`, it will
 invoke all callables assigned to that hook. This is exactly how the Slim application’s default hooks work. In this
 example, I apply a custom hook called “my.hook.name”. All callables previously registered for this hook will be invoked.

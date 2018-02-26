@@ -1,3 +1,6 @@
+---
+title: Groups
+---
 Slim lets you group related routes. This is helpful when you find yourself repeating the same URL segments
 for multiple routes. This is best explained with an example. Let's pretend we are building an API for
 books.

@@ -1,3 +1,6 @@
+---
+title: Status
+---
 The HTTP response returned to the client will have a status code indicating the response’s type
 (e.g. 200 OK, 400 Bad Request, or 500 Server Error). You can use the Slim application’s response object to set the
 HTTP response’s status like this:

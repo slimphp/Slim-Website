@@ -1,3 +1,6 @@
+---
+title: Overview
+---
 The Slim Framework implements a derivation of the [Rack protocol](http://rack.rubyforge.org/doc/files/SPEC.html). When
 you instantiate a Slim application, it immediately inspects the `$_SERVER` superglobal and derives a set of environment
 variables that dictate application behavior.

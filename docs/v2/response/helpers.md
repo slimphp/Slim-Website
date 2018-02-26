@@ -1,3 +1,6 @@
+---
+title: Helpers
+---
 The response object provides helper methods to inspect and interact with the underlying HTTP response.
 
 ### Finalize

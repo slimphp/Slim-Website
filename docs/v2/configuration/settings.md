@@ -1,3 +1,6 @@
+---
+title: Settings
+---
 ## mode
 
 This is an identifier for the application's current mode of operation. The mode does not affect a Slim application's

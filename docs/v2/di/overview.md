@@ -1,3 +1,6 @@
+---
+title: Overview
+---
 Slim has a built-in resource locator, providing an easy way to inject objects into a Slim app, or
 to override any of the Slim app's internal objects (e.g. Request, Response, Log).
 

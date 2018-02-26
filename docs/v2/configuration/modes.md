@@ -1,3 +1,6 @@
+---
+title: Modes
+---
 It is common practice to run web applications in a specific mode depending on the current state of the project.
 If you are developing the application, you will run the application in “development” mode; if you are testing the
 application, you will run the application in “test” mode; if you launch the application, you will run the application

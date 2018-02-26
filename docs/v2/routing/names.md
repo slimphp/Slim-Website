@@ -1,3 +1,6 @@
+---
+title: Names
+---
 Slim lets you assign a name to a route. Naming a route enables you to dynamically generate URLs using the urlFor
 helper method. When you use the Slim application's `urlFor()` method to create application URLs, you can freely
 change route patterns without breaking your application. Here is an example of a named route:
