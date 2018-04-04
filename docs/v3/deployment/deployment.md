@@ -54,7 +54,7 @@ or `www`) with the following content:
 </IfModule>
 ```
 
-(replace 'public' with the correct name of)
+(replace 'public' with the correct name of your domain name e.g. example.com/$1)
 
 Now upload all the files that make up your Slim project to the webserver. As you
 are on shared hosting, this is probably done via FTP and you can use any FTP client, 
