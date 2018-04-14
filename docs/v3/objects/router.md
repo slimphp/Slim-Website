@@ -166,6 +166,24 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 });
 ```
 
+## Redirect helper
+
+You can add a route that redirects `GET` HTTP requests to a different URL with
+the Slim application's `redirect()` method. It accepts three arguments:
+
+1. The route pattern (with optional named placeholders) to redirect **from**
+2. The location to redirect **to**, which may be a `string` or a
+   [`Psr\Http\Message\UriInterface`](https://www.php-fig.org/psr/psr-7/#35-psrhttpmessageuriinterface)
+3. The HTTP status code to use (optional; `302` if unset)
+
+```php
+$app = new \Slim\App();
+$app->redirect('/books', '/library', 301);
+```
+
+`redirect()` routes respond with the status code requested and a `Location`
+header set to the second argument.
+
 ## Route strategies
 
 The route callback signature is determined by a route strategy. By default, Slim expects route callbacks to accept the request, response, and an array of route placeholder arguments. This is called the RequestResponse strategy. However, you can change the expected route callback signature by simply using a different strategy. As an example, Slim provides an alternative strategy called RequestResponseArgs that accepts request and response, plus each route placeholder as a separate argument. Here is an example of using this alternative strategy; simply replace the `foundHandler` dependency provided by the default `\Slim\Container`:
