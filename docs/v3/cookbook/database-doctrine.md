@@ -10,7 +10,7 @@ The first step is importing the library into the `vendor` directory of your proj
 
 <figure markdown="1">
 ```bash
-composer require doctrine/orm:^2.5
+composer require doctrine/orm:^2
 ```
 <figcaption>Figure 1: Require doctrine in your application.</figcaption>
 </figure>
