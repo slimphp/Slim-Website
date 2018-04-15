@@ -8,7 +8,7 @@ This cookbook entry describes how to integrate from scratch the widely used [Doc
 
 The first step is importing the library into the `vendor` directory of your project using [composer](https://getcomposer.org/).
 
-<figure>
+<figure markdown="1">
 ```bash
 composer require doctrine/orm:^2.5
 ```
@@ -17,9 +17,10 @@ composer require doctrine/orm:^2.5
 
 ## Provide database credentials
 
+
 Next, add the Doctrine settings alongside your Slim configuration.
 
-<figure>
+<figure markdown="1">
 ```php
 <?php
 
@@ -66,7 +67,7 @@ Here we show how to configure the metadata reader to work with PHP annotations, 
 same time the most used mode and the most tricky to set up. Alternatively, XML or YAML can also
 be used to describe the database schema.
 
-<figure>
+<figure markdown="1">
 ```php
 <?php
 
@@ -119,7 +120,7 @@ To run database migrations, validate class annotations and so on you will use th
 already present at `vendor/bin`. But in order to work, this script needs a [`cli-config.php`](http://docs.doctrine-project.org/en/latest/reference/configuration.html#setting-up-the-commandline-tool)
 file at the root of the project telling it how to find the `EntityManager` we just set up:
 
-<figure>
+<figure markdown="1">
 ```php
 <?php
 
@@ -142,7 +143,7 @@ ConsoleRunner::run(
 Take a moment to verify that the console app works. When properly configured, its output will look more or less like this:
 
 
-<figure>
+<figure markdown="1">
 ```bash
 $ php vendor/bin/doctrine
 Doctrine Command Line Interface 2.5.12
@@ -192,7 +193,7 @@ If it works, you can now create your database and load the schema by running `ph
 
 Congratulations! Now you can already manage your database from the command line, and use the `EntityManager` wherever you need it.
 
-<figure>
+<figure markdown="1">
 ```php
 
 $container[UserRepository::class] = function ($container) {
