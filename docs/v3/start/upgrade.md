@@ -73,6 +73,14 @@ $app->get('/', function ($req, $res, $args) {
 });
 ```
 
+Alternatively, if you want a route to redirect without any other handling, you
+can use the shortcut helper function `$app->redirect()` as the route
+definition:
+
+```php
+$app->redirect('/', 'your-new-uri');
+```
+
 ## Middleware Signature
 The middleware signature has changed from a class to a function.
 
