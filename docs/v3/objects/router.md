@@ -402,14 +402,12 @@ with many actions instead of an invokable class which only handles one action.
 
 ```php
 
-use Psr\Container\ContainerInterface;
-
 class HomeController
 {
    protected $container;
 
    // constructor receives container instance
-   public function __construct(ContainerInterface $container) {
+   public function __construct(\Psr\Container\ContainerInterface $container) {
        $this->container = $container;
    }
 
@@ -440,13 +438,11 @@ You do not have to specify a method in your route callable and can just set it t
 
 ```php
 
-use Psr\Container\ContainerInterface;
-
 class HomeAction
 {
    protected $container;
 
-   public function __construct(ContainerInterface $container) {
+   public function __construct(\Psr\Container\ContainerInterface $container) {
        $this->container = $container;
    }
 
