@@ -73,7 +73,11 @@ defaults:
           - [/docs/v4/objects/router.md#container-resolution, Container Resolution]
         - title: Packaged Middleware
           items:
-          - [/docs/v4/middleware/error.md, Error Handling]
+          - [/docs/v4/middleware/routing.md, Routing]
+          - [/docs/v4/middleware/error-handling.md, Error Handling]
+          - [/docs/v4/middleware/method-overriding.md, Method Overriding]
+          - [/docs/v4/middleware/output-buffering.md, Output Buffering]
+          - [/docs/v4/middleware/content-length.md, Content Length]
         - title: Cook book
           items:
           - [/docs/v4/cookbook/route-patterns.md, Trailing / in routes]
