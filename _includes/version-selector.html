@@ -1,0 +1,10 @@
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+    {% assign versions = site.slim_docs_versions | split: ", " %}
+    {% for version in versions %}
+        {% assign selected = "" %}
+        {% if page.url contains version %}
+            {% assign selected = " selected" %}
+        {% endif %}
+        <option value="/docs/{{ version }}"{{ selected }}>{{ version }}</option>
+    {% endfor %}
+</select>

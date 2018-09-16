@@ -10,7 +10,13 @@ permalink: /404.html
 Page not found! :(
 
 <script>
-    if (window.location.pathname.indexOf('/docs/') >= 0 && window.location.pathname.indexOf('/v3/') <= 0) {
+    if (window.location.pathname.indexOf('/docs/') !== -1) {
+      if (window.location.pathname.indexOf('/v4/') !== -1) {
+        window.location = '/docs/v4' + window.location.pathname.substr(5);
+      } else if (window.location.pathname.indexOf('/v3/') !== -1) {
         window.location = '/docs/v3' + window.location.pathname.substr(5);
+      } else if (window.location.pathname.indexOf('/v2/') !== -1) {
+        window.location = '/docs/v2' + window.location.pathname.substr(5);
+      }
     }
 </script>

@@ -31,7 +31,7 @@
                     </svg>
                 </div>
 
-                {% for section in page.docs-v2 %}
+                {% for section in page.docs-v3 %}
                     {% assign isCurrentSection = false %}
                     {% for item in section.items %}
                         {% capture itemUrl %}{{ item[0] | replace: '.md', '.html' }}{% unless item[0] contains ".md" %}/{% endunless %}{% endcapture %}
@@ -59,7 +59,7 @@
 
                 <nav>
                     <ul class="nav pager">
-                        {% for section in page.docs-v2 %}
+                        {% for section in page.docs-v3 %}
                             {% assign isCurrentSection = false %}
                             {% for item in section.items %}
 
