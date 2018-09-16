@@ -401,6 +401,8 @@ will pass the container's instance to the constructor. You can construct control
 with many actions instead of an invokable class which only handles one action.
 
 ```php
+use Psr\Container\ContainerInterface;
+
 class HomeController
 {
    protected $container;
@@ -436,6 +438,8 @@ $app->get('/contact', \HomeController::class . ':contact');
 You do not have to specify a method in your route callable and can just set it to be an invokable class such as:
 
 ```php
+use Psr\Container\ContainerInterface
+
 class HomeAction
 {
    protected $container;
