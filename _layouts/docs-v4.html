@@ -31,7 +31,7 @@
                     </svg>
                 </div>
 
-                {% for section in page.docs %}
+                {% for section in page.docs-v4 %}
                     {% assign isCurrentSection = false %}
                     {% for item in section.items %}
                         {% capture itemUrl %}{{ item[0] | replace: '.md', '.html' }}{% unless item[0] contains ".md" %}/{% endunless %}{% endcapture %}
@@ -53,16 +53,13 @@
                 <h1 class="page-header">{{ page.title }}</h1>
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
                     <a href="{{ site.slim_website_repo }}{{page.path}}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
-                    <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                        <option value="/docs/v2">v2</option>
-                        <option value="/docs/" selected>v3</option>
-                    </select>
+                    {% include version-selector.html %}
                 </div>
                 {{ content }}
 
                 <nav>
                     <ul class="nav pager">
-                        {% for section in page.docs %}
+                        {% for section in page.docs-v4 %}
                             {% assign isCurrentSection = false %}
                             {% for item in section.items %}
 
