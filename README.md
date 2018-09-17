@@ -8,16 +8,21 @@ This is the repository for the Slim website at www.slimframework.com.
 If you spot any errors, typos or missing information, please submit a pull
 request.
 
-### Running locally
+### Windows User
+You need to make sure you have [Ruby Devkit Installed (MSYS2)](https://rubyinstaller.org/add-ons/devkit.html)
+
+### Running Locally
 
 To run this site locally so that you can test your changes:
-
-* `$ sudo gem install bundler`
-* `$ bundle install`
+```
+$ sudo gem install bundler`
+$ bundle install`
+```
 
 Now, run the local jekyll:
-
-    $ bundle exec jekyll serve
+```
+$ bundle exec jekyll serve
+```
 
 and browse to http://localhost:4000
 
@@ -37,3 +42,8 @@ To change any CSS, edit the appropriate files in `assets\less` and then run:
 
 You can also run `grunt watch` to automatically rebuild when you make CSS
 changes.
+
+### Build Instructions For Deployment
+```
+$ bundle exec jekyll build
+```
