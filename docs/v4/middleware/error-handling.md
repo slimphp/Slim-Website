@@ -1,12 +1,10 @@
 ---
-title: Error Handling
+title: Error Handling Middleware
 ---
 
 Things go wrong. You can't predict errors, but you can anticipate them. Each Slim Framework application has an error handler that receives all uncaught PHP exceptions. This error handler also receives the current HTTP request and response objects, too. The error handler must prepare and return an appropriate Response object to be returned to the HTTP client.
 
-## New Error Handling Middleware
-Error handling has also been implemented as middleware. 
-See [Pull Request #2398](https://github.com/slimphp/Slim/pull/2398) for more information
+## Usage
 ```php
 use Slim\App;
 use Slim\Middleware\ErrorMiddleware;
@@ -54,7 +52,7 @@ $app->add($errorMiddleware);
 
 ```
 
-### Error Logging
+## Error Logging
 If you would like to pipe in custom error logging to the default `ErrorHandler` that ships with Slim you can simply extend it and stub the `logError()` method.
 
 ```php
@@ -87,7 +85,7 @@ $app->add($errorMiddleware);
 $app->run();
 ```
 
-### Error Handling/Rendering
+## Error Handling/Rendering
 The rendering is finally decoupled from the handling. Everything still works the way it previously did. It will still detect the content-type and render things appropriately with the help of `ErrorRenderers`. The core `ErrorHandler` extends the `AbstractErrorHandler` class which has been completely refactored. By default it will call the appropriate `ErrorRenderer` for the supported content types. Someone can now provide their custom error renderer by extending the `AbstractErrorHandler` class and overloading the protected `renderer` variable from the parent. 
 
 ```php
@@ -105,7 +103,7 @@ class MyCustomErrorHandler extends \Slim\Handlers\ErrorHandler
 }
 ```
 
-### New HTTP Exceptions
+## New HTTP Exceptions
 We have added named HTTP exceptions within the application. These exceptions work nicely with the native renderers. They can each have a `description` and `title` attribute as well to provide a bit more insight when the native HTML renderer is invoked. 
 
 The base class `HttpSpecializedException` extends `Exception` and comes with the following sub classes:
