@@ -25,6 +25,12 @@ $settings = [...];
 $app = new App($settings, $container);
 ```
 
+## Removed App Settings
+- `addContentLengthHeader` See [Content Length Middleware](/docs/v4/middleware/content-length.html) for new implementation of this setting.
+- `determineRouteBeforeAppMiddleware` Position [Routing Middleware](/docs/v4/middleware/routing.html) at the right position in your middleware stack to replicate existing behavior.
+- `outputBuffering` See [Output Buffering Middleware](/docs/v4/middleware/output-buffering.html) for new implementation of this setting.
+- `displayErrorDetails` See [Error Handling Middleware](/docs/v4/middleware/error-handling.html) for new implementation of this setting.
+
 ## Changes to Container
 Slim no longer has a Container so you need to supply your own. If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. Also, `App`'s `__call()` method has been removed, so accessing a container property via $app->key_name() no longer works.
 
@@ -35,9 +41,9 @@ In Slim 4 we wanted to give more flexibility to the developers by decoupling som
 Middleware execution has not changed and is still Last In First Out (LIFO) like in Slim 3.
 
 ## New Routing Middleware
-The routing has been implemented as middleware. We are still using [FastRoute](https://github.com/nikic/FastRoute) by default.
-We provide an instantiation of FastRouter via the App::getRouter() method out of the box. You will need to instantiate and add the RoutingMiddleware in order for the app to work.
-If you were using `determineRouteBeforeAppMiddleware`, you need to add the `Middleware\RoutingMiddlewar`e middleware to your application just before your call run() to maintain the previous behaviour.
+The routing has been implemented as middleware. We are still using [FastRoute](https://github.com/nikic/FastRoute) as the default router.
+We provide an instantiation of FastRoute via the App::getRouter() method out of the box. You will need to instantiate and add the RoutingMiddleware in order for the app to work.
+If you were using `determineRouteBeforeAppMiddleware`, you need to add the `Middleware\RoutingMiddleware`e middleware to your application just before your call run() to maintain the previous behaviour.
 See [Pull Request #2288](https://github.com/slimphp/Slim/pull/2288) for more information
 
 ```php
@@ -49,6 +55,9 @@ $app = new App();
 $defaultRouter = $app->getRouter();
 $routingMiddleware = new RoutingMiddleware($defaultRouter);
 $app->add($routingMiddleware);
+
+...
+$app->run();
 ```
 
 ## New Error Handling Middleware
@@ -115,4 +124,40 @@ use Slim\App;
 $app = new App();
 $methodOverridingMiddleware = new MethodOverridingMiddleware();
 $app->add($methodOverridingMiddleware);
+```
+
+
+## New Content Length Middleware
+The Content Length Middleware will automatically append a `Content-Length` header to the response. This is to replace the `addContentLengthHeader` setting that was removed from Slim 3. This middleware should be placed on the center of the middleware stack so it gets executed last.
+```php
+use Slim\App;
+use Slim\Middleware\ContentLengthMiddleware;
+
+$app = new App();
+
+$contentLengthMiddleware = new ContentLengthMiddleware();
+$app->add($contentLengthMiddleware);
+
+...
+$app->run();
+```
+
+## New Output Buffering Middleware
+The Output Buffering Middleware enables you to switch between two modes of output buffering: `APPEND` (default) and `PREPEND` mode. The `APPEND` mode will use the existing response body to append the content while `PREPEND` mode will create a new response body and append it to the existing response. This middleware should be placed on the center of the middleware stack so it gets executed last.
+```php
+use Slim\App;
+use Slim\Middleware\OutputBufferingMiddleware;
+
+$app = new App();
+
+/**
+ * The two modes available are
+ * OutputBufferingMiddleware::APPEND (default mode) - Appends to existing response body
+ * OutputBufferingMiddleware::PREPEND - Creates entirely new response body
+ */
+$mode = OutputBufferingMiddleware::APPEND;
+$outputBufferingMiddleware = new OutputBufferingMiddleware($mode);
+
+...
+$app->run();
 ```

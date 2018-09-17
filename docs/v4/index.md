@@ -55,6 +55,7 @@ example application:
 <figure markdown="1">
 ```php
 use Slim\App;
+use Slim\Middleware\ErrorMiddleware;
 use Slim\Middleware\RoutingMiddleware;
 
 $app = new App();
@@ -63,6 +64,17 @@ $app = new App();
 $defaultRouter = $app->getRouter();
 $routingMiddleware = new RoutingMiddleware($defaultRouter);
 $app->add($routingMiddleware);
+
+/** Add Error Handling Middleware
+ * The constructor of `ErrorMiddleware` takes in 4 parameters
+ * @param CallableResolverInterface $callableResolver -> Callable Resolver Interface of your choice
+ * @param bool $displayErrorDetails -> Should be set to false in production
+ * @param bool $logErrors -> Parameter is passed to the default ErrorHandler
+ * @param bool $logErrorDetails -> Display error details in error log
+ */ 
+$callableResolver = $app->getCallableResolver();
+$errorMiddleware = new ErrorMiddleware($callableResolver, true, true, true);
+$app->add($errorMiddleware);
 
 // Define app routes
 $app->get('/hello/{name}', function ($request, $response, $args) {
