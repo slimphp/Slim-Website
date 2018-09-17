@@ -24,7 +24,7 @@ defaults:
       docs-v4:
         - title: Get Started
           items:
-          - [/docs, Home]
+          - [/docs/v4, Home]
           - [/docs/v4/start/installation.md, Installation]
           - [/docs/v4/start/upgrade.md, Upgrade Guide]
           - [/docs/v4/start/web-servers.md, Web Servers]
@@ -116,7 +116,7 @@ defaults:
       docs-v3:
         - title: Get Started
           items:
-            - [/docs, Home]
+            - [/docs/v3, Home]
             - [/docs/v3/start/installation.md, Installation]
             - [/docs/v3/start/upgrade.md, Upgrade Guide]
             - [/docs/v3/start/web-servers.md, Web Servers]
