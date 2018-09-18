@@ -9,13 +9,24 @@ There are many ways to do this that are beyond the scope of this documentation. 
 this section, we provide some notes for various set-ups.
 
 ### Disable error display in production
-
-The first thing to do is to tweak your settings (`src/settings.php` in the 
-skeleton application) and ensure that you do not display full error details to the
-public.
-
 ```php
-  'displayErrorDetails' => false, // set to false in production
+use Slim\App;
+use Slim\Middleware\ErrorMiddleware;
+
+$app = new App();
+
+...
+
+/**
+ * If you are using the pre-packaged Error Middleware
+ * Ensure that you set the second parameter `displayErrorDetails` to false
+ */ 
+$callableResolver = $app->getCallableResolver();
+$errorMiddleware = new ErrorMiddleware($callableResolver, false, true, true);
+$app->add($errorMiddleware);
+
+...
+$app->run();
 ```
 
 You should also ensure that your PHP installation is configured to not display
