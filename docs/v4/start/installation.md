@@ -5,7 +5,7 @@ title: Installation
 ## System Requirements
 
 * Web server with URL rewriting
-* PHP 5.5 or newer
+* PHP 7.0 or newer
 
 ## How to Install Slim
 
