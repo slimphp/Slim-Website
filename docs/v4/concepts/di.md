@@ -25,7 +25,7 @@ $container = new \DI\Container(); // Example PHP-DI Implementation
 $app = new \Slim\App($settings, $container);
 ```
 
-Add a service to Slim container:
+Add a service to your container:
 
 ```php
 $container = $app->getContainer();
