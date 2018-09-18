@@ -6,7 +6,7 @@ If you are upgrading from version 3 to version 4, these are the significant chan
 you need to be aware of.
 
 ## New PHP version
-Slim 4 requires PHP 7.1+
+Slim 4 requires PHP 7.0+
 
 ## Breaking changes to Slim\App constructor function signature
 Slim's App settings used to be a part of the container and they have now been decoupled from it.
