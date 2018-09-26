@@ -43,7 +43,7 @@ Middleware execution has not changed and is still Last In First Out (LIFO) like 
 ## New Routing Middleware
 The routing has been implemented as middleware. We are still using [FastRoute](https://github.com/nikic/FastRoute) as the default router.
 We provide an instantiation of FastRoute via the App::getRouter() method out of the box. You will need to instantiate and add the RoutingMiddleware in order for the app to work.
-If you were using `determineRouteBeforeAppMiddleware`, you need to add the `Middleware\RoutingMiddleware`e middleware to your application just before your call run() to maintain the previous behaviour.
+If you were using `determineRouteBeforeAppMiddleware`, you need to add the `Middleware\RoutingMiddleware` middleware to your application just before your call run() to maintain the previous behaviour.
 See [Pull Request #2288](https://github.com/slimphp/Slim/pull/2288) for more information
 
 ```php
