@@ -48,7 +48,7 @@ There's a really excellent and minimal example of an `index.php` for Slim Framew
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-require '../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 $app = new \Slim\App;
 $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
