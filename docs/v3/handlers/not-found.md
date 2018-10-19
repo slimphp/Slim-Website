@@ -15,7 +15,7 @@ A Slim Framework application's Not Found handler is a Pimple service. You can su
 ```php
 $c = new \Slim\Container(); //Create Your container
 
-//Override the default Not Found Handler before App
+//Override the default Not Found Handler before creating App
 $c['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
         return $c['response']
