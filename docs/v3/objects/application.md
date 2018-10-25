@@ -70,8 +70,7 @@ you can use the `replace` method on the settings container. For example:
 $settings = $container->get('settings');
 $settings->replace([
         'displayErrorDetails' => true,
-        'determineRouteBeforeAppMiddleware' => true,
-        'debug' => true
+        'determineRouteBeforeAppMiddleware' => true
     ]);
 ]);
 ```
