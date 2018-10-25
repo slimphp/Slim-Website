@@ -144,6 +144,7 @@ $config['db']['user']   = 'user';
 $config['db']['pass']   = 'password';
 $config['db']['dbname'] = 'exampleapp';
 ```
+These string should be added into `src/public/index.php` before the `$app = new \Slim\App` line.
 
 The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you're using the built in PHP webserver then you'll see them in the console output which is helpful). The second line allows the web server to set the Content-Length header which makes Slim behave more predictably.
 
