@@ -52,11 +52,15 @@
             <div class="col-md-8 docs-content">
                 <h1 class="page-header">{{ page.title }}</h1>
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
-                    <a href="{{ site.slim_website_repo }}{{page.path}}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
-                    <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                        <option value="/docs/v2">v2</option>
-                        <option value="/docs/" selected>v3</option>
-                    </select>
+                    <a href="{{ site.slim_website_repo }}{{page.path}}" target="_blank" class="btn btn-default btn-sm" role="button"><i class="fa fa-github"></i> Edit This Page</a>
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">v3    <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="/docs/v2">v2</a></li>
+                            <li><a href="/docs/">v3</a></li>
+                        </ul>
+                    </div>
                 </div>
                 {{ content }}
 
