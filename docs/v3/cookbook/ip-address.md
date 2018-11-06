@@ -3,12 +3,12 @@ title: Retrieving IP address
 ---
 
 The best way to retrieve the current IP address of the client is via middleware using
-a component such as [rka-ip-address-middleware](https://github.com/akrabat/rka-ip-address-middleware).
+a component such as [ip-address-middleware](https://github.com/akrabat/ip-address-middleware/).
 
 This component can be installed via composer:
 
 ```bash
-composer require akrabat/rka-ip-address-middleware
+composer require akrabat/ip-address-middleware
 ```
 
 To use it, register the middleware with the <code>App</code>, providing a list
