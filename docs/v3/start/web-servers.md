@@ -2,7 +2,7 @@
 title: Web Servers
 ---
 
-It is typical to use the front-controller pattern to funnel appropriate HTTP
+It is typical to use the front-controller pattern to tunnel appropriate HTTP
 requests received by your web server to a single PHP file. The instructions
 below explain how to tell your web server to send HTTP requests to your PHP
 front-controller file.
