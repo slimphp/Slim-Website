@@ -26,8 +26,7 @@ $app = new \Slim\App();
 $c = $app->getContainer();
 $c['phpErrorHandler'] = function ($c) {
     return function ($request, $response, $error) use ($c) {
-        return $c['response']
-            ->withStatus(500)
+        return $response->withStatus(500)
             ->withHeader('Content-Type', 'text/html')
             ->write('Something went wrong!');
     };
