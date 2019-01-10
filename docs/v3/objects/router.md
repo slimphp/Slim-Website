@@ -294,11 +294,11 @@ To help organize routes into logical groups, the `\Slim\App` also provides a `gr
 
 ```php
 $app = new \Slim\App();
-$app->group('/users/{id:[0-9]+}', function () {
-    $this->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
+$app->group('/users/{id:[0-9]+}', function (\Slim\App $app) {
+    $app->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
         // Find, delete, patch or replace user identified by $args['id']
     })->setName('user');
-    $this->get('/reset-password', function ($request, $response, $args) {
+    $app->get('/reset-password', function ($request, $response, $args) {
         // Route for /users/{id:[0-9]+}/reset-password
         // Reset the password for user identified by $args['id']
     })->setName('user-password-reset');
@@ -308,20 +308,15 @@ $app->group('/users/{id:[0-9]+}', function () {
 The group pattern can be empty, enabling the logical grouping of routes that do not share a common pattern.
 
 ```php
-$app->group('', function() {
-    $this->get('/billing', function ($request, $response, $args) {
+$app->group('', function(\Slim\App $app) {
+    $app->get('/billing', function ($request, $response, $args) {
         // Route for /billing
     });
-    $this->get('/invoice/{id:[0-9]+}', function ($request, $response, $args) {
+    $app->get('/invoice/{id:[0-9]+}', function ($request, $response, $args) {
         // Route for /invoice/{id:[0-9]+}
     });
 })->add( new SharedMiddleware() );
 ```
-
-Note inside the group closure, `$this` is used instead of `$app`. Slim binds the closure to the application instance for you, just like it is the case with route callback binds with container instance.
-
-* inside group closure, `$this` is bound to the instance of `Slim\App`
-* inside route closure, `$this` is bound to the instance of `Slim\Container`
 
 ## Route middleware
 
