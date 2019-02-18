@@ -69,9 +69,8 @@ you can use the `replace` method on the settings container. For example:
 ```php
 $settings = $container->get('settings');
 $settings->replace([
-        'displayErrorDetails' => true,
-        'determineRouteBeforeAppMiddleware' => true
-    ]);
+    'displayErrorDetails' => true,
+    'determineRouteBeforeAppMiddleware' => true,
 ]);
 ```
 
