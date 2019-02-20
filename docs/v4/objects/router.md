@@ -329,7 +329,20 @@ You can also attach middleware to any route or route group. [Learn more](/docs/v
 
 ## Router caching
 
-It's possible to enable router cache by setting valid filename in default Slim settings. [Learn more](/docs/v4/objects/application.html#slim-default-settings).
+It's possible to enable router cache via `Router::setCacheFile()`. See examples below:
+```php
+$app = new \Slim\App();
+
+/**
+ * To generate the route cache data, you need to set the file to one that does not exist in a writable directory.
+ * After the file is generated on first run, only read permissions for the file are required.
+ *
+ * You may need to generate this file in a development environment and comitting it to your project before deploying
+ * if you don't have write permissions for the directory where the cache file resides on the server it is being deployed to
+ */
+$router = $app->getRouter();
+$router->setCacheFile('/path/to/cache.file');
+```
 
 ## Container Resolution
 

@@ -41,8 +41,6 @@ defaults:
         - title: The Application
           items:
           - [/docs/v4/objects/application.md, Overview]
-          - [/docs/v4/objects/application.md#application-configuration, Configuration]
-          - [/docs/v4/objects/application.md#slim-default-settings, Default settings]
         - title: The Request
           items:
           - [/docs/v4/objects/request.md, Overview]
@@ -70,6 +68,7 @@ defaults:
           - [/docs/v4/objects/router.md#route-names, Names]
           - [/docs/v4/objects/router.md#route-groups, Groups]
           - [/docs/v4/objects/router.md#route-middleware, Middleware]
+          - [/docs/v4/objects/router.md#router-caching, Caching]
           - [/docs/v4/objects/router.md#container-resolution, Container Resolution]
         - title: Packaged Middleware
           items:
