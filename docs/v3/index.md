@@ -1,5 +1,5 @@
 ---
-title: Documentation
+title: Slim 3 Documentation
 ---
 
 <div class="alert alert-info">

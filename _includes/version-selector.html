@@ -1,0 +1,13 @@
+<h3 class="toc-title">Slim Version</h3>
+<div style="border:1px solid #CCC;border-radius:16px;box-sizing:border-box;margin:0 0 30px;padding:0 8px;width:200px;-webkit-appearance:none">
+    <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" style="border:0;border-radius:16px;height:32px;margin:0;outline:none;padding:0;width:100%">
+        {% assign versions = site.slim_docs_versions | split: ", " %}
+        {% for version in versions %}
+            {% assign selected = "" %}
+            {% if page.url contains version %}
+                {% assign selected = " selected" %}
+            {% endif %}
+            <option value="/docs/{{ version }}"{{ selected }}>{{ version }}</option>
+        {% endfor %}
+    </select>
+</div>

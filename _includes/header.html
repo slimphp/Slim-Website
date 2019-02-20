@@ -47,10 +47,20 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li{% if page.url contains "/blog" %} class="active"{% endif %}><a href="/blog">Blog</a></li>
-                        <li{% if page.url contains "/docs" %} class="active"{% endif %}><a href="/docs">User Guide</a></li>
+                        <li{% if page.url contains "/docs" %} class="active"{% endif %}><a href="/docs/{{ site.slim_version }}">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
                         <li{% if page.url contains "/contribute" %} class="active"{% endif %}><a href="/contribute">Contribute</a></li>
                     </ul>
+                    {% if page.url contains "/docs/v" %}
+                        {% assign versions = site.slim_docs_versions | split: ", " %}
+                        {% for version in versions %}
+                            {% if page.url contains version %}
+                                <div style="background:#719e40;border-radius:4px;color:#FFF;float:right;font-size:12px;font-weight:bold;height:30px;line-height:30px;margin:10px 0;padding:0 10px">
+                                    <span>{{ version }} Documentation</span>
+                                </div>
+                        {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </nav>
