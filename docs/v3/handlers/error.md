@@ -34,9 +34,9 @@ There are two ways to inject handlers:
 $c = new \Slim\Container();
 $c['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
-        return $c['response']->withStatus(500)
-                             ->withHeader('Content-Type', 'text/html')
-                             ->write('Something went wrong!');
+        return $response->withStatus(500)
+            ->withHeader('Content-Type', 'text/html')
+            ->write('Something went wrong!');
     };
 };
 $app = new \Slim\App($c);
@@ -49,9 +49,9 @@ $app = new \Slim\App();
 $c = $app->getContainer();
 $c['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
-        return $c['response']->withStatus(500)
-                             ->withHeader('Content-Type', 'text/html')
-                             ->write('Something went wrong!');
+        return $response->withStatus(500)
+            ->withHeader('Content-Type', 'text/html')
+            ->write('Something went wrong!');
     };
 };
 ```

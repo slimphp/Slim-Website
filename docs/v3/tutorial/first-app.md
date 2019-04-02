@@ -48,7 +48,7 @@ There's a really excellent and minimal example of an `index.php` for Slim Framew
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-require '../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 $app = new \Slim\App;
 $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
@@ -121,7 +121,7 @@ if (!-e $request_filename){
 }
 ```
 
-*NOTE:* If you want your entry point to be something other than index.php you will need your config to change as well. `api.php` is also commonly used as an entry point, so your set up should match accordingly. This example assumes your are using index.php.
+*NOTE:* If you want your entry point to be something other than index.php you will need your config to change as well. `api.php` is also commonly used as an entry point, so your set up should match accordingly. This example assumes you are using index.php.
 
 With this setup, just remember to use http://slimproject.test instead of http://localhost:8080 in the other examples in this tutorial.  The same health warning as above applies: you'll see an error page at http://slimproject.test but crucially it's *Slim's* error page.  If you go to http://slimproject.test/hello/joebloggs then something better should happen.
 
@@ -144,6 +144,7 @@ $config['db']['user']   = 'user';
 $config['db']['pass']   = 'password';
 $config['db']['dbname'] = 'exampleapp';
 ```
+These string should be added into `src/public/index.php` before the `$app = new \Slim\App` line.
 
 The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you're using the built in PHP webserver then you'll see them in the console output which is helpful). The second line allows the web server to set the Content-Length header which makes Slim behave more predictably.
 
@@ -408,7 +409,7 @@ To use this in my template, I need to make the router available in the template 
     $response = $this->view->render($response, 'tickets.phtml', ['tickets' => $tickets, 'router' => $this->router]);
 ```
 
-With the `/tickets/{id}` route having a friendly name, and the router now available in our template, this is what makes the `pathFor()` call in our template work.  By supplying the `id`, this gets used as a named placeholder in the URL pattern, and the correct URL for linking to that route with those values is created.  This feature is brilliant for readable template URLs and is even better if you ever need to change a URL format for any reason - no need to grep templates to see where it's used.  This approach is definitely recomended, especially for links you'll use a lot.
+With the `/tickets/{id}` route having a friendly name, and the router now available in our template, this is what makes the `pathFor()` call in our template work.  By supplying the `id`, this gets used as a named placeholder in the URL pattern, and the correct URL for linking to that route with those values is created.  This feature is brilliant for readable template URLs and is even better if you ever need to change a URL format for any reason - no need to grep templates to see where it's used.  This approach is definitely recommended, especially for links you'll use a lot.
 
 ## Where Next?
 
