@@ -10,16 +10,15 @@ Each Slim Framework application has a default Not Found handler. This handler se
 
 ## Custom Not Found handler
 
-A Slim Framework application's Not Found handler is a Pimple service. You can substitute your own Not Found handler by defining a custom Pimple factory method with the application container.
+A Slim Framework application's Not Found handler is a Pimple service. You can substitute your own Not Found handler by defining a custom Pimple factory method with the application container *before* you instantiate the App object.
 
 ```php
 $c = new \Slim\Container(); //Create Your container
 
-//Override the default Not Found Handler
+//Override the default Not Found Handler before creating App
 $c['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
-        return $c['response']
-            ->withStatus(404)
+        return $response->withStatus(404)
             ->withHeader('Content-Type', 'text/html')
             ->write('Page not found');
     };
@@ -37,3 +36,23 @@ In this example, we define a new `notFoundHandler` factory that returns a callab
 2. A `\Psr\Http\Message\ResponseInterface` instance
 
 The callable **MUST** return an appropriate `\Psr\Http\Message\ResponseInterface` instance.
+
+If you wish to override the default Not Found handler *after* you instantiate the App object you can `unset` the default handler then overwrite it.
+
+```php
+$c = new \Slim\Container(); //Create Your container
+
+//Create Slim
+$app = new \Slim\App($c);
+
+//... Your code
+
+//Override the default Not Found Handler after App
+unset($app->getContainer()['notFoundHandler']);
+$app->getContainer()['notFoundHandler'] = function ($c) {
+    return function ($request, $response) use ($c) {
+        $response = new \Slim\Http\Response(404);
+        return $response->write("Page not found");
+    };
+};
+```

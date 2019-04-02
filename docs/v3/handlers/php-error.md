@@ -7,6 +7,21 @@ If your Slim Framework application throws a
 the application invokes its PHP Error handler and returns a
 `HTTP/1.1 500 Internal Server Error` response to the HTTP client.
 
+Please note that `Warnings` and `Notices` are not caught by default. If you wish your application to display an error page when they happen, you have to run the following code before the app starts. In most cases that means adding it to the very top of `index.php`.
+
+```php
+<?php
+
+error_reporting(E_ALL);
+set_error_handler(function ($severity, $message, $file, $line) {
+    if (error_reporting() & $severity) {
+        throw new \ErrorException($message, 0, $severity, $file, $line);
+    }
+});
+```
+
+This way all `Warnings` and `Notices` will be treated as `Errors` and as such will trigger the defined handlers.
+
 ## Default PHP Error handler
 
 Each Slim Framework application has a default PHP Error handler. This handler
@@ -26,8 +41,7 @@ $app = new \Slim\App();
 $c = $app->getContainer();
 $c['phpErrorHandler'] = function ($c) {
     return function ($request, $response, $error) use ($c) {
-        return $c['response']
-            ->withStatus(500)
+        return $response->withStatus(500)
             ->withHeader('Content-Type', 'text/html')
             ->write('Something went wrong!');
     };

@@ -37,8 +37,13 @@ $app->get('/foo', function ($req, $res, $args) {
 });
 
 $app->get('/bar', function ($req, $res, $args) {
+    // Add message to be used in current request
+    $this->flash->addMessageNow('Test', 'This is another message');
+
     // Get flash messages from previous request
     $messages = $this->flash->getMessages();
+
+    // Returns both flash messages
     print_r($messages);
 });
 
