@@ -108,7 +108,7 @@ settings
     * `routerCacheFile`.
 
 environment
-:   Instance of `\Slim\Interfaces\Http\EnvironmentInterface`.
+:   Instance of `\Slim\Http\Environment`.
 
 request
 :   Instance of `\Psr\Http\Message\ServerRequestInterface`.
