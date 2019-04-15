@@ -106,9 +106,10 @@ Slim has the following default settings that you can override:
     If you are using a runtime analytics tool, such as New Relic, then this should be disabled.
     <br>(Default: <code>true</code>)</dd>
 <dt><code>routerCacheFile</code></dt>
-    <dd>Filename for caching the FastRoute routes. Must be set to to a valid filename within
-    a writeable directory. If the file does not exist, then it is created with the correct cache
-    information on first run.<br>
-    Set to <code>false</code> to disable the FastRoute cache system.
-    <br>(Default: <code>false</code>)</dd>
+    <dd>Filename for caching the FastRoute routes. To create the file, this needs to be set to a filename 
+    that does not exist in a writable directory upon first run. Once the file has been populated with the cache data, 
+    only read permissions are required for this file. You may need to generate this file in your development environment 
+    and commit it to your project if the application does not have write permissions on your deployment server.
+    <br/>Set to <code>false</code> to disable the FastRoute cache system.
+    <br/>(Default: <code>false</code>)</dd>
 </dl>
