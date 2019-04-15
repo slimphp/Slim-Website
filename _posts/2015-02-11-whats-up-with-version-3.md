@@ -81,7 +81,7 @@ This branch name change has not happened yet, but it will before the 3.0 release
 
 ### Road map
 
-I will soon establish a new Road Map on the project's GitHub wiki. I will announce this as soon as it is avialable.
+I will soon establish a new Road Map on the project's GitHub wiki. I will announce this as soon as it is available.
 
 ### Unit tests
 

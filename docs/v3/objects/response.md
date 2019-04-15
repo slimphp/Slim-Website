@@ -314,7 +314,7 @@ If there is a problem encoding the data to JSON, a `\RuntimeException($message, 
 
 ## Returning a Redirect
 
-Slim's Response object has a custom method `withRedirect($url, $status = null)` when you wish to return a redirect to another URL. You provide the `$url` where you wish the client to be redirected to along with an optional `$status` code.
+Slim's Response object has a custom method `withRedirect($url, $status = null)` when you wish to return a redirect to another URL. You provide the `$url` where you wish the client to be redirected to along with an optional `$status` code. The status code defaults to `302` if not provided.
 
 <figure markdown="1">
 ```php

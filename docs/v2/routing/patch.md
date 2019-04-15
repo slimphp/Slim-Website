@@ -15,3 +15,5 @@ the callback function's argument.
 
 The first argument of the Slim application's `patch()` method is the resource URI. The last argument is anything that
 returns `true` for `is_callable()`. Typically, the last argument will be an [anonymous function][anon-func].
+
+[anon-func]: http://php.net/manual/en/functions.anonymous.php
