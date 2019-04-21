@@ -11,6 +11,7 @@ Please note that `Warnings` and `Notices` are not caught by default. If you wish
 
 ```php
 <?php
+
 error_reporting(E_ALL);
 set_error_handler(function ($severity, $message, $file, $line) {
     if (error_reporting() & $severity) {
