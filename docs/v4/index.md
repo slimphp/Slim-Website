@@ -54,26 +54,38 @@ example application:
 
 <figure markdown="1">
 ```php
-use Slim\App;
+use Slim\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Middleware\RoutingMiddleware;
 
-$app = new App();
+/**
+ * Instantiate App
+ *
+ * In order for the factory to work you need to ensure you have installed
+ * a supported PSR-7 implementation of your choice e.g.: Slim PSR-7 and a supported
+ * ServerRequest creator (included with Slim PSR-7)
+ *
+ */
+$app = AppFactory::create();
 
 // Add Routing Middleware
-$defaultRouter = $app->getRouter();
-$routingMiddleware = new RoutingMiddleware($defaultRouter);
+$routeResolver = $app->getRouteResolver();
+$routingMiddleware = new RoutingMiddleware($routeResolver);
 $app->add($routingMiddleware);
 
-/** Add Error Handling Middleware
- * The constructor of `ErrorMiddleware` takes in 4 parameters
- * @param CallableResolverInterface $callableResolver -> Callable Resolver Interface of your choice
+/** 
+ * Add Error Handling Middleware
+ 
+ * The constructor of `ErrorMiddleware` takes in 5 parameters
+ * @param CallableResolverInterface $callableResolver -> CallableResolver implementation of your choice
+ * @param ResponseFactoryInterface $responseFactory -> ResponseFactory implementation of your choice
  * @param bool $displayErrorDetails -> Should be set to false in production
  * @param bool $logErrors -> Parameter is passed to the default ErrorHandler
  * @param bool $logErrorDetails -> Display error details in error log
  */ 
 $callableResolver = $app->getCallableResolver();
-$errorMiddleware = new ErrorMiddleware($callableResolver, true, true, true);
+$responseFactory = $app->getResponseFactory();
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
 $app->add($errorMiddleware);
 
 // Define app routes
