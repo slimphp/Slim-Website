@@ -4,7 +4,7 @@ title: Templates
 
 Slim does not have a view layer like traditional MVC frameworks. Instead,
 Slim's "view" _is the HTTP response_. Each Slim application route is responsible
-for preparing and returning an appropriate PSR 7 response object.
+for preparing and returning an appropriate PSR-7 response object.
 
 > Slim's "view" is the HTTP response.
 
@@ -60,7 +60,7 @@ $container['view'] = function ($container) {
 Note : "cache" could be set to false to disable it, see also 'auto_reload' option, useful in development environment. For more information, see [Twig environment options](http://twig.sensiolabs.org/doc/2.x/api.html#environment-options)
 
 Now you can use the `slim/twig-view` component service inside an app route
-to render a template and write it to a PSR 7 Response object like this:
+to render a template and write it to a PSR-7 Response object like this:
 
 <figure markdown="1">
 ```php
@@ -79,10 +79,10 @@ $app->run();
 
 In this example, `$this->view` invoked inside the route callback is a reference
 to the `\Slim\Views\Twig` instance returned by the `view` container service.
-The `\Slim\Views\Twig` instance's `render()` method accepts a PSR 7 Response
+The `\Slim\Views\Twig` instance's `render()` method accepts a PSR-7 Response
 object as its first argument, the Twig template path as its second argument,
 and an array of template variables as its final argument. The `render()` method
-returns a new PSR 7 Response object whose body is the rendered Twig template.
+returns a new PSR-7 Response object whose body is the rendered Twig template.
 
 ### The path_for() method
 
@@ -220,4 +220,4 @@ $app->run();
 
 You are not limited to the `Twig-View` and `PHP-View` components. You
 can use any PHP template system provided that you ultimately write the rendered
-template output to the PSR 7 Response object's body.
+template output to the PSR-7 Response object's body.

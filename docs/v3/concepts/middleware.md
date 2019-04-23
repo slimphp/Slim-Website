@@ -230,7 +230,7 @@ $foo = $request->getAttribute('foo');
 
 ## Finding available middleware
 
-You may find a PSR 7 Middleware class already written that will satisfy your needs. Here are a few unofficial lists to search.
+You may find a PSR-7 Middleware class already written that will satisfy your needs. Here are a few unofficial lists to search.
 
 * [oscarotero/psr7-middlewares](https://github.com/oscarotero/psr7-middlewares)
 * [Middleware for Slim Framework v3.x wiki](https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x)

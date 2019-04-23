@@ -2,7 +2,7 @@
 title: Lifecycle
 ---
 
-## Application Lifecycle
+## Application Life Cycle
 
 ### 1. Instantiation
 

@@ -10,32 +10,39 @@ If you want to redirect/rewrite all URLs that end in a `/` to the non-trailing `
 
 ```php
 use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Server\RequestHandlerInterface RequestHandler;
+use Slim\Factory\AppFactory;
+use Slim\Psr7\Response;
 
-$app->add(function (Request $request, Response $response, callable $next) {
+$app = AppFactory::create();
+
+$app->add(function (Request $request, RequestHandler $handler) {
     $uri = $request->getUri();
     $path = $uri->getPath();
+    
     if ($path != '/' && substr($path, -1) == '/') {
         // permanently redirect paths with a trailing slash
         // to their non-trailing counterpart
         $uri = $uri->withPath(substr($path, 0, -1));
         
-        if($request->getMethod() == 'GET') {
-            return $response->withRedirect((string)$uri, 301);
-        }
-        else {
-            return $next($request->withUri($uri), $response);
+        if ($request->getMethod() == 'GET') {
+            $response = new Response();
+            return $response
+                ->withHeader('Location', (string) $uri)
+                ->withStatus(301);
+        } else {
+            $request = $request->withUri($uri);
         }
     }
 
-    return $next($request, $response);
+    return $handler->handle($request);
 });
 ```
 
-Alternatively, consider [oscarotero/psr7-middlewares' TrailingSlash](//github.com/oscarotero/psr7-middlewares#trailingslash) middleware which also allows you to force a trailing slash to be appended to all URLs:
+Alternatively, consider [middlewares/trailing-slash](//github.com/middlewares/trailing-slash) middleware which also allows you to force a trailing slash to be appended to all URLs:
 
 ```php
-use Psr7Middlewares\Middleware\TrailingSlash;
+use Middlewares\TrailingSlash;
 
 $app->add(new TrailingSlash(true)); // true adds the trailing slash (false removes it)
 ```

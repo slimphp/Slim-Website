@@ -2,15 +2,13 @@
 title: Uploading files using POST forms
 ---
 
-Files that are uploaded using forms in POST requests can be retrieved with the
-[`getUploadedFiles`](/docs/v4/objects/request.html#uploaded-files) method of the
-`Request` object.
+Files that are uploaded using forms in POST requests can be retrieved with the Request method **getUploadedFiles()**
 
 When uploading files using a POST request, make sure your file upload form has the
-attribute `enctype="multipart/form-data"` otherwise `getUploadedFiles()` will return an empty array.
+attribute **enctype="multipart/form-data"** otherwise **getUploadedFiles()** will return an empty array.
 
 If multiple files are uploaded for the same input name, add brackets after the input name in the HTML, otherwise
-only one uploaded file will be returned for the input name by `getUploadedFiles()`.
+only one uploaded file will be returned for the input name by **getUploadedFiles()**.
 
 Below is an example HTML form that contains both single and multiple file uploads.
 
@@ -45,27 +43,25 @@ Below is an example HTML form that contains both single and multiple file upload
 <figcaption>Figure 1: Example HTML form for file uploads</figcaption>
 </figure>
 
-Uploaded files can be moved to a directory using the `moveTo` method. Below is an example application
+Uploaded files can be moved to a directory using the **moveTo** method. Below is an example application
 that handles the uploaded files of the HTML form above.
 
 <figure markdown="1">
 ```php
 <?php
+use DI\Container;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Slim\Factory\AppFactory;
 
-require_once __DIR__ . '/vendor/autoload.php';
+$container = new Container();
+$container->set('upload_directory', __DIR__ . '/uploads');
 
-use Slim\Http\Request;
-use Slim\Http\Response;
-use Slim\Http\UploadedFile;
-
-$app = new \Slim\App();
-
-$container = $app->getContainer();
-$container['upload_directory'] = __DIR__ . '/uploads';
+AppFactory::setContainer($container);
+$app = AppFactory::create();
 
 $app->post('/', function(Request $request, Response $response) {
     $directory = $this->get('upload_directory');
-
     $uploadedFiles = $request->getUploadedFiles();
 
     // handle single input with single file upload
@@ -74,7 +70,6 @@ $app->post('/', function(Request $request, Response $response) {
         $filename = moveUploadedFile($directory, $uploadedFile);
         $response->write('uploaded ' . $filename . '<br/>');
     }
-
 
     // handle multiple inputs with the same key
     foreach ($uploadedFiles['example2'] as $uploadedFile) {
@@ -92,6 +87,7 @@ $app->post('/', function(Request $request, Response $response) {
         }
     }
 
+    return $response;
 });
 
 /**
@@ -99,10 +95,10 @@ $app->post('/', function(Request $request, Response $response) {
  * to avoid overwriting an existing uploaded file.
  *
  * @param string $directory directory to which the file is moved
- * @param UploadedFile $uploaded file uploaded file to move
+ * @param UploadedFileInterface $uploaded file uploaded file to move
  * @return string filename of moved file
  */
-function moveUploadedFile($directory, UploadedFile $uploadedFile)
+function moveUploadedFile($directory, UploadedFileInterface $uploadedFile)
 {
     $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
     $basename = bin2hex(random_bytes(8)); // see http://php.net/manual/en/function.random-bytes.php
@@ -117,7 +113,3 @@ $app->run();
 ```
 <figcaption>Figure 2: Example Slim application to handle the uploaded files</figcaption>
 </figure>
-
-See also
---------
-* [https://akrabat.com/psr-7-file-uploads-in-slim-3/](https://akrabat.com/psr-7-file-uploads-in-slim-3/)

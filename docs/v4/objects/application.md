@@ -2,89 +2,235 @@
 title: Application
 ---
 
-The Application, (or `Slim\App`) is the entry point to your Slim application and is used to register the routes that link to your callbacks or controllers.
+The Application **Slim\App** is the entry point to your Slim application and is used to register the routes that link to your callbacks or controllers.
 
 ```php
 <?php
 require __DIR__ . '/../vendor/autoload.php';
     
-use Slim\App;
-use Slim\Middleware\RoutingMiddleware;
+use Slim\Factory\App;
 use Slim\Middleware\ErrorMiddleware;
-use Slim\Psr7\Factory\ResponseFactory;
-use Slim\Psr7\Factory\ServerRequestFactory;
-use Slim\Psr7\Factory\StreamFactory;
 
 // Instantiate app
-$responseFactory = new ResponseFactory();
-$app = new App($responseFactory);
-
-// Add routing middleware
-$routingMiddleware = new RoutingMiddleware($app->getRouter());
-$app->add($routingMiddleware);
+$app = AppFactory::create();
 
 // Add error handling middleware
-$errorMiddleware = new ErrorMiddleware($app->getCallableResolver(), $responseFactory, $displayErrorDetails, false, false);
+$callableResolver = $app->getCallableResolver();
+$responseFactory = $app->getResponseFactory();
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, $displayErrorDetails, false, false);
 $app->add($errorMiddleware);
 
 // Add route callbacks
 $app->get('/', function ($request, $response, $args) {
-    return $response->withStatus(200)->write('Hello World!');
+    $response->getBody()->write('Hello World');
+    return $response;
 });
 
 // Run application
-$request = new ServerRequest(ServerRequestFactory::createFromGlobals());
-$app->run($request);
+$app->run();
 ```
 
 ## Notices and Warnings Handling
 
-`Warnings` and `Notices` are not caught by default. If you wish your application to display an error page when they happen, you will need to implement code similar to the following `index.php`.
+**Warnings** and **Notices** are not caught by default. If you wish your application to display an error page when they happen, you will need to implement code similar to the following **index.php**.
 
 ```php
 <?php
 require __DIR__ . '/../vendor/autoload.php';
     
-use Slim\App;
+use MyApp\Handlers\ErrorHandler;
+use MyApp\Handlers\ShutdownHandler;
 use Slim\Exception\HttpInternalServerErrorException;
-use Slim\Handlers\ErrorHandler;
+use Slim\Factory\AppFactory;
+use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\Middleware\RoutingMiddleware;
 use Slim\Middleware\ErrorMiddleware;
-use Slim\Psr7\Factory\ResponseFactory;
-use Slim\Psr7\Factory\ServerRequestFactory;
-use Slim\Psr7\Factory\StreamFactory;
-use Slim\ResponseEmitter;
 
-try {
-    $responseFactory = new ResponseFactory();
-    $app = new App($responseFactory);
+// Set that to your needs
+$displayErrorDetails = true;
+
+$app = AppFactory::create();
+$responseFactory = $app->getResponseFactory();
+
+$serverRequestCreator = ServerRequestCreatorFactory::create();
+$request = $serverRequestCreator->createFromGlobals();
+
+$errorHandler = new HttpErrorHandler($responseFactory);
+$shutdownHandler = new ShutdownHandler($request, $errorHandler, $displayErrorDetails);
+register_shutdown_function($shutdownHandler);
+
+$routeResolver = $app->getRouteResolver();
+$routingMiddleware = new RoutingMiddleware($routeResolver);
+$app->add($routingMiddleware);
+
+$callableResolver = $app->getCallableResolver();
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, $displayErrorDetails, false, false);
+$errorMiddleware->setDefaultErrorHandler($errorHandler);
+$app->add($errorMiddleware);
+
+$app->run();
+```
+
+## Example of a Custom ErrorHandler
+```php
+<?php
+namespace MyApp\Handlers;
+
+use Psr\Http\Message\ResponseInterface;
+use Slim\Exception\HttpBadRequestException;
+use Slim\Exception\HttpException;
+use Slim\Exception\HttpForbiddenException;
+use Slim\Exception\HttpMethodNotAllowedException;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Exception\HttpNotImplementedException;
+use Slim\Exception\HttpUnauthorizedException;
+use Slim\Handlers\ErrorHandler;
+use Exception;
+use Throwable;
+
+class HttpErrorHandler extends ErrorHandler
+{
+    public const BAD_REQUEST = 'BAD_REQUEST';
+    public const INSUFFICIENT_PRIVILEGES = 'INSUFFICIENT_PRIVILEGES';
+    public const NOT_ALLOWED = 'NOT_ALLOWED';
+    public const NOT_IMPLEMENTED = 'NOT_IMPLEMENTED';
+    public const RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND';
+    public const SERVER_ERROR = 'SERVER_ERROR';
+    public const UNAUTHENTICATED = 'UNAUTHENTICATED';
     
-    $request = new ServerRequest(ServerRequestFactory::createFromGlobals());
-    
-    $routingMiddleware = new RoutingMiddleware($app->getRouter());
-    $app->add($routingMiddleware);
+    protected function respond(): ResponseInterface
+    {
+        $exception = $this->exception;
+        $statusCode = 500;
+        $type = SERVER_ERROR;
+        $description = 'An internal error has occurred while processing your request.';
 
-    $systemErrorHandler = function ($type, $message, $file, $line) use ($request) {
-        /**
-         * You can add more detail to the error message with $type, $file and $line
-         * this is just for example purposes
-        */
-        throw new HttpInternalServerErrorException($request, $message);
-    };
-    set_error_handler($systemErrorHandler, E_ALL);
+        if ($exception instanceof HttpException) {
+            $statusCode = $exception->getCode();
+            $description = $exception->getMessage();
 
-    $errorMiddleware = new ErrorMiddleware($app->getCallableResolver(), $responseFactory, $displayErrorDetails, false, false);
-    $errorHandler = $errorMiddleware->getDefaultErrorHandler();
-    
-    $app->add($errorMiddleware);
+            if ($exception instanceof HttpNotFoundException) {
+                $type = self::RESOURCE_NOT_FOUND;
+            } elseif ($exception instanceof HttpMethodNotAllowedException) {
+                $type = self::NOT_ALLOWED;
+            } elseif ($exception instanceof HttpUnauthorizedException) {
+                $type = self::UNAUTHENTICATED;
+            } elseif ($exception instanceof HttpForbiddenException) {
+                $type = self::UNAUTHENTICATED;
+            } elseif ($exception instanceof HttpBadRequestException) {
+                $type = self::BAD_REQUEST;
+            } elseif ($exception instanceof HttpNotImplementedException) {
+                $type = self::NOT_IMPLEMENTED;
+            }
+        }
 
-    ...add routes here...
+        if (
+            !($exception instanceof HttpException)
+            && ($exception instanceof Exception || $exception instanceof Throwable)
+            && $this->displayErrorDetails
+        ) {
+            $description = $exception->getMessage();
+        }
 
-    $response = $app->handle($request);
-} catch (HttpInternalServerErrorException $e) {
-    $response = $errorHandler->__invoke($e->getRequest(), $e, $displayErrorDetails, false, false);
-} finally {
-    $responseEmitter = new ResponseEmitter();
-    $responseEmitter->emit($response);
+        $error = [
+            'statusCode' => $statusCode,
+            'error' => [
+                'type' => $type,
+                'description' => $description,
+            ],
+        ];
+        
+        $payload = json_encode($error, JSON_PRETTY_PRINT);
+        
+        $response = $this->responseFactory->createResponse($statusCode);        
+        $response->getBody()->write($payload);
+        
+        return $response;
+    }
+}
+```
+
+## Example of a Custom Shutdown Handler
+```php
+<?php
+namespace MyApp\Handlers;
+
+use ERPMS\Application\ResponseEmitter\ResponseEmitter;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Exception\HttpInternalServerErrorException;
+
+class ShutdownHandler
+{
+    /**
+     * @var ServerRequestInterface
+     */
+    private $request;
+
+    /**
+     * @var HttpErrorHandler
+     */
+    private $errorHandler;
+
+    /**
+     * @var bool
+     */
+    private $displayErrorDetails;
+
+    /**
+     * ShutdownHandler constructor.
+     *
+     * @param ServerRequestInterface    $request
+     * @param $errorHandler             $errorHandler
+     * @param bool                      $displayErrorDetails
+     */
+    public function __construct(
+        ServerRequestInterface $request,
+        HttpErrorHandler $errorHandler,
+        bool $displayErrorDetails
+    ) {
+        $this->request = $request;
+        $this->errorHandler = $errorHandler;
+        $this->displayErrorDetails = $displayErrorDetails;
+    }
+
+    public function __invoke()
+    {
+        $error = error_get_last();
+        if ($error) {
+            $errorFile = $error['file'];
+            $errorLine = $error['line'];
+            $errorMessage = $error['message'];
+            $errorType = $error['type'];
+            $message = 'An error while processing your request. Please try again later.';
+
+            if ($this->displayErrorDetails) {
+                switch ($errorType) {
+                    case E_USER_ERROR:
+                        $message = "FATAL ERROR: {$errorMessage}. ";
+                        $message .= " on line {$errorLine} in file {$errorFile}.";
+                        break;
+
+                    case E_USER_WARNING:
+                        $message = "WARNING: {$errorMessage}";
+                        break;
+
+                    case E_USER_NOTICE:
+                        $message = "NOTICE: {$errorMessage}";
+                        break;
+
+                    default:
+                        $message = "ERROR: {$errorMessage}";
+                        $message .= " on line {$errorLine} in file {$errorFile}.";
+                        break;
+                }
+            }
+
+            $exception = new HttpInternalServerErrorException($this->request, $message);
+            $response = $this->errorHandler->__invoke($this->request, $exception, $this->displayErrorDetails, false, false);
+            
+            $responseEmitter = new ResponseEmitter();
+            $responseEmitter->emit($response);
+        }
+    }
 }
 ```

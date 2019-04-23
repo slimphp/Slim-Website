@@ -6,19 +6,20 @@ The Method Overidding Middleware enables you to use the `X-Http-Method-Override`
 
 ## Usage
 ```php
-use Slim\App;
+use Slim\Factory\AppFactory;
 use Slim\Middleware\MethodOverrideMiddleware;
 use Slim\Middleware\RoutingMiddleware;
 
-$app = new App();
+$app = AppFactory::create();
 
-$defaultRouter = $app->getRouter();
-$routingMiddleware = new RoutingMiddleware($defaultRouter);
+$routeResolver = $app->getRouteResolver();
+$routingMiddleware = new RoutingMiddleware($routeResolver);
 $app->add($routingMiddleware);
 
 $methodOverrideMiddleware = new MethodOverrideMiddleware();
 $app->add($methodOverrideMiddleware);
 
 ...
+
 $app->run();
 ```

@@ -79,9 +79,9 @@ and Response objects. These objects represent the actual HTTP request received
 by the web server and the eventual HTTP response returned to the client.
 
 Every Slim app route is given the current Request and Response objects as arguments
-to its callback routine. These objects implement the popular [PSR 7](/docs/v3/concepts/value-objects.html) interfaces. The Slim app route can inspect
+to its callback routine. These objects implement the popular [PSR-7](/docs/v3/concepts/value-objects.html) interfaces. The Slim app route can inspect
 or manipulate these objects as necessary. Ultimately, each Slim app route
-**MUST** return a PSR 7 Response object.
+**MUST** return a PSR-7 Response object.
 
 ## Bring your own components
 

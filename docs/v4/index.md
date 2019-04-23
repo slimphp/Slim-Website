@@ -54,7 +54,7 @@ example application:
 
 <figure markdown="1">
 ```php
-use Slim\AppFactory;
+use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Middleware\RoutingMiddleware;
 
@@ -64,7 +64,6 @@ use Slim\Middleware\RoutingMiddleware;
  * In order for the factory to work you need to ensure you have installed
  * a supported PSR-7 implementation of your choice e.g.: Slim PSR-7 and a supported
  * ServerRequest creator (included with Slim PSR-7)
- *
  */
 $app = AppFactory::create();
 
@@ -75,13 +74,12 @@ $app->add($routingMiddleware);
 
 /** 
  * Add Error Handling Middleware
- 
  * The constructor of `ErrorMiddleware` takes in 5 parameters
- * @param CallableResolverInterface $callableResolver -> CallableResolver implementation of your choice
- * @param ResponseFactoryInterface $responseFactory -> ResponseFactory implementation of your choice
- * @param bool $displayErrorDetails -> Should be set to false in production
- * @param bool $logErrors -> Parameter is passed to the default ErrorHandler
- * @param bool $logErrorDetails -> Display error details in error log
+ * @param CallableResolverInterface $callableResolver - CallableResolver implementation of your choice
+ * @param ResponseFactoryInterface $responseFactory - ResponseFactory implementation of your choice
+ * @param bool $displayErrorDetails - Should be set to false in production
+ * @param bool $logErrors - Parameter is passed to the default ErrorHandler
+ * @param bool $logErrorDetails - Display error details in error log
  */ 
 $callableResolver = $app->getCallableResolver();
 $responseFactory = $app->getResponseFactory();
@@ -106,9 +104,9 @@ and Response objects. These objects represent the actual HTTP request received
 by the web server and the eventual HTTP response returned to the client.
 
 Every Slim app route is given the current Request and Response objects as arguments
-to its callback routine. These objects implement the popular [PSR 7](/docs/v4/concepts/value-objects.html) interfaces. The Slim app route can inspect
+to its callback routine. These objects implement the popular [PSR-7](/docs/v4/concepts/value-objects.html) interfaces. The Slim app route can inspect
 or manipulate these objects as necessary. Ultimately, each Slim app route
-**MUST** return a PSR 7 Response object.
+**MUST** return a PSR-7 Response object.
 
 ## Bring your own components
 

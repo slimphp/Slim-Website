@@ -10,10 +10,10 @@ this section, we provide some notes for various set-ups.
 
 ### Disable error display in production
 ```php
-use Slim\App;
+use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 
-$app = new App();
+$app = AppFactory::create();
 
 ...
 
@@ -22,7 +22,8 @@ $app = new App();
  * Ensure that you set the second parameter `displayErrorDetails` to false
  */ 
 $callableResolver = $app->getCallableResolver();
-$errorMiddleware = new ErrorMiddleware($callableResolver, false, true, true);
+$responseFactory = $app->getResponseFactory();
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, false, true, true);
 $app->add($errorMiddleware);
 
 ...
@@ -36,8 +37,6 @@ errors with the `php.ini` setting:
 display_errors = 0
 ```
 
-
-
 ## Deploying to your own server
 
 If you control your server, then you should set up a deployment process using any 
@@ -47,9 +46,7 @@ one of the many deployment system such as:
 * Capistrano
 * Script controlled with Phing, Make, Ant, etc.
 
-
 Review the [Web Servers](/docs/v4/start/web-servers.html) documentation to configure your webserver.
-
 
 ## Deploying to a shared server
 

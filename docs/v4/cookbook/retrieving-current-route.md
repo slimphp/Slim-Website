@@ -10,10 +10,7 @@ From there you can get the route's name by using `getName()` or get the methods 
 
 Example:
 ```php
-use Slim\App;
-use Slim\Exception\NotFoundException;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Factory\AppFactory;
 
 $app = new App([
     'settings' => [
