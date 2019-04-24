@@ -53,37 +53,41 @@ This example middleware is a Closure.
 
 ```php
 <?php
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
 /**
  * Example middleware closure
  *
- * @param  Psr\Http\Message\ServerRequestInterface $request PSR-7 request
- * @param  Psr\Http\Server\RequestHandlerInterface $handler PSR-15 request handler
+ * @param  ServerRequest  $request PSR-7 request
+ * @param  RequestHandler $handler PSR-15 request handler
  *
- * @return Psr\Http\Message\ResponseInterface
+ * @return Response
  */
-$beforeMiddleware = function ($request, $handler) {
+$beforeMiddleware = function (Request $request, RequestHandler $handler) {
     $response = new Response();
     $response->getBody()->write('BEFORE');
-    
     return $response;
 };
 
 $afterMiddleware function ($request, $handler) {
     $response = $handler->handle($request);
     $response->getBody()->write('AFTER');
-
     return $response;
 };
 
 $app->add($beforeMiddleware);
 $app->add($afterMiddleware);
+
+...
+
+$app->run();
 ```
 
 ### Invokable class middleware example
@@ -92,8 +96,8 @@ This example middleware is an invokable class that implements the magic **__invo
 
 ```php
 <?php
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Psr7\Response;
 
 class ExampleBeforeMiddleware
@@ -101,16 +105,15 @@ class ExampleBeforeMiddleware
     /**
      * Example middleware invokable class
      *
-     * @param  Psr\Http\Message\ServerRequestInterface $request PSR-7 request
-     * @param  Psr\Http\Server\RequestHandlerInterface $handler PSR-15 request handler
+     * @param  ServerRequest  $request PSR-7 request
+     * @param  RequestHandler $handler PSR-15 request handler
      *
-     * @return Psr\Http\Message\ResponseInterface
+     * @return Response
      */
-    public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function __invoke(Request $request, RequestHandler $handler): Response
     {
         $response = new Response();
         $response->getBody()->write('BEFORE');
-        
         return $response;
     }
 }
@@ -118,38 +121,51 @@ class ExampleBeforeMiddleware
 
 ```php
 <?php
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+
 class ExampleAfterMiddleware
 {
     /**
      * Example middleware invokable class
      *
-     * @param  Psr\Http\Message\ServerRequestInterface $request PSR-7 request
-     * @param  Psr\Http\Server\RequestHandlerInterface $handler PSR-15 request handler
+     * @param  ServerRequest  $request PSR-7 request
+     * @param  RequestHandler $handler PSR-15 request handler
      *
-     * @return Psr\Http\Message\ResponseInterface
+     * @return Response
      */
-    public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function __invoke(Request $request, RequestHandler $handler): Response
     {
         $response = $handler->handle($request);
         $response->getBody()->write('AFTER');
-    
         return $response;
     }
 }
 ```
 
-To use these classes as a middleware, you can use **->add(new ExampleMiddleware());** function chain after the **$app**, **Route**,  or **group()**, which in the code below, any one of these, could represent $subject.
+To use these classes as a middleware, you can use **add(new ExampleMiddleware());** function chain after the **$app** route mapping methods **get(), post(), put(), patch(), delete(), options(), any()**  or **group()**, which in the code below, any one of these, could represent $subject.
 
 ```php
 <?php
 use Slim\Factory\AppFactory;
 
+require __DIR__ . '/vendor/autoload.php';
+
 $app = AppFactory::create();
 
-$app->add(new ExampleBeforeMiddleware());
-$app->add(new ExampleAfterMiddleware());
+// Add Middleware On App
+$app->add(new ExampleMiddleware());
+
+// Add Middleware On Route
+$app->get('/', function () { ... })->add(new ExampleMiddleware());
+
+// Add Middleware On Group
+$app->group('/', function () { ... })->add(new ExampleMiddleware());
+
+...
+
+$app->run();
 ```
 
 ## How do I add middleware?
@@ -162,27 +178,29 @@ Application middleware is invoked for every **incoming** HTTP request. Add appli
 
 ```php
 <?php
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
+use Slim\Psr7\Response;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->add(function ($request, $handler) {
+$app->add(function (Request $request, RequestHandler $handler) {
     $response = new Response();
     $response->getBody()->write('BEFORE');
-    
     return $response;
 });
 
-$app->add(function ($request, $handler) {
+$app->add(function (Request $request, RequestHandler $handler) {
     $response = $handler->handle($request);
     $response->getBody()->write('AFTER');
-
     return $response;
 });
 
-$app->get('/', function ($request, $response, $args) {
+$app->get('/', function (Request $request, Response $response, $args) {
 	$response->getBody()->write('Hello World');
-
 	return $response;
 });
 
@@ -191,7 +209,7 @@ $app->run();
 
 This would output this HTTP response body:
 
-```text
+```bash
 BEFORE Hello AFTER
 ```
 
@@ -201,20 +219,23 @@ Route middleware is invoked _only if_ its route matches the current HTTP request
 
 ```php
 <?php
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
+use Slim\Psr7\Response;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->add(function ($request, $handler) {
+$app->add(function (Request $request, RequestHandler $handler) {
     $response = new Response();
     $response->getBody()->write('World');
-    
     return $response;
 });
 
-$app->get('/', function ($request, $response, $args) {
+$app->get('/', function (Request $request, Response $response, $args) {
 	$response->getBody()->write('Hello World');
-
 	return $response;
 })->add($mw);
 
@@ -223,7 +244,9 @@ $app->run();
 
 This would output this HTTP response body:
 
+```bash
 Hello World
+```
 
 ### Group Middleware
 
@@ -232,23 +255,29 @@ In addition to the overall application, and standard routes being able to accept
 Sample Application, making use of callback middleware on a group of url-handlers
 ```php
 <?php
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
+use Slim\Routing\RouteCollectorProxy;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->get('/', function ($request, $response) {
+$app->get('/', function (Request $request, Response $response) {
     return $response->getBody()->write('Hello World');
 });
 
-$app->group('/utils', function () use ($app) {
-    $app->get('/date', function ($request, $response) {
+$app->group('/utils', function (RouteCollectorProxy $group) {
+    $group->get('/date', function (Request $request, Response $response) {
         return $response->getBody()->write(date('Y-m-d H:i:s'));
     });
-    $app->get('/time', function ($request, $response) {
+    
+    $group->get('/time', function (Request $request, Response $response) {
         return $response->getBody()->write(time());
     });
-})->add(function ($request, $handler) {
+})->add(function (Request $request, RequestHandler $handler) {
     $response = $handler->handle($request);
     $dateOrTime = (string) $response->getBody();
     
@@ -261,19 +290,19 @@ $app->group('/utils', function () use ($app) {
 
 When calling the **/utils/date** method, this would output a string similar to the below
 
-```text
+```bash
 It is now 2015-07-06 03:11:01. Enjoy!
 ```
 
-visiting **/utils/time** would output a string similar to the below
+Visiting **/utils/time** would output a string similar to the below
 
-```text
+```bash
 It is now 1436148762. Enjoy!
 ```
 
-but visiting **/** *(domain-root)*, would be expected to generate the following output as no middleware has been assigned
+But visiting **/** *(domain-root)*, would be expected to generate the following output as no middleware has been assigned
 
-```text
+```bash
 Hello World
 ```
 

@@ -9,8 +9,11 @@ If you were using `determineRouteBeforeAppMiddleware`, you need to add the `Midd
 
 ## Usage
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\RoutingMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 

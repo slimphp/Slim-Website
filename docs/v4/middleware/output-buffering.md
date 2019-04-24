@@ -6,10 +6,13 @@ The Output Buffering Middleware enables you to switch between two modes of outpu
 
 ## Usage
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\OutputBufferingMiddleware;
 
-$app = AppFactory::create()
+require __DIR__ . '/vendor/autoload.php';
+
+$app = AppFactory::create();
 
 /**
  * The two modes available are

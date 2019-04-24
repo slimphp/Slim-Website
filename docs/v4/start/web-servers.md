@@ -23,7 +23,7 @@ If you are not using `index.php` as your entry point then change appropriately.
 Ensure your `.htaccess` and `index.php` files are in the same
 public-accessible directory. The `.htaccess` file should contain this code:
 
-```
+```bash
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -32,7 +32,7 @@ RewriteRule ^ index.php [QSA,L]
 
 This `.htaccess` file requires URL rewriting. Make sure to enable Apache's mod_rewrite module and your virtual host is configured with the `AllowOverride` option so that the `.htaccess` rewrite rules can be used:
 
-```
+```bash
 AllowOverride All
 ```
 
@@ -45,7 +45,7 @@ is running on port 9000. You should update the `server_name`, `error_log`,
 is the path to your application's public document root directory; your Slim app's
 `index.php` front-controller file should be in this directory.
 
-```
+```bash
 server {
     listen 80;
     server_name example.com;
@@ -74,7 +74,7 @@ server {
 
 Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the `SourceRoot` setting to point to your Slim app's document root directory.
 
-```
+```bash
 Server {
     SourceRoot = /path/to/public/directory
 }
@@ -87,11 +87,11 @@ VirtualHost {
     * {
         Pattern = .*
         RewriteRules {
-                * {
-                        pattern = ^(.*)$
-                        to = index.php/$1
-                        qsa = true
-                }
+            * {
+                pattern = ^(.*)$
+                to = index.php/$1
+                qsa = true
+            }
         }
     }
 }
@@ -101,7 +101,7 @@ VirtualHost {
 
 Ensure the `Web.config` and `index.php` files are in the same public-accessible directory. The `Web.config` file should contain this code:
 
-```xml
+```bash
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <system.webServer>
@@ -125,7 +125,7 @@ Ensure the `Web.config` and `index.php` files are in the same public-accessible 
 
 Your lighttpd configuration file should contain this code (along with other settings you may need). This code requires lighttpd >= 1.4.24.
 
-```
+```bash
 url.rewrite-if-not-file = ("(.*)" => "/index.php/$0")
 ```
 

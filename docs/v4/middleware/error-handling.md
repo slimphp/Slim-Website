@@ -6,9 +6,12 @@ Things go wrong. You can't predict errors, but you can anticipate them. Each Sli
 
 ## Usage
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Middleware\RoutingMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -44,9 +47,12 @@ $app->run();
 ## Adding Custom Error Handlers
 You can now map custom handlers for any type of Exception or Throwable
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Psr7\Response;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -60,7 +66,7 @@ $handler = function ($request, $exception, $displayErrorDetails, $logErrors, $lo
     $response = new Response();
     $response->getBody()->write($payload);
     
-    return $response'
+    return $response;
 }
 
 $errorMiddleware->setErrorHandler(MyNamedException::class, $handler);
@@ -75,6 +81,7 @@ $app->run();
 If you would like to pipe in custom error logging to the default **ErrorHandler** that ships with Slim you can simply extend it and stub the **logError()** method.
 
 ```php
+<?php
 namespace MyApp\Handlers;
 
 use Slim\Handlers\ErrorHandler;
@@ -88,15 +95,19 @@ class MyErrorHandler extends ErrorHandler {
 ```
 
 ```php
+<?php
 use MyApp\Handlers\MyErrorHandler;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 
+require __DIR__ . '/vendor/autoload.php';
+
 $app = AppFactory::create();
 $callableResolver = $app->getCallableResolver();
+$responseFactory = $app->getResponseFactory();
 
 $myErrorHandler = new MyErrorHandler(true); // Constructor parameter is $logErrors (bool)
-$errorMiddleware = new ErrorMiddleware($callableResolver, true, true, true);
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
 $errorMiddleware->setDefaultErrorHandler($myErrorHandler);
 $app->add($errorMiddleware);
 
@@ -109,15 +120,23 @@ $app->run();
 The rendering is finally decoupled from the handling. Everything still works the way it previously did. It will still detect the content-type and render things appropriately with the help of **ErrorRenderers**. The core **ErrorHandler** extends the **AbstractErrorHandler** class which has been completely refactored. By default it will call the appropriate **ErrorRenderer** for the supported content types. Someone can now provide their custom error renderer by extending the **AbstractErrorHandler** class and overloading the protected **renderer** variable from the parent. 
 
 ```php
-class MyCustomErrorRenderer extends \Slim\Handlers\AbstractErrorRenderer
+<?php
+use Slim\Error\Renderers\AbstractErrorRenderer;
+
+class MyCustomErrorRenderer extends AbstractErrorRenderer
 {
     public function render()
     {
         return 'My awesome format';
     }
 }
+```
 
-class MyCustomErrorHandler extends \Slim\Handlers\ErrorHandler
+```php
+<?php
+use Slim\Handlers\ErrorHandler;
+
+class MyCustomErrorHandler extends ErrorHandler
 {
     protected $renderer = MyCustomErrorRenderer::class;
 }

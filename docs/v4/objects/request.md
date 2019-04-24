@@ -17,9 +17,11 @@ first argument to the route callback like this:
 <figure markdown="1">
 ```php
 <?php
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -39,10 +41,12 @@ as the first argument of the middleware callable like this:
 <figure markdown="1">
 ```php
 <?php
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -85,7 +89,7 @@ There are two ways to override the HTTP request method. You can include a
 **application/x-www-form-urlencoded** content type.
 
 <figure markdown="1">
-```
+```bash
 POST /path HTTP/1.1
 Host: example.com
 Content-type: application/x-www-form-urlencoded
@@ -101,7 +105,7 @@ You can also override the HTTP request method with a custom
 content type.
 
 <figure markdown="1">
-```text
+```bash
 POST /path HTTP/1.1
 Host: example.com
 Content-type: application/json
@@ -299,7 +303,7 @@ to help you further inspect the HTTP request.
 You can detect XHR requests by checking if the header **X-Requested-With** is **XMLHttpRequest** using the Request's **getHeaderLine()** method.
 
 <figure markdown="1">
-```
+```bash
 POST /path HTTP/1.1
 Host: example.com
 Content-type: application/x-www-form-urlencoded

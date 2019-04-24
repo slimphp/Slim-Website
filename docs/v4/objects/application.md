@@ -6,10 +6,12 @@ The Application **Slim\App** is the entry point to your Slim application and is 
 
 ```php
 <?php
-require __DIR__ . '/../vendor/autoload.php';
-    
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\App;
 use Slim\Middleware\ErrorMiddleware;
+
+require __DIR__ . '/../vendor/autoload.php';
 
 // Instantiate app
 $app = AppFactory::create();
@@ -21,7 +23,7 @@ $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, $dis
 $app->add($errorMiddleware);
 
 // Add route callbacks
-$app->get('/', function ($request, $response, $args) {
+$app->get('/', function (Request $request, Response $response, $args) {
     $response->getBody()->write('Hello World');
     return $response;
 });
@@ -30,14 +32,12 @@ $app->get('/', function ($request, $response, $args) {
 $app->run();
 ```
 
-## Notices and Warnings Handling
+## Advanced Notices and Warnings Handling
 
 **Warnings** and **Notices** are not caught by default. If you wish your application to display an error page when they happen, you will need to implement code similar to the following **index.php**.
 
 ```php
 <?php
-require __DIR__ . '/../vendor/autoload.php';
-    
 use MyApp\Handlers\ErrorHandler;
 use MyApp\Handlers\ShutdownHandler;
 use Slim\Exception\HttpInternalServerErrorException;
@@ -45,6 +45,8 @@ use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\Middleware\RoutingMiddleware;
 use Slim\Middleware\ErrorMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 // Set that to your needs
 $displayErrorDetails = true;
@@ -71,7 +73,7 @@ $app->add($errorMiddleware);
 $app->run();
 ```
 
-## Example of a Custom ErrorHandler
+## Advanced Custom Error Handler
 ```php
 <?php
 namespace MyApp\Handlers;
@@ -150,19 +152,20 @@ class HttpErrorHandler extends ErrorHandler
 }
 ```
 
-## Example of a Custom Shutdown Handler
+## Advanced Shutdown Handler
 ```php
 <?php
 namespace MyApp\Handlers;
 
-use ERPMS\Application\ResponseEmitter\ResponseEmitter;
+use MyApp\Handlers\HttpErrorHandler;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpInternalServerErrorException;
+use Slim\ResponseEmitter;
 
 class ShutdownHandler
 {
     /**
-     * @var ServerRequestInterface
+     * @var Request
      */
     private $request;
 
@@ -179,15 +182,11 @@ class ShutdownHandler
     /**
      * ShutdownHandler constructor.
      *
-     * @param ServerRequestInterface    $request
-     * @param $errorHandler             $errorHandler
-     * @param bool                      $displayErrorDetails
+     * @param Request           $request
+     * @param HttpErrorHandler  $errorHandler
+     * @param bool              $displayErrorDetails
      */
-    public function __construct(
-        ServerRequestInterface $request,
-        HttpErrorHandler $errorHandler,
-        bool $displayErrorDetails
-    ) {
+    public function __construct(Request $request, HttpErrorHandler $errorHandler, bool $displayErrorDetails) {
         $this->request = $request;
         $this->errorHandler = $errorHandler;
         $this->displayErrorDetails = $displayErrorDetails;
@@ -228,6 +227,7 @@ class ShutdownHandler
             $exception = new HttpInternalServerErrorException($this->request, $message);
             $response = $this->errorHandler->__invoke($this->request, $exception, $this->displayErrorDetails, false, false);
             
+            ob_clean();
             $responseEmitter = new ResponseEmitter();
             $responseEmitter->emit($response);
         }

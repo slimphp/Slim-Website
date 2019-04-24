@@ -27,7 +27,7 @@ to start using Slim.
 
 ```php
 <?php
-require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 ```
 
 ## Step 3: Install a PSR-7 Implementation and ServerRequest Creator

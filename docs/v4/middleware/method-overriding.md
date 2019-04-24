@@ -6,9 +6,12 @@ The Method Overidding Middleware enables you to use the `X-Http-Method-Override`
 
 ## Usage
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\MethodOverrideMiddleware;
 use Slim\Middleware\RoutingMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 

@@ -38,6 +38,7 @@ $app->add(function ($request, $handler) {
 Add the following route as the last route:
 
 ```php
+<?php
 use Slim\Exception\HttpNotFoundException;
 
 /*
@@ -57,8 +58,11 @@ The following middleware can be used to query Slim's router and get a list of me
 Here is a complete example application:
 
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\RoutingMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 

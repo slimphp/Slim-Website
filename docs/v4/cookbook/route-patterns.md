@@ -9,10 +9,13 @@ For GET requests a permanent redirect is fine, but for other request methods lik
 If you want to redirect/rewrite all URLs that end in a `/` to the non-trailing `/` equivalent, then you can add this middleware:
 
 ```php
+<?php
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface RequestHandler;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 

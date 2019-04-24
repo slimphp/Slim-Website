@@ -73,8 +73,11 @@ If you were using **determineRouteBeforeAppMiddleware**, you need to add the **M
 See [Pull Request #2288](https://github.com/slimphp/Slim/pull/2288) for more information
 
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\RoutingMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -83,6 +86,7 @@ $routingMiddleware = new RoutingMiddleware($routeResolver);
 $app->add($routingMiddleware);
 
 ...
+
 $app->run();
 ```
 
@@ -91,9 +95,12 @@ Error handling has also been implemented as middleware.
 For custom handlers, logging and more see full documentation [here](/docs/handlers/error.html).
 See [Pull Request #2398](https://github.com/slimphp/Slim/pull/2398) for more information
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Middleware\RoutingMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -124,6 +131,7 @@ $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true
 $app->add($errorMiddleware);
 
 ...
+
 $app->run();
 ```
 
@@ -132,21 +140,29 @@ We created a wrapper around the FastRoute dispatcher which adds a result wrapper
 The Request attribute `routeInfo` is now deprecated and replaced with `routingResults`.
 See [Pull Request #2405](https://github.com/slimphp/Slim/pull/2405) for more information
 ```php
+<?php
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->get('/foo', function (Request $request, Response $response) {
+$app->get('/hello/{name}', function (Request $request, Response $response) {
     $routingResults = $request->getAttribute('routingResults');
-    $uri = $routingResults->getUri();
-    $method = $routingResults->getMethod();
+    
+    // Get all of the route's parsed arguments e.g. ['name' => 'John']
     $routeArguments = $routingResults->getRouteArguments();
     
     // A route's allowed methods are available at all times now and not only when an error arises like in Slim 3
     $allowedMethods = $routingResults->getAllowedMethods();
+    
+    return $response;
 });
 
 ...
+
 $app->run();
 ```
 
@@ -154,8 +170,11 @@ $app->run();
 If you were overriding the HTTP method using either the custom header or the body param, you need to add the `Middleware\MethodOverrideMiddleware` middleware to be able to override the method like before.
 See [Pull Request #2329](https://github.com/slimphp/Slim/pull/2329) for more information
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\MethodOverridingMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -163,6 +182,7 @@ $methodOverridingMiddleware = new MethodOverridingMiddleware();
 $app->add($methodOverridingMiddleware);
 
 ...
+
 $app->run();
 ```
 
@@ -170,8 +190,11 @@ $app->run();
 ## New Content Length Middleware
 The Content Length Middleware will automatically append a `Content-Length` header to the response. This is to replace the `addContentLengthHeader` setting that was removed from Slim 3. This middleware should be placed on the center of the middleware stack so it gets executed last.
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ContentLengthMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -179,14 +202,18 @@ $contentLengthMiddleware = new ContentLengthMiddleware();
 $app->add($contentLengthMiddleware);
 
 ...
+
 $app->run();
 ```
 
 ## New Output Buffering Middleware
 The Output Buffering Middleware enables you to switch between two modes of output buffering: `APPEND` (default) and `PREPEND` mode. The `APPEND` mode will use the existing response body to append the content while `PREPEND` mode will create a new response body and append it to the existing response. This middleware should be placed on the center of the middleware stack so it gets executed last.
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\OutputBufferingMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -199,5 +226,6 @@ $mode = OutputBufferingMiddleware::APPEND;
 $outputBufferingMiddleware = new OutputBufferingMiddleware($mode);
 
 ...
+
 $app->run();
 ```

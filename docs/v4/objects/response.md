@@ -17,9 +17,11 @@ second argument to the route callback like this:
 <figure markdown="1">
 ```php
 <?php
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -235,7 +237,9 @@ instance of **Psr\Http\Message\StreamInterface**.
 
 <figure markdown="1">
 ```php
-$newStream = new \GuzzleHttp\Psr7\LazyOpenStream('/path/to/file', 'r');
+use GuzzleHttp\Psr7\LazyOpenStream;
+
+$newStream = new LazyOpenStream('/path/to/file', 'r');
 $newResponse = $oldResponse->withBody($newStream);
 ```
 <figcaption>Figure 14: Replace the HTTP response body</figcaption>

@@ -4,14 +4,14 @@ title: PSR-7 and Value Objects
 
 Slim supports [PSR-7](https://github.com/php-fig/http-message) interfaces for
 its Request and Response objects. This makes Slim flexible because it can
-use _any_ PSR-7 implementation. For example, you could return an instance of **\GuzzleHttp\Psr7\CachingStream** or any instance
-returned by the **\GuzzleHttp\Psr7\stream_for()** function.
+use _any_ PSR-7 implementation. For example, you could return an instance of **GuzzleHttp\Psr7\CachingStream** or any instance
+returned by the **GuzzleHttp\Psr7\stream_for()** function.
 
 Slim provides its own PSR-7 implementation so that it works out of the box. However,
 you are free to replace Slim's default PSR-7 objects with a third-party implementation.
 Just override the application container's **request** and **response** services so
-they return an instance of **\Psr\Http\Message\ServerRequestInterface** and
-**\Psr\Http\Message\ResponseInterface**, respectively.
+they return an instance of **Psr\Http\Message\ServerRequestInterface** and
+**Psr\Http\Message\ResponseInterface**, respectively.
 
 ## Value objects
 
@@ -28,17 +28,18 @@ cloned value object with the new HTTP header.
 
 ```php
 <?php
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
 $app->get('/foo', function (Request $request, Response $response, $args) {
-    return $response->withHeader(
-        'Content-Type',
-        'application/json'
-    );
+    $payload = json_encode(['hello' => 'world'], JSON_PRETTY_PRINT);
+    $response->getBody->write($payload);
+    return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->run();

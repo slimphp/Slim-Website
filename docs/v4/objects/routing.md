@@ -19,9 +19,6 @@ application's **get()** method. It accepts two arguments:
 2. The route callback
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->get('/books/{id}', function ($request, $response, $args) {
     // Show book identified by $args['id']
 });
@@ -36,9 +33,6 @@ application's **post()** method. It accepts two arguments:
 2. The route callback
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->post('/books', function ($request, $response, $args) {
     // Create new book
 });
@@ -53,9 +47,6 @@ application's **put()** method. It accepts two arguments:
 2. The route callback
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->put('/books/{id}', function ($request, $response, $args) {
     // Update book identified by $args['id']
 });
@@ -70,9 +61,6 @@ application's **delete()** method. It accepts two arguments:
 2. The route callback
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->delete('/books/{id}', function ($request, $response, $args) {
     // Delete book identified by $args['id']
 });
@@ -87,9 +75,6 @@ application's **options()** method. It accepts two arguments:
 2. The route callback
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->options('/books/{id}', function ($request, $response, $args) {
     // Return response headers
 });
@@ -104,9 +89,6 @@ application's **patch()** method. It accepts two arguments:
 2. The route callback
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->patch('/books/{id}', function ($request, $response, $args) {
     // Apply changes to book identified by $args['id']
 });
@@ -120,9 +102,6 @@ You can add a route that handles all HTTP request methods with the Slim applicat
 2. The route callback
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->any('/books/[{id}]', function ($request, $response, $args) {
     // Apply changes to books or book identified by $args['id'] if specified.
     // To check which method is used: $request->getMethod();
@@ -144,9 +123,6 @@ You can add a route that handles multiple HTTP request methods with the Slim app
 3. The route callback
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->map(['GET', 'POST'], '/books', function ($request, $response, $args) {
     // Create new book or list all books
 });
@@ -174,9 +150,6 @@ There are two ways you can write content to the HTTP response. First, you can si
 If you use a **Closure** instance as the route callback, the closure's state is bound to the **Container** instance. This means you will have access to the DI container instance _inside_ of the Closure via the **$this** keyword:
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->get('/hello/{name}', function ($request, $response, $args) {
     // Use app HTTP cookie service
     $this->get('cookies')->set('name', [
@@ -197,9 +170,6 @@ the Slim application's **redirect()** method. It accepts three arguments:
 3. The HTTP status code to use (optional; **302** if unset)
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->redirect('/books', '/library', 301);
 ```
 
@@ -212,8 +182,11 @@ The route callback signature is determined by a route strategy. By default, Slim
 Here is an example of using this alternative strategy:
 
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Handlers\Strategies\RequestResponseArgs;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -230,9 +203,13 @@ $app->get('/hello/{name}', function ($request, $response, $name) {
 ```
 
 Alternatively you can set a different invocation strategy on a per route basis:
+
 ```php
+<?php
 use Slim\Factory\AppFactory;
 use Slim\Handlers\Strategies\RequestResponseArgs;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 $routeCollector = $app->getRouteCollector();
@@ -254,12 +231,9 @@ Each routing method described above accepts a URL pattern that is matched agains
 A route pattern placeholder starts with a **{**, followed by the placeholder name, ending with a **}**. This is an example placeholder named **name**:
 
 ```php
-use Slim\Factory\AppFactory;
-use Slim\Handlers\Strategies\RequestResponseArgs;
-
-$app = AppFactory::create();
-$app->get('/hello/{name}', function ($request, $response, $args) {
-    echo "Hello, " . $args['name'];
+$app->get('/hello/{name}', function (Request $request, Response $response, $args) {
+    $name = $args['name'];
+    echo "Hello, $name";
 });
 ```
 
@@ -287,9 +261,8 @@ For "Unlimited" optional parameters, you can do this:
 
 ```php
 $app->get('/news[/{params:.*}]', function ($request, $response, $args) {
-    $params = explode('/', $args['params']);
-
     // $params is an array of all the optional segments
+    $params = explode('/', $args['params']);
 });
 ```
 
@@ -337,9 +310,6 @@ The RouteParser's **urlFor()** method accepts two arguments:
 To help organize routes into logical groups, the **Slim\App** also provides a **group()** method. Each group's route pattern is prepended to the routes or groups contained within it, and any placeholder arguments in the group pattern are ultimately made available to the nested routes:
 
 ```php
-use Slim\Factory\AppFactory;
-
-$app = AppFactory::create();
 $app->group('/users/{id:[0-9]+}', function (RouteCollectorProxy $group) {
     $group->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
         // Find, delete, patch or replace user identified by $args['id']
@@ -378,7 +348,10 @@ You can also attach middleware to any route or route group. [Learn more](/docs/v
 
 It's possible to enable router cache via **RouteCollector::setCacheFile()**. See examples below:
 ```php
+<?php
 use Slim\Factory\AppFactory;
+
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -399,10 +372,10 @@ You are not limited to defining a function for your routes. In Slim there are a 
 
 In addition to a function, you may use:
 
- - **container_key:method**
- - **Class:method**
- - An invokable class
- - **container_key**
+ - container_key:method
+ - Class:method
+ - Class implementing **__invoke()** method
+ - container_key
 
 This functionality is enabled by Slim's Callable Resolver Class. It translates a string entry into a function call.
 Example:
@@ -427,6 +400,8 @@ Create a controller with the **home** action method. The constructor should acce
 the dependencies that are required. For example:
 
 ```php
+<?php
+
 class HomeController
 {
     protected $view;
@@ -434,6 +409,7 @@ class HomeController
     public function __construct(\Slim\Views\Twig $view) {
         $this->view = $view;
     }
+    
     public function home($request, $response, $args) {
       // your code here
       // use $this->view to render the HTML
@@ -463,6 +439,7 @@ will pass the container's instance to the constructor. You can construct control
 with many actions instead of an invokable class which only handles one action.
 
 ```php
+<?php
 use Psr\Container\ContainerInterface;
 
 class HomeController
@@ -500,7 +477,8 @@ $app->get('/contact', \HomeController::class . ':contact');
 You do not have to specify a method in your route callable and can just set it to be an invokable class such as:
 
 ```php
-use Psr\Container\ContainerInterface
+<?php
+use Psr\Container\ContainerInterface;
 
 class HomeAction
 {

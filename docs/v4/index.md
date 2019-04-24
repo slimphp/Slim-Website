@@ -8,14 +8,6 @@ title: Slim 4 Documentation
     </p>
 </div>
 
-<p style="text-align: center;">
-    <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-        <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
-    </a>
-    <br />
-    This website and documentation is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
-</p>
-
 ## Welcome
 
 Slim is a PHP micro framework that helps you
@@ -55,10 +47,8 @@ example application:
 <figure markdown="1">
 ```php
 <?php
-declare(strict_types=1);
-
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Middleware\RoutingMiddleware;
@@ -134,6 +124,15 @@ to the appropriate section.
 This documentation begins by explaining Slim's concepts and architecture
 before venturing into specific topics like request and response handling,
 routing, and error handling.
+
+## Documentation License
+<p style="text-align: left;">
+    This website and documentation is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+    <br />
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+        <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
+    </a>
+</p>
 
 [symfony]: https://symfony.com/
 [laravel]: https://laravel.com/
