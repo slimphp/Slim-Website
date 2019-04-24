@@ -22,14 +22,6 @@ dependencies into your project's **vendor/** directory.
 composer require slim/slim "^4.0"
 ```
 
-Require the Composer autoloader into your PHP script, and you are ready
-to start using Slim.
-
-```php
-<?php
-require __DIR__ . '/vendor/autoload.php';
-```
-
 ## Step 3: Install a PSR-7 Implementation and ServerRequest Creator
 
 Before you can get up and running with Slim you will need to choose a PSR-7 implementation that best fits your application.
@@ -53,4 +45,23 @@ composer require guzzlehttp/psr7 http-interop/http-factory-guzzle
 ### [Zend Diactoros](https://github.com/zendframework/zend-diactoros)
 ```bash
 zendframework/zend-diactoros
+```
+
+## Step 4: Hello World
+```php
+<?php
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
+
+require __DIR__ . '/vendor/autoload.php.';
+
+$app = AppFactory::create();
+
+$app->get('/', function (Request $request, Response $response, $args) {
+    $response->getBody()->write("Hello world!");
+    return $response;
+});
+
+$app->run();
 ```
