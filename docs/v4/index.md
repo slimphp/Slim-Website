@@ -54,9 +54,16 @@ example application:
 
 <figure markdown="1">
 ```php
+<?php
+declare(strict_types=1);
+
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Middleware\RoutingMiddleware;
+
+require __DIR__ . '/vendor/autoload.php';
 
 /**
  * Instantiate App
@@ -75,6 +82,7 @@ $app->add($routingMiddleware);
 /** 
  * Add Error Handling Middleware
  * The constructor of `ErrorMiddleware` takes in 5 parameters
+ *
  * @param CallableResolverInterface $callableResolver - CallableResolver implementation of your choice
  * @param ResponseFactoryInterface $responseFactory - ResponseFactory implementation of your choice
  * @param bool $displayErrorDetails - Should be set to false in production
@@ -87,8 +95,10 @@ $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true
 $app->add($errorMiddleware);
 
 // Define app routes
-$app->get('/hello/{name}', function ($request, $response, $args) {
-    return $response->write("Hello " . $args['name']);
+$app->get('/hello/{name}', function (Request $request, Response $response, $args) {
+    $name = $args['name'];
+    $response->getBody()->write("Hello, $name");
+    return $response;
 });
 
 // Run app
