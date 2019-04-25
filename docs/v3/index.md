@@ -8,14 +8,6 @@ title: Slim 3 Documentation
     </p>
 </div>
 
-<p style="text-align: center;">
-    <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-        <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
-    </a>
-    <br />
-    This website and documentation is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
-</p>
-
 ## Welcome
 
 Slim is a PHP micro framework that helps you
@@ -79,9 +71,9 @@ and Response objects. These objects represent the actual HTTP request received
 by the web server and the eventual HTTP response returned to the client.
 
 Every Slim app route is given the current Request and Response objects as arguments
-to its callback routine. These objects implement the popular [PSR 7](/docs/v3/concepts/value-objects.html) interfaces. The Slim app route can inspect
+to its callback routine. These objects implement the popular [PSR-7](/docs/v3/concepts/value-objects.html) interfaces. The Slim app route can inspect
 or manipulate these objects as necessary. Ultimately, each Slim app route
-**MUST** return a PSR 7 Response object.
+**MUST** return a PSR-7 Response object.
 
 ## Bring your own components
 
@@ -99,6 +91,15 @@ to the appropriate section.
 This documentation begins by explaining Slim's concepts and architecture
 before venturing into specific topics like request and response handling,
 routing, and error handling.
+
+## Documentation License
+<p style="text-align: left;">
+    This website and documentation is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+    <br />
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+        <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
+    </a>
+</p>
 
 [symfony]: https://symfony.com/
 [laravel]: https://laravel.com/

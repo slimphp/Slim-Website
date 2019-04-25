@@ -10,33 +10,36 @@ this section, we provide some notes for various set-ups.
 
 ### Disable error display in production
 ```php
-use Slim\App;
+<?php
+use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 
-$app = new App();
+require __DIR__ . '/vendor/autoload.php';
+
+$app = AppFactory::create();
 
 ...
 
 /**
- * If you are using the pre-packaged Error Middleware
- * Ensure that you set the second parameter `displayErrorDetails` to false
+ * If you are using the pre-packaged ErrorMiddleware
+ * Ensure that you set the third parameter of ErrorMiddleware's constructor to false
  */ 
 $callableResolver = $app->getCallableResolver();
-$errorMiddleware = new ErrorMiddleware($callableResolver, false, true, true);
+$responseFactory = $app->getResponseFactory();
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, false, true, true);
 $app->add($errorMiddleware);
 
 ...
+
 $app->run();
 ```
 
 You should also ensure that your PHP installation is configured to not display
 errors with the `php.ini` setting:
 
-```ini
+```bash
 display_errors = 0
 ```
-
-
 
 ## Deploying to your own server
 
@@ -47,9 +50,7 @@ one of the many deployment system such as:
 * Capistrano
 * Script controlled with Phing, Make, Ant, etc.
 
-
 Review the [Web Servers](/docs/v4/start/web-servers.html) documentation to configure your webserver.
-
 
 ## Deploying to a shared server
 
@@ -57,7 +58,7 @@ If your shared server runs Apache, then you need to create a `.htaccess` file
 in your web server root directory (usually named `htdocs`, `public`, `public_html`
 or `www`) with the following content:
 
-```apache
+```bash
 <IfModule mod_rewrite.c>
    RewriteEngine on
    RewriteRule ^$ public/ [L]

@@ -17,7 +17,9 @@ You can read the specification here: https://www.w3.org/TR/cors/
 
 For simple CORS requests, the server only needs to add the following header to its response:
 
-`Access-Control-Allow-Origin: <domain>, ... | *`
+```bash
+Access-Control-Allow-Origin: <domain>, ... 
+```
 
 The following code should enable lazy CORS.
 
@@ -26,8 +28,8 @@ $app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
 });
 
-$app->add(function ($req, $res, $next) {
-    $response = $next($req, $res);
+$app->add(function ($request, $handler) {
+    $response = $handler->handle($request);
     return $response
             ->withHeader('Access-Control-Allow-Origin', 'http://mysite')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
@@ -38,11 +40,15 @@ $app->add(function ($req, $res, $next) {
 Add the following route as the last route:
 
 ```php
-// Catch-all route to serve a 404 Not Found page if none of the routes match
-// NOTE: make sure this route is defined last
-$app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($req, $res) {
-    $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
-    return $handler($req, $res);
+<?php
+use Slim\Exception\HttpNotFoundException;
+
+/*
+ * Catch-all route to serve a 404 Not Found page if none of the routes match
+ * NOTE: make sure this route is defined last
+ */
+$app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function ($request, $response) {
+    throw new HttpNotFoundException($request);
 });
 ```
 
@@ -54,41 +60,29 @@ The following middleware can be used to query Slim's router and get a list of me
 Here is a complete example application:
 
 ```php
-require __DIR__ . "/vendor/autoload.php";
+<?php
+use Slim\Factory\AppFactory;
+use Slim\Middleware\RoutingMiddleware;
 
-// This Slim setting is required for the middleware to work
-$app = new Slim\App([
-    "settings"  => [
-        "determineRouteBeforeAppMiddleware" => true,
-    ]
-]);
+require __DIR__ . '/vendor/autoload.php';
 
-// This is the middleware
-// It will add the Access-Control-Allow-Methods header to every request
+$app = AppFactory::create();
 
-$app->add(function($request, $response, $next) {
-    $route = $request->getAttribute("route");
-
-    $methods = [];
-
-    if (!empty($route)) {
-        $pattern = $route->getPattern();
-
-        foreach ($this->router->getRoutes() as $route) {
-            if ($pattern === $route->getPattern()) {
-                $methods = array_merge_recursive($methods, $route->getMethods());
-            }
-        }
-        //Methods holds all of the HTTP Verbs that a particular route handles.
-    } else {
-        $methods[] = $request->getMethod();
-    }
-
-    $response = $next($request, $response);
-
-
-    return $response->withHeader("Access-Control-Allow-Methods", implode(",", $methods));
+// This middleware will append the response header Access-Control-Allow-Methods with all allowed methods
+$app->add(function($request, $handler) {
+    $routingResults = $request->getAttribute('routingResults');
+    $methods = $routingResults->getAllowedMethods();
+    
+    $response = $handler->handle($request);
+    $response = $response->withHeader('Access-Control-Allow-Methods', implode(",", $methods));
+    
+    return $response;
 });
+
+// This middleware needs to be added last so the routing is performed first
+$routeResolver = $app->getRouteResolver();
+$routingMiddleware = new RoutingMiddleware($routeResolver);
+$app->add($routingMiddleware);
 
 $app->get("/api/{id}", function($request, $response, $arguments) {
 });
@@ -109,5 +103,3 @@ $app->group('/api', function () {
 
 $app->run();
 ```
-
-A big thank you to [tuupola](https://github.com/tuupola) for coming up with this!

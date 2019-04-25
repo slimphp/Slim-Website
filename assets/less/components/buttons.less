@@ -1,23 +1,25 @@
-.slim-button{
-    border: 1px solid #CCC;
-    border-radius: 6px;
+.slim-button {
+    background-color: @green;
+    border-radius: 4px;
     display: block;
     padding: @baseline/2 0;
     width: 100%;
     text-align: center;
 
-    i{
+    i {
+        color: #FFF;
         font-size: 32px;
         line-height: @baseline * 2;
     }
-    span{
+
+    span {
+        color: #FFF;
         display: block;
-        .brandonLight;
+        .latoLight;
         font-size: 18px;
     }
 
-    &:hover{
-        background-color: #F5F2F0;
+    &:hover {
         text-decoration: none;
     }
 }

@@ -6,22 +6,27 @@ Things go wrong. You can't predict errors, but you can anticipate them. Each Sli
 
 ## Usage
 ```php
-use Slim\App;
+<?php
+use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Middleware\RoutingMiddleware;
 
-$app = new App();
+require __DIR__ . '/vendor/autoload.php';
+
+$app = AppFactory::create();
 
 /*
  * The routing middleware should be added earlier than the ErrorMiddleware
  * Otherwise exceptions thrown from it will not be handled by the middleware
  */
-$routingMiddleware = new RoutingMiddleware($app->getRouter());
+$routeResolver = $app->getRouteResolver();
+$routingMiddleware = new RoutingMiddleware($routeResolver);
 $app->add($routingMiddleware);
 
-/*
- * The constructor of `ErrorMiddleware` takes in 4 parameters
- * @param CallableResolverInterface $callableResolver -> Callable Resolver Interface of your choice
+/**
+ * The constructor of ErrorMiddleware takes in 5 parameters
+ * @param CallableResolverInterface $callableResolver -> CallableResolver implementation of your choice
+ * @param ResponseFactoryInterface $responseFactory -> ResponseFactory implementation of your choice
  * @param bool $displayErrorDetails -> Should be set to false in production
  * @param bool $logErrors -> Parameter is passed to the default ErrorHandler
  * @param bool $logErrorDetails -> Display error details in error log
@@ -30,32 +35,53 @@ $app->add($routingMiddleware);
  * for middleware added after it.
  */
 $callableResolver = $app->getCallableResolver();
-$errorMiddleware = new ErrorMiddleware($callableResolver, true, true, true);
+$responseFactory = $app->getResponseFactory();
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
 $app->add($errorMiddleware);
 
 ...
+
 $app->run();
 ```
 
 ## Adding Custom Error Handlers
 You can now map custom handlers for any type of Exception or Throwable
 ```php
-...
-$callableResolver = $app->getCallableResolver();
-$errorMiddleware = new ErrorMiddleware($callableResolver, true, true, true);
+<?php
+use Slim\Factory\AppFactory;
+use Slim\Middleware\ErrorMiddleware;
+use Slim\Psr7\Response;
 
-$handler = function ($req, $res, $exception, $displayErrorDetails) {
-    return $res->withJson(['error' => 'Caught MyNamedException']);
+require __DIR__ . '/vendor/autoload.php';
+
+$app = AppFactory::create();
+
+$callableResolver = $app->getCallableResolver();
+$responseFactory = $app->getResponseFactory();
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
+
+$handler = function ($request, $exception, $displayErrorDetails, $logErrors, $logErrorDetails) {
+    $payload = ['error' => $exception->getMessage()];
+    
+    $response = new Response();
+    $response->getBody()->write($payload);
+    
+    return $response;
 }
+
 $errorMiddleware->setErrorHandler(MyNamedException::class, $handler);
 $app->add($errorMiddleware);
 
+...
+
+$app->run();
 ```
 
 ## Error Logging
 If you would like to pipe in custom error logging to the default `ErrorHandler` that ships with Slim you can simply extend it and stub the `logError()` method.
 
 ```php
+<?php
 namespace MyApp\Handlers;
 
 use Slim\Handlers\ErrorHandler;
@@ -69,19 +95,24 @@ class MyErrorHandler extends ErrorHandler {
 ```
 
 ```php
+<?php
 use MyApp\Handlers\MyErrorHandler;
-use Slim\App;
+use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 
-$app = new App();
+require __DIR__ . '/vendor/autoload.php';
+
+$app = AppFactory::create();
 $callableResolver = $app->getCallableResolver();
+$responseFactory = $app->getResponseFactory();
 
 $myErrorHandler = new MyErrorHandler(true); // Constructor parameter is $logErrors (bool)
-$errorMiddleware = new ErrorMiddleware($callableResolver, true, true, true);
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
 $errorMiddleware->setDefaultErrorHandler($myErrorHandler);
 $app->add($errorMiddleware);
 
 ...
+
 $app->run();
 ```
 
@@ -89,15 +120,23 @@ $app->run();
 The rendering is finally decoupled from the handling. Everything still works the way it previously did. It will still detect the content-type and render things appropriately with the help of `ErrorRenderers`. The core `ErrorHandler` extends the `AbstractErrorHandler` class which has been completely refactored. By default it will call the appropriate `ErrorRenderer` for the supported content types. Someone can now provide their custom error renderer by extending the `AbstractErrorHandler` class and overloading the protected `renderer` variable from the parent. 
 
 ```php
-class MyCustomErrorRenderer extends \Slim\Handlers\AbstractErrorRenderer
+<?php
+use Slim\Error\Renderers\AbstractErrorRenderer;
+
+class MyCustomErrorRenderer extends AbstractErrorRenderer
 {
     public function render()
     {
         return 'My awesome format';
     }
 }
+```
 
-class MyCustomErrorHandler extends \Slim\Handlers\ErrorHandler
+```php
+<?php
+use Slim\Handlers\ErrorHandler;
+
+class MyCustomErrorHandler extends ErrorHandler
 {
     protected $renderer = MyCustomErrorRenderer::class;
 }
@@ -107,13 +146,13 @@ class MyCustomErrorHandler extends \Slim\Handlers\ErrorHandler
 We have added named HTTP exceptions within the application. These exceptions work nicely with the native renderers. They can each have a `description` and `title` attribute as well to provide a bit more insight when the native HTML renderer is invoked. 
 
 The base class `HttpSpecializedException` extends `Exception` and comes with the following sub classes:
-- `HttpBadRequestException`
-- `HttpForbiddenException`
-- `HttpInternalServerErrorException`
-- `HttpNotAllowedException`
-- `HttpNotFoundException`
-- `HttpNotImplementedException`
-- `HttpUnauthorizedException`
+* HttpBadRequestException
+* HttpForbiddenException
+* HttpInternalServerErrorException
+* HttpNotAllowedException
+* HttpNotFoundException
+* HttpNotImplementedException
+* HttpUnauthorizedException
 
 You can extend the `HttpSpecializedException` class if they need any other response codes that we decide not to provide with the base repository. Example if you wanted a 504 gateway timeout exception that behaves like the native ones you would do the following:
 I

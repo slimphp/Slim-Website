@@ -13,25 +13,27 @@ inject the container instance into the Slim application's constructor.
 
 ```php
 <?php
+use DI\Container;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
 
-require_once __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
-$settings = [];
-$container = new \DI\Container(); // Example PHP-DI Implementation
+// Create Container using PHP-DI
+$container = new Container();
 
-// Important: The App constructor signature from Slim 3 to Slim 4 has changed
-// Slim 3 Constructor: App::__construct(ContainerInterface $container);
-// Slim 4 Constructor: App::__construct(array $settings = [], ContainerInterface $container);
-$app = new \Slim\App($settings, $container);
+// Set container to create App with on AppFactory
+AppFactory::setContainer($container);
+$app = AppFactory::create();
 ```
 
 Add a service to your container:
 
 ```php
-$container = $app->getContainer();
-$container->set('myService', function ($container) {
-    $myService = new MyService();
-    return $myService;
+$container->set('myService', function () {
+    $settings = [...];
+    return new MyService($settings);
 });
 ```
 
@@ -43,16 +45,18 @@ application route like this:
 /**
  * Example GET route
  *
- * @param  \Psr\Http\Message\ServerRequestInterface $req  PSR7 request
- * @param  \Psr\Http\Message\ResponseInterface      $res  PSR7 response
- * @param  array                                    $args Route parameters
+ * @param  ServerRequestInterface $request  PSR-7 request
+ * @param  ResponseInterface      $response  PSR-7 response
+ * @param  array                  $args Route parameters
  *
- * @return \Psr\Http\Message\ResponseInterface
+ * @return ResponseInterface
  */
-$app->get('/foo', function ($req, $res, $args) {
+$app->get('/foo', function (Request $request, Response $response, $args) {
     $myService = $this->get('myService');
 
-    return $res;
+    ...do something with $myService...
+
+    return $response;
 });
 ```
 
@@ -62,16 +66,18 @@ You can implicitly fetch services from the container like this:
 /**
  * Example GET route
  *
- * @param  \Psr\Http\Message\ServerRequestInterface $req  PSR7 request
- * @param  \Psr\Http\Message\ResponseInterface      $res  PSR7 response
- * @param  array                                    $args Route parameters
+ * @param  ServerRequestInterface $request  PSR-7 request
+ * @param  ResponseInterface      $response  PSR-7 response
+ * @param  array                  $args Route parameters
  *
- * @return \Psr\Http\Message\ResponseInterface
+ * @return ResponseInterface
  */
-$app->get('/foo', function ($req, $res, $args) {
+$app->get('/foo', function (Request $request, Response $response, $args) {
     $myService = $this->myService;
+    
+    ...do something with $myService...
 
-    return $res;
+    return $response;
 });
 ```
 
@@ -81,17 +87,16 @@ To test if a service exists in the container before using it, use the `has()` me
 /**
  * Example GET route
  *
- * @param  \Psr\Http\Message\ServerRequestInterface $req  PSR7 request
- * @param  \Psr\Http\Message\ResponseInterface      $res  PSR7 response
- * @param  array                                    $args Route parameters
+ * @param  ServerRequestInterface $request  PSR-7 request
+ * @param  ResponseInterface      $response  PSR-7 response
+ * @param  array                  $args Route parameters
  *
- * @return \Psr\Http\Message\ResponseInterface
+ * @return ResponseInterface
  */
-$app->get('/foo', function ($req, $res, $args) {
-    if($this->has('myService')) {
+$app->get('/foo', function (Request $request, Response $response, $args) {
+    if ($this->has('myService')) {
         $myService = $this->myService;
     }
-
-    return $res;
+    return $response;
 });
 ```

@@ -10,20 +10,19 @@ From there you can get the route's name by using `getName()` or get the methods 
 
 Example:
 ```php
-use Slim\App;
-use Slim\Exception\NotFoundException;
-use Slim\Http\Request;
-use Slim\Http\Response;
+<?php
+use Slim\Factory\AppFactory;
+use Slim\Middleware\RoutingMiddleware;
 
-$app = new App([
-    'settings' => [
-        // Only set this if you need access to route within middleware
-        'determineRouteBeforeAppMiddleware' => true
-    ]
-]);
+require __DIR__ . '/vendor/autoload.php';
 
-// routes...
-$app->add(function (Request $request, Response $response, callable $next) {
+$app = AppFactory::create();
+
+/*
+ * Via this middleware you could access the route and routing results
+ * from the resolved route
+ */
+$app->add(function (Request $request, RequestHandler $handler) {
     $route = $request->getAttribute('route');
 
     // return NotFound for non existent route
@@ -36,8 +35,21 @@ $app->add(function (Request $request, Response $response, callable $next) {
     $methods = $route->getMethods();
     $arguments = $route->getArguments();
 
-    // do something with that information
+    ... do something with the data ...
 
-    return $next($request, $response);
+    return $handler->handle($request);
 });
+
+/*
+ * You need to ensure that you add the RoutingMiddleware last
+ * In order for it to get executed first which will append the
+ * `route` and `routingResults` to the incoming request object
+ */
+ $routeResolver = $app->getRouteResolver();
+ $routingMiddleware = new RoutingMiddleware($routeResolver);
+ $app->add($routingMiddleware);
+ 
+ ...
+ 
+ $app->run();
 ```

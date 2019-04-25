@@ -20,6 +20,48 @@
   @media (min-width: @grid-float-breakpoint) {
     border-radius: @navbar-border-radius;
   }
+
+  @media (max-width: @grid-float-breakpoint) {
+    .navbar-logo {
+      margin: 0 !important;
+    }
+
+    .navbar-documentation-version-badge {
+      float: left !important;
+      margin: 15px 0 0 15px !important;
+    }
+  }
+
+  .navbar-logo {
+    .brandonLight;
+    background: rgba(255, 255, 255, 0.05);
+    color: @primary-green;
+    float: left;
+    font-size: 32px;
+    height: 64px;
+    line-height: 64px;
+    margin: 0 0 0 -15px;
+    text-align: center;
+    text-decoration: none;
+    width: 114px;
+
+    &:hover {
+      color: @primary-green;
+    }
+  }
+
+  .navbar-documentation-version-badge {
+    background: @primary-green;
+    border-radius: 4px;
+    color: #FFF;
+    float: right;
+    font-size: 12px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+    margin: 16px 0;
+    padding: 0 10px;
+  }
 }
 
 
@@ -49,8 +91,7 @@
 
 .navbar-collapse {
   overflow-x: visible;
-  padding-right: @navbar-padding-horizontal;
-  padding-left:  @navbar-padding-horizontal;
+  padding: 30px @navbar-padding-horizontal;
   border-top: 1px solid transparent;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
   &:extend(.clearfix all);
@@ -61,9 +102,10 @@
   }
 
   @media (min-width: @grid-float-breakpoint) {
-    width: auto;
     border-top: 0;
     box-shadow: none;
+    padding: 0 @navbar-padding-horizontal;
+    width: auto;
 
     &.collapse {
       display: block !important;
@@ -194,26 +236,26 @@
 .navbar-toggle {
   position: relative;
   float: right;
-  margin-right: @navbar-padding-horizontal;
-  padding: 9px 10px;
-  .navbar-vertical-align(34px);
+  margin: 0;
+  padding: 0;
   background-color: transparent;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   border: 1px solid transparent;
   border-radius: @border-radius-base;
+  height: 64px;
+  width: 64px;
 
-  // We remove the `outline` here, but later compensate by attaching `:hover`
-  // styles to `:focus`.
-  &:focus {
+  &:focus, &:active, &:hover {
     outline: 0;
   }
 
   // Bars
   .icon-bar {
-    display: block;
-    width: 22px;
-    height: 2px;
     border-radius: 1px;
+    display: block;
+    margin: 0 auto;
+    width: 24px;
+    height: 2px;
   }
   .icon-bar + .icon-bar {
     margin-top: 4px;
@@ -231,8 +273,6 @@
 // the nav the full height of the horizontal nav (above 768px).
 
 .navbar-nav {
-  margin: (@navbar-padding-vertical / 2) -@navbar-padding-horizontal;
-
   > li > a {
     padding-top:    10px;
     padding-bottom: 10px;
@@ -266,7 +306,8 @@
   // Uncollapse the nav
   @media (min-width: @grid-float-breakpoint) {
     float: left;
-    margin: 0;
+    margin: 0 0 0 15px;
+    padding-top: 0;
 
     > li {
       float: left;
@@ -413,6 +454,7 @@
   .navbar-nav {
     > li > a {
       color: @navbar-default-link-color;
+      transition: color 100ms ease-in;
 
       &:hover,
       &:focus {
@@ -440,6 +482,7 @@
 
   .navbar-toggle {
     border-color: @navbar-default-toggle-border-color;
+    border: 0;
     &:hover,
     &:focus {
       background-color: @navbar-default-toggle-hover-bg;

@@ -15,8 +15,8 @@ You need to make sure you have [Ruby Devkit Installed (MSYS2)](https://rubyinsta
 
 To run this site locally so that you can test your changes:
 ```
-$ sudo gem install bundler`
-$ bundle install`
+$ sudo gem install bundler
+$ bundle install
 ```
 
 Now, run the local jekyll:

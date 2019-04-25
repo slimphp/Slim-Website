@@ -6,14 +6,18 @@ The Content Length Middleware will automatically append a `Content-Length` heade
 
 ## Usage
 ```php
-use Slim\App;
+<?php
+use Slim\Factory\AppFactory;
 use Slim\Middleware\ContentLengthMiddleware;
 
-$app = new App();
+require __DIR__ . '/vendor/autoload.php';
+
+$app = AppFactory::create();
 
 $contentLengthMiddleware = new ContentLengthMiddleware();
 $app->add($contentLengthMiddleware);
 
 ...
+
 $app->run();
 ```

@@ -4,7 +4,7 @@ title: Slim Framework
 description: Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
 ---
 <header class="site-header">
-    <div class="site-title"><a href="/">Slim</a></div>
+    <div class="site-title">Slim</div>
     <div class="site-slogan">a micro framework for PHP</div>
 </header>
 <div class="row">
@@ -14,18 +14,20 @@ description: Slim is a PHP micro framework that helps you quickly write simple y
             yet powerful web applications and APIs.
         </p>
         <pre class="language-php"><code>&lt;?php
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
 
-require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
-$app = new \Slim\App;
+$app = AppFactory::create();
+
 $app-&gt;get('/hello/{name}', function (Request $request, Response $response, array $args) {
     $name = $args['name'];
     $response->getBody()->write("Hello, $name");
-
     return $response;
 });
+
 $app-&gt;run();</code></pre>
     </div>
 </div>
@@ -34,7 +36,7 @@ $app-&gt;run();</code></pre>
 
 <div class="row section">
     <div class="col-md-12">
-        <h1 class="divider"><span>Download &amp; Install</span></h1>
+        <h1 class="divider front-page-divider"><span>Download &amp; Install</span></h1>
         <p>
             We recommend you install the Slim Framework with the
             <a href="https://getcomposer.org/" target="_blank">Composer</a>
@@ -54,10 +56,10 @@ $app-&gt;run();</code></pre>
 
 <div class="row section">
     <div class="col-md-12">
-        <h1 class="divider"><span>Features</span></h1>
+        <h1 class="divider front-page-divider"><span>Features</span></h1>
         <div class="row">
-            <div class="col-md-6">
-                <h2><i class="fa fa-plane"></i> HTTP Router</h2>
+            <div class="feature col-md-6">
+                <h3><i class="fa fa-plane feature-icon"></i> HTTP Router</h3>
                 <p>
                     Slim provides a fast and powerful router that maps
                     route callbacks to specific HTTP request methods and
@@ -65,8 +67,8 @@ $app-&gt;run();</code></pre>
                 </p>
             </div>
 
-            <div class="col-md-6">
-                <h2><i class="fa fa-dot-circle-o"></i> Middleware</h2>
+            <div class="feature col-md-6">
+                <h3><i class="fa fa-dot-circle-o feature-icon"></i> Middleware</h3>
                 <p>
                     Build your application with concentric middleware to tweak
                     the HTTP request and response objects around your Slim app.
@@ -75,8 +77,8 @@ $app-&gt;run();</code></pre>
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <h2><i class="fa fa-exchange"></i> PSR-7 Support</h2>
+            <div class="feature col-md-6">
+                <h3><i class="fa fa-exchange feature-icon"></i> PSR-7 Support</h3>
                 <p>
                     Slim supports any PSR-7 HTTP message implementation
                     so you may inspect and manipulate HTTP message method,
@@ -84,8 +86,8 @@ $app-&gt;run();</code></pre>
                 </p>
             </div>
 
-            <div class="col-md-6">
-                <h2><i class="fa fa-plug"></i> Dependency Injection</h2>
+            <div class="feature col-md-6">
+                <h3><i class="fa fa-plug feature-icon"></i> Dependency Injection</h3>
                 <p>
                     Slim supports dependency injection so you
                     have complete control of your external tools.
@@ -98,7 +100,7 @@ $app-&gt;run();</code></pre>
 
 <div class="row section">
     <div class="col-md-12">
-        <h1 class="divider"><span>Latest News</span></h1>
+        <h1 class="divider front-page-divider"><span>Latest News</span></h1>
 
         {% for post in site.posts limit:3 %}
         <article class="note note-partial">
@@ -121,7 +123,7 @@ $app-&gt;run();</code></pre>
 
 <div class="row section"><a name="community"></a>
     <div class="col-md-12">
-        <h1 class="divider"><span>Community</span></h1>
+        <h1 class="divider front-page-divider"><span>Community</span></h1>
         You can chat with other Slim Framework developers to share code or troubleshoot tricky issues using
         either Slack or IRC.
         Our nicks are <code>akrabat</code>, <code>silentworks</code> and <code>codeguy</code> if you have have questions
@@ -153,7 +155,7 @@ $app-&gt;run();</code></pre>
 
 <div class="row section">
     <div class="col-md-12">
-        <h1 class="divider"><span>Newsletter</span></h1>
+        <h1 class="divider front-page-divider"><span>Newsletter</span></h1>
 
         <p>
             Don't have Twitter? Join our newsletter and receive one email a week (at most)
@@ -180,7 +182,7 @@ $app-&gt;run();</code></pre>
 
 <div class="row section">
     <div class="col-md-12">
-        <h1 class="divider"><span>Follow <a href="https://twitter.com/slimphp" target="_blank">@slimphp</a> on Twitter</span></h1>
+        <h1 class="divider front-page-divider"><span>Follow <a href="https://twitter.com/slimphp" target="_blank">@slimphp</a> on Twitter</span></h1>
         <a class="twitter-timeline" height="500" href="https://twitter.com/slimphp" data-widget-id="564606760938668032">Tweets by @slimphp</a>
     </div>
 </div>

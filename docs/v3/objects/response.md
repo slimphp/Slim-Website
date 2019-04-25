@@ -2,16 +2,16 @@
 title: Response
 ---
 
-Your Slim app's routes and middleware are given a PSR 7 response object that
+Your Slim app's routes and middleware are given a PSR-7 response object that
 represents the current HTTP response to be returned to the client. The response
-object implements the [PSR 7 ResponseInterface][psr7] with which you can
+object implements the [PSR-7 ResponseInterface][psr7] with which you can
 inspect and manipulate the HTTP response status, headers, and body.
 
 [psr7]: http://www.php-fig.org/psr/psr-7/#3-2-1-psr-http-message-responseinterface
 
 ## How to get the Response object
 
-The PSR 7 response object is injected into your Slim application routes as the
+The PSR-7 response object is injected into your Slim application routes as the
 second argument to the route callback like this:
 
 <figure markdown="1">
@@ -22,16 +22,16 @@ use Psr\Http\Message\ResponseInterface;
 
 $app = new \Slim\App;
 $app->get('/foo', function (ServerRequestInterface $request, ResponseInterface $response) {
-    // Use the PSR 7 $response object
+    // Use the PSR-7 $response object
 
     return $response;
 });
 $app->run();
 ```
-<figcaption>Figure 1: Inject PSR 7 response into application route callback.</figcaption>
+<figcaption>Figure 1: Inject PSR-7 response into application route callback.</figcaption>
 </figure>
 
-The PSR 7 response object is injected into your Slim application _middleware_
+The PSR-7 response object is injected into your Slim application _middleware_
 as the second argument of the middleware callable like this:
 
 <figure markdown="1">
@@ -42,21 +42,21 @@ use Psr\Http\Message\ResponseInterface;
 
 $app = new \Slim\App;
 $app->add(function (ServerRequestInterface $request, ResponseInterface $response, callable $next) {
-    // Use the PSR 7 $response object
+    // Use the PSR-7 $response object
 
     return $next($request, $response);
 });
 // Define app routes...
 $app->run();
 ```
-<figcaption>Figure 2: Inject PSR 7 response into application middleware.</figcaption>
+<figcaption>Figure 2: Inject PSR-7 response into application middleware.</figcaption>
 </figure>
 
 ## The Response Status
 
 Every HTTP response has a numeric [status code][statuscodes]. The status code
-identifies the _type_ of HTTP response to be returned to the client. The PSR 7
-Response object's default status code is `200` (OK). You can get the PSR 7
+identifies the _type_ of HTTP response to be returned to the client. The PSR-7
+Response object's default status code is `200` (OK). You can get the PSR-7
 Response object's status code with the `getStatusCode()` method like this.
 
 [statuscodes]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
@@ -68,7 +68,7 @@ $status = $response->getStatusCode();
 <figcaption>Figure 3: Get response status code.</figcaption>
 </figure>
 
-You can copy a PSR 7 Response object and assign a new status code like this:
+You can copy a PSR-7 Response object and assign a new status code like this:
 
 <figure markdown="1">
 ```php
@@ -80,12 +80,12 @@ $newResponse = $response->withStatus(302);
 ## The Response Headers
 
 Every HTTP response has headers. These are metadata that describe the HTTP
-response but are not visible in the response's body. Slim's PSR 7
+response but are not visible in the response's body. Slim's PSR-7
 Response object provides several methods to inspect and manipulate its headers.
 
 ### Get All Headers
 
-You can fetch all HTTP response headers as an associative array with the PSR 7
+You can fetch all HTTP response headers as an associative array with the PSR-7
 Response object's `getHeaders()` method. The resultant associative array's keys
 are the header names and its values are themselves a numeric array of string
 values for their respective header name.
@@ -102,7 +102,7 @@ foreach ($headers as $name => $values) {
 
 ### Get One Header
 
-You can get a single header's value(s) with the PSR 7 Response object's
+You can get a single header's value(s) with the PSR-7 Response object's
 `getHeader($name)` method. This returns an array of values for the given header
 name. Remember, _a single HTTP header may have more than one value!_
 
@@ -114,7 +114,7 @@ $headerValueArray = $response->getHeader('Vary');
 </figure>
 
 You may also fetch a comma-separated string with all values for a given header
-with the PSR 7 Response object's `getHeaderLine($name)` method. Unlike the
+with the PSR-7 Response object's `getHeaderLine($name)` method. Unlike the
 `getHeader($name)` method, this method returns a comma-separated string.
 
 <figure markdown="1">
@@ -126,7 +126,7 @@ $headerValueString = $response->getHeaderLine('Vary');
 
 ### Detect Header
 
-You can test for the presence of a header with the PSR 7 Response object's
+You can test for the presence of a header with the PSR-7 Response object's
 `hasHeader($name)` method.
 
 <figure markdown="1">
@@ -140,7 +140,7 @@ if ($response->hasHeader('Vary')) {
 
 ### Set Header
 
-You can set a header value with the PSR 7 Response object's
+You can set a header value with the PSR-7 Response object's
 `withHeader($name, $value)` method.
 
 <figure markdown="1">
@@ -162,7 +162,7 @@ $newResponse = $oldResponse->withHeader('Content-type', 'application/json');
 
 ### Append Header
 
-You can append a header value with the PSR 7 Response object's
+You can append a header value with the PSR-7 Response object's
 `withAddedHeader($name, $value)` method.
 
 <figure markdown="1">
@@ -203,12 +203,12 @@ $newResponse = $oldResponse->withoutHeader('Allow');
 
 ## The Response Body
 
-An HTTP response typically has a body. Slim provides a PSR 7 Response object
+An HTTP response typically has a body. Slim provides a PSR-7 Response object
 with which you can inspect and manipulate the eventual HTTP response's body.
 
-Just like the PSR 7 Request object, the PSR 7 Response object implements
+Just like the PSR-7 Request object, the PSR-7 Response object implements
 the body as an instance of `\Psr\Http\Message\StreamInterface`. You can get
-the HTTP response body `StreamInterface` instance with the PSR 7 Response
+the HTTP response body `StreamInterface` instance with the PSR-7 Response
 object's `getBody()` method. The `getBody()` method is preferable if the
 outgoing HTTP response length is unknown or too large for available memory.
 
@@ -235,7 +235,7 @@ methods to read from, iterate, and write to its underlying PHP `resource`.
 * `getContents()`
 * `getMetadata($key = null)`
 
-Most often, you'll need to write to the PSR 7 Response object. You can write
+Most often, you'll need to write to the PSR-7 Response object. You can write
 content to the `StreamInterface` instance with its `write()` method like this:
 
 <figure markdown="1">
@@ -246,10 +246,10 @@ $body->write('Hello');
 <figcaption>Figure 13: Write content to the HTTP response body</figcaption>
 </figure>
 
-You can also _replace_ the PSR 7 Response object's body with an entirely new
+You can also _replace_ the PSR-7 Response object's body with an entirely new
 `StreamInterface` instance. This is particularly useful when you want to pipe
 content from a remote destination (e.g. the filesystem or a remote API) into
-the HTTP response. You can replace the PSR 7 Response object's body with
+the HTTP response. You can replace the PSR-7 Response object's body with
 its `withBody(StreamInterface $body)` method. Its argument **MUST** be an
 instance of `\Psr\Http\Message\StreamInterface`.
 

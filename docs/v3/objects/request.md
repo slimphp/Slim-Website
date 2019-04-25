@@ -2,16 +2,16 @@
 title: Request
 ---
 
-Your Slim app's routes and middleware are given a PSR 7 request object that
+Your Slim app's routes and middleware are given a PSR-7 request object that
 represents the current HTTP request received by your web server. The request
-object implements the [PSR 7 ServerRequestInterface][psr7] with which you can
+object implements the [PSR-7 ServerRequestInterface][psr7] with which you can
 inspect and manipulate the HTTP request method, headers, and body.
 
 [psr7]: http://www.php-fig.org/psr/psr-7/#3-2-1-psr-http-message-serverrequestinterface
 
 ## How to get the Request object
 
-The PSR 7 request object is injected into your Slim application routes as the
+The PSR-7 request object is injected into your Slim application routes as the
 first argument to the route callback like this:
 
 <figure markdown="1">
@@ -22,16 +22,16 @@ use Psr\Http\Message\ResponseInterface;
 
 $app = new \Slim\App;
 $app->get('/foo', function (ServerRequestInterface $request, ResponseInterface $response) {
-    // Use the PSR 7 $request object
+    // Use the PSR-7 $request object
 
     return $response;
 });
 $app->run();
 ```
-<figcaption>Figure 1: Inject PSR 7 request into application route callback.</figcaption>
+<figcaption>Figure 1: Inject PSR-7 request into application route callback.</figcaption>
 </figure>
 
-The PSR 7 request object is injected into your Slim application _middleware_
+The PSR-7 request object is injected into your Slim application _middleware_
 as the first argument of the middleware callable like this:
 
 <figure markdown="1">
@@ -42,14 +42,14 @@ use Psr\Http\Message\ResponseInterface;
 
 $app = new \Slim\App;
 $app->add(function (ServerRequestInterface $request, ResponseInterface $response, callable $next) {
-    // Use the PSR 7 $request object
+    // Use the PSR-7 $request object
 
     return $next($request, $response);
 });
 // Define app routes...
 $app->run();
 ```
-<figcaption>Figure 2: Inject PSR 7 request into application middleware.</figcaption>
+<figcaption>Figure 2: Inject PSR-7 request into application middleware.</figcaption>
 </figure>
 
 ## The Request Method
@@ -72,7 +72,7 @@ $method = $request->getMethod();
 ```
 
 Because this is a common task, Slim's
-built-in PSR 7 implementation also provides these proprietary methods that return
+built-in PSR-7 implementation also provides these proprietary methods that return
 `true` or `false`.
 
 * `$request->isGet()`
@@ -120,7 +120,7 @@ X-Http-Method-Override: PUT
 <figcaption>Figure 4: Override HTTP method with X-Http-Method-Override header.</figcaption>
 </figure>
 
-You can fetch the _original_ (non-overridden) HTTP method with the PSR 7 Request
+You can fetch the _original_ (non-overridden) HTTP method with the PSR-7 Request
 object's method named `getOriginalMethod()`.
 
 ## The Request URI
@@ -134,7 +134,7 @@ resource. The HTTP request URI has several parts:
 * Path (e.g. `/users/1`)
 * Query string (e.g. `sort=created&dir=asc`)
 
-You can fetch the PSR 7 Request object's [URI object][psr7_uri] with its `getUri()` method:
+You can fetch the PSR-7 Request object's [URI object][psr7_uri] with its `getUri()` method:
 
 [psr7_uri]: http://www.php-fig.org/psr/psr-7/#3-5-psr-http-message-uriinterface
 
@@ -142,7 +142,7 @@ You can fetch the PSR 7 Request object's [URI object][psr7_uri] with its `getUri
 $uri = $request->getUri();
 ```
 
-The PSR 7 Request object's URI is itself an object that provides the following
+The PSR-7 Request object's URI is itself an object that provides the following
 methods to inspect the HTTP request's URL parts:
 
 * `getScheme()`
@@ -172,12 +172,12 @@ You can also get a single query parameter value, with optional default value if 
 ## The Request Headers
 
 Every HTTP request has headers. These are metadata that describe the HTTP
-request but are not visible in the request's body. Slim's PSR 7
+request but are not visible in the request's body. Slim's PSR-7
 Request object provides several methods to inspect its headers.
 
 ### Get All Headers
 
-You can fetch all HTTP request headers as an associative array with the PSR 7
+You can fetch all HTTP request headers as an associative array with the PSR-7
 Request object's `getHeaders()` method. The resultant associative array's keys
 are the header names and its values are themselves a numeric array of string
 values for their respective header name.
@@ -194,7 +194,7 @@ foreach ($headers as $name => $values) {
 
 ### Get One Header
 
-You can get a single header's value(s) with the PSR 7 Request object's `getHeader($name)` method. This returns an array of values for the given header name. Remember, _a single
+You can get a single header's value(s) with the PSR-7 Request object's `getHeader($name)` method. This returns an array of values for the given header name. Remember, _a single
 HTTP header may have more than one value!_
 
 <figure markdown="1">
@@ -205,7 +205,7 @@ $headerValueArray = $request->getHeader('Accept');
 </figure>
 
 You may also fetch a comma-separated string with all values for a given header
-with the PSR 7 Request object's `getHeaderLine($name)` method. Unlike the
+with the PSR-7 Request object's `getHeaderLine($name)` method. Unlike the
 `getHeader($name)` method, this method returns a comma-separated string.
 
 <figure markdown="1">
@@ -217,7 +217,7 @@ $headerValueString = $request->getHeaderLine('Accept');
 
 ### Detect Header
 
-You can test for the presence of a header with the PSR 7 Request object's
+You can test for the presence of a header with the PSR-7 Request object's
 `hasHeader($name)` method.
 
 <figure markdown="1">
@@ -232,7 +232,7 @@ if ($request->hasHeader('Accept')) {
 ## The Request Body
 
 Every HTTP request has a body. If you are building a Slim application that
-consumes JSON or XML data, you can use the PSR 7 Request object's
+consumes JSON or XML data, you can use the PSR-7 Request object's
 `getParsedBody()` method to parse the HTTP request body into a native PHP format.
 Slim can parse JSON, XML, and URL-encoded data out of the box.
 
@@ -249,9 +249,9 @@ $parsedBody = $request->getParsedBody();
 
 For URL-encoded requests, you can also get a single parameter value, with optional default value if the parameter is missing, using `getParsedBodyParam($key, $default = null)`.
 
-Technically speaking, Slim's PSR 7 Request object represents the HTTP request
+Technically speaking, Slim's PSR-7 Request object represents the HTTP request
 body as an instance of `\Psr\Http\Message\StreamInterface`. You can get
-the HTTP request body `StreamInterface` instance with the PSR 7 Request object's
+the HTTP request body `StreamInterface` instance with the PSR-7 Request object's
 `getBody()` method. The `getBody()` method is preferable if the incoming HTTP
 request size is unknown or too large for available memory.
 
@@ -313,7 +313,7 @@ See the [cookbook](/docs/v3/cookbook/uploading-files.html) on how to upload file
 
 ## Request Helpers
 
-Slim's PSR 7 Request implementation provides these additional proprietary methods
+Slim's PSR-7 Request implementation provides these additional proprietary methods
 to help you further inspect the HTTP request.
 
 ### Detect XHR requests

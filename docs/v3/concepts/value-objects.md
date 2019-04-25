@@ -1,5 +1,5 @@
 ---
-title: PSR 7 and Value Objects
+title: PSR-7 and Value Objects
 ---
 
 Slim supports [PSR-7](https://github.com/php-fig/http-message) interfaces for
@@ -10,7 +10,7 @@ for example, return an instance of `\GuzzleHttp\Psr7\CachingStream` or any insta
 returned by the `\GuzzleHttp\Psr7\stream_for()` function.
 
 Slim provides its own PSR-7 implementation so that it works out of the box. However,
-you are free to replace Slim's default PSR 7 objects with a third-party implementation.
+you are free to replace Slim's default PSR-7 objects with a third-party implementation.
 Just override the application container's `request` and `response` services so
 they return an instance of `\Psr\Http\Message\ServerRequestInterface` and
 `\Psr\Http\Message\ResponseInterface`, respectively.
@@ -23,9 +23,9 @@ property values. Value objects have a nominal overhead because they must be
 cloned when their properties are updated. This overhead does not affect
 performance in any meaningful way.
 
-You can request a copy of a value object by invoking any of its PSR 7
+You can request a copy of a value object by invoking any of its PSR-7
 interface methods (these methods typically have a `with` prefix). For example,
-a PSR 7 Response object has a `withHeader($name, $value)` method that returns a
+a PSR-7 Response object has a `withHeader($name, $value)` method that returns a
 cloned value object with the new HTTP header.
 
 ```php
@@ -40,7 +40,7 @@ $app->get('/foo', function ($req, $res, $args) {
 $app->run();
 ```
 
-The PSR 7 interface provides these methods to transform Request and Response
+The PSR-7 interface provides these methods to transform Request and Response
 objects:
 
 * `withProtocolVersion($version)`
@@ -49,7 +49,7 @@ objects:
 * `withoutHeader($name)`
 * `withBody(StreamInterface $body)`
 
-The PSR 7 interface provides these methods to transform Request objects:
+The PSR-7 interface provides these methods to transform Request objects:
 
 * `withMethod($method)`
 * `withUri(UriInterface $uri, $preserveHost = false)`
@@ -60,7 +60,7 @@ The PSR 7 interface provides these methods to transform Request objects:
 * `withAttribute($name, $value)`
 * `withoutAttribute($name)`
 
-The PSR 7 interface provides these methods to transform Response objects:
+The PSR-7 interface provides these methods to transform Response objects:
 
 * `withStatus($code, $reasonPhrase = '')`
 

@@ -294,7 +294,7 @@ To help organize routes into logical groups, the `\Slim\App` also provides a `gr
 
 ```php
 $app = new \Slim\App();
-$app->group('/users/{id:[0-9]+}', function (\Slim\App $app) {
+$app->group('/users/{id:[0-9]+}', function (App $app) {
     $app->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
         // Find, delete, patch or replace user identified by $args['id']
     })->setName('user');
@@ -308,15 +308,20 @@ $app->group('/users/{id:[0-9]+}', function (\Slim\App $app) {
 The group pattern can be empty, enabling the logical grouping of routes that do not share a common pattern.
 
 ```php
-$app->group('', function(\Slim\App $app) {
+$app->group('', function(App $app) {
     $app->get('/billing', function ($request, $response, $args) {
         // Route for /billing
     });
-    $app->get('/invoice/{id:[0-9]+}', function ($request, $response, $args) {
+    $this->get('/invoice/{id:[0-9]+}', function ($request, $response, $args) {
         // Route for /invoice/{id:[0-9]+}
     });
 })->add( new SharedMiddleware() );
 ```
+
+Note inside the group closure, `$this` can be used instead of `$app`. Slim binds the closure to the application instance for you, just like it is the case with route callback binds with container instance.
+
+* inside group closure, `$this` is bound to the instance of `Slim\App`
+* inside route closure, `$this` is bound to the instance of `Slim\Container`
 
 ## Route middleware
 
