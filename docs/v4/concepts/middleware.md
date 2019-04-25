@@ -45,7 +45,7 @@ the middleware process flow:
 
 ## How do I write middleware?
 
-Middleware is a callable that accepts two arguments: a **Request object** and a **RequestHandler** object. Each middleware **MUST** return an instance of  **Psr\Http\Message\ResponseInterface**.
+Middleware is a callable that accepts two arguments: a **Request** object and a **RequestHandler** object. Each middleware **MUST** return an instance of  **Psr\Http\Message\ResponseInterface**.
 
 ### Closure middleware example.
 
