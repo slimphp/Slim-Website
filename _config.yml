@@ -84,8 +84,8 @@ defaults:
           - [/docs/v4/cookbook/uploading-files.md, Uploading Files using POST forms]
         - title: Contributing
           items:
-          - [/docs/v3/contributors/strategy.md, Branching Strategy]
-          - [/docs/v3/contributors/guidelines.md, Guidelines]
+          - [/docs/v4/contributors/strategy.md, Branching Strategy]
+          - [/docs/v4/contributors/guidelines.md, Guidelines]
 
   - scope:
       path: "docs/v4"
