@@ -4,14 +4,14 @@ title: PSR-7 and Value Objects
 
 Slim supports [PSR-7](https://github.com/php-fig/http-message) interfaces for
 its Request and Response objects. This makes Slim flexible because it can
-use _any_ PSR-7 implementation. For example, you could return an instance of **GuzzleHttp\Psr7\CachingStream** or any instance
-returned by the **GuzzleHttp\Psr7\stream_for()** function.
+use _any_ PSR-7 implementation. For example, you could return an instance of `GuzzleHttp\Psr7\CachingStream` or any instance
+returned by the `GuzzleHttp\Psr7\stream_for()` function.
 
 Slim provides its own PSR-7 implementation so that it works out of the box. However,
 you are free to replace Slim's default PSR-7 objects with a third-party implementation.
-Just override the application container's **request** and **response** services so
-they return an instance of **Psr\Http\Message\ServerRequestInterface** and
-**Psr\Http\Message\ResponseInterface**, respectively.
+Just override the application container's `request` and `response` services so
+they return an instance of `Psr\Http\Message\ServerRequestInterface` and
+`Psr\Http\Message\ResponseInterface`, respectively.
 
 ## Value objects
 
@@ -22,8 +22,8 @@ cloned when their properties are updated. This overhead does not affect
 performance in any meaningful way.
 
 You can request a copy of a value object by invoking any of its PSR-7
-interface methods (these methods typically have a **with** prefix). For example,
-a PSR-7 Response object has a **withHeader($name, $value)** method that returns a
+interface methods (these methods typically have a `with` prefix). For example,
+a PSR-7 Response object has a `withHeader($name, $value)` method that returns a
 cloned value object with the new HTTP header.
 
 ```php

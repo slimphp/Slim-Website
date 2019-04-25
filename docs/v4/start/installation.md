@@ -25,7 +25,7 @@ composer require slim/slim "^4.0"
 ## Step 3: Install a PSR-7 Implementation and ServerRequest Creator
 
 Before you can get up and running with Slim you will need to choose a PSR-7 implementation that best fits your application.
-In order for auto-detection to work and enable you to use **AppFactory::create()** and **App::run()** without having to manually create a **ServerRequest** you need to install **one of the following implementations:**
+In order for auto-detection to work and enable you to use **AppFactory::create()** and **App::run()** without having to manually create a **ServerRequest** you need to install one of the following implementations:
 
 ### [Slim PSR-7](https://github.com/slimphp/Slim-Psr7)
 ```bash

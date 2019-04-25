@@ -78,7 +78,7 @@ $app->run();
 ```
 
 ## Error Logging
-If you would like to pipe in custom error logging to the default **ErrorHandler** that ships with Slim you can simply extend it and stub the **logError()** method.
+If you would like to pipe in custom error logging to the default `ErrorHandler` that ships with Slim you can simply extend it and stub the `logError()` method.
 
 ```php
 <?php
@@ -117,7 +117,7 @@ $app->run();
 ```
 
 ## Error Handling/Rendering
-The rendering is finally decoupled from the handling. Everything still works the way it previously did. It will still detect the content-type and render things appropriately with the help of **ErrorRenderers**. The core **ErrorHandler** extends the **AbstractErrorHandler** class which has been completely refactored. By default it will call the appropriate **ErrorRenderer** for the supported content types. Someone can now provide their custom error renderer by extending the **AbstractErrorHandler** class and overloading the protected **renderer** variable from the parent. 
+The rendering is finally decoupled from the handling. Everything still works the way it previously did. It will still detect the content-type and render things appropriately with the help of `ErrorRenderers`. The core `ErrorHandler` extends the `AbstractErrorHandler` class which has been completely refactored. By default it will call the appropriate `ErrorRenderer` for the supported content types. Someone can now provide their custom error renderer by extending the `AbstractErrorHandler` class and overloading the protected `renderer` variable from the parent. 
 
 ```php
 <?php
@@ -143,9 +143,9 @@ class MyCustomErrorHandler extends ErrorHandler
 ```
 
 ## New HTTP Exceptions
-We have added named HTTP exceptions within the application. These exceptions work nicely with the native renderers. They can each have a **description** and **title** attribute as well to provide a bit more insight when the native HTML renderer is invoked. 
+We have added named HTTP exceptions within the application. These exceptions work nicely with the native renderers. They can each have a `description` and `title` attribute as well to provide a bit more insight when the native HTML renderer is invoked. 
 
-The base class **HttpSpecializedException** extends **Exception** and comes with the following sub classes:
+The base class `HttpSpecializedException` extends `Exception` and comes with the following sub classes:
 * HttpBadRequestException
 * HttpForbiddenException
 * HttpInternalServerErrorException
@@ -154,7 +154,7 @@ The base class **HttpSpecializedException** extends **Exception** and comes with
 * HttpNotImplementedException
 * HttpUnauthorizedException
 
-You can extend the **HttpSpecializedException** class if they need any other response codes that we decide not to provide with the base repository. Example if you wanted a 504 gateway timeout exception that behaves like the native ones you would do the following:
+You can extend the `HttpSpecializedException` class if they need any other response codes that we decide not to provide with the base repository. Example if you wanted a 504 gateway timeout exception that behaves like the native ones you would do the following:
 I
 ```php
 class HttpForbiddenException extends HttpException

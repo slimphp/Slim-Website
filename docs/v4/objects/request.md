@@ -74,18 +74,18 @@ Every HTTP request has a method that is typically one of:
 * OPTIONS
 
 You can inspect the HTTP request's method with the Request object method
-appropriately named **getMethod()**.
+appropriately named `getMethod()`.
 
 ```php
 $method = $request->getMethod();
 ```
 
 It is possible to fake or _override_ the HTTP request method. This is
-useful if, for example, you need to mimic a **PUT** request using a traditional
-web browser that only supports **GET** or **POST** requests.
+useful if, for example, you need to mimic a `PUT` request using a traditional
+web browser that only supports `GET` or `POST` requests.
 
 There are two ways to override the HTTP request method. You can include a
-**METHOD** parameter in a **POST** request's body. The HTTP request must use the
+`METHOD` parameter in a `POST** request's body. The HTTP request must use the
 **application/x-www-form-urlencoded** content type.
 
 <figure markdown="1">

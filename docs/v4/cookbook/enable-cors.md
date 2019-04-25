@@ -17,7 +17,9 @@ You can read the specification here: https://www.w3.org/TR/cors/
 
 For simple CORS requests, the server only needs to add the following header to its response:
 
-**Access-Control-Allow-Origin: <domain>, ... | ***
+```bash
+Access-Control-Allow-Origin: <domain>, ... 
+```
 
 The following code should enable lazy CORS.
 
