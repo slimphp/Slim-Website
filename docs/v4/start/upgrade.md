@@ -59,7 +59,7 @@ Middleware execution has not changed and is still **Last In First Out (LIFO)** l
 
 ## New App Factory
 The **AppFactory** component was introduced to reduce some of the friction caused by decoupling the PSR-7 implementation from the **App** core. It detects which PSR-7
-implementation and ServerRequest creator installed in your project root and enables you to instantiate an app via **AppFactory::create()** and use **App::run()** without
+implementation and ServerRequest creator is installed in your project root and enables you to instantiate an app via **AppFactory::create()** and use **App::run()** without
 having to pass in a **ServerRequest** object. The following PSR-7 implementations and ServerRequest creator combos are supported:
 - [Slim PSR-7](https://github.com/slimphp/Slim-Psr7)
 - [Nyholm PSR-7](https://github.com/Nyholm/psr7) and [Nyholm PSR-7 Server](https://github.com/Nyholm/psr7-server)
