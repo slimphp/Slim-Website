@@ -421,7 +421,7 @@ $container = $app->getContainer();
 $container->set('HomeController', function (ContainerInterface $c) {
     $view = $c->get('view'); // retrieve the 'view' from the container
     return new HomeController($view);
-};
+});
 ```
 
 This allows you to leverage the container for dependency injection and so you can
