@@ -19,7 +19,7 @@ shown below. This command downloads the Slim Framework and its third-party
 dependencies into your project's **vendor/** directory.
 
 ```bash
-composer require slim/slim "^4.0"
+composer require slim/slim:4.0.0-alpha
 ```
 
 ## Step 3: Install a PSR-7 Implementation and ServerRequest Creator
@@ -44,7 +44,7 @@ composer require guzzlehttp/psr7 http-interop/http-factory-guzzle
 
 ### [Zend Diactoros](https://github.com/zendframework/zend-diactoros)
 ```bash
-zendframework/zend-diactoros
+composer require zendframework/zend-diactoros
 ```
 
 ## Step 4: Hello World
