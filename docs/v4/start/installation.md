@@ -34,7 +34,7 @@ composer require slim/psr7
 
 ### [Nyholm PSR-7](https://github.com/Nyholm/psr7) and [Nyholm PSR-7 Server](https://github.com/Nyholm/psr7-server)
 ```bash
-composer require nyholm/psr-7 nyholm/psr7-server
+composer require nyholm/psr7 nyholm/psr7-server
 ```
 
 ### [Guzzle PSR-7](https://github.com/guzzle/psr7) and [Guzzle HTTP Factory](https://github.com/http-interop/http-factory-guzzle)
@@ -54,7 +54,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
-require __DIR__ . '/vendor/autoload.php.';
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
