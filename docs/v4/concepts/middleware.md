@@ -272,12 +272,12 @@ $app->get('/', function (Request $request, Response $response) {
 $app->group('/utils', function (RouteCollectorProxy $group) {
     $group->get('/date', function (Request $request, Response $response) {
         $response->getBody()->write(date('Y-m-d H:i:s'));
-	return $response;
+        return $response;
     });
     
     $group->get('/time', function (Request $request, Response $response) {
         $response->getBody()->write(time());
-	return $response;
+        return $response;
     });
 })->add(function (Request $request, RequestHandler $handler) {
     $response = $handler->handle($request);
