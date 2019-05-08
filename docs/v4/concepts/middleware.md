@@ -248,7 +248,7 @@ This would output this HTTP response body:
 Hello World
 ```
 
-### Group Middleware
+### Group middleware
 
 In addition to the overall application, and standard routes being able to accept middleware, the **group()** multi-route definition functionality, also allows individual routes internally. Route group middleware is invoked _only if_ its route matches one of the defined HTTP request methods and URIs from the group. To add middleware within the callback, and entire-group middleware to be set by chaining **add()** after the **group()** method.
 
@@ -271,21 +271,25 @@ $app->get('/', function (Request $request, Response $response) {
 
 $app->group('/utils', function (RouteCollectorProxy $group) {
     $group->get('/date', function (Request $request, Response $response) {
-        return $response->getBody()->write(date('Y-m-d H:i:s'));
+        $response->getBody()->write(date('Y-m-d H:i:s'));
+	return $response;
     });
     
     $group->get('/time', function (Request $request, Response $response) {
-        return $response->getBody()->write(time());
+        $response->getBody()->write(time());
+	return $response;
     });
 })->add(function (Request $request, RequestHandler $handler) {
     $response = $handler->handle($request);
     $dateOrTime = (string) $response->getBody();
     
     $response = new Response();
-    $response->write('It is now ' . $dateOrTime . '. Enjoy!');
+    $response->getBody()->write('It is now ' . $dateOrTime . '. Enjoy!');
     
     return $response;
 });
+
+$app->run();
 ```
 
 When calling the **/utils/date** method, this would output a string similar to the below
