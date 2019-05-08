@@ -11,7 +11,7 @@ use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Middleware\RoutingMiddleware;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -23,7 +23,7 @@ $routeResolver = $app->getRouteResolver();
 $routingMiddleware = new RoutingMiddleware($routeResolver);
 $app->add($routingMiddleware);
 
-/**
+/`
  * The constructor of ErrorMiddleware takes in 5 parameters
  * @param CallableResolverInterface $callableResolver -> CallableResolver implementation of your choice
  * @param ResponseFactoryInterface $responseFactory -> ResponseFactory implementation of your choice
@@ -52,7 +52,7 @@ use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Psr7\Response;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -100,7 +100,7 @@ use MyApp\Handlers\MyErrorHandler;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 $callableResolver = $app->getCallableResolver();

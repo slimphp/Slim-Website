@@ -12,11 +12,11 @@ before your app runs. Middleware is perfect for these scenarios.
 
 A middleware implements the [PSR-15 Middleware Interface](https://www.php-fig.org/psr/psr-15/):
 
-1. **Psr\Http\Message\ServerRequestInterface** - The PSR-7 request object
-2. **Psr\Http\Server\RequestHandlerInterface** - The PSR-15 request handler object
+1. `Psr\Http\Message\ServerRequestInterface` - The PSR-7 request object
+2. `Psr\Http\Server\RequestHandlerInterface` - The PSR-15 request handler object
 
 It can do whatever is appropriate with these objects. The only hard requirement
-is that a middleware **MUST** return an instance of  **Psr\Http\Message\ResponseInterface**.
+is that a middleware **MUST** return an instance of  `Psr\Http\Message\ResponseInterface`.
 Each middleware **SHOULD** invoke the next middleware and pass it Request and
 Response objects as arguments.
 
@@ -45,7 +45,7 @@ the middleware process flow:
 
 ## How do I write middleware?
 
-Middleware is a callable that accepts two arguments: a **Request** object and a **RequestHandler** object. Each middleware **MUST** return an instance of  **Psr\Http\Message\ResponseInterface**.
+Middleware is a callable that accepts two arguments: a `Request` object and a `RequestHandler` object. Each middleware **MUST** return an instance of  `Psr\Http\Message\ResponseInterface`.
 
 ### Closure middleware example.
 
@@ -58,11 +58,11 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-/**
+/`
  * Example middleware closure
  *
  * @param  ServerRequest  $request PSR-7 request
@@ -92,7 +92,7 @@ $app->run();
 
 ### Invokable class middleware example
 
-This example middleware is an invokable class that implements the magic **__invoke()** method.
+This example middleware is an invokable class that implements the magic `__invoke()` method.
 
 ```php
 <?php
@@ -150,7 +150,7 @@ To use these classes as a middleware, you can use **add(new ExampleMiddleware())
 <?php
 use Slim\Factory\AppFactory;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -183,7 +183,7 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -224,7 +224,7 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -261,7 +261,7 @@ use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
 use Slim\Routing\RouteCollectorProxy;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 

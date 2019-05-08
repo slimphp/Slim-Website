@@ -181,7 +181,7 @@ Here is an example of using this alternative strategy:
 use Slim\Factory\AppFactory;
 use Slim\Handlers\Strategies\RequestResponseArgs;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -204,7 +204,7 @@ Alternatively you can set a different invocation strategy on a per route basis:
 use Slim\Factory\AppFactory;
 use Slim\Handlers\Strategies\RequestResponseArgs;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 $routeCollector = $app->getRouteCollector();
@@ -347,7 +347,7 @@ It's possible to enable router cache via `RouteCollector::setCacheFile()`. See e
 <?php
 use Slim\Factory\AppFactory;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 

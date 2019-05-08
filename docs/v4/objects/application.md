@@ -2,7 +2,7 @@
 title: Application
 ---
 
-The Application **Slim\App** is the entry point to your Slim application and is used to register the routes that link to your callbacks or controllers.
+The Application `Slim\App` is the entry point to your Slim application and is used to register the routes that link to your callbacks or controllers.
 
 ```php
 <?php
@@ -34,7 +34,7 @@ $app->run();
 
 ## Advanced Notices and Warnings Handling
 
-**Warnings** and **Notices** are not caught by default. If you wish your application to display an error page when they happen, you will need to implement code similar to the following **index.php**.
+**Warnings** and **Notices** are not caught by default. If you wish your application to display an error page when they happen, you will need to implement code similar to the following `index.php`.
 
 ```php
 <?php
@@ -46,7 +46,7 @@ use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\Middleware\RoutingMiddleware;
 use Slim\Middleware\ErrorMiddleware;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 // Set that to your needs
 $displayErrorDetails = true;

@@ -21,7 +21,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -232,7 +232,7 @@ You can also _replace_ the PSR-7 Response object's body with an entirely new
 `StreamInterface` instance. This is particularly useful when you want to pipe
 content from a remote destination (e.g. the filesystem or a remote API) into
 the HTTP response. You can replace the PSR-7 Response object's body with
-its `withBody(StreamInterface $body)` method. Its argument `MUST` be an
+its `withBody(StreamInterface $body)` method. Its argument **MUST** be an
 instance of `Psr\Http\Message\StreamInterface`.
 
 <figure markdown="1">
