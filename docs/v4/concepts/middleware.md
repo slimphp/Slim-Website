@@ -228,15 +228,17 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->add(function (Request $request, RequestHandler $handler) {
-    $response = new Response();
+$mw = function (Request $request, RequestHandler $handler) {
+    $response = $handler->handle($request);
     $response->getBody()->write('World');
+
     return $response;
-});
+};
 
 $app->get('/', function (Request $request, Response $response, $args) {
-	$response->getBody()->write('Hello World');
-	return $response;
+    $response->getBody()->write('Hello ');
+
+    return $response;
 })->add($mw);
 
 $app->run();
