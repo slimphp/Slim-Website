@@ -8,13 +8,15 @@ The Application `Slim\App` is the entry point to your Slim application and is us
 <?php
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Factory\App;
+use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 // Instantiate app
 $app = AppFactory::create();
+
+$displayErrorDetails = true;
 
 // Add error handling middleware
 $callableResolver = $app->getCallableResolver();
@@ -23,7 +25,7 @@ $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, $dis
 $app->add($errorMiddleware);
 
 // Add route callbacks
-$app->get('/', function (Request $request, Response $response, $args) {
+$app->get('/', function (Request $request, Response $response, array $args) {
     $response->getBody()->write('Hello World');
     return $response;
 });
