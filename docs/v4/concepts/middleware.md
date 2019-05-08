@@ -281,7 +281,7 @@ $app->group('/utils', function (RouteCollectorProxy $group) {
     });
 })->add(function (Request $request, RequestHandler $handler) use ($app) {
     $response = $handler->handle($request);
-    $dateOrTime = (string)$response->getBody();
+    $dateOrTime = (string) $response->getBody();
 
     $response = $app->getResponseFactory()->createResponse();
     $response->getBody()->write('It is now ' . $dateOrTime . '. Enjoy!');
