@@ -219,10 +219,10 @@ Route middleware is invoked _only if_ its route matches the current HTTP request
 
 ```php
 <?php
+use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
-use Slim\Psr7\Response;
 
 require __DIR__ . '/../vendor/autoload.php';
 
