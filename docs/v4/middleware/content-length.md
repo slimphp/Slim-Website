@@ -10,7 +10,7 @@ The Content Length Middleware will automatically append a `Content-Length` heade
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ContentLengthMiddleware;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 

@@ -15,7 +15,7 @@ use Psr\Http\Server\RequestHandlerInterface RequestHandler;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 

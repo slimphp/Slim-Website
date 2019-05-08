@@ -32,18 +32,18 @@ $app = new App(...);
 ```
 
 ## Removed App Settings
-- **addContentLengthHeader** See [Content Length Middleware](/docs/v4/middleware/content-length.html) for new implementation of this setting.
-- **determineRouteBeforeAppMiddleware** Position [Routing Middleware](/docs/v4/middleware/routing.html) at the right position in your middleware stack to replicate existing behavior.
-- **outputBuffering** See [Output Buffering Middleware](/docs/v4/middleware/output-buffering.html) for new implementation of this setting.
-- **displayErrorDetails** See [Error Handling Middleware](/docs/v4/middleware/error-handling.html) for new implementation of this setting.
+- `addContentLengthHeader` See [Content Length Middleware](/docs/v4/middleware/content-length.html) for new implementation of this setting.
+- `determineRouteBeforeAppMiddleware` Position [Routing Middleware](/docs/v4/middleware/routing.html) at the right position in your middleware stack to replicate existing behavior.
+- `outputBuffering` See [Output Buffering Middleware](/docs/v4/middleware/output-buffering.html) for new implementation of this setting.
+- `displayErrorDetails` See [Error Handling Middleware](/docs/v4/middleware/error-handling.html) for new implementation of this setting.
 
 ## Changes to Container
-Slim no longer has a Container so you need to supply your own. If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. Also, **App::__call()** method has been removed, so accessing a container property via $app->key_name() no longer works.
+Slim no longer has a Container so you need to supply your own. If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. Also, `App::__call()` method has been removed, so accessing a container property via $app->key_name() no longer works.
 
 ## Changes to Routing components
-The **Router** component from Slim 3 has been split into multiple different components in order to decouple FastRoute from the **App** core and offer more flexibility to the end user. It has been split into
-**RouteCollector**, **RouteParser** and **RouteResolver**. Those 3 components can all have their respective interfaces which you can implement on your own and inject into
-the **App** constructor. The following pull requests offer a lot of insight on the public interfaces of these new components:
+The `Router` component from Slim 3 has been split into multiple different components in order to decouple FastRoute from the `App` core and offer more flexibility to the end user. It has been split into
+`RouteCollector`, `RouteParser` and `RouteResolver`. Those 3 components can all have their respective interfaces which you can implement on your own and inject into
+the `App` constructor. The following pull requests offer a lot of insight on the public interfaces of these new components:
 - [Pull Request #2604](https://github.com/slimphp/Slim/pulls/2604)
 - [Pull Request #2622](https://github.com/slimphp/Slim/pulls/2622)
 - [Pull Request #2639](https://github.com/slimphp/Slim/pulls/2639)
@@ -55,12 +55,12 @@ the **App** constructor. The following pull requests offer a lot of insight on t
 In Slim 4 we wanted to give more flexibility to the developers by decoupling some of Slim's App core functionality and implementing it as middleware. This gives you the ability to swap in custom implementations of the core components.
 
 ## Middleware Execution
-Middleware execution has not changed and is still **Last In First Out (LIFO)** like in Slim 3.
+Middleware execution has not changed and is still `Last In First Out (LIFO)` like in Slim 3.
 
 ## New App Factory
-The **AppFactory** component was introduced to reduce some of the friction caused by decoupling the PSR-7 implementation from the **App** core. It detects which PSR-7
-implementation and ServerRequest creator is installed in your project root and enables you to instantiate an app via **AppFactory::create()** and use **App::run()** without
-having to pass in a **ServerRequest** object. The following PSR-7 implementations and ServerRequest creator combos are supported:
+The `AppFactory` component was introduced to reduce some of the friction caused by decoupling the PSR-7 implementation from the `App` core. It detects which PSR-7
+implementation and ServerRequest creator is installed in your project root and enables you to instantiate an app via `AppFactory::create()` and use `App::run()` without
+having to pass in a `ServerRequest` object. The following PSR-7 implementations and ServerRequest creator combos are supported:
 - [Slim PSR-7](https://github.com/slimphp/Slim-Psr7)
 - [Nyholm PSR-7](https://github.com/Nyholm/psr7) and [Nyholm PSR-7 Server](https://github.com/Nyholm/psr7-server)
 - [Guzzle PSR-7](https://github.com/guzzle/psr7) and [Guzzle HTTP Factory](https://github.com/http-interop/http-factory-guzzle)
@@ -68,8 +68,8 @@ having to pass in a **ServerRequest** object. The following PSR-7 implementation
 
 ## New Routing Middleware
 The routing has been implemented as middleware. We are still using [FastRoute](https://github.com/nikic/FastRoute) for our routing needs.
-In order to instantiate the RoutingMiddleware you will need to pass in a **RouteResolverInterface** which we provide by default via **App::getRouteResolver()**.
-If you were using **determineRouteBeforeAppMiddleware**, you need to add the **Middleware\RoutingMiddleware** middleware to your application just before your call run() to maintain the previous behaviour.
+In order to instantiate the RoutingMiddleware you will need to pass in a `RouteResolverInterface` which we provide by default via `App::getRouteResolver()`.
+If you were using `determineRouteBeforeAppMiddleware`, you need to add the `Middleware\RoutingMiddleware` middleware to your application just before your call run() to maintain the previous behaviour.
 See [Pull Request #2288](https://github.com/slimphp/Slim/pull/2288) for more information
 
 ```php
@@ -77,7 +77,7 @@ See [Pull Request #2288](https://github.com/slimphp/Slim/pull/2288) for more inf
 use Slim\Factory\AppFactory;
 use Slim\Middleware\RoutingMiddleware;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -100,7 +100,7 @@ use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Middleware\RoutingMiddleware;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -145,7 +145,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -174,7 +174,7 @@ See [Pull Request #2329](https://github.com/slimphp/Slim/pull/2329) for more inf
 use Slim\Factory\AppFactory;
 use Slim\Middleware\MethodOverridingMiddleware;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -194,7 +194,7 @@ The Content Length Middleware will automatically append a `Content-Length` heade
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ContentLengthMiddleware;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -213,7 +213,7 @@ The Output Buffering Middleware enables you to switch between two modes of outpu
 use Slim\Factory\AppFactory;
 use Slim\Middleware\OutputBufferingMiddleware;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 

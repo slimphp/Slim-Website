@@ -14,7 +14,7 @@ Example:
 use Slim\Factory\AppFactory;
 use Slim\Middleware\RoutingMiddleware;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 

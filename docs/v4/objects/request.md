@@ -21,7 +21,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -46,7 +46,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
@@ -85,8 +85,8 @@ useful if, for example, you need to mimic a `PUT` request using a traditional
 web browser that only supports `GET` or `POST` requests.
 
 There are two ways to override the HTTP request method. You can include a
-`METHOD` parameter in a `POST** request's body. The HTTP request must use the
-**application/x-www-form-urlencoded** content type.
+`METHOD` parameter in a `POST` request's body. The HTTP request must use the
+`application/x-www-form-urlencoded` content type.
 
 <figure markdown="1">
 ```bash
@@ -101,7 +101,7 @@ data=value&_METHOD=PUT
 </figure>
 
 You can also override the HTTP request method with a custom
-**X-Http-Method-Override** HTTP request header. This works with any HTTP request
+`X-Http-Method-Override` HTTP request header. This works with any HTTP request
 content type.
 
 <figure markdown="1">
@@ -122,13 +122,13 @@ X-Http-Method-Override: PUT
 Every HTTP request has a URI that identifies the requested application
 resource. The HTTP request URI has several parts:
 
-* Scheme (e.g. **http** or **https**)
-* Host (e.g. **example.com**)
-* Port (e.g. **80** or **443**)
-* Path (e.g. **/users/1**)
-* Query string (e.g. **sort=created&dir=asc**)
+* Scheme (e.g. `http` or `https`)
+* Host (e.g. `example.com`)
+* Port (e.g. `80` or `443`)
+* Path (e.g. `/users/1`)
+* Query string (e.g. `sort=created&dir=asc`)
 
-You can fetch the PSR-7 Request object's [URI object][psr7_uri] with its **getUri()** method:
+You can fetch the PSR-7 Request object's [URI object][psr7_uri] with its `getUri()` method:
 
 [psr7_uri]: http://www.php-fig.org/psr/psr-7/#3-5-psr-http-message-uriinterface
 
@@ -146,11 +146,11 @@ methods to inspect the HTTP request's URL parts:
 * getPort()
 * getPath()
 * getBasePath()
-* getQuery() <small>(returns the full query string, e.g. **a=1&b=2**)</small>
+* getQuery() <small>(returns the full query string, e.g. `a=1&b=2`)</small>
 * getFragment()
 * getBaseUrl()
 
-You can get the query parameters as an associative array on the Request object using **getQueryParams()**.
+You can get the query parameters as an associative array on the Request object using `getQueryParams()`.
 
 <div class="alert alert-info">
     <div><strong>Base Path</strong></div>
@@ -170,7 +170,7 @@ Request object provides several methods to inspect its headers.
 ### Get All Headers
 
 You can fetch all HTTP request headers as an associative array with the PSR-7
-Request object's **getHeaders()** method. The resultant associative array's keys
+Request object's `getHeaders()` method. The resultant associative array's keys
 are the header names and its values are themselves a numeric array of string
 values for their respective header name.
 
@@ -186,7 +186,7 @@ foreach ($headers as $name => $values) {
 
 ### Get One Header
 
-You can get a single header's value(s) with the PSR-7 Request object's **getHeader($name)** method. This returns an array of values for the given header name. Remember, _a single
+You can get a single header's value(s) with the PSR-7 Request object's `getHeader($name)` method. This returns an array of values for the given header name. Remember, _a single
 HTTP header may have more than one value!_
 
 <figure markdown="1">
@@ -197,8 +197,8 @@ $headerValueArray = $request->getHeader('Accept');
 </figure>
 
 You may also fetch a comma-separated string with all values for a given header
-with the PSR-7 Request object's **getHeaderLine($name)** method. Unlike the
-**getHeader($name)** method, this method returns a comma-separated string.
+with the PSR-7 Request object's `getHeaderLine($name)` method. Unlike the
+`getHeader($name)` method, this method returns a comma-separated string.
 
 <figure markdown="1">
 ```php
@@ -210,7 +210,7 @@ $headerValueString = $request->getHeaderLine('Accept');
 ### Detect Header
 
 You can test for the presence of a header with the PSR-7 Request object's
-**hasHeader($name)** method.
+`hasHeader($name)` method.
 
 <figure markdown="1">
 ```php
@@ -225,8 +225,32 @@ if ($request->hasHeader('Accept')) {
 
 Every HTTP request has a body. If you are building a Slim application that
 consumes JSON or XML data, you can use the PSR-7 Request object's
-**getParsedBody()** method to parse the HTTP request body into a native PHP format.
-Slim can parse JSON, XML, and URL-encoded data out of the box.
+`getParsedBody()` method to parse the HTTP request body into a native PHP format. 
+Note that body parsing differs from one PSR-7 implementation to another.
+
+You may need to implement middleware in order to parse the incoming input depending on the PSR-7 implementation you have installed. Here is an example for parsing incoming `JSON` input:
+```php
+<?php
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as RequestInterface;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+
+class JsonBodyParserMiddleware implements MiddlewareInterface {
+    public function process(Request $request, RequestHandler $handler): Response
+    {
+        $contentType = $request->getHeaderLine('Content-Type');
+
+        if (strstr($contentType, 'application/json')) {
+            $contents = json_decode(file_get_contents('php://input'));
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                $request = $request->withParsedBody($contents);
+            }
+        }
+
+        return $handler->handle($request);
+    }
+}
+```
 
 <figure markdown="1">
 ```php
@@ -235,14 +259,10 @@ $parsedBody = $request->getParsedBody();
 <figcaption>Figure 9: Parse HTTP request body into native PHP format</figcaption>
 </figure>
 
-* JSON requests are converted into associative arrays with **json_decode($input, true)**.
-* XML requests are converted into a **SimpleXMLElement** with **simplexml_load_string($input)**.
-* URL-encoded requests are converted into a PHP array with **parse_str($input)**.
-
 Technically speaking, the PSR-7 Request object represents the HTTP request
-body as an instance of **Psr\Http\Message\StreamInterface**. You can get
-the HTTP request body **StreamInterface** instance with the PSR-7 Request object's
-**getBody()** method. The **getBody()** method is preferable if the incoming HTTP
+body as an instance of `Psr\Http\Message\StreamInterface`. You can get
+the HTTP request body `StreamInterface` instance with the PSR-7 Request object's
+`getBody()` method. The `getBody()` method is preferable if the incoming HTTP
 request size is unknown or too large for available memory.
 
 <figure markdown="1">
@@ -252,8 +272,8 @@ $body = $request->getBody();
 <figcaption>Figure 10: Get HTTP request body</figcaption>
 </figure>
 
-The resultant **Psr\Http\Message\StreamInterface** instance provides the following
-methods to read and iterate its underlying PHP **resource**.
+The resultant `Psr\Http\Message\StreamInterface` instance provides the following
+methods to read and iterate its underlying PHP `resource`.
 
 * getSize()
 * tell()
@@ -270,9 +290,9 @@ methods to read and iterate its underlying PHP **resource**.
 
 ## Uploaded Files
 
-The file uploads in **$_FILES** are available from the Request object's
-**getUploadedFiles()** method. This returns an array keyed by the name of the
-**input** element.
+The file uploads in `$_FILES` are available from the Request object's
+`getUploadedFiles()` method. This returns an array keyed by the name of the
+`input` element.
 
 <figure markdown="1">
 ```php
@@ -281,8 +301,8 @@ $files = $request->getUploadedFiles();
 <figcaption>Figure 11: Get uploaded files</figcaption>
 </figure>
 
-Each object in the **$files** array is a instance of
-**Psr\Http\Message\UploadedFileInterface** and supports the following methods:
+Each object in the `$files` array is a instance of
+`Psr\Http\Message\UploadedFileInterface` and supports the following methods:
 
 * getStream()
 * moveTo($targetPath)
@@ -300,7 +320,7 @@ to help you further inspect the HTTP request.
 
 ### Detect XHR requests
 
-You can detect XHR requests by checking if the header **X-Requested-With** is **XMLHttpRequest** using the Request's **getHeaderLine()** method.
+You can detect XHR requests by checking if the header `X-Requested-With` is `XMLHttpRequest` using the Request's `getHeaderLine()` method.
 
 <figure markdown="1">
 ```bash
@@ -323,7 +343,7 @@ if ($request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest') {
 
 ### Content Type
 
-You can fetch the HTTP request content type with the Request object's **getHeaderLine()** method.
+You can fetch the HTTP request content type with the Request object's `getHeaderLine()` method.
 
 ```php
 $contentType = $request->getHeaderLine('Content-Type');
@@ -331,7 +351,7 @@ $contentType = $request->getHeaderLine('Content-Type');
 
 ### Content Length
 
-You can fetch the HTTP request content length with the Request object's **getHeaderLine()** method.
+You can fetch the HTTP request content length with the Request object's `getHeaderLine()` method.
 
 ```php
 $length = $request->getHeaderLine('Content-Length');
@@ -339,7 +359,7 @@ $length = $request->getHeaderLine('Content-Length');
 
 ### Request Parameter
 
-To fetch single request parameter value. You will need to use **getServerParams()**
+To fetch single request parameter value. You will need to use `getServerParams()`
 
 For example, to get a single Server Parameter:
 
@@ -367,7 +387,7 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
 class PermissionMiddleware {
     public function __invoke(Request $request, RequestHandler $handler) {
-        /** @var $route \Slim\Routing\Route */
+        /` @var $route \Slim\Routing\Route */
         $route = $request->getAttribute('route');
         
         $courseId = $route->getArgument('id');
@@ -404,4 +424,4 @@ $app->get('/test', function ($request, $response, $args) {
 });
 ```
 
-The request object also has bulk functions as well. **$request->getAttributes()** and **$request->withAttributes()**
+The request object also has bulk functions as well. `$request->getAttributes()` and `$request->withAttributes()`
