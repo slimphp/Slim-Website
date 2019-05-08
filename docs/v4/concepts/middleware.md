@@ -255,10 +255,10 @@ In addition to the overall application, and standard routes being able to accept
 Sample Application, making use of callback middleware on a group of url-handlers
 ```php
 <?php
+use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
-use Slim\Psr7\Response;
 use Slim\Routing\RouteCollectorProxy;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -279,13 +279,13 @@ $app->group('/utils', function (RouteCollectorProxy $group) {
         $response->getBody()->write(time());
         return $response;
     });
-})->add(function (Request $request, RequestHandler $handler) {
+})->add(function (Request $request, RequestHandler $handler) use ($app) {
     $response = $handler->handle($request);
-    $dateOrTime = (string) $response->getBody();
-    
-    $response = new Response();
-    $response->getBody()->write('It is now ' . $dateOrTime . '. Enjoy!');
-    
+    $dateOrTime = (string)$response->getBody();
+
+    $response = $app->getResponseFactory()->createResponse();
+    $response->getBody()->write('It is now '.$dateOrTime.'. Enjoy!');
+
     return $response;
 });
 
