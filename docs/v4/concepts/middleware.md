@@ -219,24 +219,26 @@ Route middleware is invoked _only if_ its route matches the current HTTP request
 
 ```php
 <?php
+use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
-use Slim\Psr7\Response;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->add(function (Request $request, RequestHandler $handler) {
-    $response = new Response();
+$mw = function (Request $request, RequestHandler $handler) {
+    $response = $handler->handle($request);
     $response->getBody()->write('World');
+
     return $response;
-});
+};
 
 $app->get('/', function (Request $request, Response $response, $args) {
-	$response->getBody()->write('Hello World');
-	return $response;
+    $response->getBody()->write('Hello ');
+
+    return $response;
 })->add($mw);
 
 $app->run();
