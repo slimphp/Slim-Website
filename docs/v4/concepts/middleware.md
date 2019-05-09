@@ -278,7 +278,7 @@ $app->group('/utils', function (RouteCollectorProxy $group) {
     });
     
     $group->get('/time', function (Request $request, Response $response) {
-        $response->getBody()->write(time());
+        $response->getBody()->write((string)time());
         return $response;
     });
 })->add(function (Request $request, RequestHandler $handler) use ($app) {
