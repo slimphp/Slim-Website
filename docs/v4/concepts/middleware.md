@@ -71,8 +71,12 @@ $app = AppFactory::create();
  * @return Response
  */
 $beforeMiddleware = function (Request $request, RequestHandler $handler) {
+    $response = $handler->handle($request);
+    $existingContent = (string) $response->getBody();
+
     $response = new Response();
-    $response->getBody()->write('BEFORE');
+    $response->getBody()->write('BEFORE' . $existingContent);
+
     return $response;
 };
 
@@ -112,8 +116,12 @@ class ExampleBeforeMiddleware
      */
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
+        $response = $handler->handle($request);
+        $existingContent = (string) $response->getBody();
+    
         $response = new Response();
-        $response->getBody()->write('BEFORE');
+        $response->getBody()->write('BEFORE' . $existingContent);
+    
         return $response;
     }
 }
@@ -188,14 +196,18 @@ require __DIR__ . '/../vendor/autoload.php';
 $app = AppFactory::create();
 
 $app->add(function (Request $request, RequestHandler $handler) {
+    $response = $handler->handle($request);
+    $existingContent = (string) $response->getBody();
+
     $response = new Response();
-    $response->getBody()->write('BEFORE');
+    $response->getBody()->write('BEFORE ' . $existingContent);
+
     return $response;
 });
 
 $app->add(function (Request $request, RequestHandler $handler) {
     $response = $handler->handle($request);
-    $response->getBody()->write('AFTER');
+    $response->getBody()->write(' AFTER');
     return $response;
 });
 
@@ -210,7 +222,7 @@ $app->run();
 This would output this HTTP response body:
 
 ```bash
-BEFORE Hello AFTER
+BEFORE Hello World AFTER
 ```
 
 ### Route middleware
