@@ -232,17 +232,19 @@ You may need to implement middleware in order to parse the incoming input depend
 ```php
 <?php
 use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as RequestInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
-class JsonBodyParserMiddleware implements MiddlewareInterface {
+class JsonBodyParserMiddleware implements MiddlewareInterface
+{
     public function process(Request $request, RequestHandler $handler): Response
     {
         $contentType = $request->getHeaderLine('Content-Type');
 
         if (strstr($contentType, 'application/json')) {
             $contents = json_decode(file_get_contents('php://input'));
-            if (json_last_error() !== JSON_ERROR_NONE) {
+            if (json_last_error() === JSON_ERROR_NONE) {
                 $request = $request->withParsedBody($contents);
             }
         }
