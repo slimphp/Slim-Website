@@ -3,30 +3,37 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                {% include version-selector.html %}
-                {% include search-box.html %}
-                {% for section in page.docs-v4 %}
-                    {% assign isCurrentSection = false %}
-                    {% for item in section.items %}
-                        {% capture itemUrl %}{{ item[0] | replace: '.md', '.html' }}{% unless item[0] contains ".md" %}/{% endunless %}{% endcapture %}
-                        {% if itemUrl == page.url %}
-                            {% assign isCurrentSection = true %}
-                        {% endif %}
-                    {% endfor %}
-                    <h3 class="toc-title{% if isCurrentSection %} active{% endif %}">{{ section.title }}</h3>
-                    <ul class="toc-links">
+                <div class="toc-nav-toggle">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tocNav"
+                            aria-expanded="false" aria-controls="tocNav">
+                        Toggle Navigation
+                    </button>
+                </div>
+                <div class="collapse toc-nav-collapse" id="tocNav">
+                    {% include version-selector.html %}
+                    {% include search-box.html %}
+                    {% for section in page.docs-v4 %}
+                        {% assign isCurrentSection = false %}
                         {% for item in section.items %}
                             {% capture itemUrl %}{{ item[0] | replace: '.md', '.html' }}{% unless item[0] contains ".md" %}/{% endunless %}{% endcapture %}
-                            <li><a href="{{ itemUrl }}">{{ item[1] }}</a></li>
+                            {% if itemUrl == page.url %}
+                                {% assign isCurrentSection = true %}
+                            {% endif %}
                         {% endfor %}
+                        <h3 class="toc-title{% if isCurrentSection %} active{% endif %}">{{ section.title }}</h3>
+                        <ul class="toc-links">
+                            {% for item in section.items %}
+                                {% capture itemUrl %}{{ item[0] | replace: '.md', '.html' }}{% unless item[0] contains ".md" %}/{% endunless %}{% endcapture %}
+                                <li><a href="{{ itemUrl }}">{{ item[1] }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+
+                    <h3 class="toc-title">Professional Support</h3>
+                    <ul class="toc-links">
+                        <li><a href="https://tidelift.com/subscription/pkg/packagist-slim-slim?utm_source=packagist-slim-slim&utm_medium=referral&utm_campaign=website">Professional support from Tidelift</a></li>
                     </ul>
-                {% endfor %}
-
-                <h3 class="toc-title">Professional Support</h3>
-                <ul class="toc-links">
-                    <li><a href="https://tidelift.com/subscription/pkg/packagist-slim-slim?utm_source=packagist-slim-slim&utm_medium=referral&utm_campaign=website">Professional support from Tidelift</a></li>
-                </ul>
-
+                </div>
             </div>
 
             <div class="col-md-8 docs-content">
