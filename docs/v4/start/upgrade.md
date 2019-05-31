@@ -44,12 +44,12 @@ Slim no longer has a Container so you need to supply your own. If you were relyi
 The `Router` component from Slim 3 has been split into multiple different components in order to decouple FastRoute from the `App` core and offer more flexibility to the end user. It has been split into
 `RouteCollector`, `RouteParser` and `RouteResolver`. Those 3 components can all have their respective interfaces which you can implement on your own and inject into
 the `App` constructor. The following pull requests offer a lot of insight on the public interfaces of these new components:
-- [Pull Request #2604](https://github.com/slimphp/Slim/pulls/2604)
-- [Pull Request #2622](https://github.com/slimphp/Slim/pulls/2622)
-- [Pull Request #2639](https://github.com/slimphp/Slim/pulls/2639)
-- [Pull Request #2640](https://github.com/slimphp/Slim/pulls/2640)
-- [Pull Request #2641](https://github.com/slimphp/Slim/pulls/2641)
-- [Pull Request #2642](https://github.com/slimphp/Slim/pulls/2642)
+- [Pull Request #2604](https://github.com/slimphp/Slim/pull/2604)
+- [Pull Request #2622](https://github.com/slimphp/Slim/pull/2622)
+- [Pull Request #2639](https://github.com/slimphp/Slim/pull/2639)
+- [Pull Request #2640](https://github.com/slimphp/Slim/pull/2640)
+- [Pull Request #2641](https://github.com/slimphp/Slim/pull/2641)
+- [Pull Request #2642](https://github.com/slimphp/Slim/pull/2642)
 
 ## New Middleware Approach
 In Slim 4 we wanted to give more flexibility to the developers by decoupling some of Slim's App core functionality and implementing it as middleware. This gives you the ability to swap in custom implementations of the core components.
