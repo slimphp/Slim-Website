@@ -93,7 +93,7 @@ $app->run();
 ## New Error Handling Middleware
 Error handling has also been implemented as middleware.
 For custom handlers, logging and more see full documentation [here](/docs/handlers/error.html).
-See [Pull Request #2398](https://github.com/slimphp/Slim/pull/2398) for more information
+See [Pull Request #2398](https://github.com/slimphp/Slim/pull/2398) for more information.
 ```php
 <?php
 use Slim\Factory\AppFactory;
@@ -113,7 +113,7 @@ $routingMiddleware = new RoutingMiddleware($routeResolver);
 $app->add($routingMiddleware);
 
 /*
- * The constructor of `ErrorMiddleware` takes in 4 parameters
+ * The constructor of `ErrorMiddleware` takes in 5 parameters
  
  * @param CallableResolverInterface $callableResolver -> CallableResolver implementation of your choice
  * @param ResponseFactoryInterface $responseFactory -> ResponseFactory implementation of your choice
