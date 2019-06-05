@@ -2,7 +2,7 @@
 title: Uploading files using POST forms
 ---
 
-Files that are uploaded using forms in POST requests can be retrieved with the Request method `getUploadedFiles()`
+Files that are uploaded using forms in POST requests can be retrieved with the Request method `getUploadedFiles()`.
 
 When uploading files using a POST request, make sure your file upload form has the
 attribute `enctype="multipart/form-data"` otherwise `getUploadedFiles()` will return an empty array.
