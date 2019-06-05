@@ -69,8 +69,8 @@ having to pass in a `ServerRequest` object. The following PSR-7 implementations 
 ## New Routing Middleware
 The routing has been implemented as middleware. We are still using [FastRoute](https://github.com/nikic/FastRoute) for our routing needs.
 In order to instantiate the RoutingMiddleware you will need to pass in a `RouteResolverInterface` which we provide by default via `App::getRouteResolver()`.
-If you were using `determineRouteBeforeAppMiddleware`, you need to add the `Middleware\RoutingMiddleware` middleware to your application just before your call run() to maintain the previous behaviour.
-See [Pull Request #2288](https://github.com/slimphp/Slim/pull/2288) for more information
+If you were using `determineRouteBeforeAppMiddleware`, you need to add the `Middleware\RoutingMiddleware` middleware to your application just before you call `run()` to maintain the previous behaviour.
+See [Pull Request #2288](https://github.com/slimphp/Slim/pull/2288) for more information.
 
 ```php
 <?php
