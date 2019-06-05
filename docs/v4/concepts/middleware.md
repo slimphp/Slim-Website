@@ -80,7 +80,7 @@ $beforeMiddleware = function (Request $request, RequestHandler $handler) {
     return $response;
 };
 
-$afterMiddleware function ($request, $handler) {
+$afterMiddleware = function ($request, $handler) {
     $response = $handler->handle($request);
     $response->getBody()->write('AFTER');
     return $response;
