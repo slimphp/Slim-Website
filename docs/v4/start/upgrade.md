@@ -6,7 +6,7 @@ If you are upgrading from version 3 to version 4, these are the significant chan
 you need to be aware of.
 
 ## PHP Version Requirement
-Slim 4 requires **PHP 7.1 or newer**
+Slim 4 requires **PHP 7.1 or newer**.
 
 ## Breaking changes to Slim\App constructor
 Slim's App settings used to be a part of the container and they have now been decoupled from it.
@@ -138,7 +138,7 @@ $app->run();
 ## New Dispatcher & Routing Results
 We created a wrapper around the FastRoute dispatcher which adds a result wrapper and access to a route's full list of allowed methods instead of only having access to those when an exception arises.
 The Request attribute `routeInfo` is now deprecated and replaced with `routingResults`.
-See [Pull Request #2405](https://github.com/slimphp/Slim/pull/2405) for more information
+See [Pull Request #2405](https://github.com/slimphp/Slim/pull/2405) for more information.
 ```php
 <?php
 use Psr\Http\Message\ResponseInterface as Response;
@@ -168,7 +168,7 @@ $app->run();
 
 ## New Method Overriding Middleware
 If you were overriding the HTTP method using either the custom header or the body param, you need to add the `Middleware\MethodOverrideMiddleware` middleware to be able to override the method like before.
-See [Pull Request #2329](https://github.com/slimphp/Slim/pull/2329) for more information
+See [Pull Request #2329](https://github.com/slimphp/Slim/pull/2329) for more information.
 ```php
 <?php
 use Slim\Factory\AppFactory;
