@@ -291,12 +291,12 @@ You can generate a URL for this named route with the application RouteParser's `
 
 ```php
 $routeParser = $app->getRouteCollector()->getRouteParser();
-echo $routeParser->urlFor('hello', ['name' => 'Josh']);
+echo $routeParser->urlFor('hello', ['name' => 'Josh'], ['example' => 'name']);
 
-// Outputs "/hello/Josh"
+// Outputs "/hello/Josh?example=name"
 ```
 
-The RouteParser's `urlFor()` method accepts two arguments:
+The RouteParser's `urlFor()` method accepts three arguments:
 
 * `$routeName` The route name. A route's name can be set via `$route->setName('name')`. Route mapping methods return an instance of `Route` so you can set the name directly after mapping the route. e.g.: `$app->get('/', function () {...})->setName('name')`
 * `$data` Associative array of route pattern placeholders and replacement values.
