@@ -290,7 +290,7 @@ You can generate a URL for this named route with the application RouteParser's `
 
 ```php
 $routeParser = $app->getRouteCollector()->getRouteParser();
-echo $routeParser->urlFor('hello', ['name' => 'Josh'], ['example' => 'name');
+echo $routeParser->urlFor('hello', ['name' => 'Josh'], ['example' => 'name']);
 
 // Outputs "/hello/Josh?example=name"
 ```
