@@ -142,7 +142,7 @@ There are two ways you can write content to the HTTP response. First, you can si
 
 ### Closure binding
 
-If you use a `Closure` instance as the route callback, the closure's state is bound to the `Container` instance. This means you will have access to the DI container instance _inside_ of the Closure via the `$this` keyword:
+If you use a [dependency container](/docs/v4/concepts/di.html) and a `Closure` instance as the route callback, the closure's state is bound to the `Container` instance. This means you will have access to the DI container instance _inside_ of the Closure via the `$this` keyword:
 
 ```php
 $app->get('/hello/{name}', function ($request, $response, $args) {
