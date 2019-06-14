@@ -2,14 +2,12 @@
 title: Dependency Container
 ---
 
-Slim uses a dependency container to prepare, manage, and inject application
-dependencies. Slim supports containers that implement [PSR-11](http://www.php-fig.org/psr/psr-11/) or third-party containers like [Acclimate](https://github.com/jeremeamia/acclimate-container)
-or [PHP-DI](http://php-di.org/doc/frameworks/slim.html).
+Slim uses an optional dependency container to prepare, manage, and inject application
+dependencies. Slim supports containers that implement [PSR-11](http://www.php-fig.org/psr/psr-11/) like [PHP-DI](http://php-di.org/doc/frameworks/slim.html).
 
-## How to use the container
+## Example usage with PHP-DI
 
-You don't _have_ to provide a dependency container. If you do, however, you must
-inject the container instance into the Slim application's constructor.
+You don't _have_ to provide a dependency container. If you do, however, you must provide an instance of the container to `AppFactory` before creating an `App`.
 
 ```php
 <?php
@@ -37,8 +35,7 @@ $container->set('myService', function () {
 });
 ```
 
-You can fetch services from your container explicitly or implicitly.
-You can fetch an explicit reference to the container instance from inside a Slim
+You can fetch services from your container explicitly as well as from inside a Slim
 application route like this:
 
 ```php
@@ -60,27 +57,6 @@ $app->get('/foo', function (Request $request, Response $response, $args) {
 });
 ```
 
-You can implicitly fetch services from the container like this:
-
-```php
-/**
- * Example GET route
- *
- * @param  ServerRequestInterface $request  PSR-7 request
- * @param  ResponseInterface      $response  PSR-7 response
- * @param  array                  $args Route parameters
- *
- * @return ResponseInterface
- */
-$app->get('/foo', function (Request $request, Response $response, $args) {
-    $myService = $this->myService;
-    
-    ...do something with $myService...
-
-    return $response;
-});
-```
-
 To test if a service exists in the container before using it, use the `has()` method, like this:
 
 ```php
@@ -95,7 +71,7 @@ To test if a service exists in the container before using it, use the `has()` me
  */
 $app->get('/foo', function (Request $request, Response $response, $args) {
     if ($this->has('myService')) {
-        $myService = $this->myService;
+        $myService = $this->get('myService');
     }
     return $response;
 });
