@@ -287,8 +287,7 @@ return $response
     <div><strong>Reminder</strong></div>
     <div>
         The Response object is immutable. This method returns a <em>copy</em> of
-        the Response object that has a new Content-Type header. <strong>This method is
-        destructive</strong>, and it <em>replaces</em> the existing Content-Type header. The Status is also replaced if a $status was passed when <code>withJson()</code> was called.
+        the Response object that has a new Content-Type header. <strong>This method is destructive</strong>, and it <em>replaces</em> the existing Content-Type header.
     </div>
 </div>
 
