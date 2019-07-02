@@ -154,6 +154,31 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 });
 ```
 
+<div class="alert alert-info">
+    <div><strong>Heads Up!</strong></div>
+    <p>Slim does not support <em>static closures</em>.</p>
+</div>
+
+However it is possible to create controller classes with static actions (methods).
+```php
+class Controller
+{
+    public static function home(
+        ServerRequest $request,
+        Response $response,
+        array $args
+    ): ResponseInterface {
+        $response->write('Static route handler');
+
+        return $response;
+    }
+}
+
+// ...
+ 
+$app->get('/', Controller::class . ':home');
+```
+
 ## Redirect helper
 
 You can add a route that redirects `GET` HTTP requests to a different URL with
