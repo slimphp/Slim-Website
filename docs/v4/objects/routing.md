@@ -156,7 +156,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 
 <div class="alert alert-info">
     <div><strong>Heads Up!</strong></div>
-    <p>Slim does not support <em>static closures</em>.</p>
+    <p>Slim does not support <code>static</code> closures.</p>
 </div>
 
 However it is possible to create controller classes with static actions (methods).
