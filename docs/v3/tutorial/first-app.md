@@ -174,7 +174,7 @@ My setup is pretty simple since I only have a few extra classes, they're just in
     },
     "autoload": {
         "psr-4": {
-            "": "classes/"
+            "\\": "classes/"
         }
     }
 }
