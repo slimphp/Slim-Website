@@ -154,6 +154,11 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 });
 ```
 
+<div class="alert alert-info">
+    <div><strong>Heads Up!</strong></div>
+    <p>Slim does not support <code>static</code> closures.</p>
+</div>
+
 ## Redirect helper
 
 You can add a route that redirects `GET` HTTP requests to a different URL with
