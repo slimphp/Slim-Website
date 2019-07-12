@@ -162,7 +162,7 @@ We'll be able to access any settings we put into that `$config` array from our a
 
 Composer can handle the autoloading of your own classes just as well as the vendored ones. For an in-depth guide, take a look at [using Composer to manage autoloading rules](https://getcomposer.org/doc/04-schema.md#autoload).
 
-My setup is pretty simple since I only have a few extra classes, they're just in the global namespace, and the files are in the `src/classes/` directory.  So to autoload them, I add this `autoload` section to my `composer.json` file:
+My setup is pretty simple. I have a few extra classes and the files are in the `src/classes/` directory.  So to autoload them, I add this `autoload` section to my `composer.json` file:
 
 ```javascript
 {
@@ -174,7 +174,7 @@ My setup is pretty simple since I only have a few extra classes, they're just in
     },
     "autoload": {
         "psr-4": {
-            "\\": "classes/"
+            "Example\\": "classes/"
         }
     }
 }
