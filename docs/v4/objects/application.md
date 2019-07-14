@@ -54,12 +54,13 @@ require __DIR__ . '/../vendor/autoload.php';
 $displayErrorDetails = true;
 
 $app = AppFactory::create();
+$callableResolver = $app->getCallableResolver();
 $responseFactory = $app->getResponseFactory();
 
 $serverRequestCreator = ServerRequestCreatorFactory::create();
 $request = $serverRequestCreator->createFromGlobals();
 
-$errorHandler = new HttpErrorHandler($responseFactory);
+$errorHandler = new HttpErrorHandler($callableResolver, $responseFactory);
 $shutdownHandler = new ShutdownHandler($request, $errorHandler, $displayErrorDetails);
 register_shutdown_function($shutdownHandler);
 
@@ -67,7 +68,6 @@ $routeResolver = $app->getRouteResolver();
 $routingMiddleware = new RoutingMiddleware($routeResolver);
 $app->add($routingMiddleware);
 
-$callableResolver = $app->getCallableResolver();
 $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, $displayErrorDetails, false, false);
 $errorMiddleware->setDefaultErrorHandler($errorHandler);
 $app->add($errorMiddleware);

@@ -125,7 +125,7 @@ use Slim\Error\Renderers\AbstractErrorRenderer;
 
 class MyCustomErrorRenderer extends AbstractErrorRenderer
 {
-    public function render()
+    public function __invoke(Throwable $exception, bool $displayErrorDetails): string
     {
         return 'My awesome format';
     }
