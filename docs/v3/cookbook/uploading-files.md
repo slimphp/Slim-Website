@@ -99,7 +99,7 @@ $app->post('/', function(Request $request, Response $response) {
  * to avoid overwriting an existing uploaded file.
  *
  * @param string $directory directory to which the file is moved
- * @param UploadedFile $uploaded file uploaded file to move
+ * @param UploadedFile $uploadedFile file uploaded file to move
  * @return string filename of moved file
  */
 function moveUploadedFile($directory, UploadedFile $uploadedFile)
