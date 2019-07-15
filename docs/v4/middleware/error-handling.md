@@ -131,13 +131,24 @@ $app->run();
 ```
 
 ## Error Handling/Rendering
-The rendering is finally decoupled from the handling. Everything still works the way it previously did. It will still detect the content-type and render things appropriately with the help of `ErrorRenderers`. The core `ErrorHandler` extends the `AbstractErrorHandler` class which has been completely refactored. By default it will call the appropriate `ErrorRenderer` for the supported content types. Someone can now provide their custom error renderer by extending the `AbstractErrorHandler` class and overloading the protected `renderer` variable from the parent. 
+The rendering is finally decoupled from the handling. Everything still works the way it previously did.
+It will still detect the content-type and render things appropriately with the help of `ErrorRenderers`.
+The core `ErrorHandler` extends the `AbstractErrorHandler` class which has been completely refactored.
+By default it will call the appropriate `ErrorRenderer` for the supported content types. The core
+`ErrorHandler` defines renderers for the following content types:
+- `application/json`
+- `application/xml` and `text/xml`
+- `text/html`
+- `text/plain`
+
+For any content type you can register your own error renderer. So first define a new error renderer
+that implements `\Slim\Interfaces\ErrorRendererInterface`.
 
 ```php
 <?php
-use Slim\Error\Renderers\AbstractErrorRenderer;
+use Slim\Interfaces\ErrorRendererInterface;
 
-class MyCustomErrorRenderer extends AbstractErrorRenderer
+class MyCustomErrorRenderer implements ErrorRendererInterface
 {
     public function __invoke(Throwable $exception, bool $displayErrorDetails): string
     {
@@ -146,14 +157,34 @@ class MyCustomErrorRenderer extends AbstractErrorRenderer
 }
 ```
 
+And then register that error renderer in the core error handler. In the example below we
+will register the renderer to be used for `text/html` content types.
 ```php
 <?php
-use Slim\Handlers\ErrorHandler;
+use MyApp\Handlers\MyErrorHandler;
+use Slim\Factory\AppFactory;
+use Slim\Middleware\ErrorMiddleware;
 
-class MyCustomErrorHandler extends ErrorHandler
-{
-    protected $renderer = MyCustomErrorRenderer::class;
-}
+require __DIR__ . '/../vendor/autoload.php';
+
+$app = AppFactory::create();
+
+// Don't forget to add the routing middleware!
+
+// Create the error middleware and add it to the app.
+$callableResolver = $app->getCallableResolver();
+$responseFactory = $app->getResponseFactory();
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
+$app->add($errorMiddleware);
+
+// Get the default error handler and register my custom error renderer.
+$errorHandler = $errorMiddleware->getDefaultErrorHandler();
+$errorHandler->registerErrorRenderer('text/html', MyCustomErrorRenderer::class);
+
+// ...
+
+$app->run();
+```
 
 ### Force content type
 By default, the error handler tries to detect the error renderer using the `Accept` header of the
