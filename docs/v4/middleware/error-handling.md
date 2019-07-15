@@ -23,7 +23,7 @@ $routeResolver = $app->getRouteResolver();
 $routingMiddleware = new RoutingMiddleware($routeResolver);
 $app->add($routingMiddleware);
 
-/`
+/*
  * The constructor of ErrorMiddleware takes in 5 parameters
  * @param CallableResolverInterface $callableResolver -> CallableResolver implementation of your choice
  * @param ResponseFactoryInterface $responseFactory -> ResponseFactory implementation of your choice
@@ -39,15 +39,16 @@ $responseFactory = $app->getResponseFactory();
 $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
 $app->add($errorMiddleware);
 
-...
+// ...
 
 $app->run();
 ```
 
 ## Adding Custom Error Handlers
-You can now map custom handlers for any type of Exception or Throwable
+You can now map custom handlers for any type of Exception or Throwable.
 ```php
 <?php
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Psr7\Response;
@@ -56,23 +57,33 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
+// Don't forget to add the routing middleware!
+
 $callableResolver = $app->getCallableResolver();
 $responseFactory = $app->getResponseFactory();
 $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
 
-$handler = function ($request, $exception, $displayErrorDetails, $logErrors, $logErrorDetails) {
+$handler = function (
+    ServerRequestInterface $request,
+    Throwable $exception,
+    bool $displayErrorDetails,
+    bool $logErrors,
+    bool $logErrorDetails
+) use ($app) {
     $payload = ['error' => $exception->getMessage()];
-    
-    $response = new Response();
-    $response->getBody()->write($payload);
-    
+
+    $response = $app->getResponseFactory()->createResponse();
+    $response->getBody()->write(
+        json_encode($payload, JSON_UNESCAPED_UNICODE)
+    );
+
     return $response;
-}
+};
 
 $errorMiddleware->setErrorHandler(MyNamedException::class, $handler);
 $app->add($errorMiddleware);
 
-...
+// ...
 
 $app->run();
 ```
@@ -103,6 +114,9 @@ use Slim\Middleware\ErrorMiddleware;
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
+
+// Don't forget to add the routing middleware!
+
 $callableResolver = $app->getCallableResolver();
 $responseFactory = $app->getResponseFactory();
 
@@ -111,19 +125,30 @@ $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true
 $errorMiddleware->setDefaultErrorHandler($myErrorHandler);
 $app->add($errorMiddleware);
 
-...
+// ...
 
 $app->run();
 ```
 
 ## Error Handling/Rendering
-The rendering is finally decoupled from the handling. Everything still works the way it previously did. It will still detect the content-type and render things appropriately with the help of `ErrorRenderers`. The core `ErrorHandler` extends the `AbstractErrorHandler` class which has been completely refactored. By default it will call the appropriate `ErrorRenderer` for the supported content types. Someone can now provide their custom error renderer by extending the `AbstractErrorHandler` class and overloading the protected `renderer` variable from the parent. 
+The rendering is finally decoupled from the handling. Everything still works the way it previously did.
+It will still detect the content-type and render things appropriately with the help of `ErrorRenderers`.
+The core `ErrorHandler` extends the `AbstractErrorHandler` class which has been completely refactored.
+By default it will call the appropriate `ErrorRenderer` for the supported content types. The core
+`ErrorHandler` defines renderers for the following content types:
+- `application/json`
+- `application/xml` and `text/xml`
+- `text/html`
+- `text/plain`
+
+For any content type you can register your own error renderer. So first define a new error renderer
+that implements `\Slim\Interfaces\ErrorRendererInterface`.
 
 ```php
 <?php
-use Slim\Error\Renderers\AbstractErrorRenderer;
+use Slim\Interfaces\ErrorRendererInterface;
 
-class MyCustomErrorRenderer extends AbstractErrorRenderer
+class MyCustomErrorRenderer implements ErrorRendererInterface
 {
     public function __invoke(Throwable $exception, bool $displayErrorDetails): string
     {
@@ -132,15 +157,44 @@ class MyCustomErrorRenderer extends AbstractErrorRenderer
 }
 ```
 
+And then register that error renderer in the core error handler. In the example below we
+will register the renderer to be used for `text/html` content types.
 ```php
 <?php
-use Slim\Handlers\ErrorHandler;
+use MyApp\Handlers\MyErrorHandler;
+use Slim\Factory\AppFactory;
+use Slim\Middleware\ErrorMiddleware;
 
-class MyCustomErrorHandler extends ErrorHandler
-{
-    protected $renderer = MyCustomErrorRenderer::class;
-}
+require __DIR__ . '/../vendor/autoload.php';
+
+$app = AppFactory::create();
+
+// Don't forget to add the routing middleware!
+
+// Create the error middleware and add it to the app.
+$callableResolver = $app->getCallableResolver();
+$responseFactory = $app->getResponseFactory();
+$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
+$app->add($errorMiddleware);
+
+// Get the default error handler and register my custom error renderer.
+$errorHandler = $errorMiddleware->getDefaultErrorHandler();
+$errorHandler->registerErrorRenderer('text/html', MyCustomErrorRenderer::class);
+
+// ...
+
+$app->run();
 ```
+
+### Force content type
+By default, the error handler tries to detect the error renderer using the `Accept` header of the
+request. If you need to force the error handler to use a specific error renderer you can 
+write the following.
+
+```php
+$errorHandler->forceContentType('application/json');
+```
+
 
 ## New HTTP Exceptions
 We have added named HTTP exceptions within the application. These exceptions work nicely with the native renderers. They can each have a `description` and `title` attribute as well to provide a bit more insight when the native HTML renderer is invoked. 
@@ -155,7 +209,6 @@ The base class `HttpSpecializedException` extends `Exception` and comes with the
 * HttpUnauthorizedException
 
 You can extend the `HttpSpecializedException` class if they need any other response codes that we decide not to provide with the base repository. Example if you wanted a 504 gateway timeout exception that behaves like the native ones you would do the following:
-I
 ```php
 class HttpForbiddenException extends HttpException
 {
