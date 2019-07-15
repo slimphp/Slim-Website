@@ -23,7 +23,7 @@ $routeResolver = $app->getRouteResolver();
 $routingMiddleware = new RoutingMiddleware($routeResolver);
 $app->add($routingMiddleware);
 
-/`
+/*
  * The constructor of ErrorMiddleware takes in 5 parameters
  * @param CallableResolverInterface $callableResolver -> CallableResolver implementation of your choice
  * @param ResponseFactoryInterface $responseFactory -> ResponseFactory implementation of your choice
@@ -39,15 +39,16 @@ $responseFactory = $app->getResponseFactory();
 $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
 $app->add($errorMiddleware);
 
-...
+// ...
 
 $app->run();
 ```
 
 ## Adding Custom Error Handlers
-You can now map custom handlers for any type of Exception or Throwable
+You can now map custom handlers for any type of Exception or Throwable.
 ```php
 <?php
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Slim\Psr7\Response;
@@ -56,23 +57,33 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
+// Don't forget to add the routing middleware!
+
 $callableResolver = $app->getCallableResolver();
 $responseFactory = $app->getResponseFactory();
 $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
 
-$handler = function ($request, $exception, $displayErrorDetails, $logErrors, $logErrorDetails) {
+$handler = function (
+    ServerRequestInterface $request,
+    Throwable $exception,
+    bool $displayErrorDetails,
+    bool $logErrors,
+    bool $logErrorDetails
+) use ($app) {
     $payload = ['error' => $exception->getMessage()];
-    
-    $response = new Response();
-    $response->getBody()->write($payload);
-    
+
+    $response = $app->getResponseFactory()->createResponse();
+    $response->getBody()->write(
+        json_encode($payload, JSON_UNESCAPED_UNICODE)
+    );
+
     return $response;
-}
+};
 
 $errorMiddleware->setErrorHandler(MyNamedException::class, $handler);
 $app->add($errorMiddleware);
 
-...
+// ...
 
 $app->run();
 ```
@@ -103,6 +114,9 @@ use Slim\Middleware\ErrorMiddleware;
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
+
+// Don't forget to add the routing middleware!
+
 $callableResolver = $app->getCallableResolver();
 $responseFactory = $app->getResponseFactory();
 
@@ -111,7 +125,7 @@ $errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true
 $errorMiddleware->setDefaultErrorHandler($myErrorHandler);
 $app->add($errorMiddleware);
 
-...
+// ...
 
 $app->run();
 ```
@@ -155,7 +169,6 @@ The base class `HttpSpecializedException` extends `Exception` and comes with the
 * HttpUnauthorizedException
 
 You can extend the `HttpSpecializedException` class if they need any other response codes that we decide not to provide with the base repository. Example if you wanted a 504 gateway timeout exception that behaves like the native ones you would do the following:
-I
 ```php
 class HttpForbiddenException extends HttpException
 {
