@@ -154,7 +154,16 @@ class MyCustomErrorHandler extends ErrorHandler
 {
     protected $renderer = MyCustomErrorRenderer::class;
 }
+
+### Force content type
+By default, the error handler tries to detect the error renderer using the `Accept` header of the
+request. If you need to force the error handler to use a specific error renderer you can 
+write the following.
+
+```php
+$errorHandler->forceContentType('application/json');
 ```
+
 
 ## New HTTP Exceptions
 We have added named HTTP exceptions within the application. These exceptions work nicely with the native renderers. They can each have a `description` and `title` attribute as well to provide a bit more insight when the native HTML renderer is invoked. 
