@@ -26,7 +26,7 @@ $app = new App([
  * @param ContainerInterface|null Any implementation of a Container
  * @param CallableResolverInterface|null Any implementation of a CallableResolver
  * @param RouteCollectorInterface|null Any implementation of a RouteCollector
- * @param RouteResolverInterface|null Any implementation of a RouteResolverInterface
+ * @param RouteResolverInterface|null Any implementation of a RouteResolver
  */
 $app = new App(...);
 ```
