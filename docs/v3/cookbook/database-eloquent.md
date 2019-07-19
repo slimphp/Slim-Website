@@ -2,7 +2,7 @@
 title: Using Eloquent with Slim
 ---
 
-You can use a database ORM such as [Eloquent](https://laravel.com/docs/5.1/eloquent) to connect your SlimPHP application to a database.
+You can use a database ORM such as [Eloquent](https://laravel.com/docs/eloquent) to connect your SlimPHP application to a database.
 
 ## Adding Eloquent to your application
 
@@ -142,4 +142,4 @@ $record = $this->table->find(1);
 
 ## More information
 
-[Eloquent](https://laravel.com/docs/5.1/eloquent) Documentation
+[Eloquent](https://laravel.com/docs/eloquent) Documentation
