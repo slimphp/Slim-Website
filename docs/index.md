@@ -105,5 +105,5 @@ routing, and error handling.
 [csrf]: https://github.com/slimphp/Slim-Csrf/
 [httpcache]: https://github.com/slimphp/Slim-HttpCache
 [flash]: https://github.com/slimphp/Slim-Flash
-[eloquent]: https://laravel.com/docs/5.1/eloquent
+[eloquent]: https://laravel.com/docs/eloquent
 [doctrine]: http://www.doctrine-project.org/projects/orm.html
