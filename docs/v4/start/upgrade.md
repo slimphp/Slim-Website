@@ -26,7 +26,7 @@ $app = new App([
  * @param ContainerInterface|null Any implementation of a Container
  * @param CallableResolverInterface|null Any implementation of a CallableResolver
  * @param RouteCollectorInterface|null Any implementation of a RouteCollector
- * @param RouteResolverInterface|null Any implementation of a RouteResolverInterface
+ * @param RouteResolverInterface|null Any implementation of a RouteResolver
  */
 $app = new App(...);
 ```
@@ -38,7 +38,7 @@ $app = new App(...);
 - `displayErrorDetails` See [Error Handling Middleware](/docs/v4/middleware/error-handling.html) for new implementation of this setting.
 
 ## Changes to Container
-Slim no longer has a Container so you need to supply your own. If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. Also, `App::__call()` method has been removed, so accessing a container property via $app->key_name() no longer works.
+Slim no longer has a Container so you need to supply your own. If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. Also, `App::__call()` method has been removed, so accessing a container property via `$app->key_name()` no longer works.
 
 ## Changes to Routing components
 The `Router` component from Slim 3 has been split into multiple different components in order to decouple FastRoute from the `App` core and offer more flexibility to the end user. It has been split into
