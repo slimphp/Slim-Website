@@ -9,20 +9,14 @@ The Application `Slim\App` is the entry point to your Slim application and is us
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
-use Slim\Middleware\ErrorMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 // Instantiate app
 $app = AppFactory::create();
 
-$displayErrorDetails = true;
-
-// Add error handling middleware
-$callableResolver = $app->getCallableResolver();
-$responseFactory = $app->getResponseFactory();
-$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, $displayErrorDetails, false, false);
-$app->add($errorMiddleware);
+// Add Error Handling Middleware
+$app->addErrorMiddleware(true, false, false);
 
 // Add route callbacks
 $app->get('/', function (Request $request, Response $response, array $args) {
@@ -45,8 +39,6 @@ use MyApp\Handlers\ShutdownHandler;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
-use Slim\Middleware\RoutingMiddleware;
-use Slim\Middleware\ErrorMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -64,13 +56,12 @@ $errorHandler = new HttpErrorHandler($callableResolver, $responseFactory);
 $shutdownHandler = new ShutdownHandler($request, $errorHandler, $displayErrorDetails);
 register_shutdown_function($shutdownHandler);
 
-$routeResolver = $app->getRouteResolver();
-$routingMiddleware = new RoutingMiddleware($routeResolver);
-$app->add($routingMiddleware);
+// Add Routing Middleware
+$app->addRoutingMiddleware();
 
-$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, $displayErrorDetails, false, false);
+// Add Error Handling Middleware
+$errorMiddleware = $app->addErrorMiddleware($displayErrorDetails, false, false);
 $errorMiddleware->setDefaultErrorHandler($errorHandler);
-$app->add($errorMiddleware);
 
 $app->run();
 ```

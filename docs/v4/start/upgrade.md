@@ -68,55 +68,45 @@ having to pass in a `ServerRequest` object. The following PSR-7 implementations 
 
 ## New Routing Middleware
 The routing has been implemented as middleware. We are still using [FastRoute](https://github.com/nikic/FastRoute) for our routing needs.
-In order to instantiate the RoutingMiddleware you will need to pass in a `RouteResolverInterface` which we provide by default via `App::getRouteResolver()`.
 If you were using `determineRouteBeforeAppMiddleware`, you need to add the `Middleware\RoutingMiddleware` middleware to your application just before you call `run()` to maintain the previous behaviour.
 See [Pull Request #2288](https://github.com/slimphp/Slim/pull/2288) for more information.
 
 ```php
 <?php
 use Slim\Factory\AppFactory;
-use Slim\Middleware\RoutingMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$routeResolver = $app->getRouteResolver();
-$routingMiddleware = new RoutingMiddleware($routeResolver);
-$app->add($routingMiddleware);
+// Add Routing Middleware
+$app->addRoutingMiddleware();
 
-...
+// ...
 
 $app->run();
 ```
 
 ## New Error Handling Middleware
 Error handling has also been implemented as middleware.
-For custom handlers, logging and more see full documentation [here](/docs/handlers/error.html).
 See [Pull Request #2398](https://github.com/slimphp/Slim/pull/2398) for more information.
 ```php
 <?php
 use Slim\Factory\AppFactory;
-use Slim\Middleware\ErrorMiddleware;
-use Slim\Middleware\RoutingMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
 /*
- * The routing middleware should be added earlier than the ErrorMiddleware
- * Otherwise exceptions thrown from it will not be handled by the middleware
+ * The routing middleware should be added before the ErrorMiddleware
+ * Otherwise exceptions thrown from it will not be handled
  */
-$routeResolver = $app->getRouteResolver();
-$routingMiddleware = new RoutingMiddleware($routeResolver);
-$app->add($routingMiddleware);
+$app->addRoutingMiddleware();
 
 /*
- * The constructor of `ErrorMiddleware` takes in 5 parameters
- 
- * @param CallableResolverInterface $callableResolver -> CallableResolver implementation of your choice
- * @param ResponseFactoryInterface $responseFactory -> ResponseFactory implementation of your choice
+ * Add Error Handling Middleware
+ *
  * @param bool $displayErrorDetails -> Should be set to false in production
  * @param bool $logErrors -> Parameter is passed to the default ErrorHandler
  * @param bool $logErrorDetails -> Display error details in error log
@@ -125,12 +115,9 @@ $app->add($routingMiddleware);
  * Note: This middleware should be added last. It will not handle any exceptions/errors
  * for middleware added after it.
  */
-$callableResolver = $app->getCallableResolver();
-$responseFactory = $app->getResponseFactory();
-$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
-$app->add($errorMiddleware);
+$app->addErrorMiddleware(true, true, true);
 
-...
+// ...
 
 $app->run();
 ```
@@ -144,13 +131,15 @@ See [Pull Request #2405](https://github.com/slimphp/Slim/pull/2405) for more inf
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+use Slim\Routing\RouteContext;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
 $app->get('/hello/{name}', function (Request $request, Response $response) {
-    $routingResults = $request->getAttribute('routingResults');
+    $routeContext = RouteContext::fromRequest($request);
+    $routingResults = $routeContext->getRoutingResults();
     
     // Get all of the route's parsed arguments e.g. ['name' => 'John']
     $routeArguments = $routingResults->getRouteArguments();
@@ -161,7 +150,7 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
     return $response;
 });
 
-...
+// ...
 
 $app->run();
 ```
@@ -181,7 +170,7 @@ $app = AppFactory::create();
 $methodOverridingMiddleware = new MethodOverridingMiddleware();
 $app->add($methodOverridingMiddleware);
 
-...
+// ...
 
 $app->run();
 ```
@@ -201,7 +190,7 @@ $app = AppFactory::create();
 $contentLengthMiddleware = new ContentLengthMiddleware();
 $app->add($contentLengthMiddleware);
 
-...
+// ...
 
 $app->run();
 ```
@@ -225,7 +214,7 @@ $app = AppFactory::create();
 $mode = OutputBufferingMiddleware::APPEND;
 $outputBufferingMiddleware = new OutputBufferingMiddleware($mode);
 
-...
+// ...
 
 $app->run();
 ```

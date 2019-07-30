@@ -62,7 +62,7 @@ Here is a complete example application:
 ```php
 <?php
 use Slim\Factory\AppFactory;
-use Slim\Middleware\RoutingMiddleware;
+use Slim\Routing\RouteContext;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -70,7 +70,8 @@ $app = AppFactory::create();
 
 // This middleware will append the response header Access-Control-Allow-Methods with all allowed methods
 $app->add(function($request, $handler) {
-    $routingResults = $request->getAttribute('routingResults');
+    $routeContext = RouteContext::fromRequest($request);
+    $routingResults = $routeContext->getRoutingResults();
     $methods = $routingResults->getAllowedMethods();
     
     $response = $handler->handle($request);
@@ -79,18 +80,19 @@ $app->add(function($request, $handler) {
     return $response;
 });
 
-// This middleware needs to be added last so the routing is performed first
-$routeResolver = $app->getRouteResolver();
-$routingMiddleware = new RoutingMiddleware($routeResolver);
-$app->add($routingMiddleware);
+// The RoutingMiddleware should be added after our CORS middleware so routing is performed first
+$app->addRoutingMiddleware();
 
 $app->get("/api/{id}", function($request, $response, $arguments) {
+    // ...
 });
 
 $app->post("/api/{id}", function($request, $response, $arguments) {
+    // ...
 });
 
 $app->map(["DELETE", "PATCH"], "/api/{id}", function($request, $response, $arguments) {
+    // ...
 });
 
 // Pay attention to this when you are using some javascript front-end framework and you are using groups in slim php

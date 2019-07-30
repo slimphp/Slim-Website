@@ -89,7 +89,7 @@ $afterMiddleware = function ($request, $handler) {
 $app->add($beforeMiddleware);
 $app->add($afterMiddleware);
 
-...
+// ...
 
 $app->run();
 ```
@@ -171,7 +171,7 @@ $app->get('/', function () { ... })->add(new ExampleMiddleware());
 // Add Middleware On Group
 $app->group('/', function () { ... })->add(new ExampleMiddleware());
 
-...
+// ...
 
 $app->run();
 ```

@@ -54,7 +54,7 @@ $app->add(function (ServerRequestInterface $request, RequestHandler $handler) {
    return $handler->handle($request);
 });
 
-...define app routes...
+// ...define app routes...
 
 $app->run();
 ```
@@ -382,19 +382,21 @@ $app
   ->get('/course/{id}', Video::class.":watch")
   ->add(PermissionMiddleware::class);
 ```
+
 ```php
 <?php
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+use Slim\Routing\RouteContext;
 
 class PermissionMiddleware {
     public function __invoke(Request $request, RequestHandler $handler) {
-        /` @var $route \Slim\Routing\Route */
-        $route = $request->getAttribute('route');
+        $routeContext = RouteContext::fromRequest($request);
+        $route = $routeContext->getRoute();
         
         $courseId = $route->getArgument('id');
         
-        ...do permission logic...
+        // ...do permission logic...
         
         return $handler->handle($request);
     }
@@ -415,13 +417,11 @@ $app->add(function ($request, $handler) {
 });
 ```
 
-
 Example, how to retrieve the value.
 
 ```php
 $app->get('/test', function ($request, $response, $args) {
-    $session = $request->getAttribute('session'); //get the session from the request
-    
+    $session = $request->getAttribute('session'); // get the session from the request
     return $response->write('Yay, ' . $session['name']);
 });
 ```
