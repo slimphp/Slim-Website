@@ -50,8 +50,6 @@ example application:
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
-use Slim\Middleware\ErrorMiddleware;
-use Slim\Middleware\RoutingMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -65,24 +63,20 @@ require __DIR__ . '/../vendor/autoload.php';
 $app = AppFactory::create();
 
 // Add Routing Middleware
-$routeResolver = $app->getRouteResolver();
-$routingMiddleware = new RoutingMiddleware($routeResolver);
-$app->add($routingMiddleware);
+$app->addRoutingMiddleware();
 
-/** 
+/*
  * Add Error Handling Middleware
- * The constructor of `ErrorMiddleware` takes in 5 parameters
  *
- * @param CallableResolverInterface $callableResolver - CallableResolver implementation of your choice
- * @param ResponseFactoryInterface $responseFactory - ResponseFactory implementation of your choice
- * @param bool $displayErrorDetails - Should be set to false in production
- * @param bool $logErrors - Parameter is passed to the default ErrorHandler
- * @param bool $logErrorDetails - Display error details in error log
- */ 
-$callableResolver = $app->getCallableResolver();
-$responseFactory = $app->getResponseFactory();
-$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
-$app->add($errorMiddleware);
+ * @param bool $displayErrorDetails -> Should be set to false in production
+ * @param bool $logErrors -> Parameter is passed to the default ErrorHandler
+ * @param bool $logErrorDetails -> Display error details in error log
+ * which can be replaced by a callable of your choice.
+ 
+ * Note: This middleware should be added last. It will not handle any exceptions/errors
+ * for middleware added after it.
+ */
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // Define app routes
 $app->get('/hello/{name}', function (Request $request, Response $response, $args) {

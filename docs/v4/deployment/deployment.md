@@ -12,24 +12,17 @@ this section, we provide some notes for various set-ups.
 ```php
 <?php
 use Slim\Factory\AppFactory;
-use Slim\Middleware\ErrorMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-...
+// ...
 
-/**
- * If you are using the pre-packaged ErrorMiddleware
- * Ensure that you set the third parameter of ErrorMiddleware's constructor to false
- */ 
-$callableResolver = $app->getCallableResolver();
-$responseFactory = $app->getResponseFactory();
-$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, false, true, true);
-$app->add($errorMiddleware);
+// If you are adding the pre-packaged ErrorMiddleware set `displayErrorDetails` to `false`
+$app->addErrorMiddleware(false, true, true);
 
-...
+// ...
 
 $app->run();
 ```

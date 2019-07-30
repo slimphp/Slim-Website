@@ -23,7 +23,7 @@ $mode = OutputBufferingMiddleware::APPEND;
 $outputBufferingMiddleware = new OutputBufferingMiddleware($mode);
 $app->add($outputBufferingMiddleware);
 
-...
+// ...
 
 $app->run();
 ```

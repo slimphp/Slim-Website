@@ -51,7 +51,7 @@ application route like this:
 $app->get('/foo', function (Request $request, Response $response, $args) {
     $myService = $this->get('myService');
 
-    ...do something with $myService...
+    // ...do something with $myService...
 
     return $response;
 });

@@ -12,18 +12,16 @@ Example:
 ```php
 <?php
 use Slim\Factory\AppFactory;
-use Slim\Middleware\RoutingMiddleware;
+use Slim\Routing\RouteContext;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-/*
- * Via this middleware you could access the route and routing results
- * from the resolved route
- */
+// Via this middleware you could access the route and routing results from the resolved route
 $app->add(function (Request $request, RequestHandler $handler) {
-    $route = $request->getAttribute('route');
+    $routeContext = RouteContext::fromRequest($request);
+    $route = $routeContext->getRoute();
 
     // return NotFound for non existent route
     if (empty($route)) {
@@ -35,21 +33,15 @@ $app->add(function (Request $request, RequestHandler $handler) {
     $methods = $route->getMethods();
     $arguments = $route->getArguments();
 
-    ... do something with the data ...
+    // ... do something with the data ...
 
     return $handler->handle($request);
 });
 
-/*
- * You need to ensure that you add the RoutingMiddleware last
- * In order for it to get executed first which will append the
- * `route` and `routingResults` to the incoming request object
- */
- $routeResolver = $app->getRouteResolver();
- $routingMiddleware = new RoutingMiddleware($routeResolver);
- $app->add($routingMiddleware);
+// The RoutingMiddleware should be added after our CORS middleware so routing is performed first
+$app->addRoutingMiddleware();
  
- ...
+// ...
  
- $app->run();
+$app->run();
 ```

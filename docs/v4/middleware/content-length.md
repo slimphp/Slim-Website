@@ -17,7 +17,7 @@ $app = AppFactory::create();
 $contentLengthMiddleware = new ContentLengthMiddleware();
 $app->add($contentLengthMiddleware);
 
-...
+// ...
 
 $app->run();
 ```

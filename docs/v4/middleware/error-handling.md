@@ -8,8 +8,6 @@ Things go wrong. You can't predict errors, but you can anticipate them. Each Sli
 ```php
 <?php
 use Slim\Factory\AppFactory;
-use Slim\Middleware\ErrorMiddleware;
-use Slim\Middleware\RoutingMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -19,25 +17,19 @@ $app = AppFactory::create();
  * The routing middleware should be added earlier than the ErrorMiddleware
  * Otherwise exceptions thrown from it will not be handled by the middleware
  */
-$routeResolver = $app->getRouteResolver();
-$routingMiddleware = new RoutingMiddleware($routeResolver);
-$app->add($routingMiddleware);
+$app->addRoutingMiddleware();
 
 /*
- * The constructor of ErrorMiddleware takes in 5 parameters
- * @param CallableResolverInterface $callableResolver -> CallableResolver implementation of your choice
- * @param ResponseFactoryInterface $responseFactory -> ResponseFactory implementation of your choice
+ * 
  * @param bool $displayErrorDetails -> Should be set to false in production
  * @param bool $logErrors -> Parameter is passed to the default ErrorHandler
  * @param bool $logErrorDetails -> Display error details in error log
  * which can be replaced by a callable of your choice.
+ * 
  * Note: This middleware should be added last. It will not handle any exceptions/errors
  * for middleware added after it.
  */
-$callableResolver = $app->getCallableResolver();
-$responseFactory = $app->getResponseFactory();
-$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
-$app->add($errorMiddleware);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // ...
 
@@ -50,20 +42,17 @@ You can now map custom handlers for any type of Exception or Throwable.
 <?php
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\AppFactory;
-use Slim\Middleware\ErrorMiddleware;
 use Slim\Psr7\Response;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-// Don't forget to add the routing middleware!
+// Add Routing Middleware
+$app->addRoutingMiddleware();
 
-$callableResolver = $app->getCallableResolver();
-$responseFactory = $app->getResponseFactory();
-$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
-
-$handler = function (
+// Define Custom Error Handler
+$customErrorHandler = function (
     ServerRequestInterface $request,
     Throwable $exception,
     bool $displayErrorDetails,
@@ -80,8 +69,9 @@ $handler = function (
     return $response;
 };
 
-$errorMiddleware->setErrorHandler(MyNamedException::class, $handler);
-$app->add($errorMiddleware);
+// Add Error Middleware
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
 // ...
 
@@ -109,21 +99,21 @@ class MyErrorHandler extends ErrorHandler {
 <?php
 use MyApp\Handlers\MyErrorHandler;
 use Slim\Factory\AppFactory;
-use Slim\Middleware\ErrorMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-// Don't forget to add the routing middleware!
 
-$callableResolver = $app->getCallableResolver();
-$responseFactory = $app->getResponseFactory();
+// Add Routing Middleware
+$app->addRoutingMiddleware();
 
+// Instantiate Your Custom Error Handler
 $myErrorHandler = new MyErrorHandler(true); // Constructor parameter is $logErrors (bool)
-$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
-$errorMiddleware->setDefaultErrorHandler($myErrorHandler);
-$app->add($errorMiddleware);
+
+// Add Error Middleware
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
 // ...
 
@@ -163,19 +153,16 @@ will register the renderer to be used for `text/html` content types.
 <?php
 use MyApp\Handlers\MyErrorHandler;
 use Slim\Factory\AppFactory;
-use Slim\Middleware\ErrorMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-// Don't forget to add the routing middleware!
+// Add Routing Middleware
+$app->addRoutingMiddleware();
 
-// Create the error middleware and add it to the app.
-$callableResolver = $app->getCallableResolver();
-$responseFactory = $app->getResponseFactory();
-$errorMiddleware = new ErrorMiddleware($callableResolver, $responseFactory, true, true, true);
-$app->add($errorMiddleware);
+// Add Error Middleware
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // Get the default error handler and register my custom error renderer.
 $errorHandler = $errorMiddleware->getDefaultErrorHandler();
@@ -186,7 +173,7 @@ $errorHandler->registerErrorRenderer('text/html', MyCustomErrorRenderer::class);
 $app->run();
 ```
 
-### Force content type
+### Force a specific content type for error rendering
 By default, the error handler tries to detect the error renderer using the `Accept` header of the
 request. If you need to force the error handler to use a specific error renderer you can 
 write the following.
@@ -194,7 +181,6 @@ write the following.
 ```php
 $errorHandler->forceContentType('application/json');
 ```
-
 
 ## New HTTP Exceptions
 We have added named HTTP exceptions within the application. These exceptions work nicely with the native renderers. They can each have a `description` and `title` attribute as well to provide a bit more insight when the native HTML renderer is invoked. 
