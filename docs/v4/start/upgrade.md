@@ -89,7 +89,6 @@ $app->run();
 
 ## New Error Handling Middleware
 Error handling has also been implemented as middleware.
-For custom handlers, logging and more see full documentation [here](/docs/handlers/error.html).
 See [Pull Request #2398](https://github.com/slimphp/Slim/pull/2398) for more information.
 ```php
 <?php
