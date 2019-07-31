@@ -88,7 +88,7 @@ namespace MyApp\Handlers;
 use Slim\Handlers\ErrorHandler;
 
 class MyErrorHandler extends ErrorHandler {
-    public function logError($error)
+    protected function logError(string $error): void
     {
         // Insert custom error logging function.
     }
@@ -113,7 +113,7 @@ $myErrorHandler = new MyErrorHandler(true); // Constructor parameter is $logErro
 
 // Add Error Middleware
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
-$errorMiddleware->setDefaultErrorHandler($customErrorHandler);
+$errorMiddleware->setDefaultErrorHandler($myErrorHandler);
 
 // ...
 
