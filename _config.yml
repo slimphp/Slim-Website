@@ -3,6 +3,8 @@ markdown: kramdown
 timezone: America/New_York
 title: Slim Framework
 url: http://www.slimframework.com
+slim_version: v4
+slim_docs_versions: v2, v3, v4
 slim_website_repo: https://github.com/slimphp/Slim-Website/tree/gh-pages/
 urlBasePath:
 include: [.htaccess]
@@ -19,10 +21,87 @@ defaults:
       path: ""
       type: "pages"
     values:
-      docs:
+      docs-v4:
         - title: Get Started
           items:
-            - [/docs, Home]
+          - [/docs/v4, Home]
+          - [/docs/v4/start/installation.md, Installation]
+          - [/docs/v4/start/upgrade.md, Upgrade Guide]
+          - [/docs/v4/start/web-servers.md, Web Servers]
+          - [/docs/v4/deployment/deployment.md, Deployment]
+        - title: Concepts
+          items:
+          - [/docs/v4/concepts/life-cycle.md, Application Life Cycle]
+          - [/docs/v4/concepts/value-objects.md, PSR-7]
+          - [/docs/v4/concepts/middleware.md, Middleware]
+          - [/docs/v4/concepts/di.md, Dependency Container]
+        - title: The Application
+          items:
+          - [/docs/v4/objects/application.md, Overview]
+          - [/docs/v4/objects/application.md#notices-and-warnings-handling, Notices & Warnings Handling]
+        - title: The Request
+          items:
+          - [/docs/v4/objects/request.md, Overview]
+          - [/docs/v4/objects/request.md#the-request-method, Method]
+          - [/docs/v4/objects/request.md#the-request-headers, Headers]
+          - [/docs/v4/objects/request.md#the-request-body, Body]
+          - [/docs/v4/objects/request.md#uploaded-files, Uploaded Files]
+          - [/docs/v4/objects/request.md#request-helpers, Helpers]
+          - [/docs/v4/objects/request.md#route-object, Route object]
+          - [/docs/v4/objects/request.md#media-type-parsers, Media type parsers]
+
+        - title: The Response
+          items:
+          - [/docs/v4/objects/response.md, Overview]
+          - [/docs/v4/objects/response.md#the-response-status, Status]
+          - [/docs/v4/objects/response.md#the-response-headers, Headers]
+          - [/docs/v4/objects/response.md#the-response-body, Body]
+          - [/docs/v4/objects/response.md#returning-json, JSON]
+        - title: Routing
+          items:
+          - [/docs/v4/objects/routing.md, Overview]
+          - [/docs/v4/objects/routing.md#how-to-create-routes, Create Routes]
+          - [/docs/v4/objects/routing.md#route-callbacks, Callbacks]
+          - [/docs/v4/objects/routing.md#route-strategies, Strategies]
+          - [/docs/v4/objects/routing.md#route-placeholders, Placeholders]
+          - [/docs/v4/objects/routing.md#route-names, Names]
+          - [/docs/v4/objects/routing.md#route-groups, Groups]
+          - [/docs/v4/objects/routing.md#route-middleware, Middleware]
+          - [/docs/v4/objects/routing.md#router-caching, Caching]
+          - [/docs/v4/objects/routing.md#container-resolution, Container Resolution]
+        - title: Packaged Middleware
+          items:
+          - [/docs/v4/middleware/routing.md, Routing]
+          - [/docs/v4/middleware/error-handling.md, Error Handling]
+          - [/docs/v4/middleware/method-overriding.md, Method Overriding]
+          - [/docs/v4/middleware/output-buffering.md, Output Buffering]
+          - [/docs/v4/middleware/content-length.md, Content Length]
+        - title: Cook book
+          items:
+          - [/docs/v4/cookbook/route-patterns.md, Trailing / in routes]
+          - [/docs/v4/cookbook/retrieving-current-route.md, Retrieving Current Route]
+          - [/docs/v4/cookbook/enable-cors.md, Enabling CORS]
+          - [/docs/v4/cookbook/uploading-files.md, Uploading Files using POST forms]
+        - title: Contributing
+          items:
+          - [/docs/v4/contributors/strategy.md, Branching Strategy]
+          - [/docs/v4/contributors/guidelines.md, Guidelines]
+
+  - scope:
+      path: "docs/v4"
+      type: "pages"
+    values:
+      layout: docs-v4
+
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      docs-v3:
+        - title: Get Started
+          items:
+            - [/docs/v3, Home]
             - [/docs/v3/start/installation.md, Installation]
             - [/docs/v3/start/upgrade.md, Upgrade Guide]
             - [/docs/v3/start/web-servers.md, Web Servers]
@@ -33,7 +112,8 @@ defaults:
 
         - title: Concepts
           items:
-            - [/docs/v3/concepts/value-objects.md, PSR 7]
+            - [/docs/v3/concepts/life-cycle.md, Application Life Cycle]
+            - [/docs/v3/concepts/value-objects.md, PSR-7]
             - [/docs/v3/concepts/middleware.md, Middleware]
             - [/docs/v3/concepts/di.md, Dependency Container]
         - title: The Application
@@ -94,17 +174,17 @@ defaults:
             - [/docs/v3/features/csrf.md, CSRF Protection]
             - [/docs/v3/features/flash.md, Flash Messages]
             - ['https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x', 3rd Party]
-
         - title: Contributing
           items:
             - [/docs/v3/contributors/strategy.md, Branching Strategy]
             - [/docs/v3/contributors/guidelines.md, Guidelines]
-  -
-    scope:
-      path: "docs"
+
+  - scope:
+      path: "docs/v3"
       type: "pages"
     values:
-      layout: docs
+      layout: docs-v3
+
   -
     scope:
       path: ""

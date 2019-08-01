@@ -1,20 +1,12 @@
 ---
-title: Documentation
+title: Slim 4 Documentation
 ---
 
 <div class="alert alert-info">
     <p>
-        This documentation is for <strong>Slim 3</strong>. Looking for <a href="/docs/v2">Slim 2 Docs</a>?.
+        This documentation is for <strong>Slim 4</strong>. Looking for <a href="/docs/v3">Slim 3 Docs</a>?.
     </p>
 </div>
-
-<p style="text-align: center;">
-    <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-        <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
-    </a>
-    <br />
-    This website and documentation is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
-</p>
 
 ## Welcome
 
@@ -42,7 +34,7 @@ provides only a minimal set of tools that do what you need and nothing else.
 ## How does it work?
 
 First, you need a web server like Nginx or Apache. You should [configure
-your web server](/docs/v3/start/web-servers.html) so that it sends all appropriate
+your web server](/docs/v4/start/web-servers.html) so that it sends all appropriate
 requests to one "front-controller" PHP file. You instantiate and run your Slim
 app in this PHP file.
 
@@ -55,15 +47,42 @@ example application:
 <figure markdown="1">
 ```php
 <?php
-// Create and configure Slim app
-$config = ['settings' => [
-    'addContentLengthHeader' => false,
-]];
-$app = new \Slim\App($config);
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+/**
+ * Instantiate App
+ *
+ * In order for the factory to work you need to ensure you have installed
+ * a supported PSR-7 implementation of your choice e.g.: Slim PSR-7 and a supported
+ * ServerRequest creator (included with Slim PSR-7)
+ */
+$app = AppFactory::create();
+
+// Add Routing Middleware
+$app->addRoutingMiddleware();
+
+/*
+ * Add Error Handling Middleware
+ *
+ * @param bool $displayErrorDetails -> Should be set to false in production
+ * @param bool $logErrors -> Parameter is passed to the default ErrorHandler
+ * @param bool $logErrorDetails -> Display error details in error log
+ * which can be replaced by a callable of your choice.
+ 
+ * Note: This middleware should be added last. It will not handle any exceptions/errors
+ * for middleware added after it.
+ */
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // Define app routes
-$app->get('/hello/{name}', function ($request, $response, $args) {
-    return $response->write("Hello " . $args['name']);
+$app->get('/hello/{name}', function (Request $request, Response $response, $args) {
+    $name = $args['name'];
+    $response->getBody()->write("Hello, $name");
+    return $response;
 });
 
 // Run app
@@ -79,9 +98,9 @@ and Response objects. These objects represent the actual HTTP request received
 by the web server and the eventual HTTP response returned to the client.
 
 Every Slim app route is given the current Request and Response objects as arguments
-to its callback routine. These objects implement the popular [PSR 7](/docs/v3/concepts/value-objects.html) interfaces. The Slim app route can inspect
+to its callback routine. These objects implement the popular [PSR-7](/docs/v4/concepts/value-objects.html) interfaces. The Slim app route can inspect
 or manipulate these objects as necessary. Ultimately, each Slim app route
-**MUST** return a PSR 7 Response object.
+**MUST** return a PSR-7 Response object.
 
 ## Bring your own components
 
@@ -100,10 +119,19 @@ This documentation begins by explaining Slim's concepts and architecture
 before venturing into specific topics like request and response handling,
 routing, and error handling.
 
+## Documentation License
+<p style="text-align: left;">
+    This website and documentation is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+    <br />
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+        <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
+    </a>
+</p>
+
 [symfony]: https://symfony.com/
 [laravel]: https://laravel.com/
 [csrf]: https://github.com/slimphp/Slim-Csrf/
 [httpcache]: https://github.com/slimphp/Slim-HttpCache
 [flash]: https://github.com/slimphp/Slim-Flash
-[eloquent]: https://laravel.com/docs/eloquent
+[eloquent]: https://laravel.com/docs/5.1/eloquent
 [doctrine]: http://www.doctrine-project.org/projects/orm.html
