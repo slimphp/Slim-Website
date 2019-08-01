@@ -1,18 +1,28 @@
+.divider.front-page-divider {
+  margin: 60px 0 36px;
+}
+
 .center{
     text-align: center;
 }
 
 .wrapper{
     margin: 0 auto;
-    max-width: 92%;
-    width: 700px;
+    width: 960px;
 }
 
 .wrapper.docs {
     width: 80%;
 }
 
-pre{
+.feature {
+  .feature-icon {
+    color: @green;
+    margin-right: 4px;
+  }
+}
+
+pre {
     margin-bottom: @baseline !important;
 }
 
@@ -30,6 +40,40 @@ pre{
             margin-bottom: 0 !important;
         }
     }
+}
+
+.toc-nav-toggle {
+  margin-bottom: 2em;
+
+  @media (min-width: @screen-md-min) {
+    display: none !important;
+  }
+}
+
+.toc-nav-collapse {
+  overflow-x: visible;
+  &:extend(.clearfix all);
+  -webkit-overflow-scrolling: touch;
+
+  &.in {
+    overflow-y: auto;
+  }
+
+  @media (min-width: @screen-md-min) {
+    width: auto;
+
+    &.collapse {
+      display: block !important;
+      visibility: visible !important;
+      height: auto !important;
+      padding-bottom: 0;
+      overflow: visible !important;
+    }
+
+    &.in {
+      overflow-y: visible;
+    }
+  }
 }
 
 .toc-title{
@@ -60,8 +104,10 @@ pre{
 }
 
 .docs-content {
+  margin-top: 2em;
   word-wrap: break-word;
 }
+
 
 @import "../bootstrap/less/variables";
 
@@ -79,6 +125,7 @@ pre{
 
 @media (min-width: @screen-md-min) {
   .docs-content {
+    margin-top: 0;
     padding-left: 2em;
   }
 }

@@ -1,0 +1,79 @@
+{% include header.html %}
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tocNav"
+                            aria-expanded="false" aria-controls="tocNav">
+                        Toggle Navigation
+                    </button>
+                </div>
+                <div class="collapse toc-nav-collapse" id="tocNav">
+                    {% include version-selector.html %}
+                    {% include search-box.html %}
+                    {% for section in page.docs-v3 %}
+                        {% assign isCurrentSection = false %}
+                        {% for item in section.items %}
+                            {% capture itemUrl %}{{ item[0] | replace: '.md', '.html' }}{% unless item[0] contains ".md" %}/{% endunless %}{% endcapture %}
+                            {% if itemUrl == page.url %}
+                                {% assign isCurrentSection = true %}
+                            {% endif %}
+                        {% endfor %}
+                        <h3 class="toc-title{% if isCurrentSection %} active{% endif %}">{{ section.title }}</h3>
+                        <ul class="toc-links">
+                            {% for item in section.items %}
+                                {% capture itemUrl %}{{ item[0] | replace: '.md', '.html' }}{% unless item[0] contains ".md" %}/{% endunless %}{% endcapture %}
+                                <li><a href="{{ itemUrl }}">{{ item[1] }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header">{{ page.title }}</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a href="{{ site.slim_website_repo }}{{page.path}}" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                {{ content }}
+
+                <nav>
+                    <ul class="nav pager">
+                        {% for section in page.docs-v3 %}
+                            {% assign isCurrentSection = false %}
+                            {% for item in section.items %}
+
+                                {% comment %}skip menu items that point to a page fragment{% endcomment %}
+                                {% if item[0] contains '#' %}
+                                  {% break %}
+                                {% endif %}
+
+                                {% capture itemUrl %}{{ item[0] | replace: '.md', '.html' }}{% unless item[0] contains ".md" %}/{% endunless %}{% endcapture %}
+                                {% if itemUrl == page.url %}
+                                    {% if prevSection and prevItem %}
+                                        <li class="previous">
+                                            <a href="{{ prevItemUrl }}" rel="prev"><i class="fa fa-arrow-left"></i> <small>{{ prevSection.title }}: </small> {{ prevItem[1] }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if prevItemUrl == page.url %}
+                                    <li class="next">
+                                        <a href="{{ itemUrl }}" rel="next"><small>{{ section.title }}: </small> {{ item[1] }} <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                {% endif %}
+
+                                {% assign prevSection = section %}
+                                {% assign prevItem = item %}
+                                {% assign prevItemUrl = itemUrl %}
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% include maintainers.html %}
+    </div>
+</div>
+{% include footer.html %}

@@ -1,5 +1,5 @@
 ---
-title: Slim Framework v2 Documentation
+title: Slim 2 Documentation
 ---
 # Slim Framework v2
 
