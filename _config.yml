@@ -80,6 +80,7 @@ defaults:
           items:
           - [/docs/v4/cookbook/route-patterns.md, Trailing / in routes]
           - [/docs/v4/cookbook/retrieving-current-route.md, Retrieving Current Route]
+          - [/docs/v4/cookbook/route-redirection.md, Route redirection]
           - [/docs/v4/cookbook/enable-cors.md, Enabling CORS]
           - [/docs/v4/cookbook/uploading-files.md, Uploading Files using POST forms]
         - title: Contributing
