@@ -274,6 +274,7 @@ We can also return JSON data with a custom HTTP status code.
 <figure markdown="1">
 ```php
 $data = array('name' => 'Rob', 'age' => 40);
+$payload = json_encode($data);
 
 $response->getBody()->write($payload);
 return $response
