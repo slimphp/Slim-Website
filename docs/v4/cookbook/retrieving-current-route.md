@@ -2,7 +2,7 @@
 title: Retrieving Current Route
 ---
 
-If you ever need to get access to the current route within your application all you have to do is call the request class' `getAttribute` method with an argument of `'route'` and it will return the current route, which is an instance of the `Slim\Route` class.
+If you ever need to get access to the current route within your application all you have to do is call the request class' `getAttribute` method with an argument of `'route'` and it will return the current route, which is an instance of the `Slim\Routing\Route` class.
 
 From there you can get the route's name by using `getName()` or get the methods supported by this route via `getMethods()`, etc.
 
