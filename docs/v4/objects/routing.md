@@ -108,7 +108,7 @@ $app->any('/books/[{id}]', function ($request, $response, $args) {
 });
 ```
 
-Note that the second parameter is a callback. You could specify a Class (which need a `__invoke()` implementation) instead of a Closure. You can then do the mapping somewhere else:
+Note that the second parameter is a callback. You could specify a Class which implementes the `__invoke()` method instead of a Closure. You can then do the mapping somewhere else:
 
 ```php
 $app->any('/user', 'MyRestfulController');
