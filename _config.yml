@@ -49,7 +49,6 @@ defaults:
           - [/docs/v4/objects/request.md#request-helpers, Helpers]
           - [/docs/v4/objects/request.md#route-object, Route object]
           - [/docs/v4/objects/request.md#media-type-parsers, Media type parsers]
-
         - title: The Response
           items:
           - [/docs/v4/objects/response.md, Overview]
@@ -109,7 +108,6 @@ defaults:
         - title: Tutorial
           items:
             - [/docs/v3/tutorial/first-app.md, First Application]
-
         - title: Concepts
           items:
             - [/docs/v3/concepts/life-cycle.md, Application Life Cycle]
