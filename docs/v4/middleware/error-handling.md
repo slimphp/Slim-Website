@@ -121,7 +121,7 @@ $app->run();
 ```
 
 ## Error Handling/Rendering
-The rendering is finally decoupled from the handling. Everything still works the way it previously did.
+The rendering is finally decoupled from the handling.
 It will still detect the content-type and render things appropriately with the help of `ErrorRenderers`.
 The core `ErrorHandler` extends the `AbstractErrorHandler` class which has been completely refactored.
 By default it will call the appropriate `ErrorRenderer` for the supported content types. The core
