@@ -343,8 +343,14 @@ Note inside the group closure, Slim binds the closure to the container instance.
 * inside route closure, `$this` is bound to the instance of `Psr\Container\ContainerInterface`
 
 ## Route middleware
+You can also attach middleware to any route or route group.
+```php
+$app->group('/foo', function (RouteCollectorProxy $group) {
+    $group->get('/bar', function ($request, $response, $args) {
 
-You can also attach middleware to any route or route group. [Learn more](/docs/v4/concepts/middleware.html).
+    })->add(new RouteMiddleware());
+})->add(new GroupMiddleware());
+```
 
 ## Route expressions caching
 
