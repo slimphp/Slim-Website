@@ -15,6 +15,9 @@ kramdown:
   syntax_highlighter: rouge
 plugins:
   - jekyll-sitemap
+algolia:
+  application_id: KS0N5YSBFY
+  index_name:     slim-docs
 defaults:
   -
     scope:
