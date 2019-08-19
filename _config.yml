@@ -18,6 +18,7 @@ plugins:
 algolia:
   application_id: KS0N5YSBFY
   index_name:     slim-docs
+  nodes_to_index: 'h1,h2,h3,p,ul.toc-links.li'
 defaults:
   -
     scope:
