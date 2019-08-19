@@ -51,3 +51,10 @@ changes.
 ```bash
 $ bundle exec jekyll build
 ```
+
+### Update Algolia Search
+Ensure you set the environment variable `ALGOLIA_API_KEY` before running these commands. See [algolia docs](https://community.algolia.com/jekyll-algolia/getting-started.html) for more information
+```bash
+$ bundle install
+$ bundle exec jekyll algolia
+```
