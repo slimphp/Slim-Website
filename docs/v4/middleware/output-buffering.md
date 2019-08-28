@@ -12,10 +12,13 @@ This middleware should be placed on the center of the middleware stack so it get
 <?php
 use Slim\Factory\AppFactory;
 use Slim\Middleware\OutputBufferingMiddleware;
+use Slim\Psr7\Factory\StreamFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
+
+$streamFactory = new StreamFactory();
 
 /**
  * The two modes available are
@@ -23,7 +26,7 @@ $app = AppFactory::create();
  * OutputBufferingMiddleware::PREPEND - Creates entirely new response body
  */
 $mode = OutputBufferingMiddleware::APPEND;
-$outputBufferingMiddleware = new OutputBufferingMiddleware($mode);
+$outputBufferingMiddleware = new OutputBufferingMiddleware($streamFactory, $mode);
 $app->add($outputBufferingMiddleware);
 
 // ...
