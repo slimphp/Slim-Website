@@ -84,6 +84,11 @@ It is possible to fake or _override_ the HTTP request method. This is
 useful if, for example, you need to mimic a `PUT` request using a traditional
 web browser that only supports `GET` or `POST` requests.
 
+<div class="alert alert-info">
+    <div><strong>Heads Up!</strong></div>
+    To enable request method overriding the <a href="/docs/v4/middleware/method-overriding.html">Method Overriding Middleware</a> must be injected into your application.
+</div>
+
 There are two ways to override the HTTP request method. You can include a
 `METHOD` parameter in a `POST` request's body. The HTTP request must use the
 `application/x-www-form-urlencoded` content type.
