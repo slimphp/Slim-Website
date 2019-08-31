@@ -87,7 +87,8 @@ namespace MyApp\Handlers;
 
 use Slim\Handlers\ErrorHandler;
 
-class MyErrorHandler extends ErrorHandler {
+class MyErrorHandler extends ErrorHandler
+{
     protected function logError(string $error): void
     {
         // Insert custom error logging function.
@@ -99,17 +100,23 @@ class MyErrorHandler extends ErrorHandler {
 <?php
 use MyApp\Handlers\MyErrorHandler;
 use Slim\Factory\AppFactory;
+use Slim\CallableResolver;
+use Slim\Handlers\ErrorHandler;
+use Slim\Psr7\Factory\ResponseFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
+$container = $app->getContainer();
 
 // Add Routing Middleware
 $app->addRoutingMiddleware();
 
 // Instantiate Your Custom Error Handler
-$myErrorHandler = new MyErrorHandler(true); // Constructor parameter is $logErrors (bool)
+$responseFactory = new ResponseFactory();
+$callableResolver = new CallableResolver($container);
+$myErrorHandler = new MyErrorHandler($callableResolver, $responseFactory);
 
 // Add Error Middleware
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
