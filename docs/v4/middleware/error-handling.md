@@ -106,8 +106,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$container = $app->getContainer();
-
 // Add Routing Middleware
 $app->addRoutingMiddleware();
 
