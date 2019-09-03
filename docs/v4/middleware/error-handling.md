@@ -100,7 +100,6 @@ class MyErrorHandler extends ErrorHandler
 <?php
 use MyApp\Handlers\MyErrorHandler;
 use Slim\Factory\AppFactory;
-use Slim\Handlers\ErrorHandler;
 
 require __DIR__ . '/../vendor/autoload.php';
 
