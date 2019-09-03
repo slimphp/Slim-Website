@@ -114,9 +114,7 @@ $container = $app->getContainer();
 $app->addRoutingMiddleware();
 
 // Instantiate Your Custom Error Handler
-$responseFactory = new ResponseFactory();
-$callableResolver = new CallableResolver($container);
-$myErrorHandler = new MyErrorHandler($callableResolver, $responseFactory);
+$myErrorHandler = new MyErrorHandler($app->getCallableResolver(), $app->getResponseFactory());
 
 // Add Error Middleware
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
