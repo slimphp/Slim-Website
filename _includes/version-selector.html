@@ -9,8 +9,8 @@
             {% endif %}
             {% comment %}Try to determine if the User Guide exists for the current language and version {% endcomment %}
             {% capture indexNameWithVersion %}index-{{ version }}{% endcapture %}
-            {% assign indexI18nExists=site.pages | where:"l10n-link", indexNameWithVersion | where: "l10n-lang": page.l10n-lang %}
-            {% if indexI18nExists.size > 0 and site.l10nDefaultLang != page.l10n-lang %}
+            {% assign indexL10nExists=site.pages | where:"l10n-link", indexNameWithVersion | where: "l10n-lang": page.l10n-lang %}
+            {% if indexL10Exists.size > 0 and site.l10nDefaultLang != page.l10n-lang %}
                 <option value="/{{ page.l10n-lang }}/docs/{{ version }}"{{ selected }}>{{ version }}</option>
             {% else %}
                 <option value="/docs/{{ version }}"{{ selected }}>{{ version }}</option>
