@@ -12,6 +12,7 @@ exclude: [node_modules,.idea]
 l10nDefaultLang: gb
 l10nLanguageLabels:
   gb: English
+  pl: Polski
 kramdown:
   input: GFM
   hard_wrap: false
@@ -98,6 +99,82 @@ defaults:
       type: "pages"
     values:
       layout: docs-v4
+  -
+    scope:
+      path: "pl"
+      type: "pages"
+    values:
+      l10n-lang: pl
+      docs-v4:
+        - title: Zaczynamy
+          items:
+            - [/pl/docs/v4, Rozpocz&#281;cie]
+            - [/pl/docs/v4/start/installation.md, Instalacja]
+            - [/docs/v4/start/upgrade.md, Aktualizacja, gb]
+            - [/docs/v4/start/web-servers.md, Serwery Web, gb]
+            - [/docs/v4/deployment/deployment.md, Wdro&#380;enie, gb]
+        - title: Concepts
+          items:
+            - [/docs/v4/concepts/life-cycle.md, Application Life Cycle, gb]
+            - [/docs/v4/concepts/value-objects.md, PSR-7, gb]
+            - [/docs/v4/concepts/middleware.md, Middleware, gb]
+            - [/docs/v4/concepts/di.md, Dependency Container, gb]
+        - title: The Application
+          items:
+            - [/docs/v4/objects/application.md, Overview, gb]
+            - [/docs/v4/objects/application.md#notices-and-warnings-handling, Notices & Warnings Handling, gb]
+        - title: The Request
+          items:
+            - [/docs/v4/objects/request.md, Overview, gb]
+            - [/docs/v4/objects/request.md#the-request-method, Method, gb]
+            - [/docs/v4/objects/request.md#the-request-headers, Headers, gb]
+            - [/docs/v4/objects/request.md#the-request-body, Body, gb]
+            - [/docs/v4/objects/request.md#uploaded-files, Uploaded Files, gb]
+            - [/docs/v4/objects/request.md#request-helpers, Helpers, gb]
+            - [/docs/v4/objects/request.md#route-object, Route object, gb]
+            - [/docs/v4/objects/request.md#media-type-parsers, Media type parsers, gb]
+        - title: The Response
+          items:
+            - [/docs/v4/objects/response.md, Overview, gb]
+            - [/docs/v4/objects/response.md#the-response-status, Status, gb]
+            - [/docs/v4/objects/response.md#the-response-headers, Headers, gb]
+            - [/docs/v4/objects/response.md#the-response-body, Body, gb]
+            - [/docs/v4/objects/response.md#returning-json, JSON, gb]
+        - title: Routing
+          items:
+            - [/docs/v4/objects/routing.md, Overview, gb]
+            - [/docs/v4/objects/routing.md#how-to-create-routes, Create Routes, gb]
+            - [/docs/v4/objects/routing.md#route-callbacks, Callbacks, gb]
+            - [/docs/v4/objects/routing.md#route-strategies, Strategies, gb]
+            - [/docs/v4/objects/routing.md#route-placeholders, Placeholders, gb]
+            - [/docs/v4/objects/routing.md#route-names, Names, gb]
+            - [/docs/v4/objects/routing.md#route-groups, Groups, gb]
+            - [/docs/v4/objects/routing.md#route-middleware, Middleware, gb]
+            - [/docs/v4/objects/routing.md#router-caching, Caching, gb]
+            - [/docs/v4/objects/routing.md#container-resolution, Container Resolution, gb]
+        - title: Packaged Middleware
+          items:
+            - [/docs/v4/middleware/routing.md, Routing, gb]
+            - [/docs/v4/middleware/error-handling.md, Error Handling, gb]
+            - [/docs/v4/middleware/method-overriding.md, Method Overriding, gb]
+            - [/docs/v4/middleware/output-buffering.md, Output Buffering, gb]
+            - [/docs/v4/middleware/content-length.md, Content Length, gb]
+        - title: Cook book
+          items:
+            - [/docs/v4/cookbook/route-patterns.md, Trailing / in routes, gb]
+            - [/docs/v4/cookbook/retrieving-current-route.md, Retrieving Current Route, gb]
+            - [/docs/v4/cookbook/enable-cors.md, Enabling CORS, gb]
+            - [/docs/v4/cookbook/uploading-files.md, Uploading Files using POST forms, gb]
+        - title: Contributing
+          items:
+            - [/docs/v4/contributors/strategy.md, Branching Strategy, gb]
+            - [/docs/v4/contributors/guidelines.md, Guidelines, gb]
+  -
+    scope:
+      path: "pl/docs/v4"
+      type: "pages"
+    values:
+      layout: pl/docs-v4
   -
     scope:
       path: ""
@@ -188,6 +265,96 @@ defaults:
       type: "pages"
     values:
       layout: docs-v3
+  -
+    scope:
+      path: "pl"
+      type: "pages"
+    values:
+      docs-v3:
+        - title: Zaczynamy
+          items:
+            - [/pl/docs/v3, Rozpocz&#281;cie]
+            - [/pl/docs/v3/start/installation.md, Instalacja]
+            - [/docs/v3/start/upgrade.md, Upgrade Guide, gb]
+            - [/docs/v3/start/web-servers.md, Web Servers, gb]
+            - [/docs/v3/deployment/deployment.md, Deployment, gb]
+        - title: Tutorial
+          items:
+            - [/docs/v3/tutorial/first-app.md, First Application, gb]
+        - title: Concepts
+          items:
+            - [/docs/v3/concepts/life-cycle.md, Application Life Cycle, gb]
+            - [/docs/v3/concepts/value-objects.md, PSR-7, gb]
+            - [/docs/v3/concepts/middleware.md, Middleware, gb]
+            - [/docs/v3/concepts/di.md, Dependency Container, gb]
+        - title: The Application
+          items:
+            - [/docs/v3/objects/application.md, Overview, gb]
+            - [/docs/v3/objects/application.md#application-configuration, Configuration, gb]
+            - [/docs/v3/objects/application.md#slim-default-settings, Default settings, gb]
+        - title: The Request
+          items:
+            - [/docs/v3/objects/request.md, Overview, gb]
+            - [/docs/v3/objects/request.md#the-request-method, Method, gb]
+            - [/docs/v3/objects/request.md#the-request-headers, Headers, gb]
+            - [/docs/v3/objects/request.md#the-request-body, Body, gb]
+            - [/docs/v3/objects/request.md#uploaded-files, Uploaded Files, gb]
+            - [/docs/v3/objects/request.md#request-helpers, Helpers, gb]
+            - [/docs/v3/objects/request.md#route-object, Route object, gb]
+            - [/docs/v3/objects/request.md#media-type-parsers, Media type parsers, gb]
+        - title: The Response
+          items:
+            - [/docs/v3/objects/response.md, Overview, gb]
+            - [/docs/v3/objects/response.md#the-response-status, Status, gb]
+            - [/docs/v3/objects/response.md#the-response-headers, Headers, gb]
+            - [/docs/v3/objects/response.md#the-response-body, Body, gb]
+            - [/docs/v3/objects/response.md#returning-json, JSON, gb]
+        - title: Routing
+          items:
+            - [/docs/v3/objects/router.md, Overview, gb]
+            - [/docs/v3/objects/router.md#how-to-create-routes, Create Routes, gb]
+            - [/docs/v3/objects/router.md#route-callbacks, Callbacks, gb]
+            - [/docs/v3/objects/router.md#route-strategies, Strategies, gb]
+            - [/docs/v3/objects/router.md#route-placeholders, Placeholders, gb]
+            - [/docs/v3/objects/router.md#route-names, Names, gb]
+            - [/docs/v3/objects/router.md#route-groups, Groups, gb]
+            - [/docs/v3/objects/router.md#route-middleware, Middleware, gb]
+            - [/docs/v3/objects/router.md#container-resolution, Container Resolution, gb]
+        - title: Error Handling
+          items:
+            - [/docs/v3/handlers/error.md, Error Handlers, gb]
+            - [/docs/v3/handlers/not-found.md, 404 Not Found, gb]
+            - [/docs/v3/handlers/not-allowed.md, 405 Not Allowed, gb]
+            - [/docs/v3/handlers/php-error.md, PHP Runtime Error, gb]
+        - title: Cook book
+          items:
+            - [/docs/v3/cookbook/route-patterns.md, Trailing / in routes, gb]
+            - [/docs/v3/cookbook/ip-address.md, Retrieving IP address, gb]
+            - [/docs/v3/cookbook/retrieving-current-route.md, Retrieving Current Route, gb]
+            - [/docs/v3/cookbook/database-eloquent.md, Using Eloquent with Slim, gb]
+            - [/docs/v3/cookbook/database-doctrine.md, Using Doctrine with Slim, gb]
+            - [/docs/v3/cookbook/database-atlas.md, Using Atlas with Slim, gb]
+            - [/docs/v3/cookbook/enable-cors.md, Enabling CORS, gb]
+            - [/docs/v3/cookbook/environment.md, Getting and Mocking the Environment, gb]
+            - [/docs/v3/cookbook/uploading-files.md, Uploading Files using POST forms, gb]
+            - [/docs/v3/cookbook/action-domain-responder.md, Action-Domain-Responder with Slim, gb]
+        - title: Add Ons
+          items:
+            - [/docs/v3/features/templates.md, Templates, gb]
+            - [/docs/v3/features/caching.md, HTTP Caching, gb]
+            - [/docs/v3/features/csrf.md, CSRF Protection, gb]
+            - [/docs/v3/features/flash.md, Flash Messages, gb]
+            - ['https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x', 3rd Party]
+        - title: Contributing
+          items:
+            - [/docs/v3/contributors/strategy.md, Branching Strategy, gb]
+            - [/docs/v3/contributors/guidelines.md, Guidelines, gb]
+  -
+    scope:
+      path: "pl/docs/v3"
+      type: "pages"
+    values:
+      layout: pl/docs-v3
   -
     scope:
       path: ""
@@ -302,15 +469,22 @@ defaults:
 t:
   blog:
     gb: "Blog"
+    pl: "Blog"
   user-guide:
     gb: "User Guide"
+    pl: "Podr&#x0119;cznik U&#x017C;ytkownika"
   support:
     gb: "Support"
+    pl: "Wsparcie"
   community:
     gb: "Community"
+    pl: "Spo&#322;eczno&#347;&#263;"
   contribute:
     gb: "Contribute"
+    pl: "Wsp&#x00F3;&#x0142;pracuj z nami"
   slim-version:
     gb: "Slim Version"
+    pl: "Wersja Slim'a"
   documentation:
     gb: "Documentation"
+    pl: "Dokumentacja"

@@ -1,0 +1,28 @@
+---
+layout: default
+title: Blog
+l10n-link: blog
+l10n-lang: pl
+---
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1>Najnowsze wiadomo&#347;ci</h1>
+            <p class="lead">
+                To jest oficjalny blog Slim Framework, na kt&#243;rym mo&#380;na znale&#378;&#263; og&#322;oszenia o wydaniu i wiadomo&#347;ci spo&#322;eczno&#347;ci.
+            </p>
+            <a class="btn btn-primary btn-lg" href="/blog/feed.rss" target="_blank"><i class="fa fa-rss-square"></i> Subscribe with RSS</a>
+        </div>
+
+        {% for post in site.posts %}
+        <article class="note note-partial">
+            <time class="note-publish-datetime">{{ post.date | date: "%b %d, %Y" }}</time>
+            <h2 class="note-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+            <div class="note-excerpt">
+                {{ post.excerpt }}
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
