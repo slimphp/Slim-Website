@@ -2,6 +2,7 @@
 title: Slim Framework and Zend Server Enterprise Edition
 description: Top 50 Slim Framework contributors eligible for Zend Server Enterprise Edition and Zend Studio
 layout: post
+l10n-lang: gb
 ---
 
 The top 50 Slim Framework contributors are eligible for a free copy of

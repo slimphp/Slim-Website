@@ -2,6 +2,7 @@
 title: Version Numbers
 description: The Slim Framework for PHP 5 will migrate to a major, minor, revision versioning scheme
 layout: post
+l10n-lang: gb
 ---
 
 Thus far, the Slim Framework’s version numbers have mostly adhered to the major.minor.revision scheme. However, sometimes the version numbers have strayed from this practice. Slim is my first large open source project, and it is an ongoing learning experience for me as Slim’s user base continues to flourish.

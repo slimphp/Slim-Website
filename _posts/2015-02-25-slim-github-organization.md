@@ -2,6 +2,7 @@
 title: Slim Framework GitHub Organization
 description: The Slim Framework code repositories have a new home in their very own GitHub Organization.
 layout: post
+l10n-lang: gb
 ---
 
 The Slim Framework code repositories have a new home in their very own [GitHub Organization](https://github.com/slimphp). As much as I'd like to keep the project beneath my own GitHub handle for the notoriety and what not, the project is best served with its own GitHub Organization. This solves several problems.

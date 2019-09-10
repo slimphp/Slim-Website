@@ -2,6 +2,7 @@
 title: Our support forum now uses Tender
 description: The Slim Framework for PHP 5 support forum now runs on Tender
 layout: post
+l10n-lang: gb
 ---
 
 I am happy to announce that Slim’s support forum and knowledge base now run on Tender™. We previously used the Vanilla forum software, but it proved unstable and unreliable for many users. I want to extend a big thank you to Tender for setting up an open source account for us. Our initial impression is that it is a phenomenal platform, and we cannot wait to put it to good use.

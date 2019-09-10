@@ -2,6 +2,7 @@
 title: Slim Framework Skeleton Application for Rapid Development
 description: Use the Slim Framework skeleton application and Composer for rapid application development
 layout: post
+l10n-lang: gb
 ---
 
 After launching a ton of Slim Framework applications, I grew tired of re-configuring the same filesystem structure, the same libraries, and the same boilerplate code time and time again. No more.

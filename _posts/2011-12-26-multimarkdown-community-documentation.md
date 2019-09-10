@@ -2,6 +2,7 @@
 title: MultiMarkdown Community Documentation
 description: The Slim Framework for PHP 5 documentation has moved into the core Git repository and is written in MultiMarkdown format
 layout: post
+l10n-lang: gb
 ---
 
 The Slim Framework documentation has moved into the Git repository as of v1.5.2 (currently in the development branch). This change makes it easy for the community to suggest additions or changes to the framework documentation.

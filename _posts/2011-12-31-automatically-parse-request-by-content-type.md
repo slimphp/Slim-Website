@@ -2,6 +2,7 @@
 title: Automatically parse an HTTP request by content type
 description: Learn how to automatically parse an HTTP request body using Slim Framework middleware
 layout: post
+l10n-lang: gb
 ---
 
 The Slim Framework for PHP 5 version 1.6.0 (currently in the develop branch) introduces new middleware that will automatically parse the HTTP request body based on its content type. This middleware will parse HTTP requests with a JSON, XML, or CSV content type. To enable this middleware, do this:
