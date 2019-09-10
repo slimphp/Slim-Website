@@ -1,5 +1,7 @@
 ---
 title: Installation
+l10n-link: start-v4-installation
+l10n-lang: gb
 ---
 
 ## System Requirements

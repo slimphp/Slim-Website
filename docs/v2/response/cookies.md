@@ -1,5 +1,7 @@
 ---
 title: Cookies
+l10n-link: response-v2-cookies
+l10n-lang: gb
 ---
 The Slim application provides helper methods to send cookies with the HTTP response.
 

@@ -1,5 +1,7 @@
 ---
 title: Setting up CORS
+l10n-link: cookbook-v4-enable_cors
+l10n-lang: gb
 ---
 
 CORS - Cross origin resource sharing

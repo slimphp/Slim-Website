@@ -1,5 +1,7 @@
 ---
 title: DELETE
+l10n-link: routing-v2-delete
+l10n-lang: gb
 ---
 Use the Slim application's `delete()` method to map a callback function to a resource URI that is requested with
 the HTTP DELETE method.

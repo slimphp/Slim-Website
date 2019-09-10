@@ -1,3 +1,7 @@
+---
+l10n-link: cache-v2-expires
+l10n-lang: gb
+---
 Used in conjunction with the Slim application’s `etag()` or `lastModified()` methods, the `expires()` method sets an
 **Expires** header on the HTTP response informing the HTTP client when its client-side cache for the current
 resource should be considered stale. The HTTP client will continue serving from its client-side cache until the

@@ -1,5 +1,7 @@
 ---
 title: Configuration Overview
+l10n-link: configuration-v2-overview
+l10n-lang: gb
 ---
 
 There are two ways to apply settings to the Slim application. First during Slim application instantiation and second

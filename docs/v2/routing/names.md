@@ -1,5 +1,7 @@
 ---
 title: Names
+l10n-link: routing-v2-names
+l10n-lang: gb
 ---
 Slim lets you assign a name to a route. Naming a route enables you to dynamically generate URLs using the urlFor
 helper method. When you use the Slim application's `urlFor()` method to create application URLs, you can freely

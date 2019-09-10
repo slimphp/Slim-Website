@@ -1,5 +1,7 @@
 ---
 title: 405 Not Allowed Handler
+l10n-link: handlers-v3-not_allowed
+l10n-lang: gb
 ---
 
 If your Slim Framework application has a route that matches the current HTTP request URI **but NOT the HTTP request method**, the application invokes its Not Allowed handler and returns a `HTTP/1.1 405 Not Allowed` response to the HTTP client.

@@ -1,5 +1,7 @@
 ---
 title: Web Servers
+l10n-link: start-v3-web_servers
+l10n-lang: gb
 ---
 
 It is typical to use the front-controller pattern to funnel appropriate HTTP

@@ -1,5 +1,7 @@
 ---
 title: Helpers
+l10n-link: routing-v2-helpers
+l10n-lang: gb
 ---
 Slim provides several helper methods (exposed via the Slim application instance) that will help you control the flow
 of your application.

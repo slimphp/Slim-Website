@@ -1,5 +1,7 @@
 ---
 title: Cookies
+l10n-link: sessions-v2-cookies
+l10n-lang: gb
 ---
 You may also use the `\Slim\Middleware\SessionCookie` middleware to persist session data in encrypted, hashed
 HTTP cookies. To enable the session cookie middleware, add the `\Slim\Middleware\SessionCookie` middleware to your

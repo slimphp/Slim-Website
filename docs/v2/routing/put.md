@@ -1,5 +1,7 @@
 ---
 title: PUT
+l10n-link: routing-v2-put
+l10n-lang: gb
 ---
 Use the Slim application's `put()` method to map a callback function to a resource URI that is requested with
 the HTTP PUT method.

@@ -1,5 +1,7 @@
 ---
 title: Upgrade Guide
+l10n-link: start-v4-upgrade
+l10n-lang: gb
 ---
 
 If you are upgrading from version 3 to version 4, these are the significant changes that

@@ -1,5 +1,7 @@
 ---
 title: Deployment
+l10n-link: deployment-v3-deployment
+l10n-lang: gb
 ---
 Congratulations! if you have made it this far, that means you have successfully built something 
 awesome using Slim. However, the time to party has not come yet. We still have to push our 

@@ -1,5 +1,7 @@
 ---
 title: HTTP Caching
+l10n-link: features-v3-caching
+l10n-lang: gb
 ---
 
 Slim 3 uses the optional standalone [slimphp/Slim-HttpCache](https://github.com/slimphp/Slim-HttpCache) PHP component

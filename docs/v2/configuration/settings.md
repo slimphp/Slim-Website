@@ -1,5 +1,7 @@
 ---
 title: Settings
+l10n-link: configuration-v2-settings
+l10n-lang: gb
 ---
 ## mode
 

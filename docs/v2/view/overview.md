@@ -1,5 +1,7 @@
 ---
 title: Overview
+l10n-link: view-v2-overview
+l10n-lang: gb
 ---
 A Slim application delegates rendering of templates to its view object. A Slim application view is a subclass
 of `\Slim\View` that implements this interface:

@@ -1,5 +1,7 @@
 ---
 title: Activate
+l10n-link: logging-v2-activate
+l10n-lang: gb
 ---
 The Slim application’s log object provides the following public methods to enable or disable logging during runtime.
 

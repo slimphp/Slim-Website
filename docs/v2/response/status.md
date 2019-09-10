@@ -1,5 +1,7 @@
 ---
 title: Status
+l10n-link: response-v2-status
+l10n-lang: gb
 ---
 The HTTP response returned to the client will have a status code indicating the response’s type
 (e.g. 200 OK, 400 Bad Request, or 500 Server Error). You can use the Slim application’s response object to set the

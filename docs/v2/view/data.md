@@ -1,5 +1,7 @@
 ---
 title: Data
+l10n-link: view-v2-data
+l10n-lang: gb
 ---
 <div class="alert alert-info">
     <strong>Heads Up!</strong> Rarely will you set or append data directly on the view object. Usually, you

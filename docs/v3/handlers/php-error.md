@@ -1,5 +1,7 @@
 ---
 title: PHP Error Handler
+l10n-link: handlers-v3-php_error
+l10n-lang: gb
 ---
 
 If your Slim Framework application throws a

@@ -1,5 +1,7 @@
 ---
 title: Overview
+l10n-link: logging-v2-overview
+l10n-lang: gb
 ---
 A Slim application provides a log object that writes data to a specific output. The actual writing of data is
 delegated to a log writer.

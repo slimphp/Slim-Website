@@ -1,5 +1,7 @@
 ---
 title: Retrieving IP address
+l10n-link: cookoook-v3-ip_address
+l10n-lang: gb
 ---
 
 The best way to retrieve the current IP address of the client is via middleware using

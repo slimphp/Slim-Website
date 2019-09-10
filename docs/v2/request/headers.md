@@ -1,5 +1,7 @@
 ---
 title: Headers
+l10n-link: request-v2-headers
+l10n-lang: gb
 ---
 A Slim application will automatically parse all HTTP request headers. You can access the request headers using the
 request object's public `headers` property. The `headers` property is an instance of `\Slim\Helper\Set`, meaning

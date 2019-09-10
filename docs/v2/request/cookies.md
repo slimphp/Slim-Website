@@ -1,5 +1,7 @@
 ---
 title: Cookies
+l10n-link: request-v2-cookies
+l10n-lang: gb
 ---
 ### Get Cookies
 

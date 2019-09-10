@@ -1,5 +1,7 @@
 ---
 title: Overview
+l10n-link: routing-v2-overview
+l10n-lang: gb
 ---
 The Slim Framework helps you map resource URIs to callback functions for specific HTTP request methods (e.g. GET, POST, PUT, DELETE, OPTIONS or HEAD). A Slim application will invoke the first route that matches the current HTTP request’s URI and method.
 

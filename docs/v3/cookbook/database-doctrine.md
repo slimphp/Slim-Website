@@ -1,5 +1,7 @@
 ---
 title: Using Doctrine with Slim
+l10n-link: cookoook-v3-database_doctrine
+l10n-lang: gb
 ---
 
 This cookbook entry describes how to integrate from scratch the widely used [Doctrine ORM](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/) into a Slim application.

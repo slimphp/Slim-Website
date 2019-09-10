@@ -1,5 +1,7 @@
 ---
 title: Getting and Mocking the Environment
+l10n-link: cookoook-v3-environment
+l10n-lang: gb
 ---
 
 The Environment object encapsulates the `$_SERVER` superglobal array and decouples the Slim application from the PHP global environment. Decoupling the Slim application from the PHP global environment lets us create HTTP requests that may (or may not) resemble the global environment. This is particularly useful for unit testing and initiating sub-requests. You can fetch the current Environment object anywhere in your Slim application like this:

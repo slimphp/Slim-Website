@@ -1,5 +1,7 @@
 ---
 title: Uploading files using POST forms
+l10n-link: cookoook-v3-uploading_files
+l10n-lang: gb
 ---
 
 Files that are uploaded using forms in POST requests can be retrieved with the

@@ -1,0 +1,23 @@
+{% comment %} Read posts with same `l10n-link`. If Posts not found then search for Pages with same `l10n-link` {% endcomment %}
+
+{% assign posts=site.posts | where:"l10n-link", page.l10n-link | sort: 'l10n-lang' %}
+{% if posts.size == 0 %}
+    {% comment %} Search for Pages with same `l10n-link` {% endcomment %}
+    {% assign posts=site.pages | where:"l10n-link", page.l10n-link | sort: 'l10n-lang' %}
+{% endif %}
+
+{% if posts.size > 0 %}
+<ul class="nav navbar-nav list-inline" style="float:right;">
+    {% for post in posts %}
+        {% if post.l10n-lang != page.l10n-lang %}
+        <li class="list-inline-item">
+            {% comment %} Try to determine language label {% endcomment %}
+            {% capture langLabel %}{% if site.l10nLanguageLabels[post.l10n-lang] And site.l10nLanguageLabels[post.l10n-lang] != nil %}{{ site.l10nLanguageLabels[post.l10n-lang] }}{% else %}{{ post.l10n-lang }}{% endif %}{% endcapture %}
+            <a class="{{ post.l10n-lang }}" href="{{ site.base-url }}{{ post.url }}">
+                <img src="{{ site.base-url }}/assets/images/flags/{{ post.l10n-lang }}.png" alt="{{ post.l10n-lang }}" title="{{ langLabel }}" />
+            </a>
+        </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}

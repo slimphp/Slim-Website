@@ -1,5 +1,7 @@
 ---
 title: Now
+l10n-link: flash-v2-now
+l10n-lang: gb
 ---
 The Slim application’s `flashNow()` method sets a message that will be available in the current request’s view
 templates. Messages set with the `flashNow()` application instance method will not be available in the next request.

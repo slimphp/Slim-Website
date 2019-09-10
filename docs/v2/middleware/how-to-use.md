@@ -1,5 +1,7 @@
 ---
 title: How to use
+l10n-link: middleware-v2-how_to_use
+l10n-lang: gb
 ---
 Use the Slim application’s `add()` instance method to add new middleware to a Slim application. New middleware will
 surround previously added middleware, or the Slim application itself if no middleware has yet been added.

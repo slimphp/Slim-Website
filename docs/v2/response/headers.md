@@ -1,5 +1,7 @@
 ---
 title: Headers
+l10n-link: response-v2-headers
+l10n-lang: gb
 ---
 The HTTP response returned to the HTTP client will have a header. The HTTP header is a list of keys and values that
 provide metadata about the HTTP response. You can use the Slim application’s response object to set the HTTP
