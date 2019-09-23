@@ -1,6 +1,6 @@
 ---
 l10n-link: start-v2-get_started
-l10n-lang: gb
+l10n-lang: en
 ---
 # System Requirements
 

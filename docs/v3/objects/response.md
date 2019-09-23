@@ -1,7 +1,7 @@
 ---
 title: Response
 l10n-link: objects-v3-response
-l10n-lang: gb
+l10n-lang: en
 ---
 
 Your Slim app's routes and middleware are given a PSR-7 response object that

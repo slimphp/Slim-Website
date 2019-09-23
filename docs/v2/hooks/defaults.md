@@ -1,7 +1,7 @@
 ---
 title: Defaults
 l10n-link: hooks-v2-defaults
-l10n-lang: gb
+l10n-lang: en
 ---
 These are the default hooks always invoked in a Slim application.
 

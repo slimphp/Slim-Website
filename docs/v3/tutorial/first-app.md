@@ -1,7 +1,7 @@
 ---
 title: First Application Walkthrough
 l10n-link: tutorial-v3-first_app
-l10n-lang: gb
+l10n-lang: en
 ---
 
 If you're looking for a tour through all the ingredients for setting up a very simple Slim application (this one doesn't use Twig, but does use Monolog and a PDO database connection) then you're in the right place.  Either walk through the tutorial to build the example application, or adapt each step for your own needs.

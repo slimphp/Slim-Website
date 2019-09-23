@@ -1,7 +1,7 @@
 ---
 title: Overview
 l10n-link: hooks-v2-overview
-l10n-lang: gb
+l10n-lang: en
 ---
 A Slim application provides a set of hooks to which you can register your own callbacks.
 

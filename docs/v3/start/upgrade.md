@@ -1,7 +1,7 @@
 ---
 title: Upgrade Guide
 l10n-link: start-v3-upgrade
-l10n-lang: gb
+l10n-lang: en
 ---
 
 If you are upgrading from version 2 to version 3, these are the significant changes that

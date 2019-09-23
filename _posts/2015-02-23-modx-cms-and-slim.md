@@ -2,7 +2,7 @@
 title: MODX to be rebuilt on top of Slim 3.x
 description: The popular MODX content management platform will be rebuilt on top of the Slim Framework.
 layout: post
-l10n-lang: gb
+l10n-lang: en
 ---
 
 <img src="/assets/images/modx-logo.png" alt="MODX Logo" width="50%"/>

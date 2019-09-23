@@ -1,7 +1,7 @@
 ---
 title: Helpers
 l10n-link: request-v2-helpers
-l10n-lang: gb
+l10n-lang: en
 ---
 The Slim application's request object provides several helper methods to fetch common HTTP request information:
 

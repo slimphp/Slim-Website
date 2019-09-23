@@ -2,7 +2,7 @@
 title: Upcoming changes to the Slim Framework
 description: Learn about new features and changes coming in the next version of the Slim Framework.
 layout: post
-l10n-lang: gb
+l10n-lang: en
 ---
 
 Now that the day job is finally slowing down a bit, I’ve been back at work on the Slim Framework. Here are several new features and changes coming in the next stable release — currently available in the develop branch to help you start updating your applications.

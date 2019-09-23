@@ -1,7 +1,7 @@
 ---
 title: Action-Domain-Responder with Slim
 l10n-link: cookoook-v3-action_domain_responder
-l10n-lang: gb
+l10n-lang: en
 ---
 
 In this post, I'll show how to refactor the Slim tutorial application to more closely follow the [Action-Domain-Responder](http://pmjones.io/adr) pattern.

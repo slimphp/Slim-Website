@@ -1,6 +1,6 @@
 ---
 l10n-link: cache-v2-lastmodified
-l10n-lang: gb
+l10n-lang: en
 ---
 A Slim application provides built-in support for HTTP caching using the resource’s last modified date. When you
 specify a last modified date, Slim tells the HTTP client the date and time the current resource was last modified.

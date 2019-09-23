@@ -1,7 +1,7 @@
 ---
 title: Middleware
 l10n-link: concept-v4-middleware
-l10n-lang: gb
+l10n-lang: en
 ---
 
 You can run code _before_ and _after_ your Slim application to manipulate the

@@ -1,7 +1,7 @@
 ---
 title: Debug
 l10n-link: errors-v2-debug
-l10n-lang: gb
+l10n-lang: en
 ---
 You can enable debugging during application instantiation with this setting:
 

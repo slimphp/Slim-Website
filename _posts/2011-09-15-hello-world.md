@@ -2,7 +2,7 @@
 title: Say Hello World with Slim
 description: Build a simple Hello World application with the Slim Framework for PHP 5
 layout: post
-l10n-lang: gb
+l10n-lang: en
 ---
 
 This tutorial demonstrates the typical process for writing a Slim Framework application. The Slim Framework uses the front controller pattern to send all HTTP requests through a single file — usually `index.php`. By default, Slim comes with a `.htaccess` file for use with the Apache web server. You'll typically initialize your app, define your routes, and run your app in the ``index.php`.

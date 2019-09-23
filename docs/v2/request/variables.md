@@ -1,7 +1,7 @@
 ---
 title: Variables
 l10n-link: request-v2-variables
-l10n-lang: gb
+l10n-lang: en
 ---
 An HTTP request may have associated variables (not to be confused with route variables). The GET, POST, or PUT
 variables sent with the current HTTP request are exposed via the Slim application’s request object.

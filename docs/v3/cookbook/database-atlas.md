@@ -1,7 +1,7 @@
 ---
 title: Using Atlas 3 with Slim
 l10n-link: cookoook-v3-database_atlas
-l10n-lang: gb
+l10n-lang: en
 ---
 
 This cookbook entry describes how to use the [Atlas 3](http://atlasphp.io) ORM

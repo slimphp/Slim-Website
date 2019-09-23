@@ -1,7 +1,7 @@
 ---
 title: Router
 l10n-link: objects-v3-router
-l10n-lang: gb
+l10n-lang: en
 ---
 
 The Slim Framework's router is built on top of the [nikic/fastroute](https://github.com/nikic/FastRoute) component, and it is remarkably fast and stable.

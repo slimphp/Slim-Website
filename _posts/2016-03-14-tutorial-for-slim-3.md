@@ -2,7 +2,7 @@
 title: First Application Walkthrough Tutorial
 description: First Application Walkthrough Tutorial
 layout: post
-l10n-lang: gb
+l10n-lang: en
 ---
 
 We are very happy to have added our first Slim 3 tutorial to the documentation!

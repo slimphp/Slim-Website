@@ -1,7 +1,7 @@
 ---
 title: Slim 3 Documentation
 l10n-link: index-v3
-l10n-lang: gb
+l10n-lang: en
 ---
 
 <div class="alert alert-info">

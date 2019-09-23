@@ -2,7 +2,7 @@
 title: How to use Laravel's Eloquent ORM with the Slim Framework
 description: Learn how to use Laravel's Eloquent ORM component in your Slim Framework application.
 layout: post
-l10n-lang: gb
+l10n-lang: en
 ---
 
 I’m building a small Slim Framework application at [New Media Campaigns](http://www.newmediacampaigns.com/). Because this application is for internal use, I figured I’d learn something new while building it. Even though the database schema is pretty simple, I’ve heard great things about [Laravel](http://laravel.com/) — a full-stack framework from [Taylor Otwell](https://twitter.com/taylorotwell) — and how many of its components are available as separate [Composer](http://getcomposer.org/) packages on [Packagist](https://packagist.org/search/?q=illuminate).

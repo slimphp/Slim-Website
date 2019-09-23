@@ -1,7 +1,7 @@
 ---
 title: Custom
 l10n-link: hooks-v2-custom
-l10n-lang: gb
+l10n-lang: en
 ---
 Custom hooks may be created and invoked in a Slim application. When a custom hook is invoked with `applyHook()`, it will
 invoke all callables assigned to that hook. This is exactly how the Slim application’s default hooks work. In this

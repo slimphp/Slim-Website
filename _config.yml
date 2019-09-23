@@ -8,10 +8,10 @@ slim_docs_versions: v2, v3, v4
 slim_website_repo: https://github.com/slimphp/Slim-Website/tree/gh-pages/
 urlBasePath:
 include: [.htaccess]
-exclude: [node_modules,.idea]
-l10nDefaultLang: gb
+exclude: [node_modules]
+l10nDefaultLang: en
 l10nLanguageLabels:
-  gb: English
+  en: English
 kramdown:
   input: GFM
   hard_wrap: false
@@ -301,16 +301,16 @@ defaults:
       layout: docs-v2
 t:
   blog:
-    gb: "Blog"
+    en: "Blog"
   user-guide:
-    gb: "User Guide"
+    en: "User Guide"
   support:
-    gb: "Support"
+    en: "Support"
   community:
     gb: "Community"
   contribute:
-    gb: "Contribute"
+    en: "Contribute"
   slim-version:
-    gb: "Slim Version"
+    en: "Slim Version"
   documentation:
-    gb: "Documentation"
+    en: "Documentation"

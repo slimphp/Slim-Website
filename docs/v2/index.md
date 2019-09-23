@@ -1,7 +1,7 @@
 ---
 title: Slim 2 Documentation
 l10n-link: index-v2
-l10n-lang: gb
+l10n-lang: en
 ---
 # Slim Framework v2
 

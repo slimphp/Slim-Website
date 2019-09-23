@@ -1,7 +1,7 @@
 ---
 title: Templates
 l10n-link: features-v3-templates
-l10n-lang: gb
+l10n-lang: en
 ---
 
 Slim does not have a view layer like traditional MVC frameworks. Instead,

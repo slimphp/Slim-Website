@@ -2,7 +2,7 @@
 title: How to organize a large Slim Framework application
 description: Learn how to organize a larger Slim Framework application using separate files for related routes
 layout: post
-l10n-lang: gb
+l10n-lang: en
 ---
 
 The Slim Micro Framework is a micro framework that enables developers to quickly write RESTful web applications and APIs. I emphasize micro because Slim is just that — a lightweight and nimble PHP framework used to build smaller web applications and APIs. Unlike CodeIgniter and Symfony (excellent frameworks created by EllisLab and Sensio Labs, respectively), Slim forgoes controllers and abstract components for simplicity and ease-of-use.

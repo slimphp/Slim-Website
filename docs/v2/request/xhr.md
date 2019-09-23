@@ -1,7 +1,7 @@
 ---
 title: XHR
 l10n-link: request-v2-xhr
-l10n-lang: gb
+l10n-lang: en
 ---
 When using a Javascript framework like MooTools or jQuery to execute an XMLHttpRequest, the XMLHttpRequest will
 usually be sent with a **X-Requested-With** HTTP header. The Slim application will detect the HTTP

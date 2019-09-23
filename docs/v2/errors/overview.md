@@ -1,7 +1,7 @@
 ---
 title: Overview
 l10n-link: errors-v2-overview
-l10n-lang: gb
+l10n-lang: en
 ---
 Let’s face it: sometimes things go wrong. It is important to intercept errors and respond to them appropriately. A
 Slim application provides helper methods to respond to errors and exceptions.

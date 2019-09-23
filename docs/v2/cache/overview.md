@@ -1,6 +1,6 @@
 ---
 l10n-link: cache-v2-overview
-l10n-lang: gb
+l10n-lang: en
 ---
 A Slim application provides built-in support for HTTP caching with its `etag()`, `lastModified()`, and `expires()`
 helper methods. It is best to use one of `etag()` or `lastModified()` - in conjunction with `expires()` - per route;
