@@ -23,8 +23,7 @@ algolia:
   index_name:     slim-docs
   nodes_to_index: 'h1,h2,h3,p,ul.toc-links.li'
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "pages"
     values:
@@ -92,14 +91,12 @@ defaults:
           items:
             - [/docs/v4/contributors/strategy.md, Branching Strategy]
             - [/docs/v4/contributors/guidelines.md, Guidelines]
-  -
-    scope:
+  - scope:
       path: "docs/v4"
       type: "pages"
     values:
       layout: docs-v4
-  -
-    scope:
+  - scope:
       path: ""
       type: "pages"
     values:
@@ -182,14 +179,12 @@ defaults:
           items:
             - [/docs/v3/contributors/strategy.md, Branching Strategy]
             - [/docs/v3/contributors/guidelines.md, Guidelines]
-  -
-    scope:
+  - scope:
       path: "docs/v3"
       type: "pages"
     values:
       layout: docs-v3
-  -
-    scope:
+  - scope:
       path: ""
       type: "pages"
     values:
@@ -293,8 +288,7 @@ defaults:
         - title: Dependency Injection
           items:
             - [/docs/v2/di/overview.md, Overview]
-  -
-    scope:
+  - scope:
       path: "docs/v2"
       type: "pages"
     values:
