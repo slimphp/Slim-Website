@@ -1,7 +1,7 @@
 ---
 title: Body
 l10n-link: response-v2-body
-l10n-lang: gb
+l10n-lang: en
 ---
 The HTTP response returned to the client will have a body. The HTTP body is the actual content of the HTTP response
 delivered to the client. You can use the Slim application’s response object to set the HTTP response’s body:

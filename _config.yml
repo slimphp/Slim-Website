@@ -8,10 +8,10 @@ slim_docs_versions: v2, v3, v4
 slim_website_repo: https://github.com/slimphp/Slim-Website/tree/gh-pages/
 urlBasePath:
 include: [.htaccess]
-exclude: [node_modules,.idea]
-l10nDefaultLang: gb
+exclude: [node_modules]
+l10nDefaultLang: en
 l10nLanguageLabels:
-  gb: English
+  en: English
   pl: Polski
 kramdown:
   input: GFM
@@ -24,8 +24,7 @@ algolia:
   index_name:     slim-docs
   nodes_to_index: 'h1,h2,h3,p,ul.toc-links.li'
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "pages"
     values:
@@ -93,14 +92,12 @@ defaults:
           items:
             - [/docs/v4/contributors/strategy.md, Branching Strategy]
             - [/docs/v4/contributors/guidelines.md, Guidelines]
-  -
-    scope:
+  - scope:
       path: "docs/v4"
       type: "pages"
     values:
       layout: docs-v4
-  -
-    scope:
+  - scope:
       path: "pl"
       type: "pages"
     values:
@@ -110,73 +107,71 @@ defaults:
           items:
             - [/pl/docs/v4, Rozpocz&#281;cie]
             - [/pl/docs/v4/start/installation.md, Instalacja]
-            - [/docs/v4/start/upgrade.md, Aktualizacja, gb]
-            - [/docs/v4/start/web-servers.md, Serwery Web, gb]
-            - [/docs/v4/deployment/deployment.md, Wdro&#380;enie, gb]
+            - [/docs/v4/start/upgrade.md, Aktualizacja, en]
+            - [/docs/v4/start/web-servers.md, Serwery Web, en]
+            - [/docs/v4/deployment/deployment.md, Wdro&#380;enie, en]
         - title: Concepts
           items:
-            - [/docs/v4/concepts/life-cycle.md, Application Life Cycle, gb]
-            - [/docs/v4/concepts/value-objects.md, PSR-7, gb]
-            - [/docs/v4/concepts/middleware.md, Middleware, gb]
-            - [/docs/v4/concepts/di.md, Dependency Container, gb]
+            - [/docs/v4/concepts/life-cycle.md, Application Life Cycle, en]
+            - [/docs/v4/concepts/value-objects.md, PSR-7, en]
+            - [/docs/v4/concepts/middleware.md, Middleware, en]
+            - [/docs/v4/concepts/di.md, Dependency Container, en]
         - title: The Application
           items:
-            - [/docs/v4/objects/application.md, Overview, gb]
-            - [/docs/v4/objects/application.md#notices-and-warnings-handling, Notices & Warnings Handling, gb]
+            - [/docs/v4/objects/application.md, Overview, en]
+            - [/docs/v4/objects/application.md#notices-and-warnings-handling, Notices & Warnings Handling, en]
         - title: The Request
           items:
-            - [/docs/v4/objects/request.md, Overview, gb]
-            - [/docs/v4/objects/request.md#the-request-method, Method, gb]
-            - [/docs/v4/objects/request.md#the-request-headers, Headers, gb]
-            - [/docs/v4/objects/request.md#the-request-body, Body, gb]
-            - [/docs/v4/objects/request.md#uploaded-files, Uploaded Files, gb]
-            - [/docs/v4/objects/request.md#request-helpers, Helpers, gb]
-            - [/docs/v4/objects/request.md#route-object, Route object, gb]
-            - [/docs/v4/objects/request.md#media-type-parsers, Media type parsers, gb]
+            - [/docs/v4/objects/request.md, Overview, en]
+            - [/docs/v4/objects/request.md#the-request-method, Method, en]
+            - [/docs/v4/objects/request.md#the-request-headers, Headers, en]
+            - [/docs/v4/objects/request.md#the-request-body, Body, en]
+            - [/docs/v4/objects/request.md#uploaded-files, Uploaded Files, en]
+            - [/docs/v4/objects/request.md#request-helpers, Helpers, en]
+            - [/docs/v4/objects/request.md#route-object, Route object, en]
+            - [/docs/v4/objects/request.md#media-type-parsers, Media type parsers, en]
         - title: The Response
           items:
-            - [/docs/v4/objects/response.md, Overview, gb]
-            - [/docs/v4/objects/response.md#the-response-status, Status, gb]
-            - [/docs/v4/objects/response.md#the-response-headers, Headers, gb]
-            - [/docs/v4/objects/response.md#the-response-body, Body, gb]
-            - [/docs/v4/objects/response.md#returning-json, JSON, gb]
+            - [/docs/v4/objects/response.md, Overview, en]
+            - [/docs/v4/objects/response.md#the-response-status, Status, en]
+            - [/docs/v4/objects/response.md#the-response-headers, Headers, en]
+            - [/docs/v4/objects/response.md#the-response-body, Body, en]
+            - [/docs/v4/objects/response.md#returning-json, JSON, en]
         - title: Routing
           items:
-            - [/docs/v4/objects/routing.md, Overview, gb]
-            - [/docs/v4/objects/routing.md#how-to-create-routes, Create Routes, gb]
-            - [/docs/v4/objects/routing.md#route-callbacks, Callbacks, gb]
-            - [/docs/v4/objects/routing.md#route-strategies, Strategies, gb]
-            - [/docs/v4/objects/routing.md#route-placeholders, Placeholders, gb]
-            - [/docs/v4/objects/routing.md#route-names, Names, gb]
-            - [/docs/v4/objects/routing.md#route-groups, Groups, gb]
-            - [/docs/v4/objects/routing.md#route-middleware, Middleware, gb]
-            - [/docs/v4/objects/routing.md#router-caching, Caching, gb]
-            - [/docs/v4/objects/routing.md#container-resolution, Container Resolution, gb]
+            - [/docs/v4/objects/routing.md, Overview, en]
+            - [/docs/v4/objects/routing.md#how-to-create-routes, Create Routes, en]
+            - [/docs/v4/objects/routing.md#route-callbacks, Callbacks, en]
+            - [/docs/v4/objects/routing.md#route-strategies, Strategies, en]
+            - [/docs/v4/objects/routing.md#route-placeholders, Placeholders, en]
+            - [/docs/v4/objects/routing.md#route-names, Names, en]
+            - [/docs/v4/objects/routing.md#route-groups, Groups, en]
+            - [/docs/v4/objects/routing.md#route-middleware, Middleware, en]
+            - [/docs/v4/objects/routing.md#router-caching, Caching, en]
+            - [/docs/v4/objects/routing.md#container-resolution, Container Resolution, en]
         - title: Packaged Middleware
           items:
-            - [/docs/v4/middleware/routing.md, Routing, gb]
-            - [/docs/v4/middleware/error-handling.md, Error Handling, gb]
-            - [/docs/v4/middleware/method-overriding.md, Method Overriding, gb]
-            - [/docs/v4/middleware/output-buffering.md, Output Buffering, gb]
-            - [/docs/v4/middleware/content-length.md, Content Length, gb]
+            - [/docs/v4/middleware/routing.md, Routing, en]
+            - [/docs/v4/middleware/error-handling.md, Error Handling, en]
+            - [/docs/v4/middleware/method-overriding.md, Method Overriding, en]
+            - [/docs/v4/middleware/output-buffering.md, Output Buffering, en]
+            - [/docs/v4/middleware/content-length.md, Content Length, en]
         - title: Cook book
           items:
-            - [/docs/v4/cookbook/route-patterns.md, Trailing / in routes, gb]
-            - [/docs/v4/cookbook/retrieving-current-route.md, Retrieving Current Route, gb]
-            - [/docs/v4/cookbook/enable-cors.md, Enabling CORS, gb]
-            - [/docs/v4/cookbook/uploading-files.md, Uploading Files using POST forms, gb]
+            - [/docs/v4/cookbook/route-patterns.md, Trailing / in routes, en]
+            - [/docs/v4/cookbook/retrieving-current-route.md, Retrieving Current Route, en]
+            - [/docs/v4/cookbook/enable-cors.md, Enabling CORS, en]
+            - [/docs/v4/cookbook/uploading-files.md, Uploading Files using POST forms, en]
         - title: Contributing
           items:
-            - [/docs/v4/contributors/strategy.md, Branching Strategy, gb]
-            - [/docs/v4/contributors/guidelines.md, Guidelines, gb]
-  -
-    scope:
+            - [/docs/v4/contributors/strategy.md, Branching Strategy, en]
+            - [/docs/v4/contributors/guidelines.md, Guidelines, en]
+  - scope:
       path: "pl/docs/v4"
       type: "pages"
     values:
       layout: pl/docs-v4
-  -
-    scope:
+  - scope:
       path: ""
       type: "pages"
     values:
@@ -259,14 +254,12 @@ defaults:
           items:
             - [/docs/v3/contributors/strategy.md, Branching Strategy]
             - [/docs/v3/contributors/guidelines.md, Guidelines]
-  -
-    scope:
+  - scope:
       path: "docs/v3"
       type: "pages"
     values:
       layout: docs-v3
-  -
-    scope:
+  - scope:
       path: "pl"
       type: "pages"
     values:
@@ -275,88 +268,86 @@ defaults:
           items:
             - [/pl/docs/v3, Rozpocz&#281;cie]
             - [/pl/docs/v3/start/installation.md, Instalacja]
-            - [/docs/v3/start/upgrade.md, Upgrade Guide, gb]
-            - [/docs/v3/start/web-servers.md, Web Servers, gb]
-            - [/docs/v3/deployment/deployment.md, Deployment, gb]
+            - [/docs/v3/start/upgrade.md, Upgrade Guide, en]
+            - [/docs/v3/start/web-servers.md, Web Servers, en]
+            - [/docs/v3/deployment/deployment.md, Deployment, en]
         - title: Tutorial
           items:
-            - [/docs/v3/tutorial/first-app.md, First Application, gb]
+            - [/docs/v3/tutorial/first-app.md, First Application, en]
         - title: Concepts
           items:
-            - [/docs/v3/concepts/life-cycle.md, Application Life Cycle, gb]
-            - [/docs/v3/concepts/value-objects.md, PSR-7, gb]
-            - [/docs/v3/concepts/middleware.md, Middleware, gb]
-            - [/docs/v3/concepts/di.md, Dependency Container, gb]
+            - [/docs/v3/concepts/life-cycle.md, Application Life Cycle, en]
+            - [/docs/v3/concepts/value-objects.md, PSR-7, en]
+            - [/docs/v3/concepts/middleware.md, Middleware, en]
+            - [/docs/v3/concepts/di.md, Dependency Container, en]
         - title: The Application
           items:
-            - [/docs/v3/objects/application.md, Overview, gb]
-            - [/docs/v3/objects/application.md#application-configuration, Configuration, gb]
-            - [/docs/v3/objects/application.md#slim-default-settings, Default settings, gb]
+            - [/docs/v3/objects/application.md, Overview, en]
+            - [/docs/v3/objects/application.md#application-configuration, Configuration, en]
+            - [/docs/v3/objects/application.md#slim-default-settings, Default settings, en]
         - title: The Request
           items:
-            - [/docs/v3/objects/request.md, Overview, gb]
-            - [/docs/v3/objects/request.md#the-request-method, Method, gb]
-            - [/docs/v3/objects/request.md#the-request-headers, Headers, gb]
-            - [/docs/v3/objects/request.md#the-request-body, Body, gb]
-            - [/docs/v3/objects/request.md#uploaded-files, Uploaded Files, gb]
-            - [/docs/v3/objects/request.md#request-helpers, Helpers, gb]
-            - [/docs/v3/objects/request.md#route-object, Route object, gb]
-            - [/docs/v3/objects/request.md#media-type-parsers, Media type parsers, gb]
+            - [/docs/v3/objects/request.md, Overview, en]
+            - [/docs/v3/objects/request.md#the-request-method, Method, en]
+            - [/docs/v3/objects/request.md#the-request-headers, Headers, en]
+            - [/docs/v3/objects/request.md#the-request-body, Body, en]
+            - [/docs/v3/objects/request.md#uploaded-files, Uploaded Files, en]
+            - [/docs/v3/objects/request.md#request-helpers, Helpers, en]
+            - [/docs/v3/objects/request.md#route-object, Route object, en]
+            - [/docs/v3/objects/request.md#media-type-parsers, Media type parsers, en]
         - title: The Response
           items:
-            - [/docs/v3/objects/response.md, Overview, gb]
-            - [/docs/v3/objects/response.md#the-response-status, Status, gb]
-            - [/docs/v3/objects/response.md#the-response-headers, Headers, gb]
-            - [/docs/v3/objects/response.md#the-response-body, Body, gb]
-            - [/docs/v3/objects/response.md#returning-json, JSON, gb]
+            - [/docs/v3/objects/response.md, Overview, en]
+            - [/docs/v3/objects/response.md#the-response-status, Status, en]
+            - [/docs/v3/objects/response.md#the-response-headers, Headers, en]
+            - [/docs/v3/objects/response.md#the-response-body, Body, en]
+            - [/docs/v3/objects/response.md#returning-json, JSON, en]
         - title: Routing
           items:
-            - [/docs/v3/objects/router.md, Overview, gb]
-            - [/docs/v3/objects/router.md#how-to-create-routes, Create Routes, gb]
-            - [/docs/v3/objects/router.md#route-callbacks, Callbacks, gb]
-            - [/docs/v3/objects/router.md#route-strategies, Strategies, gb]
-            - [/docs/v3/objects/router.md#route-placeholders, Placeholders, gb]
-            - [/docs/v3/objects/router.md#route-names, Names, gb]
-            - [/docs/v3/objects/router.md#route-groups, Groups, gb]
-            - [/docs/v3/objects/router.md#route-middleware, Middleware, gb]
-            - [/docs/v3/objects/router.md#container-resolution, Container Resolution, gb]
+            - [/docs/v3/objects/router.md, Overview, en]
+            - [/docs/v3/objects/router.md#how-to-create-routes, Create Routes, en]
+            - [/docs/v3/objects/router.md#route-callbacks, Callbacks, en]
+            - [/docs/v3/objects/router.md#route-strategies, Strategies, en]
+            - [/docs/v3/objects/router.md#route-placeholders, Placeholders, en]
+            - [/docs/v3/objects/router.md#route-names, Names, en]
+            - [/docs/v3/objects/router.md#route-groups, Groups, en]
+            - [/docs/v3/objects/router.md#route-middleware, Middleware, en]
+            - [/docs/v3/objects/router.md#container-resolution, Container Resolution, en]
         - title: Error Handling
           items:
-            - [/docs/v3/handlers/error.md, Error Handlers, gb]
-            - [/docs/v3/handlers/not-found.md, 404 Not Found, gb]
-            - [/docs/v3/handlers/not-allowed.md, 405 Not Allowed, gb]
-            - [/docs/v3/handlers/php-error.md, PHP Runtime Error, gb]
+            - [/docs/v3/handlers/error.md, Error Handlers, en]
+            - [/docs/v3/handlers/not-found.md, 404 Not Found, en]
+            - [/docs/v3/handlers/not-allowed.md, 405 Not Allowed, en]
+            - [/docs/v3/handlers/php-error.md, PHP Runtime Error, en]
         - title: Cook book
           items:
-            - [/docs/v3/cookbook/route-patterns.md, Trailing / in routes, gb]
-            - [/docs/v3/cookbook/ip-address.md, Retrieving IP address, gb]
-            - [/docs/v3/cookbook/retrieving-current-route.md, Retrieving Current Route, gb]
-            - [/docs/v3/cookbook/database-eloquent.md, Using Eloquent with Slim, gb]
-            - [/docs/v3/cookbook/database-doctrine.md, Using Doctrine with Slim, gb]
-            - [/docs/v3/cookbook/database-atlas.md, Using Atlas with Slim, gb]
-            - [/docs/v3/cookbook/enable-cors.md, Enabling CORS, gb]
-            - [/docs/v3/cookbook/environment.md, Getting and Mocking the Environment, gb]
-            - [/docs/v3/cookbook/uploading-files.md, Uploading Files using POST forms, gb]
-            - [/docs/v3/cookbook/action-domain-responder.md, Action-Domain-Responder with Slim, gb]
+            - [/docs/v3/cookbook/route-patterns.md, Trailing / in routes, en]
+            - [/docs/v3/cookbook/ip-address.md, Retrieving IP address, en]
+            - [/docs/v3/cookbook/retrieving-current-route.md, Retrieving Current Route, en]
+            - [/docs/v3/cookbook/database-eloquent.md, Using Eloquent with Slim, en]
+            - [/docs/v3/cookbook/database-doctrine.md, Using Doctrine with Slim, en]
+            - [/docs/v3/cookbook/database-atlas.md, Using Atlas with Slim, en]
+            - [/docs/v3/cookbook/enable-cors.md, Enabling CORS, en]
+            - [/docs/v3/cookbook/environment.md, Getting and Mocking the Environment, en]
+            - [/docs/v3/cookbook/uploading-files.md, Uploading Files using POST forms, en]
+            - [/docs/v3/cookbook/action-domain-responder.md, Action-Domain-Responder with Slim, en]
         - title: Add Ons
           items:
-            - [/docs/v3/features/templates.md, Templates, gb]
-            - [/docs/v3/features/caching.md, HTTP Caching, gb]
-            - [/docs/v3/features/csrf.md, CSRF Protection, gb]
-            - [/docs/v3/features/flash.md, Flash Messages, gb]
+            - [/docs/v3/features/templates.md, Templates, en]
+            - [/docs/v3/features/caching.md, HTTP Caching, en]
+            - [/docs/v3/features/csrf.md, CSRF Protection, en]
+            - [/docs/v3/features/flash.md, Flash Messages, en]
             - ['https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x', 3rd Party]
         - title: Contributing
           items:
-            - [/docs/v3/contributors/strategy.md, Branching Strategy, gb]
-            - [/docs/v3/contributors/guidelines.md, Guidelines, gb]
-  -
-    scope:
+            - [/docs/v3/contributors/strategy.md, Branching Strategy, en]
+            - [/docs/v3/contributors/guidelines.md, Guidelines, en]
+  - scope:
       path: "pl/docs/v3"
       type: "pages"
     values:
       layout: pl/docs-v3
-  -
-    scope:
+  - scope:
       path: ""
       type: "pages"
     values:
@@ -460,31 +451,30 @@ defaults:
         - title: Dependency Injection
           items:
             - [/docs/v2/di/overview.md, Overview]
-  -
-    scope:
+  - scope:
       path: "docs/v2"
       type: "pages"
     values:
       layout: docs-v2
 t:
   blog:
-    gb: "Blog"
+    en: "Blog"
     pl: "Blog"
   user-guide:
-    gb: "User Guide"
+    en: "User Guide"
     pl: "Podr&#x0119;cznik U&#x017C;ytkownika"
   support:
-    gb: "Support"
+    en: "Support"
     pl: "Wsparcie"
   community:
-    gb: "Community"
+    en: "Community"
     pl: "Spo&#322;eczno&#347;&#263;"
   contribute:
-    gb: "Contribute"
+    en: "Contribute"
     pl: "Wsp&#x00F3;&#x0142;pracuj z nami"
   slim-version:
-    gb: "Slim Version"
+    en: "Slim Version"
     pl: "Wersja Slim'a"
   documentation:
-    gb: "Documentation"
+    en: "Documentation"
     pl: "Dokumentacja"

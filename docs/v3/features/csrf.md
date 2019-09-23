@@ -1,7 +1,7 @@
 ---
 title: CSRF Protection
 l10n-link: features-v3-csrf
-l10n-lang: gb
+l10n-lang: en
 ---
 
 Slim 3 uses the optional standalone [slimphp/Slim-Csrf](https://github.com/slimphp/Slim-Csrf)

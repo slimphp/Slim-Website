@@ -2,7 +2,7 @@
 title: Cookie handling updates
 description: Learn about updates to cookie handling in Slim Framework applications.
 layout: post
-l10n-lang: gb
+l10n-lang: en
 ---
 
 The next major point release to the Slim Framework will simplify how you get and set encrypted cookies. Previously, you would use the Slim application’s `getEncryptedCookie()` and `setEncryptedCookie()` methods to get or set an encrypted cookie.

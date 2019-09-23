@@ -2,7 +2,7 @@
 title: We're getting ready to start work on Slim Framework v4.0
 description: We're getting ready to start work on Slim Framework v4.0
 layout: post
-l10n-lang: gb
+l10n-lang: en
 ---
 
 We are happy to announce that we will soon start work on Slim Framework version 4.0. You can see our project road map on our [GitHub issue tracker](https://github.com/slimphp/Slim/issues?q=is%3Aopen+is%3Aissue+milestone%3A4.0).

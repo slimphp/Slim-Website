@@ -1,7 +1,7 @@
 ---
 title: Writers
 l10n-link: logging-v2-writers
-l10n-lang: gb
+l10n-lang: en
 ---
 The Slim application’s log object has a log writer. The log writer is responsible for sending a logged message to
 the appropriate output (e.g. STDERR, a log file, a remote web service, Twitter, or a database). Out of the box,

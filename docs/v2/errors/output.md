@@ -1,7 +1,7 @@
 ---
 title: Output
 l10n-link: errors-v2-output
-l10n-lang: gb
+l10n-lang: en
 ---
 The Slim application's environment will always contain a key **slim.errors** with a value that is a writable
 resource to which log and error messages may be written. The Slim application’s log object will write log messages

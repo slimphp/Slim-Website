@@ -1,7 +1,7 @@
 ---
 title: Middleware
 l10n-link: routing-v2-middleware
-l10n-lang: gb
+l10n-lang: en
 ---
 Slim enables you to associate middleware with a specific application route. When the given route matches the current
 HTTP request and is invoked, Slim will first invoke the associated middleware in the order they are defined.

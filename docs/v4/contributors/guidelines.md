@@ -1,7 +1,7 @@
 ---
 title: Contributor Guidelines
 l10n-link: contributors-v4-guidelines
-l10n-lang: gb
+l10n-lang: en
 ---
 
 I encourage everyone to contribute to the Slim Framework project. You can find the latest code on GitHub at <https://github.com/slimphp/Slim>.

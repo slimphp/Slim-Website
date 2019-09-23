@@ -1,7 +1,7 @@
 ---
 title: Rendering
 l10n-link: view-v2-rendering
-l10n-lang: gb
+l10n-lang: en
 ---
 You can use the Slim application’s `render()` method to ask the current view object to render a template with a
 given set of variables. The Slim application's `render()` method will `echo()` the output returned from the view

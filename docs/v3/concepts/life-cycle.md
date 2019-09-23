@@ -1,7 +1,7 @@
 ---
 title: Lifecycle
 l10n-link: concepts-v3-life_cycle
-l10n-lang: gb
+l10n-lang: en
 ---
 
 ## Application Life Cycle

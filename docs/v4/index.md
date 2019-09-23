@@ -1,7 +1,7 @@
 ---
 title: Slim 4 Documentation
 l10n-link: index-v4
-l10n-lang: gb
+l10n-lang: en
 ---
 
 <div class="alert alert-info">

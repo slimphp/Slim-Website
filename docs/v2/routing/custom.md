@@ -1,7 +1,7 @@
 ---
 title: Custom
 l10n-link: routing-v2-custom
-l10n-lang: gb
+l10n-lang: en
 ---
 ### One route, multiple HTTP methods
 

@@ -1,7 +1,7 @@
 ---
 title: Helpers
 l10n-link: response-v2-helpers
-l10n-lang: gb
+l10n-lang: en
 ---
 The response object provides helper methods to inspect and interact with the underlying HTTP response.
 

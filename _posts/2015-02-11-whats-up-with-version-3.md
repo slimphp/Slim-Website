@@ -2,7 +2,7 @@
 title: What's up with version 3.0?
 description: New changes in the upcoming Slim Framework version 3.0 release
 layout: post
-l10n-lang: gb
+l10n-lang: en
 ---
 
 It's coming. I promise. As many of you know, I recently finished writing a new book for O'Reilly Media—[Modern PHP](http://shop.oreilly.com/product/0636920033868.do). I'm excited that my book is nearing publication and should be on bookshelves within a month or two. Unfortunately, writing a book is a time-consuming task. I also have a 9 to 5 day job. Life gets in the way sometimes. Excuses, excuses... I know :) I now have free time to work on Slim again. So what's going on? A lot.

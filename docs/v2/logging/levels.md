@@ -1,7 +1,7 @@
 ---
 title: Levels
 l10n-link: logging-v2-levels
-l10n-lang: gb
+l10n-lang: en
 ---
 
 <div class="alert alert-info">

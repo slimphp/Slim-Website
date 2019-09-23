@@ -1,7 +1,7 @@
 ---
 title: Conditions
 l10n-link: routing-v2-conditions
-l10n-lang: gb
+l10n-lang: en
 ---
 Slim lets you assign conditions to route parameters. If the specified conditions are not met, the route is not run.
 For example, if you need a route with a second segment that must be a valid 4-digit year, you could enforce

@@ -1,7 +1,7 @@
 ---
 title: Parameters
 l10n-link: routing-v2-params
-l10n-lang: gb
+l10n-lang: en
 ---
 You can embed parameters into route resource URIs. In this example, I have two parameters in my
 route URI, “:one” and “:two”.

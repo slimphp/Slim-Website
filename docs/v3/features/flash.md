@@ -1,7 +1,7 @@
 ---
 title: Flash Messages
 l10n-link: features-v3-flash
-l10n-lang: gb
+l10n-lang: en
 ---
 
 ## Install

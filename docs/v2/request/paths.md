@@ -1,7 +1,7 @@
 ---
 title: Paths
 l10n-link: request-v2-paths
-l10n-lang: gb
+l10n-lang: en
 ---
 Every HTTP request received by a Slim application will have a root URI and a resource URI.
 
