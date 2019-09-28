@@ -478,3 +478,6 @@ t:
   documentation:
     en: "Documentation"
     pl: "Dokumentacja"
+  toggle-navigation:
+    en: "Toggle Navigation"
+    pl: "Prze&#x0142;&#261;cz nawigację"
