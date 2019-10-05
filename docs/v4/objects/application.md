@@ -220,7 +220,10 @@ class ShutdownHandler
             $exception = new HttpInternalServerErrorException($this->request, $message);
             $response = $this->errorHandler->__invoke($this->request, $exception, $this->displayErrorDetails, false, false);
             
-            ob_clean();
+            if (ob_get_contents()) {
+              ob_clean();
+            }
+
             $responseEmitter = new ResponseEmitter();
             $responseEmitter->emit($response);
         }
