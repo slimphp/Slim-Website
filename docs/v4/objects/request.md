@@ -408,6 +408,29 @@ class PermissionMiddleware {
 }
 ```
 
+## Obtain Base Path From Within Route
+
+To obtain the base path from within a route simply do the following:
+
+```php
+<?php
+use Slim\Factory\AppFactory;
+use Slim\Routing\RouteContext;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$app = AppFactory::create();
+
+$app->get('/', function($request, $response) {
+    $routeContext = RouteContext::fromRequest($request);
+    $basePath = $routeContext->getBasePath();
+    
+    // ...
+    
+    return $response;
+});
+```
+
 ## Attributes
 
 With PSR-7 it is possible to inject objects/values into the request object for further processing. In your applications middleware often need to pass along information to your route closure and the way to do is it is to add it to the request object via an attribute.
