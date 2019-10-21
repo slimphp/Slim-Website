@@ -41,7 +41,7 @@ $app = new App(...);
 Slim no longer has a Container so you need to supply your own. If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. Also, `App::__call()` method has been removed, so accessing a container property via `$app->key_name()` no longer works.
 ```php
 /**
- * In Slim 3.x version container was available.
+ * Slim 3.x shipped with the Pimple container implementation and enabled the following synthax
  */
 $container = $app->getContainer();
 
@@ -52,8 +52,8 @@ $container['view'] = function (\Psr\Container\ContainerInterface $container){
 
 
 /**
- * Slim 4.x didn't come with a container. Slim supports containers that implement PSR-11 like PHP-DI.
- * To install DI Slim bridge `composer require php-di/slim-bridge`
+ * Slim 4.x doesn’t come with a container. Slim supports containers that implement PSR-11 like PHP-DI.
+ * To install DI Slim bridge `composer require php-di/php-di`
  */
 
 use Slim\Factory\AppFactory;
