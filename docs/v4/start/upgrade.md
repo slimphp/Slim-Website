@@ -167,7 +167,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$methodOverridingMiddleware = new MethodOverridingMiddleware();
+$methodOverridingMiddleware = new MethodOverrideMiddleware();
 $app->add($methodOverridingMiddleware);
 
 // ...
