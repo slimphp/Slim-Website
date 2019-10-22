@@ -97,10 +97,10 @@ $app->post('/', function(Request $request, Response $response) {
  * to avoid overwriting an existing uploaded file.
  *
  * @param string $directory directory to which the file is moved
- * @param UploadedFileInterface $uploaded file uploaded file to move
+ * @param UploadedFile $uploaded file uploaded file to move
  * @return string filename of moved file
  */
-function moveUploadedFile($directory, UploadedFileInterface $uploadedFile)
+function moveUploadedFile($directory, UploadedFile $uploadedFile)
 {
     $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
     $basename = bin2hex(random_bytes(8)); // see http://php.net/manual/en/function.random-bytes.php
