@@ -295,6 +295,27 @@ methods to read and iterate its underlying PHP `resource`.
 * getContents()
 * getMetadata($key = null)
 
+### Testing the Request Body
+
+When testing POST actions, you will need to set a body on the request. The `TestCase` helper included with the Slim skeleton features a `->createRequest` method that accepts a `$method` and a `$path`. It creates an internal resource pointing to `php://temp`, which you might be able to write to.
+
+To manually set body content for a POST, use the PSR-7 `withBody()` method to inject a parsed body value:
+
+<figure markdown="1">
+```php
+$request = $this->createRequest('POST', '/users');
+$request = $request->withParsedBody(
+    [
+        'username' => 'vint.cerf',
+        'firstName => 'Vint',
+        'lastName' => 'Cerf',
+    ]
+);
+$response = $app->handle($request);
+```
+<figcaption>Figure 11: Setting a request body for testing</figcaption>
+</figure>
+
 ## Uploaded Files
 
 The file uploads in `$_FILES` are available from the Request object's
@@ -305,7 +326,7 @@ The file uploads in `$_FILES` are available from the Request object's
 ```php
 $files = $request->getUploadedFiles();
 ```
-<figcaption>Figure 11: Get uploaded files</figcaption>
+<figcaption>Figure 12: Get uploaded files</figcaption>
 </figure>
 
 Each object in the `$files` array is a instance of
