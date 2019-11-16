@@ -52,8 +52,8 @@ $container['view'] = function (\Psr\Container\ContainerInterface $container){
 
 
 /**
- * Slim 4.x doesn’t come with a container. Slim supports containers that implement PSR-11 like PHP-DI.
- * To install DI Slim bridge `composer require php-di/php-di`
+ * Slim 4.x does not ship with a container library. It supports all PSR-11 implementations such as PHP-DI
+ * To install PHP-DI `composer require php-di/php-di`
  */
 
 use Slim\Factory\AppFactory;
