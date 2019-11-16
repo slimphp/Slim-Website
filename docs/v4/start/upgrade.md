@@ -64,8 +64,8 @@ AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 $container = $app->getContainer();
-$container->set("view", function(\Psr\Container\ContainerInterface $container){
-    return new \Slim\Views\Twig("");
+$container->set('view', function(\Psr\Container\ContainerInterface $container){
+    return new \Slim\Views\Twig('');
 });
 ```
 
