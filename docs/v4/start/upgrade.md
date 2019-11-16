@@ -39,6 +39,35 @@ $app = new App(...);
 
 ## Changes to Container
 Slim no longer has a Container so you need to supply your own. If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. Also, `App::__call()` method has been removed, so accessing a container property via `$app->key_name()` no longer works.
+```php
+/**
+ * Slim 3.x shipped with the Pimple container implementation and enabled the following synthax
+ */
+$container = $app->getContainer();
+
+//Assign dependencies as array
+$container['view'] = function (\Psr\Container\ContainerInterface $container){
+    return new \Slim\Views\Twig('');
+};
+
+
+/**
+ * Slim 4.x does not ship with a container library. It supports all PSR-11 implementations such as PHP-DI
+ * To install PHP-DI `composer require php-di/php-di`
+ */
+
+use Slim\Factory\AppFactory;
+
+$container = new \DI\Container();
+
+AppFactory::setContainer($container);
+$app = AppFactory::create();
+
+$container = $app->getContainer();
+$container->set('view', function(\Psr\Container\ContainerInterface $container){
+    return new \Slim\Views\Twig('');
+});
+```
 
 ## Changes to Routing components
 The `Router` component from Slim 3 has been split into multiple different components in order to decouple FastRoute from the `App` core and offer more flexibility to the end user. It has been split into
