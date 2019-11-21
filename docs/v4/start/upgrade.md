@@ -151,6 +151,47 @@ $app->addErrorMiddleware(true, true, true);
 $app->run();
 ```
 
+
+## New Not Found- and Not Allowed Handler
+
+The [404 Not Found Handler](http://www.slimframework.com/docs/v3/handlers/not-found.html) and 
+the [405 Not Allowed Handler](http://www.slimframework.com/docs/v3/handlers/not-allowed.html) from v3
+can be migrated as follows: 
+
+```php
+<?php
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Factory\AppFactory;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Psr7\Response;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$app = AppFactory::create();
+
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+
+// Set the Not Found Handler
+$errorMiddleware->setErrorHandler(
+    HttpNotFoundException::class,
+    function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
+        $response = new Response();
+        $response->getBody()->write('404 NOT FOUND');
+
+        return $response->withStatus(404);
+    });
+
+// Set the Not Allowed Handler
+$errorMiddleware->setErrorHandler(
+    HttpMethodNotAllowedException::class,
+    function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
+        $response = new Response();
+        $response->getBody()->write('405 NOT ALLOWED');
+
+        return $response->withStatus(405);
+    });
+```
+
 ## New Dispatcher & Routing Results
 We created a wrapper around the FastRoute dispatcher which adds a result wrapper and access to a route's full list of allowed methods instead of only having access to those when an exception arises.
 The Request attribute `routeInfo` is now deprecated and replaced with `routingResults`.
