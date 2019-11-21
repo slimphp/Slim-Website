@@ -48,6 +48,9 @@ composer require zendframework/zend-diactoros
 ```
 
 ## Step 4: Hello World
+
+File: `public/index.php`
+
 ```php
 <?php
 use Psr\Http\Message\ResponseInterface as Response;
