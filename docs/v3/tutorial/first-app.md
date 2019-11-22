@@ -23,7 +23,7 @@ Start by making a folder for your project (mine is called `project`, because nam
 
 [Composer](https://getcomposer.org) is the best way to install Slim Framework.  If you don't have it already, you can follow the [installation instructions](https://getcomposer.org/download/), in my project I've just downloaded the `composer.phar` into my `src/` directory and I'll use it locally.  So my first command looks like this (I'm in the `src/` directory):
 
-    php composer.phar require slim/slim
+    php composer.phar require slim/slim:^3
 
 This does two things:
 
