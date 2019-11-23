@@ -73,6 +73,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
+$app->addBodyParsingMiddleware();
+
 // This middleware will append the response header Access-Control-Allow-Methods with all allowed methods
 $app->add(function (Request $request, RequestHandlerInterface $handler): Response {
     $routeContext = RouteContext::fromRequest($request);
