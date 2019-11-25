@@ -78,6 +78,7 @@ defaults:
           - [/docs/v4/middleware/error-handling.md, Error Handling]
           - [/docs/v4/middleware/method-overriding.md, Method Overriding]
           - [/docs/v4/middleware/output-buffering.md, Output Buffering]
+          - [/docs/v4/middleware/body-parsing.md, Body Parsing]
           - [/docs/v4/middleware/content-length.md, Content Length]
         - title: Cook book
           items:
