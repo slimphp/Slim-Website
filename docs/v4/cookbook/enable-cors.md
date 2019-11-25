@@ -61,45 +61,105 @@ Here is a complete example application:
 
 ```php
 <?php
+
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface;
 use Slim\Factory\AppFactory;
+use Slim\Routing\RouteCollectorProxy;
 use Slim\Routing\RouteContext;
 
-require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
+$app->addBodyParsingMiddleware();
+
 // This middleware will append the response header Access-Control-Allow-Methods with all allowed methods
-$app->add(function($request, $handler) {
+$app->add(function (Request $request, RequestHandlerInterface $handler): Response {
     $routeContext = RouteContext::fromRequest($request);
     $routingResults = $routeContext->getRoutingResults();
     $methods = $routingResults->getAllowedMethods();
-    
+    $requestHeaders = $request->getHeaderLine('Access-Control-Request-Headers');
+
     $response = $handler->handle($request);
-    $response = $response->withHeader('Access-Control-Allow-Methods', implode(",", $methods));
-    
+
+    $response = $response->withHeader('Access-Control-Allow-Origin', '*');
+    $response = $response->withHeader('Access-Control-Allow-Methods', implode(',', $methods));
+    $response = $response->withHeader('Access-Control-Allow-Headers', $requestHeaders);
+
+    // Optional: Allow Ajax CORS requests with Authorization header
+    // $response = $response->withHeader('Access-Control-Allow-Credentials', 'true');
+
     return $response;
 });
 
 // The RoutingMiddleware should be added after our CORS middleware so routing is performed first
 $app->addRoutingMiddleware();
 
-$app->get("/api/{id}", function($request, $response, $arguments) {
-    // ...
+// The routes
+$app->get('/api/v0/users', function (Request $request, Response $response): Response {
+    $response->getBody()->write('List all users');
+
+    return $response;
 });
 
-$app->post("/api/{id}", function($request, $response, $arguments) {
-    // ...
+$app->get('/api/v0/users/{id}', function (Request $request, Response $response, array $arguments): Response {
+    $userId = (int)$arguments['id'];
+    $response->getBody()->write(sprintf('Get user: %s', $userId));
+
+    return $response;
 });
 
-$app->map(["DELETE", "PATCH"], "/api/{id}", function($request, $response, $arguments) {
-    // ...
+$app->post('/api/v0/users', function (Request $request, Response $response): Response {
+    // Retrieve the JSON data
+    $parameters = (array)$request->getParsedBody();
+
+    $response->getBody()->write('Create user');
+
+    return $response;
 });
 
-// Pay attention to this when you are using some javascript front-end framework and you are using groups in slim php
-$app->group('/api', function () {
-    // Due to the behaviour of browsers when sending PUT or DELETE request, you must add the OPTIONS method. Read about preflight.
-    $this->map(['PUT', 'OPTIONS'], '/{user_id:[0-9]+}', function ($request, $response, $arguments) {
+$app->delete('/api/v0/users/{id}', function (Request $request, Response $response, array $arguments): Response {
+    $userId = (int)$arguments['id'];
+    $response->getBody()->write(sprintf('Delete user: %s', $userId));
+
+    return $response;
+});
+
+// Allow preflight requests
+// Due to the behaviour of browsers when sending a request,
+// you must add the OPTIONS method. Read about preflight.
+$app->options('/api/v0/users', function (Request $request, Response $response): Response {
+    // Do nothing here. Just return the response.
+    return $response;
+});
+
+// Allow additional preflight requests
+$app->options('/api/v0/users/{id}', function (Request $request, Response $response): Response {
+    return $response;
+});
+
+// Using groups
+$app->group('/api/v0/users/{id:[0-9]+}', function (RouteCollectorProxy $group) {
+    $group->put('', function (Request $request, Response $response, array $arguments): Response {
         // Your code here...
+        $userId = (int)$arguments['id'];
+        $response->getBody()->write(sprintf('Put user: %s', $userId));
+
+        return $response;
+    });
+
+    $group->patch('', function (Request $request, Response $response, array $arguments): Response {
+        $userId = (int)$arguments['id'];
+        $response->getBody()->write(sprintf('Patch user: %s', $userId));
+
+        return $response;
+    });
+
+    // Allow preflight requests
+    $group->options('', function (Request $request, Response $response): Response {
+        return $response;
     });
 });
 
