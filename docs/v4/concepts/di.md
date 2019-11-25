@@ -3,11 +3,13 @@ title: Dependency Container
 ---
 
 Slim uses an optional dependency container to prepare, manage, and inject application
-dependencies. Slim supports containers that implement [PSR-11](http://www.php-fig.org/psr/psr-11/) like [PHP-DI](http://php-di.org/doc/frameworks/slim.html).
+dependencies. Slim supports containers that implement [PSR-11](http://www.php-fig.org/psr/psr-11/) 
+like [PHP-DI](http://php-di.org/doc/frameworks/slim.html).
 
 ## Example usage with PHP-DI
 
-You don't _have_ to provide a dependency container. If you do, however, you must provide an instance of the container to `AppFactory` before creating an `App`.
+You don't _have_ to provide a dependency container. If you do, however, you must provide an 
+instance of the container to `AppFactory` before creating an `App`.
 
 ```php
 <?php
@@ -75,4 +77,36 @@ $app->get('/foo', function (Request $request, Response $response, $args) {
     }
     return $response;
 });
+```
+
+## Configuring the application via a container
+
+If you have pre-configured container (e.g. for tests), you can call 
+the `AppFactory::createFromContainer()` method to create an `App`.
+
+**Example**
+
+```php
+<?php
+
+use DI\Container;
+use Slim\Factory\AppFactory;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+// Create Container using PHP-DI
+$container = new Container();
+
+// Add a service to the container
+$container->set(MyService::class, function () {
+    $settings = [...];
+    return new MyService($settings);
+});
+
+// Configure the application via a container
+$app = AppFactory::createFromContainer($container);
+
+// ...
+
+$app->run();
 ```
