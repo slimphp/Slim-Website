@@ -11,7 +11,7 @@ to handle this task.
 ## Usage
 
 It's recommended to put the body parsing middleware before before the call to 
-`addErrorMiddlware`, so that my stack looks like this:
+`addErrorMiddlware`, so that the stack looks like this:
 
 ```php
 <?php
