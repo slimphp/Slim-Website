@@ -2,11 +2,11 @@
 title: Retrieving Current Route
 ---
 
-If you ever need to get access to the current route within your application all you have to do is call the request class' `getAttribute` method with an argument of `'route'` and it will return the current route, which is an instance of the `Slim\Route` class.
+If you ever need to get access to the current route within your application, you will need to instantiate the `RouteContext` object using the incoming `ServerRequestInterface`.
 
-From there you can get the route's name by using `getName()` or get the methods supported by this route via `getMethods()`, etc.
+From there you can get the route via `$routeContext->getRoute()` and access the route's name by using `getName()` or get the methods supported by this route via `getMethods()`, etc.
 
- Note: If you need to access the route from within your app middleware you must set `'determineRouteBeforeAppMiddleware'` to true in your configuration otherwise `getAttribute('route')` will return null. Also `getAttribute('route')` will return null on non existent routes.
+Note: If you need to access the `RouteContext` object during the middleware cycle before reaching the route handler you will need to add the `RoutingMiddleware` as the outermost middleware before the error handling middleware (See example below).
 
 Example:
 ```php
@@ -41,6 +41,9 @@ $app->add(function (Request $request, RequestHandler $handler) {
 // The RoutingMiddleware should be added after our CORS middleware so routing is performed first
 $app->addRoutingMiddleware();
  
+// The ErrorMiddleware should always be the outermost middleware
+$app->addErrorMiddleware(true, true, true);
+
 // ...
  
 $app->run();
