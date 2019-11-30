@@ -33,6 +33,9 @@ defaults:
           - [/docs/v4/start/upgrade.md, Upgrade Guide]
           - [/docs/v4/start/web-servers.md, Web Servers]
           - [/docs/v4/deployment/deployment.md, Deployment]
+        - title: Tutorial
+          items:
+            - [/docs/v4/tutorial/first-app.md, First Application]
         - title: Concepts
           items:
           - [/docs/v4/concepts/life-cycle.md, Application Life Cycle]
