@@ -76,3 +76,45 @@ $app->get('/foo', function (Request $request, Response $response, $args) {
     return $response;
 });
 ```
+
+## Configuring the application via a container
+
+In case you want to create the `App` with dependencies already defined in your container, 
+you can use the `AppFactory::createFromContainer()` method.
+
+**Example**
+
+```php
+<?php
+
+use App\Factory\MyResponseFactory;
+use DI\Container;
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Slim\Factory\AppFactory;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+// Create Container using PHP-DI
+$container = new Container();
+
+// Add custom response factory
+$container->set(ResponseFactoryInterface::class, function (ContainerInterface $container) {
+    return new MyResponseFactory(...);
+});
+
+// Configure the application via container
+$app = AppFactory::createFromContainer($container);
+
+// ...
+
+$app->run();
+```
+
+Supported `App` dependencies are:
+
+* Psr\Http\Message\ResponseFactoryInterface
+* Slim\Interfaces\CallableResolverInterface
+* Slim\Interfaces\RouteCollectorInterface
+* Slim\Interfaces\RouteResolverInterface
+* Slim\Interfaces\MiddlewareDispatcherInterface
