@@ -15,7 +15,7 @@ shown below. This command downloads the Slim Framework and its third-party
 dependencies into your project's `vendor/` directory.
 
 ```bash
-composer require slim/slim "^3.12"
+composer require slim/slim:3.*
 ```
 
 Require the Composer autoloader into your PHP script, and you are ready
