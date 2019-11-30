@@ -13,10 +13,14 @@ Run the following command in terminal to start localhost web server,
 assuming `./public/` is public-accessible directory with `index.php` file:
 
 ```bash
-php -S localhost:8888 -t public public/index.php
+cd public/
+php -S localhost:8888
 ```
 
 If you are not using `index.php` as your entry point then change appropriately.
+
+> **Warning:** The built-in web server was designed to aid application development. 
+It may also be useful for testing purposes or for application demonstrations that are run in controlled environments. It is not intended to be a full-featured web server. It should not be used on a public network.
 
 ## Apache configuration
 
