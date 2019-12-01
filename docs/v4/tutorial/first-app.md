@@ -976,11 +976,22 @@ final class UserCreateAction
         // Invoke the Domain with inputs and retain the result
         $userId = $this->userCreator->createUser($user);
 
+        // Transform the result into the JSON representation
+        $result = [
+            'user_id' => $userId
+        ];
+
         // Build the HTTP response
-        return $response->withJson(['user_id' => $userId]);
+        return $response->withJson($result)->withStatus(201);
     }
 }
 ```
+
+In this example, we create a "barrier" between source data and output 
+so that schema changes do not affect the clients. For the sake of 
+simplicity, this is done using the same method. In reality, you would 
+separate the input data mapping and output JSON conversion into 
+separate parts of your application.
 
 Add the new route in `config/routes.php`:
 
