@@ -62,7 +62,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-/`
+/*
  * Example middleware closure
  *
  * @param  ServerRequest  $request PSR-7 request
