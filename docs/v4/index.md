@@ -65,7 +65,7 @@ $app = AppFactory::create();
 // Add Routing Middleware
 $app->addRoutingMiddleware();
 
-/*
+/**
  * Add Error Handling Middleware
  *
  * @param bool $displayErrorDetails -> Should be set to false in production
