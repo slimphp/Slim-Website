@@ -43,7 +43,7 @@ Add the following route as the last route:
 <?php
 use Slim\Exception\HttpNotFoundException;
 
-/*
+/**
  * Catch-all route to serve a 404 Not Found page if none of the routes match
  * NOTE: make sure this route is defined last
  */

@@ -127,13 +127,13 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-/*
+/**
  * The routing middleware should be added before the ErrorMiddleware
  * Otherwise exceptions thrown from it will not be handled
  */
 $app->addRoutingMiddleware();
 
-/*
+/**
  * Add Error Handling Middleware
  *
  * @param bool $displayErrorDetails -> Should be set to false in production
