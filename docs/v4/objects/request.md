@@ -7,7 +7,7 @@ represents the current HTTP request received by your web server. The request
 object implements the [PSR-7 ServerRequestInterface][psr7] with which you can
 inspect and manipulate the HTTP request method, headers, and body.
 
-[psr7]: http://www.php-fig.org/psr/psr-7/#3-2-1-psr-http-message-serverrequestinterface
+[psr7]: https://www.php-fig.org/psr/psr-7/#321-psrhttpmessageserverrequestinterface
 
 ## How to get the Request object
 
@@ -135,7 +135,7 @@ resource. The HTTP request URI has several parts:
 
 You can fetch the PSR-7 Request object's [URI object][psr7_uri] with its `getUri()` method:
 
-[psr7_uri]: http://www.php-fig.org/psr/psr-7/#3-5-psr-http-message-uriinterface
+[psr7_uri]: https://www.php-fig.org/psr/psr-7/#35-psrhttpmessageuriinterface
 
 ```php
 $uri = $request->getUri();
