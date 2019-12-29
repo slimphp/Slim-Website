@@ -7,7 +7,7 @@ represents the current HTTP response to be returned to the client. The response
 object implements the [PSR-7 ResponseInterface][psr7] with which you can
 inspect and manipulate the HTTP response status, headers, and body.
 
-[psr7]: http://www.php-fig.org/psr/psr-7/#3-2-1-psr-http-message-responseinterface
+[psr7]: https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface
 
 ## How to get the Response object
 
