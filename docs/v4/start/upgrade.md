@@ -6,7 +6,7 @@ If you are upgrading from version 3 to version 4, these are the significant chan
 you need to be aware of.
 
 ## PHP Version Requirement
-Slim 4 requires **PHP 7.1 or newer**.
+Slim 4 requires **PHP 7.2 or newer**.
 
 ## Breaking changes to Slim\App constructor
 Slim's App settings used to be a part of the container and they have now been decoupled from it.
