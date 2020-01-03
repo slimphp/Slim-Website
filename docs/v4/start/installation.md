@@ -42,9 +42,9 @@ composer require nyholm/psr7 nyholm/psr7-server
 composer require guzzlehttp/psr7 http-interop/http-factory-guzzle
 ```
 
-### [Zend Diactoros](https://github.com/zendframework/zend-diactoros)
+### [Laminas Diactoros](https://github.com/laminas/laminas-diactoros)
 ```bash
-composer require zendframework/zend-diactoros
+composer require laminas/laminas-diactoros
 ```
 
 ## Step 4: Hello World
