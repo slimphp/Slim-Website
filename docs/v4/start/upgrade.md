@@ -6,7 +6,7 @@ If you are upgrading from version 3 to version 4, these are the significant chan
 you need to be aware of.
 
 ## PHP Version Requirement
-Slim 4 requires **PHP 7.1 or newer**.
+Slim 4 requires **PHP 7.2 or newer**.
 
 ## Breaking changes to Slim\App constructor
 Slim's App settings used to be a part of the container and they have now been decoupled from it.
@@ -93,7 +93,7 @@ having to pass in a `ServerRequest` object. The following PSR-7 implementations 
 - [Slim PSR-7](https://github.com/slimphp/Slim-Psr7)
 - [Nyholm PSR-7](https://github.com/Nyholm/psr7) and [Nyholm PSR-7 Server](https://github.com/Nyholm/psr7-server)
 - [Guzzle PSR-7](https://github.com/guzzle/psr7) and [Guzzle HTTP Factory](https://github.com/http-interop/http-factory-guzzle)
-- [Zend Diactoros](https://github.com/zendframework/zend-diactoros)
+- [Laminas Diactoros](https://github.com/laminas/laminas-diactoros)
 
 ## New Routing Middleware
 The routing has been implemented as middleware. We are still using [FastRoute](https://github.com/nikic/FastRoute) for our routing needs.
