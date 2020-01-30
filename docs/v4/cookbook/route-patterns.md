@@ -24,9 +24,14 @@ $app->add(function (Request $request, RequestHandler $handler) {
     $path = $uri->getPath();
     
     if ($path != '/' && substr($path, -1) == '/') {
+        // recursively remove slashes when its more than 1 slash
+        while(substr($path, -1) == '/') {
+            $path = substr($path, 0, -1);
+        }
+
         // permanently redirect paths with a trailing slash
         // to their non-trailing counterpart
-        $uri = $uri->withPath(substr($path, 0, -1));
+        $uri = $uri->withPath($path);
         
         if ($request->getMethod() == 'GET') {
             $response = new Response();
