@@ -28,7 +28,7 @@ the same as normal route parameters shown above. Here’s an example:
     });
 
 When you invoke this example application with a resource URI “/hello/Josh/T/Lockhart”, the route callback’s `$name`
-argument will be equal to `array('Josh', 'T', Lockhart')`.
+argument will be equal to `array('Josh', 'T', 'Lockhart')`.
 
 ### Optional route parameters
 
