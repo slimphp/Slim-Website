@@ -70,7 +70,7 @@ defaults:
           - [/docs/v4/objects/routing.md#route-names, Names]
           - [/docs/v4/objects/routing.md#route-groups, Groups]
           - [/docs/v4/objects/routing.md#route-middleware, Middleware]
-          - [/docs/v4/objects/routing.md#router-caching, Caching]
+          - [/docs/v4/objects/routing.md#route-expressions-caching, Caching]
           - [/docs/v4/objects/routing.md#container-resolution, Container Resolution]
         - title: Packaged Middleware
           items:
