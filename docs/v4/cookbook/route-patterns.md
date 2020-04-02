@@ -25,9 +25,7 @@ $app->add(function (Request $request, RequestHandler $handler) {
     
     if ($path != '/' && substr($path, -1) == '/') {
         // recursively remove slashes when its more than 1 slash
-        while(substr($path, -1) == '/') {
-            $path = substr($path, 0, -1);
-        }
+        $path = rtrim($path, '/');
 
         // permanently redirect paths with a trailing slash
         // to their non-trailing counterpart
