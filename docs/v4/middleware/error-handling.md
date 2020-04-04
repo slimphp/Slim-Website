@@ -24,11 +24,12 @@ $app->addRoutingMiddleware();
  * @param bool $logErrors -> Parameter is passed to the default ErrorHandler
  * @param bool $logErrorDetails -> Display error details in error log
  * which can be replaced by a callable of your choice.
+ * @param \Psr\Log\LoggerInterface $logger -> Optional PSR-3 logger to receive errors
  * 
  * Note: This middleware should be added last. It will not handle any exceptions/errors
  * for middleware added after it.
  */
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
 
 // ...
 
@@ -40,6 +41,7 @@ You can now map custom handlers for any type of Exception or Throwable.
 ```php
 <?php
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
 
@@ -56,8 +58,11 @@ $customErrorHandler = function (
     Throwable $exception,
     bool $displayErrorDetails,
     bool $logErrors,
-    bool $logErrorDetails
+    bool $logErrorDetails,
+    ?LoggerInterface $logger = null
 ) use ($app) {
+    $logger->error($exception->getMessage());
+
     $payload = ['error' => $exception->getMessage()];
 
     $response = $app->getResponseFactory()->createResponse();
@@ -69,7 +74,7 @@ $customErrorHandler = function (
 };
 
 // Add Error Middleware
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
 $errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
 // ...
@@ -78,7 +83,9 @@ $app->run();
 ```
 
 ## Error Logging
-If you would like to pipe in custom error logging to the default `ErrorHandler` that ships with Slim you can simply extend it and stub the `logError()` method.
+If you would like to pipe in custom error logging to the default `ErrorHandler` that ships with Slim, there are two ways to do it.
+
+With the first method, you can simply extend `ErrorHandler` and stub the `logError()` method.
 
 ```php
 <?php
@@ -113,6 +120,33 @@ $myErrorHandler = new MyErrorHandler($app->getCallableResolver(), $app->getRespo
 // Add Error Middleware
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 $errorMiddleware->setDefaultErrorHandler($myErrorHandler);
+
+// ...
+
+$app->run();
+```
+
+With the second method, you can supply a logger that conforms to the
+[PSR-3 standard](https://www.php-fig.org/psr/psr-3/), such as one from the popular
+[Monolog](https://github.com/Seldaek/monolog/) library.
+
+```php
+<?php
+use MyApp\Handlers\MyErrorHandler;
+use Slim\Factory\AppFactory;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$app = AppFactory::create();
+
+// Add Routing Middleware
+$app->addRoutingMiddleware();
+
+// Instantiate Logger
+// $logger = ...
+
+// Add Error Middleware with Logger
+$errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
 
 // ...
 
