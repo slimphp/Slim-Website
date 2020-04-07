@@ -6,7 +6,7 @@ title: Lifecycle
 
 ### 1. Instantiation
 
-First, you instantiate the `Slim\App` class. This is the Slim application object. During instantiation, Slim registers default services for each application dependency. The application constructor accepts an optional settings array that configures the application's behavior.
+First, you instantiate the `Slim\App` class. This is the Slim application object. During instantiation, Slim registers default services for each application dependency.
 
 ### 2. Route Definitions
 
