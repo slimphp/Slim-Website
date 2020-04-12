@@ -14,5 +14,11 @@
         });
       }
     });
+
+    // add anchor to docs-content
+    $('.docs-content h2, .docs-content h3').click(function() {
+      window.location = window.location.href.split('#')[0] + '#' + this.id;
+    });
   });
 })(jQuery);
+
