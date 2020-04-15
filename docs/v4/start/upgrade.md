@@ -69,6 +69,17 @@ $container->set('view', function(\Psr\Container\ContainerInterface $container){
 });
 ```
 
+## Changes to base path handling
+Up to v3, Slim extracted the base path from the folder where the application was instantiated. This is no longer the case, and the base path must be explicitly declared [in case your application is not executed from the root of your domain](/docs/v4/start/web-servers.html#run-from-a-sub-directory):
+```php
+use Slim\Factory\AppFactory;
+// ...
+$app = AppFactory::create();
+$app->setBasePath('/my-app-subpath');
+// ...
+$app->run();
+```
+
 ## Changes to Routing components
 The `Router` component from Slim 3 has been split into multiple different components in order to decouple FastRoute from the `App` core and offer more flexibility to the end user. It has been split into
 `RouteCollector`, `RouteParser` and `RouteResolver`. Those 3 components can all have their respective interfaces which you can implement on your own and inject into
