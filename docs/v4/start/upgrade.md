@@ -80,6 +80,14 @@ the `App` constructor. The following pull requests offer a lot of insight on the
 - [Pull Request #2641](https://github.com/slimphp/Slim/pull/2641)
 - [Pull Request #2642](https://github.com/slimphp/Slim/pull/2642)
 
+This also means that [Route Groups](/docs/v4/objects/routing.html#route-groups) have changed their signatures:
+```php
+$app->group('/user', function(\Slim\Routing\RouteCollectorProxy $app){
+    $app->get('', function() { /* ... */ });
+    //...
+});
+```
+
 ## New Middleware Approach
 In Slim 4 we wanted to give more flexibility to the developers by decoupling some of Slim's App core functionality and implementing it as middleware. This gives you the ability to swap in custom implementations of the core components.
 
