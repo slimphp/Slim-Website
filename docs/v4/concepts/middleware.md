@@ -212,8 +212,8 @@ $app->add(function (Request $request, RequestHandler $handler) {
 });
 
 $app->get('/', function (Request $request, Response $response, $args) {
-	$response->getBody()->write('Hello World');
-	return $response;
+    $response->getBody()->write('Hello World');
+    return $response;
 });
 
 $app->run();
@@ -280,7 +280,8 @@ require __DIR__ . '/../vendor/autoload.php';
 $app = AppFactory::create();
 
 $app->get('/', function (Request $request, Response $response) {
-    return $response->getBody()->write('Hello World');
+    $response->getBody()->write('Hello World');
+    return $response;
 });
 
 $app->group('/utils', function (RouteCollectorProxy $group) {
