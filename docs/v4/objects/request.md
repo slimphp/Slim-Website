@@ -308,7 +308,7 @@ $files = $request->getUploadedFiles();
 <figcaption>Figure 11: Get uploaded files</figcaption>
 </figure>
 
-Each object in the `$files` array is a instance of
+Each object in the `$files` array is an instance of
 `Psr\Http\Message\UploadedFileInterface` and supports the following methods:
 
 * getStream()
@@ -372,7 +372,7 @@ For example, to get a single Server Parameter:
 
 ```php
 $params = $request->getServerParams();
-$authorization = isset($params['HTTP_AUTHORIZATION']) : $params['HTTP_AUTHORIZATION'] : null;
+$authorization = isset($params['HTTP_AUTHORIZATION']) ? $params['HTTP_AUTHORIZATION'] : null;
 ```
 
 ## Route Object
@@ -433,7 +433,7 @@ $app->get('/', function($request, $response) {
 
 ## Attributes
 
-With PSR-7 it is possible to inject objects/values into the request object for further processing. In your applications middleware often need to pass along information to your route closure and the way to do is it is to add it to the request object via an attribute.
+With PSR-7 it is possible to inject objects/values into the request object for further processing. In your applications middleware often need to pass along information to your route closure and the way to do it is to add it to the request object via an attribute.
 
 Example, Setting a value on your request object.
 
