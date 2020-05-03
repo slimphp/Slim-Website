@@ -52,7 +52,6 @@ defaults:
           - [/docs/v4/objects/request.md#uploaded-files, Uploaded Files]
           - [/docs/v4/objects/request.md#request-helpers, Helpers]
           - [/docs/v4/objects/request.md#route-object, Route object]
-          - [/docs/v4/objects/request.md#media-type-parsers, Media type parsers]
         - title: The Response
           items:
           - [/docs/v4/objects/response.md, Overview]
