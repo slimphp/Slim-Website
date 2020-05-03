@@ -42,7 +42,7 @@ defaults:
         - title: The Application
           items:
           - [/docs/v4/objects/application.md, Overview]
-          - [/docs/v4/objects/application.md#notices-and-warnings-handling, Notices & Warnings Handling]
+          - [/docs/v4/objects/application.md#advanced-notices-and-warnings-handling, Notices & Warnings Handling]
         - title: The Request
           items:
           - [/docs/v4/objects/request.md, Overview]
