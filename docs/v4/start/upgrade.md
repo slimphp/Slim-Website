@@ -41,7 +41,7 @@ $app = new App(...);
 Slim no longer has a Container so you need to supply your own. If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. Also, `App::__call()` method has been removed, so accessing a container property via `$app->key_name()` no longer works.
 ```php
 /**
- * Slim 3.x shipped with the Pimple container implementation and enabled the following synthax
+ * Slim 3.x shipped with the Pimple container implementation and enabled the following syntax
  */
 $container = $app->getContainer();
 
