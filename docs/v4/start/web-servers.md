@@ -44,7 +44,7 @@ AllowOverride All
 
 This is an example Nginx virtual host configuration for the domain `example.com`.
 It listens for inbound HTTP connections on port 80. It assumes a PHP-FPM server
-is running on port 9000. You should update the `server_name`, `error_log`,
+is running on port 9123. You should update the `server_name`, `error_log`,
 `access_log`, and `root` directives with your own values. The `root` directive
 is the path to your application's public document root directory; your Slim app's
 `index.php` front-controller file should be in this directory.
@@ -69,7 +69,7 @@ server {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param SCRIPT_NAME $fastcgi_script_name;
         fastcgi_index index.php;
-        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_pass 127.0.0.1:9123;
     }
 }
 ```
