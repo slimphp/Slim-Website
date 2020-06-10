@@ -11,7 +11,7 @@ If you want to redirect/rewrite all URLs that end in a `/` to the non-trailing `
 ```php
 <?php
 use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Server\RequestHandlerInterface RequestHandler;
+use Psr\Http\Message\ServerRequestInterface as RequestHandler;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
 
