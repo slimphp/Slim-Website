@@ -34,7 +34,7 @@ $app->run();
 
 ```php
 <?php
-use MyApp\Handlers\ErrorHandler;
+use MyApp\Handlers\HttpErrorHandler;
 use MyApp\Handlers\ShutdownHandler;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Factory\AppFactory;
@@ -50,7 +50,7 @@ $callableResolver = $app->getCallableResolver();
 $responseFactory = $app->getResponseFactory();
 
 $serverRequestCreator = ServerRequestCreatorFactory::create();
-$request = $serverRequestCreator->createFromGlobals();
+$request = $serverRequestCreator->createServerRequestFromGlobals();
 
 $errorHandler = new HttpErrorHandler($callableResolver, $responseFactory);
 $shutdownHandler = new ShutdownHandler($request, $errorHandler, $displayErrorDetails);
@@ -151,7 +151,7 @@ class HttpErrorHandler extends ErrorHandler
 namespace MyApp\Handlers;
 
 use MyApp\Handlers\HttpErrorHandler;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\ResponseEmitter;
 
