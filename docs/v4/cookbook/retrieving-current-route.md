@@ -11,6 +11,7 @@ Note: If you need to access the `RouteContext` object during the middleware cycl
 Example:
 ```php
 <?php
+use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
 use Slim\Routing\RouteContext;
 
@@ -25,7 +26,7 @@ $app->add(function (Request $request, RequestHandler $handler) {
 
     // return NotFound for non existent route
     if (empty($route)) {
-        throw new NotFoundException($request, $response);
+        throw new HttpNotFoundException($request);
     }
 
     $name = $route->getName();
