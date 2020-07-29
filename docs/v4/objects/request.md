@@ -364,15 +364,28 @@ You can fetch the HTTP request content length with the Request object's `getHead
 $length = $request->getHeaderLine('Content-Length');
 ```
 
-### Request Parameter
+### Server Parameter
 
-To fetch single request parameter value. You will need to use `getServerParams()`
+To fetch data related to the incoming request environment, you will need to use `getServerParams()`.
 
 For example, to get a single Server Parameter:
 
 ```php
 $params = $request->getServerParams();
-$authorization = isset($params['HTTP_AUTHORIZATION']) ? $params['HTTP_AUTHORIZATION'] : null;
+$authorization = $params['HTTP_AUTHORIZATION'] ?? null;
+```
+
+### POST Parameters
+
+If the request method is `POST` and the `Content-Type` is either `application/x-www-form-urlencoded` 
+or `multipart/form-data`, you can retrieve all `POST` parameters as follows:
+
+```php
+// Get all POST parameters
+$params = (array)$request->getParsedBody();
+
+// Get a single POST parameter
+$foo = $params['foo'];
 ```
 
 ## Route Object
