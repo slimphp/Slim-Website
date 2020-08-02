@@ -49,20 +49,24 @@ that handles the uploaded files of the HTML form above.
 <figure markdown="1">
 ```php
 <?php
-use DI\Container;
-use Psr\Http\Message\ServerRequestInterface;
+
+use DI\ContainerBuilder;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UploadedFileInterface;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$container = new Container();
+$containerBuilder = new ContainerBuilder();
+$container = $containerBuilder->build();
+
 $container->set('upload_directory', __DIR__ . '/uploads');
 
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-$app->post('/', function(Request $request, Response $response) {
+$app->post('/', function (ServerRequestInterface $request, ResponseInterface $response) {
     $directory = $this->get('upload_directory');
     $uploadedFiles = $request->getUploadedFiles();
 
@@ -70,14 +74,14 @@ $app->post('/', function(Request $request, Response $response) {
     $uploadedFile = $uploadedFiles['example1'];
     if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
         $filename = moveUploadedFile($directory, $uploadedFile);
-        $response->write('uploaded ' . $filename . '<br/>');
+        $response->getBody()->write('Uploaded: ' . $filename . '<br/>');
     }
 
     // handle multiple inputs with the same key
     foreach ($uploadedFiles['example2'] as $uploadedFile) {
         if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
             $filename = moveUploadedFile($directory, $uploadedFile);
-            $response->write('uploaded ' . $filename . '<br/>');
+            $response->getBody()->write('Uploaded: ' . $filename . '<br/>');
         }
     }
 
@@ -85,7 +89,7 @@ $app->post('/', function(Request $request, Response $response) {
     foreach ($uploadedFiles['example3'] as $uploadedFile) {
         if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
             $filename = moveUploadedFile($directory, $uploadedFile);
-            $response->write('uploaded ' . $filename . '<br/>');
+            $response->getBody()->write('Uploaded: ' . $filename . '<br/>');
         }
     }
 
@@ -96,14 +100,17 @@ $app->post('/', function(Request $request, Response $response) {
  * Moves the uploaded file to the upload directory and assigns it a unique name
  * to avoid overwriting an existing uploaded file.
  *
- * @param string $directory directory to which the file is moved
- * @param UploadedFileInterface $uploaded file uploaded file to move
- * @return string filename of moved file
+ * @param string $directory The directory to which the file is moved
+ * @param UploadedFileInterface $uploadedFile The file uploaded file to move
+ *
+ * @return string The filename of moved file
  */
-function moveUploadedFile($directory, UploadedFileInterface $uploadedFile)
+function moveUploadedFile(string $directory, UploadedFileInterface $uploadedFile)
 {
     $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
-    $basename = bin2hex(random_bytes(8)); // see http://php.net/manual/en/function.random-bytes.php
+
+    // see http://php.net/manual/en/function.random-bytes.php
+    $basename = bin2hex(random_bytes(8));
     $filename = sprintf('%s.%0.8s', $basename, $extension);
 
     $uploadedFile->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
@@ -112,6 +119,8 @@ function moveUploadedFile($directory, UploadedFileInterface $uploadedFile)
 }
 
 $app->run();
+
 ```
+
 <figcaption>Figure 2: Example Slim application to handle the uploaded files</figcaption>
 </figure>
