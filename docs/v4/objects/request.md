@@ -41,7 +41,7 @@ as the first argument of the middleware callable like this:
 <figure markdown="1">
 ```php
 <?php
-use Psr\Http\Message\ResponseInterface as Response;
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
@@ -50,7 +50,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->add(function (ServerRequestInterface $request, RequestHandler $handler) {
+$app->add(function (Request $request, RequestHandler $handler) {
    return $handler->handle($request);
 });
 
@@ -236,6 +236,7 @@ Note that body parsing differs from one PSR-7 implementation to another.
 You may need to implement middleware in order to parse the incoming input depending on the PSR-7 implementation you have installed. Here is an example for parsing incoming `JSON` input:
 ```php
 <?php
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\MiddlewareInterface;
@@ -395,26 +396,28 @@ Sometimes in middleware you require the parameter of your route.
 In this example we are checking first that the user is logged in and second that the user has permissions to view the particular video they are attempting to view.
 
 ```php
-<?php
 $app
-  ->get('/course/{id}', Video::class.":watch")
+  ->get('/course/{id}', Video::class . ':watch')
   ->add(PermissionMiddleware::class);
 ```
 
 ```php
 <?php
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Routing\RouteContext;
 
-class PermissionMiddleware {
-    public function __invoke(Request $request, RequestHandler $handler) {
+class PermissionMiddleware
+{
+    public function __invoke(Request $request, RequestHandler $handler)
+    {
         $routeContext = RouteContext::fromRequest($request);
         $route = $routeContext->getRoute();
         
         $courseId = $route->getArgument('id');
         
-        // ...do permission logic...
+        // do permission logic...
         
         return $handler->handle($request);
     }
@@ -427,6 +430,9 @@ To obtain the base path from within a route simply do the following:
 
 ```php
 <?php
+
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Slim\Routing\RouteContext;
 
@@ -434,10 +440,9 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->get('/', function($request, $response) {
+$app->get('/', function(Request $request, Response $response) {
     $routeContext = RouteContext::fromRequest($request);
     $basePath = $routeContext->getBasePath();
-    
     // ...
     
     return $response;
@@ -446,14 +451,19 @@ $app->get('/', function($request, $response) {
 
 ## Attributes
 
-With PSR-7 it is possible to inject objects/values into the request object for further processing. In your applications middleware often need to pass along information to your route closure and the way to do it is to add it to the request object via an attribute.
+With PSR-7 it is possible to inject objects/values into the request object for further processing. 
+In your applications middleware often need to pass along information to your route closure and the way to do it is to add it to the request object via an attribute.
 
 Example, Setting a value on your request object.
 
 ```php
-$app->add(function ($request, $handler) {
-    // add the session storage to your request as [READ-ONLY]
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+
+$app->add(function (Request $request, RequestHandler $handler) {
+    // Add the session storage to your request as [READ-ONLY]
     $request = $request->withAttribute('session', $_SESSION);
+    
     return $handler->handle($request);
 });
 ```
@@ -461,9 +471,16 @@ $app->add(function ($request, $handler) {
 Example, how to retrieve the value.
 
 ```php
-$app->get('/test', function ($request, $response, $args) {
-    $session = $request->getAttribute('session'); // get the session from the request
-    return $response->write('Yay, ' . $session['name']);
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+
+$app->get('/test', function (Request $request, Response $response) {
+    // Get the session from the request
+    $session = $request->getAttribute('session');
+    
+    $response->getBody()->write('Yay, ' . $session['name']);
+    
+    return $response;
 });
 ```
 
