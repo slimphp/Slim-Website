@@ -19,7 +19,7 @@ application's `get()` method. It accepts two arguments:
 2. The route callback
 
 ```php
-$app->get('/books/{id}', function ($request, $response, $args) {
+$app->get('/books/{id}', function ($request, $response, array $args) {
     // Show book identified by $args['id']
 });
 ```
@@ -33,7 +33,7 @@ application's `post()` method. It accepts two arguments:
 2. The route callback
 
 ```php
-$app->post('/books', function ($request, $response, $args) {
+$app->post('/books', function ($request, $response, array $args) {
     // Create new book
 });
 ```
@@ -47,7 +47,7 @@ application's `put()` method. It accepts two arguments:
 2. The route callback
 
 ```php
-$app->put('/books/{id}', function ($request, $response, $args) {
+$app->put('/books/{id}', function ($request, $response, array $args) {
     // Update book identified by $args['id']
 });
 ```
@@ -61,7 +61,7 @@ application's `delete()` method. It accepts two arguments:
 2. The route callback
 
 ```php
-$app->delete('/books/{id}', function ($request, $response, $args) {
+$app->delete('/books/{id}', function ($request, $response, array $args) {
     // Delete book identified by $args['id']
 });
 ```
@@ -75,7 +75,7 @@ application's `options()` method. It accepts two arguments:
 2. The route callback
 
 ```php
-$app->options('/books/{id}', function ($request, $response, $args) {
+$app->options('/books/{id}', function ($request, $response, array $args) {
     // Return response headers
 });
 ```
@@ -89,7 +89,7 @@ application's `patch()` method. It accepts two arguments:
 2. The route callback
 
 ```php
-$app->patch('/books/{id}', function ($request, $response, $args) {
+$app->patch('/books/{id}', function ($request, $response, array $args) {
     // Apply changes to book identified by $args['id']
 });
 ```
@@ -102,7 +102,7 @@ You can add a route that handles all HTTP request methods with the Slim applicat
 2. The route callback
 
 ```php
-$app->any('/books/[{id}]', function ($request, $response, $args) {
+$app->any('/books/[{id}]', function ($request, $response, array $args) {
     // Apply changes to books or book identified by $args['id'] if specified.
     // To check which method is used: $request->getMethod();
 });
@@ -123,7 +123,7 @@ You can add a route that handles multiple HTTP request methods with the Slim app
 3. The route callback
 
 ```php
-$app->map(['GET', 'POST'], '/books', function ($request, $response, $args) {
+$app->map(['GET', 'POST'], '/books', function ($request, $response, array $args) {
     // Create new book or list all books
 });
 ```
@@ -145,7 +145,7 @@ There are two ways you can write content to the HTTP response. First, you can si
 If you use a [dependency container](/docs/v4/concepts/di.html) and a `Closure` instance as the route callback, the closure's state is bound to the `Container` instance. This means you will have access to the DI container instance _inside_ of the Closure via the `$this` keyword:
 
 ```php
-$app->get('/hello/{name}', function ($request, $response, $args) {
+$app->get('/hello/{name}', function ($request, $response, array $args) {
     // Use app HTTP cookie service
     $this->get('cookies')->set('name', [
         'value' => $args['name'],
@@ -199,7 +199,9 @@ $routeCollector = $app->getRouteCollector();
 $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
 
 $app->get('/hello/{name}', function ($request, $response, $name) {
-    return $response->write($name);
+    $response->getBody()->write($name);
+    
+    return $response;
 });
 ```
 
@@ -216,7 +218,9 @@ $app = AppFactory::create();
 $routeCollector = $app->getRouteCollector();
 
 $route = $app->get('/hello/{name}', function ($request, $response, $name) {
-    return $response->write($name);
+    $response->getBody()->write($name);
+    
+    return $response;
 });
 $route->setInvocationStrategy(new RequestResponseArgs());
 ```
@@ -232,9 +236,15 @@ Each routing method described above accepts a URL pattern that is matched agains
 A route pattern placeholder starts with a `{`, followed by the placeholder name, ending with a `}`. This is an example placeholder named `name`:
 
 ```php
-$app->get('/hello/{name}', function (Request $request, Response $response, $args) {
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+// ...
+
+$app->get('/hello/{name}', function (ServerRequestInterface $request, ResponseInterface $response, array $args) {
     $name = $args['name'];
-    echo "Hello, $name";
+    $response->getBody()->write("Hello, $name");
+    
+    return $response;
 });
 ```
 
@@ -243,27 +253,34 @@ $app->get('/hello/{name}', function (Request $request, Response $response, $args
 To make a section optional, simply wrap in square brackets:
 
 ```php
-$app->get('/users[/{id}]', function ($request, $response, $args) {
+$app->get('/users[/{id}]', function ($request, $response, array $args) {
     // responds to both `/users` and `/users/123`
     // but not to `/users/`
+    
+    return $response;
 });
 ```
-
 
 Multiple optional parameters are supported by nesting:
 
 ```php
-$app->get('/news[/{year}[/{month}]]', function ($request, $response, $args) {
+$app->get('/news[/{year}[/{month}]]', function ($request, $response, array $args) {
     // reponds to `/news`, `/news/2016` and `/news/2016/03`
+    // ...
+    
+    return $response;
 });
 ```
 
 For "Unlimited" optional parameters, you can do this:
 
 ```php
-$app->get('/news[/{params:.*}]', function ($request, $response, $args) {
+$app->get('/news[/{params:.*}]', function ($request, $response, array $args) {
     // $params is an array of all the optional segments
     $params = explode('/', $args['params']);
+    // ...
+    
+    return $response;
 });
 ```
 
@@ -277,8 +294,11 @@ By default the placeholders are written inside `{}` and can accept any
 values. However, placeholders can also require the HTTP request URI to match a particular regular expression. If the current HTTP request URI does not match a placeholder regular expression, the route is not invoked. This is an example placeholder named `id` that requires one or more digits.
 
 ```php
-$app->get('/users/{id:[0-9]+}', function ($request, $response, $args) {
+$app->get('/users/{id:[0-9]+}', function ($request, $response, array $args) {
     // Find user identified by $args['id']
+    // ...
+    
+    return $response;
 });
 ```
 
@@ -287,8 +307,9 @@ $app->get('/users/{id:[0-9]+}', function ($request, $response, $args) {
 Application routes can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the RouteParser's `urlFor()` method. Each routing method described above returns a `Slim\Route` object, and this object exposes a `setName()` method.
 
 ```php
-$app->get('/hello/{name}', function ($request, $response, $args) {
-    echo "Hello, " . $args['name'];
+$app->get('/hello/{name}', function ($request, $response, array $args) {
+    $response->getBody()->write("Hello, " . $args['name']);
+    return $response;
 })->setName('hello');
 ```
 
@@ -312,14 +333,23 @@ The RouteParser's `urlFor()` method accepts three arguments:
 To help organize routes into logical groups, the `Slim\App` also provides a `group()` method. Each group's route pattern is prepended to the routes or groups contained within it, and any placeholder arguments in the group pattern are ultimately made available to the nested routes:
 
 ```php
+use Slim\Routing\RouteCollectorProxy;
+// ...
+
 $app->group('/users/{id:[0-9]+}', function (RouteCollectorProxy $group) {
-    $group->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
+    $group->map(['GET', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, array $args) {
         // Find, delete, patch or replace user identified by $args['id']
+        // ...
+        
+        return $response;
     })->setName('user');
     
-    $group->get('/reset-password', function ($request, $response, $args) {
+    $group->get('/reset-password', function ($request, $response, array $args) {
         // Route for /users/{id:[0-9]+}/reset-password
         // Reset the password for user identified by $args['id']
+        // ...
+        
+        return $response;
     })->setName('user-password-reset');
 });
 ```
@@ -327,13 +357,18 @@ $app->group('/users/{id:[0-9]+}', function (RouteCollectorProxy $group) {
 The group pattern can be empty, enabling the logical grouping of routes that do not share a common pattern.
 
 ```php
+use Slim\Routing\RouteCollectorProxy;
+// ...
+
 $app->group('', function (RouteCollectorProxy $group) {
-    $group->get('/billing', function ($request, $response, $args) {
+    $group->get('/billing', function ($request, $response, array $args) {
         // Route for /billing
+        return $response;
     });
     
-    $group->get('/invoice/{id:[0-9]+}', function ($request, $response, $args) {
+    $group->get('/invoice/{id:[0-9]+}', function ($request, $response, array $args) {
         // Route for /invoice/{id:[0-9]+}
+        return $response;
     });
 })->add(new GroupMiddleware());
 ```
@@ -345,9 +380,13 @@ Note inside the group closure, Slim binds the closure to the container instance.
 ## Route middleware
 You can also attach middleware to any route or route group.
 ```php
-$app->group('/foo', function (RouteCollectorProxy $group) {
-    $group->get('/bar', function ($request, $response, $args) {
+use Slim\Routing\RouteCollectorProxy;
+// ...
 
+$app->group('/foo', function (RouteCollectorProxy $group) {
+    $group->get('/bar', function ($request, $response, array $args) {
+        // ...
+        return $response;
     })->add(new RouteMiddleware());
 })->add(new GroupMiddleware());
 ```
@@ -410,17 +449,25 @@ the dependencies that are required. For example:
 ```php
 <?php
 
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Views\Twig;
+
 class HomeController
 {
-    protected $view;
+    private $view;
 
-    public function __construct(\Slim\Views\Twig $view) {
+    public function __construct(Twig $view)
+    {
         $this->view = $view;
     }
     
-    public function home($request, $response, $args) {
+    public function home(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
       // your code here
       // use $this->view to render the HTML
+      // ...
+      
       return $response;
     }
 }
@@ -429,9 +476,15 @@ class HomeController
 Create a factory in the container that instantiates the controller with the dependencies:
 
 ```php
+use Psr\Container\ContainerInterface;
+// ...
+
 $container = $app->getContainer();
-$container->set('HomeController', function (ContainerInterface $c) {
-    $view = $c->get('view'); // retrieve the 'view' from the container
+
+$container->set('HomeController', function (ContainerInterface $container) {
+    // retrieve the 'view' from the container
+    $view = $container->get('view');
+    
     return new HomeController($view);
 });
 ```
@@ -448,26 +501,32 @@ with many actions instead of an invokable class which only handles one action.
 
 ```php
 <?php
+
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class HomeController
 {
-   protected $container;
+   private $container;
 
    // constructor receives container instance
-   public function __construct(ContainerInterface $container) {
+   public function __construct(ContainerInterface $container)
+   {
        $this->container = $container;
    }
 
-   public function home($request, $response, $args) {
-        // your code
-        // to access items in the container... $this->container->get('');
+   public function home(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+   {
+        // your code to access items in the container... $this->container->get('');
+        
         return $response;
    }
 
-   public function contact($request, $response, $args) {
-        // your code
-        // to access items in the container... $this->container->get('');
+   public function contact(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+   {
+        // your code to access items in the container... $this->container->get('');
+        
         return $response;
    }
 }
@@ -486,19 +545,24 @@ You do not have to specify a method in your route callable and can just set it t
 
 ```php
 <?php
+
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class HomeAction
 {
-   protected $container;
+   private $container;
 
-   public function __construct(ContainerInterface $container) {
+   public function __construct(ContainerInterface $container)
+   {
        $this->container = $container;
    }
 
-   public function __invoke($request, $response, $args) {
-        // your code
-        // to access items in the container... $this->container->get('');
+   public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+   {
+        // your code to access items in the container... $this->container->get('');
+        
         return $response;
    }
 }
