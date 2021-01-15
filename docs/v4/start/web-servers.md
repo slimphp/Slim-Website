@@ -24,6 +24,14 @@ It may also be useful for testing purposes or for application demonstrations tha
 
 ## Apache configuration
 
+Ensure that the Apache `mod_rewrite` module is installed and enabled.
+In order to enable `mod_rewrite` you can type the following command in the terminal:
+
+```
+sudo a2enmod rewrite
+sudo a2enmod actions
+```
+
 Ensure your `.htaccess` and `index.php` files are in the same
 public-accessible directory. The `.htaccess` file should contain this code:
 
@@ -34,11 +42,63 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
 ```
 
-This `.htaccess` file requires URL rewriting. Make sure to enable Apache's mod_rewrite module and your virtual host is configured with the `AllowOverride` option so that the `.htaccess` rewrite rules can be used:
+This `.htaccess` file requires URL rewriting.
+
+Make sure to enable Apache's `mod_rewrite` module and your virtual host is configured
+with the `AllowOverride` option so that the `.htaccess` rewrite rules can be used:
+To do this, the file `/etc/apache2/apache2.conf` must be opened in an editor with root privileges.
+
+Change the `<Directory ...>` directive from `AllowOveride None` to `AllowOveride All`.
+
+**Example**
 
 ```bash
-AllowOverride All
+<Directory /var/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
 ```
+
+Finally, the configuration of Apache must be reloaded.
+To restart Apache web server, enter:
+
+```
+sudo service apache2 restart
+```
+
+This command works on most Debian/Ubuntu variants.
+For all other Linux distributions, please consult 
+the documentation of your specific Linux distribution 
+to find out how to restart Apache.
+
+**Running in a sub-directory**
+
+This example assumes that the front controller is located in `public/index.php`.
+
+To "redirect" the sub-directory to the front-controller create a second
+`.htaccess` file above the `public/` directory. 
+
+The second `.htaccess` file should contain this code:
+
+```
+RewriteEngine on
+RewriteRule ^$ public/ [L]
+RewriteRule (.*) public/$1 [L]
+```
+
+You may also set the base path so that the router can 
+match the URL from the browser with the path set in the route registration.
+This is done with the `setBasePath()` method.
+
+```php
+$app->setBasePath('/myapp');
+```
+
+**Read more**
+
+* [Running Slim 4 in a subdirectory](https://akrabat.com/running-slim-4-in-a-subdirectory/)
+* [Slim 4 base path middleware](https://github.com/selective-php/basepath)
 
 ## Nginx configuration
 
