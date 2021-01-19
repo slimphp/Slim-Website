@@ -20,8 +20,7 @@ routine, and returns an HTTP response. That's it.
 Slim is an ideal tool to create APIs that consume, repurpose, or publish data. Slim is also
 a great tool for rapid prototyping. Heck, you can even build full-featured web
 applications with user interfaces. More importantly, Slim is super fast
-and has very little code. In fact, you can read and understand its source code
-in only an afternoon!
+and has very little code.
 
 > At its core, Slim
 is a dispatcher that receives an HTTP request, invokes an appropriate callback
