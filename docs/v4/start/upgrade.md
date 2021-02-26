@@ -182,6 +182,7 @@ can be migrated as follows:
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\AppFactory;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Exception\HttpMethodNotAllowedException;
 use Slim\Psr7\Response;
 
 require __DIR__ . '/../vendor/autoload.php';
