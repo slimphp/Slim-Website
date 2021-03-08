@@ -58,6 +58,8 @@ You can also access them in route callables via `$this`:
 $app->get('/', function ($request, $response, $args) {
     $loggerSettings = $this->get('settings')['logger'];
     // ...
+    
+    return $response;
 });
 ```
 
