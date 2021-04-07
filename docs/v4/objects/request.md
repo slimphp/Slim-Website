@@ -155,15 +155,6 @@ methods to inspect the HTTP request's URL parts:
 
 You can get the query parameters as an associative array on the Request object using `getQueryParams()`.
 
-<div class="alert alert-info">
-    <div><strong>Base Path</strong></div>
-    If your Slim application's front-controller lives in a physical subdirectory
-    beneath your document root directory, you can fetch the HTTP request's physical
-    base path (relative to the document root) with the Uri object's <code>getBasePath()</code>
-    method. This will be an empty string if the Slim application is installed
-    in the document root's top-most directory.
-</div>
-
 ## The Request Headers
 
 Every HTTP request has headers. These are metadata that describe the HTTP
