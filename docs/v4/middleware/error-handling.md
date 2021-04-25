@@ -222,7 +222,7 @@ The base class `HttpSpecializedException` extends `Exception` and comes with the
 * HttpBadRequestException
 * HttpForbiddenException
 * HttpInternalServerErrorException
-* HttpNotAllowedException
+* HttpMethodNotAllowedException
 * HttpNotFoundException
 * HttpNotImplementedException
 * HttpUnauthorizedException
