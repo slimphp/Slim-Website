@@ -1,5 +1,5 @@
 ---
-title: Error Handling Middleware
+title: Error Middleware
 ---
 
 Things go wrong. You can't predict errors, but you can anticipate them. Each Slim Framework application has an error handler that receives all uncaught PHP exceptions. This error handler also receives the current HTTP request and response objects, too. The error handler must prepare and return an appropriate Response object to be returned to the HTTP client.
@@ -20,16 +20,17 @@ $app = AppFactory::create();
 $app->addRoutingMiddleware();
 
 /**
- * @param bool $displayErrorDetails -> Should be set to false in production
- * @param bool $logErrors -> Parameter is passed to the default ErrorHandler
- * @param bool $logErrorDetails -> Display error details in error log
- * which can be replaced by a callable of your choice.
- * @param \Psr\Log\LoggerInterface $logger -> Optional PSR-3 logger to receive errors
- * 
+ * Add Error Middleware
+ *
+ * @param bool                  $displayErrorDetails -> Should be set to false in production
+ * @param bool                  $logErrors -> Parameter is passed to the default ErrorHandler
+ * @param bool                  $logErrorDetails -> Display error details in error log
+ * @param LoggerInterface|null  $logger -> Optional PSR-3 Logger  
+ *
  * Note: This middleware should be added last. It will not handle any exceptions/errors
  * for middleware added after it.
  */
-$errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // ...
 
@@ -74,7 +75,7 @@ $customErrorHandler = function (
 };
 
 // Add Error Middleware
-$errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 $errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
 // ...
@@ -132,6 +133,8 @@ With the second method, you can supply a logger that conforms to the
 
 ```php
 <?php
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use MyApp\Handlers\MyErrorHandler;
 use Slim\Factory\AppFactory;
 
@@ -142,8 +145,10 @@ $app = AppFactory::create();
 // Add Routing Middleware
 $app->addRoutingMiddleware();
 
-// Instantiate Logger
-// $logger = ...
+// Monolog Example
+$logger = new Logger('app');
+$streamHandler = new StreamHandler(__DIR__ . '/var/log', 100);
+$logger->pushHandler($streamHandler);
 
 // Add Error Middleware with Logger
 $errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
@@ -170,6 +175,7 @@ that implements `\Slim\Interfaces\ErrorRendererInterface`.
 ```php
 <?php
 use Slim\Interfaces\ErrorRendererInterface;
+use Throwable;
 
 class MyCustomErrorRenderer implements ErrorRendererInterface
 {
