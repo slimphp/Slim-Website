@@ -180,7 +180,7 @@ $newResponse = $oldResponse->withoutHeader('Allow');
     <div><strong>Reminder</strong></div>
     <div>
         The Response object is immutable. This method returns a <em>copy</em>
-        of the Response object that has the appended header value.
+        of the Response object without the specified header.
     </div>
 </div>
 
