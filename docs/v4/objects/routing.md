@@ -437,6 +437,11 @@ Alternatively, you can take advantage of PHP's `::class` operator which works we
 $app->get('/', \HomeController::class . ':home');
 ```
 
+You can also pass an array, the first element of which will contain the name of the class, and the second will contain the name of the method being called:
+```php
+$app->get('/', [\HomeController::class, 'home']);
+```
+
 In this code above we are defining a `/` route and telling Slim to execute the `home()` method on the `HomeController` class.
 
 Slim first looks for an entry of `HomeController` in the container, if it's found it will use that instance otherwise it will call it's constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.
