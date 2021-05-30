@@ -17,8 +17,8 @@ A middleware implements the [PSR-15 Middleware Interface](https://www.php-fig.or
 
 It can do whatever is appropriate with these objects. The only hard requirement
 is that a middleware **MUST** return an instance of  `Psr\Http\Message\ResponseInterface`.
-Each middleware **SHOULD** invoke the next middleware and pass it Request and
-Response objects as arguments.
+Each middleware **SHOULD** invoke the next middleware and pass it the Request 
+object as argument.
 
 ## How does middleware work?
 
