@@ -85,6 +85,9 @@ defaults:
           - [/docs/v4/cookbook/retrieving-current-route.md, Retrieving Current Route]
           - [/docs/v4/cookbook/enable-cors.md, Enabling CORS]
           - [/docs/v4/cookbook/uploading-files.md, Uploading Files using POST forms]
+        - title: Add Ons
+          items:
+            - [/docs/v4/features/templates.md, Templates]
         - title: Contributing
           items:
           - [/docs/v4/contributors/strategy.md, Branching Strategy]
