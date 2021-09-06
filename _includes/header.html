@@ -31,13 +31,20 @@
             })();
         </script>
     </head>
+    {% assign l10nDefaultLanguageCode = site.l10n.default %}
+    {% if page.l10n-language == nil %}
+        {% comment %} Page language will be set to `default`. {% endcomment %}
+        {% assign l10nCurrentPageLanguageCode = l10nDefaultLanguageCode %}
+    {% else %}
+        {% assign l10nCurrentPageLanguageCode = page.l10n-language %}
+    {% endif %}
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
+                        <span class="sr-only">{{ site.t[l10nCurrentPageLanguageCode]['toggle-navigation'] }}</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -47,18 +54,13 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li{% if page.url contains "/blog" %} class="active"{% endif %}><a href="/blog">Blog</a></li>
-                        <li{% if page.url contains "/docs" %} class="active"{% endif %}><a href="/docs/{{ site.slim_version }}">User Guide</a></li>
-                        <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li{% if page.url contains "/contribute" %} class="active"{% endif %}><a href="/contribute">Contribute</a></li>
-                    </ul>
+                    {% include header-menu.html %}
                     {% if page.url contains "/docs/v" %}
                         {% assign versions = site.slim_docs_versions | split: ", " %}
                         {% for version in versions %}
                             {% if page.url contains version %}
                                 <div class="navbar-documentation-version-badge">
-                                    <span>{{ version }} Documentation</span>
+                                    <span>{{ version }} {{ site.t[l10nCurrentPageLanguageCode]['documentation'] }}</span>
                                 </div>
                         {% endif %}
                         {% endfor %}
