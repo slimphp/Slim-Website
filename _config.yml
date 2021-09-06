@@ -9,6 +9,12 @@ slim_website_repo: https://github.com/slimphp/Slim-Website/tree/gh-pages/
 urlBasePath:
 include: [.htaccess]
 exclude: [node_modules]
+l10n:
+  default: en
+  languages:
+    en:
+      code: en
+      label: English
 kramdown:
   input: GFM
   hard_wrap: false
@@ -301,3 +307,24 @@ defaults:
       type: "pages"
     values:
       layout: docs-v2
+t:
+  en:
+    language: "Language"
+    toggle-navigation: "Toggle Navigation"
+    blog: "Blog"
+    docs: "User Guide"
+    support: "Support"
+    community: "Community"
+    contribute: "Contribute"
+    documentation: "Documentation"
+    slim-version: "Slim Version"
+    search: "Search"
+    search-in-doc: "Search in the doc"
+    search-submit: "Submit your search query."
+    search-clear: "Clear the search query."
+    search-reset: "Reset"
+    professional-support: "Professional Support"
+    professional-support-from: "Professional support from"
+    edit-this-page: "Edit This Page"
+    created-maintaned-by: "Created and maintained by"
+    and-the: "and the"
