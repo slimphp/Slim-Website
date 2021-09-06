@@ -1,5 +1,6 @@
 ---
 title: Installation
+l10n-link: docs-start-v4-installation
 ---
 
 ## System Requirements

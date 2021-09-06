@@ -1,5 +1,6 @@
 ---
 title: Lifecycle
+l10n-link: concepts-v4-life_cycle
 ---
 
 ## Application Life Cycle

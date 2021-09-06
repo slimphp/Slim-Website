@@ -1,5 +1,6 @@
 ---
 title: PSR-7 and Value Objects
+l10n-link: concepts-v4-value_objects
 ---
 
 Slim supports [PSR-7](https://github.com/php-fig/http-message) interfaces for

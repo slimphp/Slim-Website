@@ -1,5 +1,6 @@
 ---
 title: Slim 4 Documentation
+l10n-link: index-v4
 ---
 
 <div class="alert alert-info">

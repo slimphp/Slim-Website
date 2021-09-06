@@ -1,5 +1,6 @@
 ---
 title: Trailing / in route patterns
+l10n-link: cookbook-v4-route_patterns
 ---
 
 Slim treats a URL pattern with a trailing slash as different to one without. That is, `/user` and `/user/` are different and so can have different callbacks attached.

@@ -1,5 +1,6 @@
 ---
 title: Response
+l10n-link: objects-v4-response
 ---
 
 Your Slim app's routes and middleware are given a PSR-7 response object that

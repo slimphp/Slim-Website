@@ -1,5 +1,6 @@
 ---
 title: Dependency Container
+l10n-link: concepts-v4-di
 ---
 
 Slim uses an optional dependency container to prepare, manage, and inject application

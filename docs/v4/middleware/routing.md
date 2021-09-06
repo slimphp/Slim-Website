@@ -1,5 +1,6 @@
 ---
 title: Routing Middleware
+l10n-link: middleware-v4-routing
 ---
 
 The routing has been implemented as middleware. We are still using [FastRoute](https://github.com/nikic/FastRoute) as the default router but it is not tightly coupled to it.
