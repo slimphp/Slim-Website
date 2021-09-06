@@ -1,5 +1,5 @@
-{% comment %} If current Page has `l10n-link` tag then the script will look for other pages with same tag. {% endcomment %}
-{% comment %} If in some Page the language is not declared, assumes the default language from `site.l10n.default`. {% endcomment %}
+{% comment %} If current Page has `page.l10n-link` tag then the script will look for other pages with same tag. {% endcomment %}
+{% comment %} If in some Page the language tag `page.l10n-language` is not declared, assumes the default language from `site.l10n.default`. {% endcomment %}
 
 {% if site.l10n.languages.size > 1 and page.l10n-link != nil %}
     {% assign allPagesByCurrentL10nLink=site.pages | where:"l10n-link", page.l10n-link %}
