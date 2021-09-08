@@ -53,19 +53,23 @@
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse">
                     {% include header-menu.html %}
+                    <ul class="nav navbar-nav navbar-right mx-3">
+                        <li>{% include language-selector.html %}</li>
                     {% if page.url contains "/docs/v" %}
                         {% assign versions = site.slim_docs_versions | split: ", " %}
                         {% for version in versions %}
                             {% if page.url contains version %}
-                                <div class="navbar-documentation-version-badge">
-                                    <span>{{ version }} {{ site.t[l10nCurrentPageLanguageCode]['documentation'] }}</span>
-                                </div>
+                        <li>
+                            <div class="navbar-documentation-version-badge">
+                                <span>{{ version }} {{ site.t[l10nCurrentPageLanguageCode]['documentation'] }}</span>
+                            </div>
+                        </li>
                         {% endif %}
                         {% endfor %}
                     {% endif %}
-                    {% include language-selector.html %}
+                    </ul>
                 </div>
             </div>
         </nav>

@@ -5,8 +5,8 @@
     {% assign allPagesByCurrentL10nLink=site.pages | where:"l10n-link", page.l10n-link %}
     {% if allPagesByCurrentL10nLink.size > 1 %}
         {% comment %} Display the language selector only if there are Pages with same `page.l10n-link` value. {% endcomment %}
-        <ul class="nav navbar-nav list-inline l10n-switch pull-right">
-            <li class="list-inline-item">
+<!--        <ul class="nav navbar-nav list-inline l10n-switch pull-right">-->
+<!--            <li class="list-inline-item">-->
                 <div class="dropdown">
                     <a class="dropdown-toggle" id="l10nMenuButton" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:block;margin-top:17px;margin-right:20px;">
                         <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
@@ -36,7 +36,7 @@
         {% endfor %}
                     </div>
                 </div>
-            </li>
-        </ul>
+<!--            </li>-->
+<!--        </ul>-->
     {% endif %}
 {% endif %}
