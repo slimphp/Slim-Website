@@ -4,17 +4,15 @@
 {% if site.l10n.languages.size > 1 and page.l10n-link != nil %}
     {% assign allPagesByCurrentL10nLink=site.pages | where:"l10n-link", page.l10n-link %}
     {% if allPagesByCurrentL10nLink.size > 1 %}
-        {% comment %} Display the language selector only if there are Pages with same `page.l10n-link` value. {% endcomment %}
-<!--        <ul class="nav navbar-nav list-inline l10n-switch pull-right">-->
-<!--            <li class="list-inline-item">-->
-                <div class="dropdown">
-                    <a class="dropdown-toggle" id="l10nMenuButton" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:block;margin-top:17px;margin-right:20px;">
-                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-                        <span class="text">{% if site.t['language'][currentLanguageCode] != nil %}{{ site.t['language'][currentLanguageCode] }}{% elsif site.t['language'][site.l10n.default] != nil %}{{ site.t['language'][site.l10n.default] }}{% else %}Language{% endif %}</span>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown" aria-labelledby="l10nMenuButton">
-        {% comment %} Iterate every page found by page.l10n-link. {% endcomment %}
+    {% comment %} Display the language selector only if there are Pages with same `page.l10n-link` value. {% endcomment %}
+    <div class="dropdown">
+        <a class="dropdown-toggle" id="l10nMenuButton" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:block;margin-top:17px;margin-right:20px;">
+            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+            <span class="text">{% if site.t[l10nCurrentPageLanguageCode]['language'] != nil %}{{ site.t[l10nCurrentPageLanguageCode]['language'] }}{% elsif site.t[l10nDefaultLanguageCode]['language'] != nil %}{{ site.t[l10nDefaultLanguageCode]['language']}}{% else %}Language{% endif %}</span>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu dropdown" aria-labelledby="l10nMenuButton">
+            {% comment %} Iterate every page found by page.l10n-link. {% endcomment %}
         {% for pageByCurrentL10nLink in allPagesByCurrentL10nLink %}
             {% if pageByCurrentL10nLink.l10n-language == nil %}
                 {% assign l10nSelectorLanguageByPage = l10nDefaultLanguageCode %}
@@ -23,20 +21,25 @@
             {% endif %}
 
             {% if l10nSelectorLanguageByPage == l10nCurrentPageLanguageCode %}
-                        <div class="dropdown-item active">
-                            <img src="{{ site.base-url }}/assets/images/flags/{{ l10nCurrentPageLanguageCode }}.png" alt="{{ l10nCurrentPageLanguageCode }}" />
-                            <span>{{ site.l10n.languages[l10nCurrentPageLanguageCode].label }}</span>
-                        </div>
+            {% comment %} Iterated page is in default language. {% endcomment %}
+            <li class="dropdown-item active">
+                <a href="#" onlick="javascript: return false;">
+                    <img src="{{ site.base-url }}/assets/images/flags/{{ l10nCurrentPageLanguageCode }}.png" alt="{{ l10nCurrentPageLanguageCode }}" />
+                    <span>{{ site.l10n.languages[l10nCurrentPageLanguageCode].label }}</span>
+                </a>
+            </li>
             {% else %}
-                        <a class="dropdown-item" href="{{ site.base-url }}{{ pageByCurrentL10nLink.url }}">
-                            <img src="{{ site.base-url }}/assets/images/flags/{{ l10nSelectorLanguageByPage }}.png" alt="{{ l10nSelectorLanguageByPage }}" />
-                            <span>{{ site.l10n.languages[l10nSelectorLanguageByPage].label }}</span>
-                        </a>
+            <li class="dropdown-item">
+                <a href="{{ site.base-url }}{{ pageByCurrentL10nLink.url }}">
+                    <img src="{{ site.base-url }}/assets/images/flags/{{ l10nSelectorLanguageByPage }}.png" alt="{{ l10nSelectorLanguageByPage }}" />
+                    <span>{{ site.l10n.languages[l10nSelectorLanguageByPage].label }}</span>
+                </a>
+            </li>
             {% endif %}
         {% endfor %}
-                    </div>
-                </div>
-<!--            </li>-->
-<!--        </ul>-->
+        </ul>
+    </div>
+    <!--            </li>-->
+    <!--        </ul>-->
     {% endif %}
 {% endif %}
