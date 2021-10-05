@@ -1,5 +1,6 @@
 ---
 title: Body Parsing Middleware
+l10n-link: middleware-v4-body_parsing
 ---
 
 It’s very common in web APIs to send data in JSON or XML format. 

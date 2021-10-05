@@ -1,5 +1,6 @@
 ---
 title: Output Buffering Middleware
+l10n-link: middleware-v4-output_buffering
 ---
 
 The Output Buffering Middleware enables you to switch between two modes of output buffering: `APPEND` (default) and `PREPEND` mode. 

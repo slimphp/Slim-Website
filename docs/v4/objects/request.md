@@ -1,5 +1,6 @@
 ---
 title: Request
+l10n-link: objects-v4-request
 ---
 
 Your Slim app's routes and middleware are given a PSR-7 request object that

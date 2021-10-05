@@ -1,5 +1,6 @@
 ---
 title: Application
+l10n-link: objects-v4-application
 ---
 
 The Application `Slim\App` is the entry point to your Slim application and is used to register the routes that link to your callbacks or controllers.

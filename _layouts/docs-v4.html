@@ -6,7 +6,7 @@
                 <div class="toc-nav-toggle">
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tocNav"
                             aria-expanded="false" aria-controls="tocNav">
-                        Toggle Navigation
+                        {{ site.t[l10nCurrentPageLanguageCode]['toggle-navigation'] }}
                     </button>
                 </div>
                 <div class="collapse toc-nav-collapse" id="tocNav">
@@ -29,9 +29,9 @@
                         </ul>
                     {% endfor %}
 
-                    <h3 class="toc-title">Professional Support</h3>
+                    <h3 class="toc-title">{{ site.t[l10nCurrentPageLanguageCode]['professional-support'] }}</h3>
                     <ul class="toc-links">
-                        <li><a href="https://tidelift.com/subscription/pkg/packagist-slim-slim?utm_source=packagist-slim-slim&utm_medium=referral&utm_campaign=website">Professional support from Tidelift</a></li>
+                        <li><a href="https://tidelift.com/subscription/pkg/packagist-slim-slim?utm_source=packagist-slim-slim&utm_medium=referral&utm_campaign=website">{{ site.t[l10nCurrentPageLanguageCode]['professional-support-from'] }} Tidelift</a></li>
                     </ul>
                 </div>
             </div>
@@ -39,7 +39,7 @@
             <div class="col-md-8 docs-content">
                 <h1 class="page-header">{{ page.title }}</h1>
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
-                    <a href="{{ site.slim_website_repo }}{{page.path}}" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-github"></i> Edit This Page</a>
+                    <a href="{{ site.slim_website_repo }}{{page.path}}" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-github"></i> {{ site.t[l10nCurrentPageLanguageCode]['edit-this-page'] }}</a>
                 </div>
                 {{ content }}
 

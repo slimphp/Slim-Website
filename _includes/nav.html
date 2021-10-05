@@ -1,17 +1,24 @@
+{% assign l10nDefaultLanguageCode = site.l10n.default %}
+{% if page.l10n-language == nil %}
+    {% comment %} Page language will be set to `default`. {% endcomment %}
+    {% assign l10nCurrentPageLanguageCode = l10nDefaultLanguageCode %}
+{% else %}
+    {% assign l10nCurrentPageLanguageCode = page.l10n-language %}
+{% endif %}
 <div class="row section">
     <div class="col-md-3 slim-button-wrapper">
-        <a class="slim-button" href="/blog"><i class="fa fa-bullhorn"></i><span>Blog</span></a>
+        <a class="slim-button" href="/blog"><i class="fa fa-bullhorn"></i><span>{{ site.t[l10nCurrentPageLanguageCode]['blog'] }}</span></a>
     </div>
 
     <div class="col-md-3 slim-button-wrapper">
-        <a class="slim-button" href="/docs/{{ site.slim_version }}"><i class="fa fa-book"></i><span>User Guide</span></a>
+        <a class="slim-button" href="/docs/{{ site.slim_version }}"><i class="fa fa-book"></i><span>{{ site.t[l10nCurrentPageLanguageCode]['docs'] }}</span></a>
     </div>
 
     <div class="col-md-3 slim-button-wrapper">
-        <a class="slim-button" href="/#community"><i class="fa fa-handshake-o"></i><span>Community</span></a>
+        <a class="slim-button" href="/#community"><i class="fa fa-handshake-o"></i><span>{{ site.t[l10nCurrentPageLanguageCode]['community'] }}</span></a>
     </div>
 
     <div class="col-md-3 slim-button-wrapper">
-        <a class="slim-button" href="/contribute"><i class="fa fa-wrench"></i><span>Contribute</span></a>
+        <a class="slim-button" href="/contribute"><i class="fa fa-wrench"></i><span>{{ site.t[l10nCurrentPageLanguageCode]['contribute'] }}</span></a>
     </div>
 </div>

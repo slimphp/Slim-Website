@@ -1,5 +1,6 @@
 ---
 title: Retrieving Current Route
+l10n-link: cookbook-v4-retrieving_current_route
 ---
 
 If you ever need to get access to the current route within your application, you will need to instantiate the `RouteContext` object using the incoming `ServerRequestInterface`.

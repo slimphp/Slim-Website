@@ -1,5 +1,6 @@
 ---
 title: Uploading files using POST forms
+l10n-link: cookbook-v4-uploading_files
 ---
 
 Files that are uploaded using forms in POST requests can be retrieved with the Request method `getUploadedFiles()`.

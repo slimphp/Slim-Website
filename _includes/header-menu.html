@@ -1,0 +1,15 @@
+<ul class="nav navbar-nav">
+    {% if l10nCurrentPageLanguageCode != l10nDefaultLanguageCode and page.l10n-language != nil %}
+    {% comment %} Current Page is not in Websites` default language and is translated. {% endcomment %}
+    <li{% if page.url contains "/{{ l10nCurrentPageLanguageCode }}/blog" %} class="active"{% endif %}><a href="/{{ l10nCurrentPageLanguageCode }}/blog">{% if site.t[l10nCurrentPageLanguageCode]['blog'] != nil %}{{ site.t[l10nCurrentPageLanguageCode]['blog'] }}{% else %}{{ site.t[l10nDefaultLanguageCode]['blog'] }}{% endif %}</a></li>
+    <li{% if page.url contains "/{{ l10nCurrentPageLanguageCode }}/docs" %} class="active"{% endif %}><a href="/{{ l10nCurrentPageLanguageCode }}/docs">{% if site.t[l10nCurrentPageLanguageCode]['docs'] != nil %}{{ site.t[l10nCurrentPageLanguageCode]['docs'] }}{% else %}{{ site.t[l10nDefaultLanguageCode]['docs'] }}{% endif %}</a></li>
+    <li><a href="http://discourse.slimframework.com/">{% if site.t[l10nCurrentPageLanguageCode]['support'] != nil %}{{ site.t[l10nCurrentPageLanguageCode]['support'] }}{% else %}{{ site.t[site.l10n.default]['support'] }}{% endif %}</a></li>
+    <li{% if page.url contains "/{{ l10nCurrentPageLanguageCode }}/contribute" %} class="active"{% endif %}><a href="/{{ l10nCurrentPageLanguageCode }}/contribute">{% if site.t[l10nCurrentPageLanguageCode]['contribute'] != nil %}{{ site.t[l10nCurrentPageLanguageCode]['contribute'] }}{% else %}{{ site.t[l10nDefaultLanguageCode]['contribute'] }}{% endif %}</a></li>
+    {% elsif l10nCurrentPageLanguageCode == l10nDefaultLanguageCode or page.l10n-language == nil %}
+        {% comment %} Page is in Websites` default language {% endcomment %}
+    <li{% if page.url contains "/blog" %} class="active"{% endif %}><a href="/blog">{{ site.t[l10nDefaultLanguageCode]['blog'] }}</a></li>
+    <li{% if page.url contains "/docs" %} class="active"{% endif %}><a href="/docs/{{ site.slim_version }}">{{ site.t[l10nDefaultLanguageCode]['docs'] }}</a></li>
+    <li><a href="http://discourse.slimframework.com/">{{ site.t[l10nDefaultLanguageCode]['support'] }}</a></li>
+    <li{% if page.url contains "/contribute" %} class="active"{% endif %}><a href="/contribute">{{ site.t[l10nDefaultLanguageCode]['contribute'] }}</a></li>
+    {% endif %}
+</ul>
