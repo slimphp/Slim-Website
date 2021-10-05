@@ -152,7 +152,7 @@ class ExampleAfterMiddleware
 }
 ```
 
-To use these classes as a middleware, you can use **add(new ExampleMiddleware());** function chain after the **$app** route mapping methods **get(), post(), put(), patch(), delete(), options(), any()**  or **group()**, which in the code below, any one of these, could represent $subject.
+To use these classes as a middleware, you can use **add(new ExampleMiddleware());** function chain after the **$app** route mapping methods **get(), post(), put(), patch(), delete(), options(), any()**  or **group()**, as demonstrated in the code below.
 
 ```php
 <?php
