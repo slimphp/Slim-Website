@@ -22,7 +22,7 @@ it's easy to install with Composer like this:
 [twig]: http://twig.sensiolabs.org/
 
 <figure markdown="1">
-```
+```bash
 composer require slim/twig-view
 ```
 <figcaption>Figure 1: Install slim/twig-view component.</figcaption>

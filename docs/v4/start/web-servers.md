@@ -27,7 +27,7 @@ It may also be useful for testing purposes or for application demonstrations tha
 Ensure that the Apache `mod_rewrite` module is installed and enabled.
 In order to enable `mod_rewrite` you can type the following command in the terminal:
 
-```
+```bash
 sudo a2enmod rewrite
 sudo a2enmod actions
 ```
@@ -63,7 +63,7 @@ Change the `<Directory ...>` directive from `AllowOveride None` to `AllowOveride
 Finally, the configuration of Apache must be reloaded.
 To restart Apache web server, enter:
 
-```
+```bash
 sudo service apache2 restart
 ```
 
@@ -81,7 +81,7 @@ To "redirect" the sub-directory to the front-controller create a second
 
 The second `.htaccess` file should contain this code:
 
-```
+```bash
 RewriteEngine on
 RewriteRule ^$ public/ [L]
 RewriteRule (.*) public/$1 [L]
