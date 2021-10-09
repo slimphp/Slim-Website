@@ -24,12 +24,6 @@ Now, run the local jekyll:
 $ bundle exec jekyll serve
 ```
 
-_Ruby 3.0 no longer comes with webrick, so you will need to install webrick before you can start the local jekyll instance:_
-
-```bash
-$ bundle add webrick
-```
-
 and browse to http://localhost:4000
 
 #### CSS
