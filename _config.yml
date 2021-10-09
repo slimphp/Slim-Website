@@ -2,7 +2,7 @@ highlighter: rouge
 markdown: kramdown
 timezone: America/New_York
 title: Slim Framework
-url: http://www.slimframework.com
+url: https://www.slimframework.com
 slim_version: v4
 slim_docs_versions: v2, v3, v4
 slim_website_repo: https://github.com/slimphp/Slim-Website/tree/gh-pages/
