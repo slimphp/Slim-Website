@@ -11,3 +11,6 @@ end
 gem 'wdm', '>= 0.1.0'
 gem 'tzinfo', '~> 1.2'
 gem 'tzinfo-data', '~> 1.2', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Since Ruby 3.0 webrick isn't included in Ruby anymore.
+gem "webrick", "~> 1.7"
