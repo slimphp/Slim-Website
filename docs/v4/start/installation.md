@@ -32,6 +32,11 @@ In order for auto-detection to work and enable you to use `AppFactory::create()`
 composer require slim/psr7
 ```
 
+### [HttpSoft PSR-7](https://github.com/httpsoft/http-message) and [HttpSoft PSR-7 Server Request](https://github.com/httpsoft/http-server-request)
+```bash
+composer require httpsoft/http-message httpsoft/http-server-request
+```
+
 ### [Nyholm PSR-7](https://github.com/Nyholm/psr7) and [Nyholm PSR-7 Server](https://github.com/Nyholm/psr7-server)
 ```bash
 composer require nyholm/psr7 nyholm/psr7-server
