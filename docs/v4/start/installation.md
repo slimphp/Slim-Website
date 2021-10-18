@@ -37,9 +37,16 @@ composer require slim/psr7
 composer require nyholm/psr7 nyholm/psr7-server
 ```
 
-### [Guzzle PSR-7](https://github.com/guzzle/psr7) and [Guzzle HTTP Factory](https://github.com/http-interop/http-factory-guzzle)
+### [Guzzle PSR-7](https://github.com/guzzle/psr7)
+#### For usage with Guzzle PSR-7 version 2:
 ```bash
-composer require guzzlehttp/psr7 http-interop/http-factory-guzzle
+composer require guzzlehttp/psr7 "^2"
+```
+
+#### For usage with Guzzle PSR-7 version 1:
+```bash
+composer require guzzlehttp/psr7 "^1"
+composer require sapphirecat/slim4-http-interop-adapter
 ```
 
 ### [Laminas Diactoros](https://github.com/laminas/laminas-diactoros)
