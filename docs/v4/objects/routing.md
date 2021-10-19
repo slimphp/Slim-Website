@@ -128,6 +128,15 @@ $app->map(['GET', 'POST'], '/books', function ($request, $response, array $args)
 });
 ```
 
+### Fallback Route
+You can add a route that will be executed when no other route matches the incoming request. And the order of adding a fallback route does not matter - it can be specified even in the first place before all other routes. It accepts one argument - the route callback:
+```php
+$app->fallback(function ($request, $response) {
+    // your logic, e.g. throwing an exception
+    throw new HttpNotFoundException($request);
+});
+```
+
 ## Route callbacks
 
 Each routing method described above accepts a callback routine as its final argument. This argument can be any PHP callable, and by default it accepts three arguments.
