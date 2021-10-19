@@ -28,7 +28,7 @@ GEM
     em-websocket (0.5.2)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    ethon (0.14.0)
+    ethon (0.15.0)
       ffi (>= 1.15.0)
     eventmachine (1.2.7)
     eventmachine (1.2.7-x64-mingw32)
@@ -57,7 +57,7 @@ GEM
     filesize (0.2.0)
     forwardable-extended (2.6.0)
     gemoji (3.0.1)
-    github-pages (220)
+    github-pages (221)
       github-pages-health-check (= 1.17.9)
       jekyll (= 3.9.0)
       jekyll-avatar (= 0.7.0)
@@ -98,7 +98,7 @@ GEM
       liquid (= 4.0.3)
       mercenary (~> 0.3)
       minima (= 2.5.1)
-      nokogiri (>= 1.10.4, < 2.0)
+      nokogiri (>= 1.12.5, < 2.0)
       rouge (= 3.26.0)
       terminal-table (~> 1.4)
     github-pages-health-check (1.17.9)
@@ -295,6 +295,7 @@ GEM
     unicode-display_width (1.8.0)
     verbal_expressions (0.1.5)
     wdm (0.1.1)
+    webrick (1.7.0)
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -308,6 +309,7 @@ DEPENDENCIES
   tzinfo (~> 1.2)
   tzinfo-data (~> 1.2)
   wdm (>= 0.1.0)
+  webrick (~> 1.7)
 
 BUNDLED WITH
    2.0.1
