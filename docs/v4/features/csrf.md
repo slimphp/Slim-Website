@@ -23,7 +23,9 @@ to your application like this:
 ```php
 // Add middleware to the application
 $app = new \Slim\App;
-$app->add(new \Slim\Csrf\Guard);
+$responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
+$app->add(new \Slim\Csrf\Guard($responseFactory));
+
 
 // Create your application routes...
 
