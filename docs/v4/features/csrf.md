@@ -2,7 +2,7 @@
 title: CSRF Protection
 ---
 
-Slim 3 uses the optional standalone [slimphp/Slim-Csrf](https://github.com/slimphp/Slim-Csrf)
+Slim 4 uses the optional standalone [slimphp/Slim-Csrf](https://github.com/slimphp/Slim-Csrf)
 PHP component to protect your application from CSRF (cross-site request forgery).
 This component generates a unique token per request that validates subsequent
 POST requests from client-side HTML forms.
