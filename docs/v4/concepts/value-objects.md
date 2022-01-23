@@ -4,14 +4,13 @@ title: PSR-7 and Value Objects
 
 Slim supports [PSR-7](https://github.com/php-fig/http-message) interfaces for
 its Request and Response objects. This makes Slim flexible because it can
-use _any_ PSR-7 implementation. For example, you could return an instance of `GuzzleHttp\Psr7\CachingStream` or any instance
+use _any_ PSR-7 implementation. For example, you could return an instance of 
+`GuzzleHttp\Psr7\CachingStream` or any instance
 returned by the `GuzzleHttp\Psr7\stream_for()` function.
 
-Slim provides its own PSR-7 implementation so that it works out of the box. However,
-you are free to replace Slim's default PSR-7 objects with a third-party implementation.
-Just override the application container's `request` and `response` services so
-they return an instance of `Psr\Http\Message\ServerRequestInterface` and
-`Psr\Http\Message\ResponseInterface`, respectively.
+Slim provides its own PSR-7 implementation. 
+However, you are free to 
+[install a third-party implementation](/docs/v4/start/installation.html).
 
 ## Value objects
 
@@ -69,4 +68,5 @@ The PSR-7 interface provides these methods to transform Response objects:
 
 * `withStatus($code, $reasonPhrase = '')`
 
-Refer to the [PSR-7 documentation](http://www.php-fig.org/psr/psr-7/) for more information about these methods.
+Refer to the [PSR-7 documentation](https://www.php-fig.org/psr/psr-7/) 
+for more information about these methods.
