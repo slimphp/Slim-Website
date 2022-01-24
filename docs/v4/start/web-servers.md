@@ -42,7 +42,17 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
 ```
 
-This `.htaccess` file requires URL rewriting.
+To ensure that the `public/` directory does not appear in the
+URL, you should add a second `.htaccess` file above the `public/`
+directory with the following internal redirect rule:
+
+```bash
+RewriteEngine on
+RewriteRule ^$ public/ [L]
+RewriteRule (.*) public/$1 [L]
+```
+
+These `.htaccess` files require URL rewriting.
 
 Make sure to enable Apache's `mod_rewrite` module and your virtual host is configured
 with the `AllowOverride` option so that the `.htaccess` rewrite rules can be used:
