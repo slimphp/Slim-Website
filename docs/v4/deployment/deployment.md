@@ -64,4 +64,3 @@ or `www`) with the following content:
 Now upload all the files that make up your Slim project to the webserver. As you
 are on shared hosting, this is probably done via FTP and you can use any FTP client, 
 such as Filezilla to do this.
-

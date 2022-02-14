@@ -5,7 +5,7 @@ title: Installation
 ## System Requirements
 
 * Web server with URL rewriting
-* PHP 7.2 or newer
+* PHP 7.4 or newer
 
 ## Step 1: Install Composer
 
