@@ -2,7 +2,7 @@
 title: Using Doctrine with Slim
 ---
 
-This cookbook entry describes how to integrate the widely used [Doctrine ORM](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/) into a Slim 3 application from scratch.
+This cookbook entry describes how to integrate the widely used [Doctrine ORM](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/) into a Slim 4 application from scratch.
 
 ## Adding Doctrine to your application
 
@@ -97,8 +97,19 @@ define('APP_ROOT', __DIR__);
 
 return [
     'settings' => [
-        'displayErrorDetails' => true,
-        'determineRouteBeforeAppMiddleware' => false,
+        'slim' => [
+            // Returns a detailed HTML page with error details and
+            // a stack trace. Should be disabled in production.
+            'displayErrorDetails' => true,
+
+            // Whether to display errors on the internal PHP log or not.
+            'logErrors' => true,
+
+            // If true, display full errors with message and stack trace on the PHP log.
+            // If false, display only "Slim Application Error" on the PHP log.
+            // Doesn't do anything when 'logErrors' is false.
+            'logErrorDetails' => true,
+        ],
 
         'doctrine' => [
             // Enables or disables Doctrine metadata caching
@@ -139,6 +150,10 @@ return [
 
 Now we define the `EntityManager` service, which is the main point of interaction with the ORM in your code.
 
+Slim 4 requires that you provide your own PSR-11 container implementation.
+This example uses [`uma/dic`](https://github.com/1ma/dic), a simple and concise PSR-11 container.
+Adapt this to your own choice of container.
+
 Traditionally the annotation metadata reader was the most popular, but starting from `doctrine/orm` 2.10.0 they
 made the dependency on `doctrine/annotations` optional, hinting that the project prefers users to migrate to
 the modern PHP8 attribute notation.
@@ -160,13 +175,13 @@ use Doctrine\ORM\Tools\Setup;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Slim\Container;
+use UMA\DIC\Container;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 $container = new Container(require __DIR__ . '/settings.php');
 
-$container[EntityManager::class] = function (Container $c): EntityManager {
+$container->set(EntityManager::class, static function (Container $c): EntityManager {
     /** @var array $settings */
     $settings = $c->get('settings');
 
@@ -184,7 +199,7 @@ $container[EntityManager::class] = function (Container $c): EntityManager {
     );
 
     return EntityManager::create($settings['doctrine']['connection'], $config);
-};
+});
 
 return $container;
 ```
@@ -197,7 +212,7 @@ To run database migrations, validate class annotations and so on you will use th
 already present at `vendor/bin`. But in order to work this script needs a [`cli-config.php`](http://docs.doctrine-project.org/en/latest/reference/configuration.html#setting-up-the-commandline-tool)
 file at the root of the project telling it how to find the `EntityManager` we just set up.
 
-Our `cli-config.php` only needs to retrieve the EntityManager service we just defined in the Slim container and
+Our `cli-config.php` only needs to retrieve the EntityManager service we just defined in our container and
 pass it to `ConsoleRunner::createHelperSet()`.
 
 <figure markdown="1">
@@ -214,7 +229,7 @@ use Slim\Container;
 /** @var Container $container */
 $container = require_once __DIR__ . '/bootstrap.php';
 
-return ConsoleRunner::createHelperSet($container[EntityManager::class]);
+return ConsoleRunner::createHelperSet($container->get(EntityManager::class));
 ```
 
 <figcaption>Figure 4: Enabling Doctrine's console app.</figcaption>
@@ -281,9 +296,9 @@ Congratulations! You can now manage your database from the command line and use 
 
 // bootstrap.php
 
-$container[UserService::class] = function (Container $c) {
-    return new UserService($c[EntityManager::class]);
-};
+$container->set(UserService::class, static function (Container $c) {
+    return new UserService($c->get(EntityManager::class));
+});
 
 // src/UserService.php
 
@@ -313,4 +328,4 @@ final class UserService
 ## Other resources
 
 - The [official Doctrine ORM documentation](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/).
-- [A full example](https://github.com/1ma/Slim-Doctrine-Demo) of the above setup in a small but complete project (uses Slim 4).
+- [A full example](https://github.com/1ma/Slim-Doctrine-Demo) of the above setup in a small but complete project.
