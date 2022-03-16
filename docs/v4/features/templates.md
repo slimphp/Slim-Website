@@ -19,7 +19,7 @@ templates in your application. This component is available on Packagist, and
 it's easy to install with Composer like this:
 
 [twigview]: https://github.com/slimphp/Twig-View
-[twig]: http://twig.sensiolabs.org/
+[twig]: http://twig.symfony.com/
 
 <figure markdown="1">
 ```bash
@@ -51,7 +51,7 @@ $app->add(TwigMiddleware::create($app, $twig));
 <figcaption>Figure 2: Add slim/twig-view middleware.</figcaption>
 </figure>
 
-Note : For production scenarios, `cache` should be set to some `'path/to/cache'` to store compiled templates (thus avoiding recomplication on every request). For more information, see [Twig environment options](http://twig.sensiolabs.org/doc/2.x/api.html#environment-options)
+Note : For production scenarios, `cache` should be set to some `'path/to/cache'` to store compiled templates (thus avoiding recomplication on every request). For more information, see [Twig environment options](http://twig.symfony.com/doc/3.x/api.html#environment-options)
 
 Now you can use the `slim/twig-view` component service inside an app route
 to render a template and write it to a PSR-7 Response object like this:
