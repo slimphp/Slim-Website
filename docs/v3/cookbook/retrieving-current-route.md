@@ -6,7 +6,7 @@ If you ever need to get access to the current route within your application all 
 
 From there you can get the route's name by using `getName()` or get the methods supported by this route via `getMethods()`, etc.
 
- Note: If you need to access the route from within your app middleware you must set `'determineRouteBeforeAppMiddleware'` to true in your configuration otherwise `getAttribute('route')` will return null. Also `getAttribute('route')` will return null on non existent routes.
+ Note: If you need to access the route from within your app middleware you must set `'determineRouteBeforeAppMiddleware'` to true in your configuration otherwise `getAttribute('route')` will return null. Also `getAttribute('route')` will return null on non-existent routes.
 
 Example:
 ```php
@@ -26,7 +26,7 @@ $app = new App([
 $app->add(function (Request $request, Response $response, callable $next) {
     $route = $request->getAttribute('route');
 
-    // return NotFound for non existent route
+    // return NotFound for non-existent route
     if (empty($route)) {
         throw new NotFoundException($request, $response);
     }
