@@ -37,6 +37,11 @@ composer require slim/psr7
 composer require nyholm/psr7 nyholm/psr7-server
 ```
 
+### [HttpSoft PSR-7](https://github.com/httpsoft/http-message) and [HttpSoft PSR-7 Server](https://github.com/httpsoft/http-server-request)
+```bash
+composer require httpsoft/http-message httpsoft/http-server-request
+```
+
 ### [Guzzle PSR-7](https://github.com/guzzle/psr7)
 #### For usage with Guzzle PSR-7 version 2:
 ```bash
