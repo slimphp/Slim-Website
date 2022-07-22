@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.0.5)
+    activesupport (6.0.5.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -250,7 +250,7 @@ GEM
       jekyll (>= 3.5, < 5.0)
       jekyll-feed (~> 0.9)
       jekyll-seo-tag (~> 2.1)
-    minitest (5.15.0)
+    minitest (5.16.2)
     multipart-post (2.1.1)
     nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
@@ -300,7 +300,7 @@ GEM
     verbal_expressions (0.1.5)
     wdm (0.1.1)
     webrick (1.7.0)
-    zeitwerk (2.5.4)
+    zeitwerk (2.6.0)
 
 PLATFORMS
   ruby
