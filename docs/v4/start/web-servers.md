@@ -144,6 +144,33 @@ server {
 }
 ```
 
+## Caddy
+
+The Caddy configuration is located in `/etc/caddy/Caddyfile`. Caddy requires `php-fpm` and have the FPM server running.
+Assuming the FPM socket is at `/var/run/php/php-fpm.sock`, and your application is located in `/var/www`, the following configuration should work out of the box.
+
+### HTTP configuration listening for any request
+```json
+:80 {
+        # Set-up the FCGI location
+        php_fastcgi unix//var/run/php/php-fpm.sock
+        # Set this path to your site's directory.
+        root * /var/www/public
+}
+```
+
+### HTTPS configuration with self-signed certificate
+```json
+:443 {
+        tls internal
+        # Set-up the FCGI location
+        php_fastcgi unix//var/run/php/php-fpm.sock
+        # Set this path to your site's directory.
+        root * /var/www/public
+}
+```
+
+
 ## HipHop Virtual Machine
 
 Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the `SourceRoot` setting to point to your Slim app's document root directory.
