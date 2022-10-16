@@ -150,7 +150,7 @@ The Caddy configuration is located in `/etc/caddy/Caddyfile`. Caddy requires `ph
 Assuming the FPM socket is at `/var/run/php/php-fpm.sock`, and your application is located in `/var/www`, the following configuration should work out of the box.
 
 ### HTTP configuration listening for any request
-```json
+```bash
 :80 {
         # Set-up the FCGI location
         php_fastcgi unix//var/run/php/php-fpm.sock
@@ -160,7 +160,7 @@ Assuming the FPM socket is at `/var/run/php/php-fpm.sock`, and your application 
 ```
 
 ### HTTPS configuration with self-signed certificate
-```json
+```bash
 :443 {
         tls internal
         # Set-up the FCGI location
