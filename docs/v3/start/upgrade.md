@@ -59,7 +59,7 @@ In your applications, you should transition to using the withStatus() and withBo
 PrettyExceptions cause lots of issues for many people, so these have been removed.
 
 ## Route::setDefaultConditions(...) has been removed
-We have switched routers which enable you to keep the default conditions regex inside of the route pattern.
+We have switched routers which enable you to keep the default conditions regex inside the route pattern.
 
 ## Changes to redirect
 In Slim v2.x one would use the helper function `$app->redirect();` to trigger a redirect request.
@@ -129,7 +129,7 @@ $app->add(My\Middleware::class);
 Application middleware is executed as Last In First Executed (LIFE).
 
 ## Flash Messages
-Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate [Slim Flash](/docs/v3/features/flash.html) package.
+Flash messages are no longer a part of the Slim v3 core but instead have been moved to separate [Slim Flash](/docs/v3/features/flash.html) package.
 
 ## Cookies
 In v3.0 cookies has been removed from core. See [FIG Cookies](https://github.com/dflydev/dflydev-fig-cookies) for a PSR-7 compatible cookie component.
@@ -196,7 +196,7 @@ $app = new Slim\App(
 );
 
 // Slim will grab the Home class from the container defined below and execute its index method.
-// If the class is not defined in the container Slim will still contruct it and pass the container as the first arugment to the constructor!
+// If the class is not defined in the container Slim will still construct it and pass the container as the first argument to the constructor!
 $app->get('/', Home::class . ':index');
 
 
