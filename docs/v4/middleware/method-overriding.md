@@ -14,7 +14,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-// Add RoutingMiddleware before we add the MethodOverrideMiddleware so the method is overrode before routing is done
+// Add RoutingMiddleware before we add the MethodOverrideMiddleware so the method is overridden before routing is done
 $app->addRoutingMiddleware();
 
 // Add MethodOverride middleware

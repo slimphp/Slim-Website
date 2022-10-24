@@ -299,7 +299,7 @@ $files = $request->getUploadedFiles();
 <figcaption>Figure 11: Get uploaded files</figcaption>
 </figure>
 
-Each object in the `$files` array is a instance of
+Each object in the `$files` array is an instance of
 `\Psr\Http\Message\UploadedFileInterface` and supports the following methods:
 
 * `getStream()`

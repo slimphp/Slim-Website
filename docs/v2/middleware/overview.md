@@ -8,7 +8,7 @@ Slim application is invoked.
 ### Middleware Architecture
 
 Think of a Slim application as the core of an onion. Each layer of the onion is middleware. When you invoke the
-Slim application’s `run()` method, the outer-most middleware layer is invoked first. When ready, that middleware
+Slim application’s `run()` method, the outermost middleware layer is invoked first. When ready, that middleware
 layer is responsible for optionally invoking the next middleware layer that it surrounds. This process steps deeper
 into the onion - through each middleware layer - until the core Slim application is invoked. This stepped process
 is possible because each middleware layer, and the Slim application itself, all implement a public `call()` method.

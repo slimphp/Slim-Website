@@ -39,7 +39,7 @@ return a **3xx Redirect** response.
 
 ### Status Introspection
 
-The response object provides other helper methods to inspect its current status. All of the following methods
+The response object provides other helper methods to inspect its current status. All the following methods
 return a boolean value:
 
     <?php

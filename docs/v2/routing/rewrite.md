@@ -26,7 +26,7 @@ The **.htaccess** file in the directory structure above contains:
     RewriteRule ^ index.php [QSA,L]
 
 You also need a directory directive to enable **.htaccess** files and allow the **RewriteEngine** directive to be used.
-This is sometimes done globally in the **httpd.conf** file, but its generally a good idea to limit the directive to
+This is sometimes done globally in the **httpd.conf** file, but it's generally a good idea to limit the directive to
 just your virtual host by enclosing it in your **VirtualHost** configuration block. This is generally setup in your
 configuration in the form of:
 

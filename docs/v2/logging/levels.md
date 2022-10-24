@@ -8,7 +8,7 @@ title: Levels
 </div>
 
 The Slim application’s log object will respect or ignore logged messages based on its log level setting. When you
-invoke the log objects’s methods, you are inherently assigning a level to the logged message.
+invoke the log object’s methods, you are inherently assigning a level to the logged message.
 The available log levels are:
 
 \Slim\Log::EMERGENCY

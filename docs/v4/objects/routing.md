@@ -108,7 +108,7 @@ $app->any('/books/[{id}]', function ($request, $response, array $args) {
 });
 ```
 
-Note that the second parameter is a callback. You could specify a Class which implementes the `__invoke()` method instead of a Closure. You can then do the mapping somewhere else:
+Note that the second parameter is a callback. You could specify a Class which implements the `__invoke()` method instead of a Closure. You can then do the mapping somewhere else:
 
 ```php
 $app->any('/user', 'MyRestfulController');
@@ -265,7 +265,7 @@ Multiple optional parameters are supported by nesting:
 
 ```php
 $app->get('/news[/{year}[/{month}]]', function ($request, $response, array $args) {
-    // reponds to `/news`, `/news/2016` and `/news/2016/03`
+    // responds to `/news`, `/news/2016` and `/news/2016/03`
     // ...
     
     return $response;
@@ -406,7 +406,7 @@ $app = AppFactory::create();
  * To generate the route cache data, you need to set the file to one that does not exist in a writable directory.
  * After the file is generated on first run, only read permissions for the file are required.
  *
- * You may need to generate this file in a development environment and comitting it to your project before deploying
+ * You may need to generate this file in a development environment and committing it to your project before deploying
  * if you don't have write permissions for the directory where the cache file resides on the server it is being deployed to
  */
 $routeCollector = $app->getRouteCollector();
