@@ -18,16 +18,16 @@ Third, you invoke the application instance's `run()` method. This method starts 
 
 #### A. Enter Middleware Stack
 
-The `run()` method begins to inwardly traverse the application's middleware stack. This is a concentric structure of middleware layers that receive (and optionally manipulate) the Environment, Request, and Response objects before (and after) the Slim application runs. The Slim application is the inner-most layer of the concentric middleware structure. Each middleware layer is invoked inwardly beginning from the outer-most layer.
+The `run()` method begins to inwardly traverse the application's middleware stack. This is a concentric structure of middleware layers that receive (and optionally manipulate) the Environment, Request, and Response objects before (and after) the Slim application runs. The Slim application is the innermost layer of the concentric middleware structure. Each middleware layer is invoked inwardly beginning from the outermost layer.
 
 #### B. Run Application
 
-After the `run()` method reaches the inner-most middleware layer, it invokes the application instance and dispatches the current HTTP request to the appropriate application route object. If a route matches the HTTP method and URI, the route's middleware and callable are invoked. If a matching route is not found, the Not Found or Not Allowed handler is invoked.
+After the `run()` method reaches the innermost middleware layer, it invokes the application instance and dispatches the current HTTP request to the appropriate application route object. If a route matches the HTTP method and URI, the route's middleware and callable are invoked. If a matching route is not found, the Not Found or Not Allowed handler is invoked.
 
 #### C. Exit Middleware Stack
 
-After the application dispatch process completes, each middleware layer reclaims control outwardly, beginning from the inner-most layer.
+After the application dispatch process completes, each middleware layer reclaims control outwardly, beginning from the innermost layer.
 
 #### D. Send HTTP Response
 
-After the outer-most middleware layer cedes control, the application instance prepares, serializes, and returns the HTTP response. The HTTP response headers are set with PHP's native `header()` method, and the HTTP response body is output to the current output buffer.
+After the outermost middleware layer cedes control, the application instance prepares, serializes, and returns the HTTP response. The HTTP response headers are set with PHP's native `header()` method, and the HTTP response body is output to the current output buffer.

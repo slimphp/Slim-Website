@@ -6,7 +6,7 @@ method does not accept arguments. Middleware may implement its own constructor, 
 you to look at Slim’s built-in middleware for working examples (e.g. Slim/Middleware/ContentTypes.php or
 Slim/Middleware/SessionCookie.php).
 
-This example is the most simple implementation of Slim application middleware. It extends `\Slim\Middleware`,
+This example is the simplest implementation of Slim application middleware. It extends `\Slim\Middleware`,
 implements a public `call()` method, and calls the next inner middleware.
 
     <?php

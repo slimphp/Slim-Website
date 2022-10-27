@@ -30,12 +30,12 @@ additional middleware layers are added.
 The last middleware layer added is the first to be executed.
 
 When you run the Slim application, the Request object traverses the
-middleware structure from the outside in. They first enter the outer-most middleware,
-then the next outer-most middleware, (and so on), until they ultimately arrive
+middleware structure from the outside in. They first enter the outermost middleware,
+then the next outermost middleware, (and so on), until they ultimately arrive
 at the Slim application itself. After the Slim application dispatches the
 appropriate route, the resultant Response object exits the Slim application and
 traverses the middleware structure from the inside out. Ultimately, a final
-Response object exits the outer-most middleware, is serialized into a raw HTTP
+Response object exits the outermost middleware, is serialized into a raw HTTP
 response, and is returned to the HTTP client. Here's a diagram that illustrates
 the middleware process flow:
 
