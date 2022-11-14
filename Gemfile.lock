@@ -1,12 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.7)
+    activesupport (7.0.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     addressable (2.4.0)
     algolia_html_extractor (2.6.4)
       json (~> 2.0)
@@ -153,14 +152,13 @@ GEM
     verbal_expressions (0.1.5)
     wdm (0.1.1)
     webrick (1.7.0)
-    zeitwerk (2.6.0)
 
 PLATFORMS
   ruby
   x64-mingw32
 
 DEPENDENCIES
-  activesupport (~> 6.0)
+  activesupport (~> 7.0)
   github-pages
   jekyll-algolia
   tzinfo (~> 2.0)
