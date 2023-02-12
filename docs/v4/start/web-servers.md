@@ -170,34 +170,6 @@ Assuming the FPM socket is at `/var/run/php/php-fpm.sock`, and your application 
 }
 ```
 
-
-## HipHop Virtual Machine
-
-Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the `SourceRoot` setting to point to your Slim app's document root directory.
-
-```bash
-Server {
-    SourceRoot = /path/to/public/directory
-}
-
-ServerVariables {
-    SCRIPT_NAME = /index.php
-}
-
-VirtualHost {
-    * {
-        Pattern = .*
-        RewriteRules {
-            * {
-                pattern = ^(.*)$
-                to = index.php/$1
-                qsa = true
-            }
-        }
-    }
-}
-```
-
 ## IIS
 
 Ensure the `Web.config` and `index.php` files are in the same public-accessible directory. The `Web.config` file should contain this code:
