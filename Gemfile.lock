@@ -18,7 +18,7 @@ GEM
       execjs
     coffee-script-source (1.11.1)
     colorator (0.1)
-    concurrent-ruby (1.1.10)
+    concurrent-ruby (1.2.0)
     ethon (0.15.0)
       ffi (>= 1.15.0)
     execjs (2.8.1)
@@ -144,7 +144,7 @@ GEM
       unicode-display_width (~> 1.1, >= 1.1.1)
     typhoeus (0.8.0)
       ethon (>= 0.8.0)
-    tzinfo (2.0.5)
+    tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2022.6)
       tzinfo (>= 1.0.0)
