@@ -94,6 +94,45 @@ $app->add($afterMiddleware);
 $app->run();
 ```
 
+### PSR-15 class middleware example
+
+This class implements the [PSR-15 MiddlewareInterface](https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface).
+
+```php
+<?php
+
+namespace App\Middleware;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+
+final class ExampleMiddleware implements MiddlewareInterface
+{
+    public function process(
+        ServerRequestInterface $request,
+        RequestHandlerInterface $handler
+    ): ResponseInterface {
+        // Handle the incoming request
+        // ...
+        
+        // Invoke the next middleware
+        $response = $handler->handle($request);
+    
+        // Handle the outgoing response
+        // ...
+    
+        return $response;
+    }
+}
+
+```
+
+In the incoming direction, the request object is typically checked for security purposes, such as authentication.
+
+The HTTP response header or body content can be modified as needed in the outgoing direction.
+
 ### Invokable class middleware example
 
 This example middleware is an invokable class that implements the magic `__invoke()` method.
