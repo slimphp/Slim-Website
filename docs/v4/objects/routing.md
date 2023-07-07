@@ -138,7 +138,15 @@ Each routing method described above accepts a callback routine as its final argu
 
 ### Writing content to the response
 
-There are two ways you can write content to the HTTP response. First, you can simply `echo()` content from the route callback. This content will be appended to the current HTTP response object. Second, you can return a `Psr\Http\Message\ResponseInterface` object.
+There are two ways to write content to the HTTP response:
+
+1. Using the `$response->getBody()->write('my content');` method of the Response object.
+
+2. Simply `echo()` content from the route callback. 
+This content will be appended or prepended to the current HTTP response object 
+if you add the  [Output Buffering Middleware](/docs/v4/middleware/output-buffering.html).
+
+Please note that since Slim 4, you must return a `Psr\Http\Message\ResponseInterface` object.
 
 ### Closure binding
 
