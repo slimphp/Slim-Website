@@ -235,7 +235,7 @@ The base class `HttpSpecializedException` extends `Exception` and comes with the
 
 You can extend the `HttpSpecializedException` class if they need any other response codes that we decide not to provide with the base repository. Example if you wanted a 504 gateway timeout exception that behaves like the native ones you would do the following:
 ```php
-class HttpForbiddenException extends HttpSpecializedException
+class HttpGatewayTimeoutException extends HttpSpecializedException
 {
     protected $code = 504;
     protected $message = 'Gateway Timeout.';
