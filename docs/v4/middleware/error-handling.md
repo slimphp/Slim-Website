@@ -44,7 +44,6 @@ You can now map custom handlers for any type of Exception or Throwable.
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
-use Slim\Psr7\Response;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -62,7 +61,9 @@ $customErrorHandler = function (
     bool $logErrorDetails,
     ?LoggerInterface $logger = null
 ) use ($app) {
-    $logger->error($exception->getMessage());
+    if ($logger) {
+        $logger->error($exception->getMessage());
+    }
 
     $payload = ['error' => $exception->getMessage()];
 
