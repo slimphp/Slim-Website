@@ -65,7 +65,7 @@ $app = AppFactory::create();
 /**
  * Example middleware closure
  *
- * @param  ServerRequest  $request PSR-7 request
+ * @param  Request        $request PSR-7 request
  * @param  RequestHandler $handler PSR-15 request handler
  *
  * @return Response
@@ -109,7 +109,7 @@ class ExampleBeforeMiddleware
     /**
      * Example middleware invokable class
      *
-     * @param  ServerRequest  $request PSR-7 request
+     * @param  Request        $request PSR-7 request
      * @param  RequestHandler $handler PSR-15 request handler
      *
      * @return Response
@@ -138,7 +138,7 @@ class ExampleAfterMiddleware
     /**
      * Example middleware invokable class
      *
-     * @param  ServerRequest  $request PSR-7 request
+     * @param  Request        $request PSR-7 request
      * @param  RequestHandler $handler PSR-15 request handler
      *
      * @return Response
