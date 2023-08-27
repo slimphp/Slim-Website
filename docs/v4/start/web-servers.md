@@ -207,9 +207,9 @@ This assumes that Slim's `index.php` is in the root folder of your project (www 
 ## Run From a Sub-Directory
 
 If you want to run your Slim Application from a sub-directory in your Server's Root instead of creating a Virtual Host, 
-you can configure `$app->setBasePath('/path-to-your-app')` right after the `AppFactory::create()`.
+you can configure `$app->setBasePath('/path-to-your-app');` right after the `AppFactory::create();`.
 Assuming that your Server's Root is `/var/www/html/` and path to your Slim Application is `/var/www/html/my-slim-app`
-you can set the base path to `$app->setBasePath('/my-slim-app')`.
+you can set the base path to `$app->setBasePath('/my-slim-app');`.
 
 ```php
 <?php
