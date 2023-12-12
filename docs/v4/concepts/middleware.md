@@ -56,7 +56,7 @@ This example middleware is a Closure.
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
-use Slim\Psr7\Response;
+use Psr\Http\Message\ResponseInterface as Response;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -102,7 +102,7 @@ This example middleware is an invokable class that implements the magic `__invok
 <?php
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
-use Slim\Psr7\Response;
+use Psr\Http\Message\ResponseInterface as Response;
 
 class ExampleBeforeMiddleware
 {
@@ -189,7 +189,7 @@ Application middleware is invoked for every **incoming** HTTP request. Add appli
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
-use Slim\Psr7\Response;
+use Psr\Http\Message\ResponseInterface as Response;
 
 require __DIR__ . '/../vendor/autoload.php';
 
