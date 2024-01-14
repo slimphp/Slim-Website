@@ -53,10 +53,10 @@ This example middleware is a Closure.
 
 ```php
 <?php
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
-use Psr\Http\Message\ResponseInterface as Response;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -68,13 +68,13 @@ $app = AppFactory::create();
  * @param  Request        $request PSR-7 request
  * @param  RequestHandler $handler PSR-15 request handler
  *
- * @return Response
+ * @return ResponseInterface
  */
-$beforeMiddleware = function (Request $request, RequestHandler $handler) {
+$beforeMiddleware = function (Request $request, RequestHandler $handler) use ($app) {
     $response = $handler->handle($request);
     $existingContent = (string) $response->getBody();
 
-    $response = new Response();
+    $response = $app->getResponseFactory()->createResponse();
     $response->getBody()->write('BEFORE' . $existingContent);
 
     return $response;
@@ -186,20 +186,24 @@ Application middleware is invoked for every **incoming** HTTP request. Add appli
 
 ```php
 <?php
+use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
+<<<<<<< HEAD
 use Psr\Http\Message\ResponseInterface as Response;
+=======
+>>>>>>> c9ce721 (Fix Response instantiation)
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->add(function (Request $request, RequestHandler $handler) {
+$app->add(function (Request $request, RequestHandler $handler) use ($app) {
     $response = $handler->handle($request);
     $existingContent = (string) $response->getBody();
 
-    $response = new Response();
+    $response = $app->getResponseFactory()->createResponse();
     $response->getBody()->write('BEFORE ' . $existingContent);
 
     return $response;
