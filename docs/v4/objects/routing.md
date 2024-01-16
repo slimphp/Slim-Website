@@ -494,7 +494,7 @@ use Psr\Container\ContainerInterface;
 
 $container = $app->getContainer();
 
-$container->set('HomeController', function (ContainerInterface $container) {
+$container->set(\HomeController::class, function (ContainerInterface $container) {
     // retrieve the 'view' from the container
     $view = $container->get('view');
     
