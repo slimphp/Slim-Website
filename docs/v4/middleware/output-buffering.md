@@ -8,8 +8,10 @@ The `PREPEND` mode will create a new response body object and prepend the conten
 This middleware should be placed in the center of the middleware stack so it gets executed last.
 
 ## Usage
+
 ```php
 <?php
+
 use Slim\Factory\AppFactory;
 use Slim\Middleware\OutputBufferingMiddleware;
 use Slim\Psr7\Factory\StreamFactory;

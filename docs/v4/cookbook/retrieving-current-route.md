@@ -6,11 +6,13 @@ If you ever need to get access to the current route within your application, you
 
 From there you can get the route via `$routeContext->getRoute()` and access the route's name by using `getName()` or get the methods supported by this route via `getMethods()`, etc.
 
-Note: If you need to access the `RouteContext` object during the middleware cycle before reaching the route handler you will need to add the `RoutingMiddleware` as the outermost middleware before the error handling middleware (See example below).
+**Note:** If you need to access the `RouteContext` object during the middleware cycle before reaching the route handler you will need to add the `RoutingMiddleware` as the outermost middleware before the error handling middleware (See example below).
 
 Example:
+
 ```php
 <?php
+
 use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
 use Slim\Routing\RouteContext;

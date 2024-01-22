@@ -2,21 +2,19 @@
 title: Request
 ---
 
-Your Slim app's routes and middleware are given a PSR-7 request object that
-represents the current HTTP request received by your web server. The request
-object implements the [PSR-7 ServerRequestInterface][psr7] with which you can
-inspect and manipulate the HTTP request method, headers, and body.
+Your Slim app's routes and middleware are given a PSR-7 request object that represents the current HTTP request received by your web server. 
+The request object implements the [PSR-7 ServerRequestInterface][psr7] with which you can inspect and manipulate the HTTP request method, headers, and body.
 
 [psr7]: https://www.php-fig.org/psr/psr-7/#321-psrhttpmessageserverrequestinterface
 
 ## How to get the Request object
 
-The PSR-7 request object is injected into your Slim application routes as the
-first argument to the route callback like this:
+The PSR-7 request object is injected into your Slim application routes as the first argument to the route callback like this:
 
 <figure markdown="1">
 ```php
 <?php
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -35,8 +33,7 @@ $app->run();
 <figcaption>Figure 1: Inject PSR-7 request into application route callback.</figcaption>
 </figure>
 
-The PSR-7 request object is injected into your Slim application _middleware_
-as the first argument of the middleware callable like this:
+The PSR-7 request object is injected into your Slim application _middleware_ as the first argument of the middleware callable like this:
 
 <figure markdown="1">
 ```php
@@ -73,25 +70,23 @@ Every HTTP request has a method that is typically one of:
 * PATCH
 * OPTIONS
 
-You can inspect the HTTP request's method with the Request object method
-appropriately named `getMethod()`.
+You can inspect the HTTP request's method with the Request object method appropriately named `getMethod()`.
 
 ```php
 $method = $request->getMethod();
 ```
 
-It is possible to fake or _override_ the HTTP request method. This is
-useful if, for example, you need to mimic a `PUT` request using a traditional
-web browser that only supports `GET` or `POST` requests.
+It is possible to fake or _override_ the HTTP request method. 
+This is useful if, for example, you need to mimic a `PUT` request using a traditional web browser that only supports `GET` or `POST` requests.
 
 <div class="alert alert-info">
     <div><strong>Heads Up!</strong></div>
     To enable request method overriding the <a href="/docs/v4/middleware/method-overriding.html">Method Overriding Middleware</a> must be injected into your application.
 </div>
 
-There are two ways to override the HTTP request method. You can include a
-`METHOD` parameter in a `POST` request's body. The HTTP request must use the
-`application/x-www-form-urlencoded` content type.
+There are two ways to override the HTTP request method. 
+You can include a `METHOD` parameter in a `POST` request's body. 
+The HTTP request must use the `application/x-www-form-urlencoded` content type.
 
 <figure markdown="1">
 ```bash
@@ -105,9 +100,8 @@ data=value&_METHOD=PUT
 <figcaption>Figure 3: Override HTTP method with _METHOD parameter.</figcaption>
 </figure>
 
-You can also override the HTTP request method with a custom
-`X-Http-Method-Override` HTTP request header. This works with any HTTP request
-content type.
+You can also override the HTTP request method with a custom `X-Http-Method-Override` HTTP request header. 
+This works with any HTTP request content type.
 
 <figure markdown="1">
 ```bash
@@ -124,8 +118,8 @@ X-Http-Method-Override: PUT
 
 ## The Request URI
 
-Every HTTP request has a URI that identifies the requested application
-resource. The HTTP request URI has several parts:
+Every HTTP request has a URI that identifies the requested application resource. 
+The HTTP request URI has several parts:
 
 * Scheme (e.g. `http` or `https`)
 * Host (e.g. `example.com`)
@@ -141,8 +135,7 @@ You can fetch the PSR-7 Request object's [URI object][psr7_uri] with its `getUri
 $uri = $request->getUri();
 ```
 
-The PSR-7 Request object's URI is itself an object that provides the following
-methods to inspect the HTTP request's URL parts:
+The PSR-7 Request object's URI is itself an object that provides the following methods to inspect the HTTP request's URL parts:
 
 * getScheme()
 * getAuthority()
@@ -157,16 +150,14 @@ You can get the query parameters as an associative array on the Request object u
 
 ## The Request Headers
 
-Every HTTP request has headers. These are metadata that describe the HTTP
-request but are not visible in the request's body. Slim's PSR-7
-Request object provides several methods to inspect its headers.
+Every HTTP request has headers. 
+These are metadata that describe the HTTP request but are not visible in the request's body. Slim's PSR-7 Request object provides several methods to inspect its headers.
 
 ### Get All Headers
 
 You can fetch all HTTP request headers as an associative array with the PSR-7
-Request object's `getHeaders()` method. The resultant associative array's keys
-are the header names and its values are themselves a numeric array of string
-values for their respective header name.
+Request object's `getHeaders()` method. 
+The resultant associative array's keys are the header names and its values are themselves a numeric array of string values for their respective header name.
 
 <figure markdown="1">
 ```php
@@ -180,8 +171,9 @@ foreach ($headers as $name => $values) {
 
 ### Get One Header
 
-You can get a single header's value(s) with the PSR-7 Request object's `getHeader($name)` method. This returns an array of values for the given header name. Remember, _a single
-HTTP header may have more than one value!_
+You can get a single header's value(s) with the PSR-7 Request object's `getHeader($name)` method. 
+This returns an array of values for the given header name. 
+Remember, _a single HTTP header may have more than one value!_
 
 <figure markdown="1">
 ```php
@@ -190,9 +182,8 @@ $headerValueArray = $request->getHeader('Accept');
 <figcaption>Figure 6: Get values for a specific HTTP header.</figcaption>
 </figure>
 
-You may also fetch a comma-separated string with all values for a given header
-with the PSR-7 Request object's `getHeaderLine($name)` method. Unlike the
-`getHeader($name)` method, this method returns a comma-separated string.
+You may also fetch a comma-separated string with all values for a given header with the PSR-7 Request object's `getHeaderLine($name)` method. 
+Unlike the `getHeader($name)` method, this method returns a comma-separated string.
 
 <figure markdown="1">
 ```php
@@ -203,8 +194,7 @@ $headerValueString = $request->getHeaderLine('Accept');
 
 ### Detect Header
 
-You can test for the presence of a header with the PSR-7 Request object's
-`hasHeader($name)` method.
+You can test for the presence of a header with the PSR-7 Request object's `hasHeader($name)` method.
 
 <figure markdown="1">
 ```php
@@ -217,12 +207,13 @@ if ($request->hasHeader('Accept')) {
 
 ## The Request Body
 
-Every HTTP request has a body. If you are building a Slim application that
-consumes JSON or XML data, you can use the PSR-7 Request object's
-`getParsedBody()` method to parse the HTTP request body into a native PHP format. 
+Every HTTP request has a body. 
+If you are building a Slim application that consumes JSON or XML data, you can use the PSR-7 Request object's `getParsedBody()` method to parse the HTTP request body into a native PHP format. 
 Note that body parsing differs from one PSR-7 implementation to another.
 
-You may need to implement middleware in order to parse the incoming input depending on the PSR-7 implementation you have installed. Here is an example for parsing incoming `JSON` input:
+You may need to implement middleware in order to parse the incoming input depending on the PSR-7 implementation you have installed. 
+Here is an example for parsing incoming `JSON` input:
+
 ```php
 <?php
 
@@ -256,11 +247,9 @@ $parsedBody = $request->getParsedBody();
 <figcaption>Figure 9: Parse HTTP request body into native PHP format</figcaption>
 </figure>
 
-Technically speaking, the PSR-7 Request object represents the HTTP request
-body as an instance of `Psr\Http\Message\StreamInterface`. You can get
-the HTTP request body `StreamInterface` instance with the PSR-7 Request object's
-`getBody()` method. The `getBody()` method is preferable if the incoming HTTP
-request size is unknown or too large for available memory.
+Technically speaking, the PSR-7 Request object represents the HTTP request body as an instance of `Psr\Http\Message\StreamInterface`. 
+You can get the HTTP request body `StreamInterface` instance with the PSR-7 Request object's `getBody()` method. 
+The `getBody()` method is preferable if the incoming HTTP request size is unknown or too large for available memory.
 
 <figure markdown="1">
 ```php
@@ -269,8 +258,7 @@ $body = $request->getBody();
 <figcaption>Figure 10: Get HTTP request body</figcaption>
 </figure>
 
-The resultant `Psr\Http\Message\StreamInterface` instance provides the following
-methods to read and iterate its underlying PHP `resource`.
+The resultant `Psr\Http\Message\StreamInterface` instance provides the following methods to read and iterate its underlying PHP `resource`.
 
 * getSize()
 * tell()
@@ -287,9 +275,8 @@ methods to read and iterate its underlying PHP `resource`.
 
 ## Uploaded Files
 
-The file uploads in `$_FILES` are available from the Request object's
-`getUploadedFiles()` method. This returns an array keyed by the name of the
-`input` element.
+The file uploads in `$_FILES` are available from the Request object's `getUploadedFiles()` method. 
+This returns an array keyed by the name of the `input` element.
 
 <figure markdown="1">
 ```php
@@ -298,8 +285,7 @@ $files = $request->getUploadedFiles();
 <figcaption>Figure 11: Get uploaded files</figcaption>
 </figure>
 
-Each object in the `$files` array is an instance of
-`Psr\Http\Message\UploadedFileInterface` and supports the following methods:
+Each object in the `$files` array is an instance of `Psr\Http\Message\UploadedFileInterface` and supports the following methods:
 
 * getStream()
 * moveTo($targetPath)
@@ -312,8 +298,7 @@ See the [cookbook](/docs/v4/cookbook/uploading-files.html) on how to upload file
 
 ## Request Helpers
 
-Slim's PSR-7 Request implementation provides these additional proprietary methods
-to help you further inspect the HTTP request.
+Slim's PSR-7 Request implementation provides these additional proprietary methods to help you further inspect the HTTP request.
 
 ### Detect XHR requests
 
@@ -357,7 +342,6 @@ $length = $request->getHeaderLine('Content-Length');
 ### Server Parameter
 
 To fetch data related to the incoming request environment, you will need to use `getServerParams()`.
-
 For example, to get a single Server Parameter:
 
 ```php
@@ -367,8 +351,7 @@ $authorization = $params['HTTP_AUTHORIZATION'] ?? null;
 
 ### POST Parameters
 
-If the request method is `POST` and the `Content-Type` is either `application/x-www-form-urlencoded` 
-or `multipart/form-data`, you can retrieve all `POST` parameters as follows:
+If the request method is `POST` and the `Content-Type` is either `application/x-www-form-urlencoded` or `multipart/form-data`, you can retrieve all `POST` parameters as follows:
 
 ```php
 // Get all POST parameters
@@ -443,7 +426,7 @@ $app->get('/', function(Request $request, Response $response) {
 With PSR-7 it is possible to inject objects/values into the request object for further processing. 
 In your applications middleware often need to pass along information to your route closure and the way to do it is to add it to the request object via an attribute.
 
-Example, Setting a value on your request object.
+Example, setting a value on your request object.
 
 ```php
 use Psr\Http\Message\ServerRequestInterface as Request;

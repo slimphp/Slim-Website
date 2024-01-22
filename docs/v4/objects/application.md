@@ -30,10 +30,12 @@ $app->run();
 
 ## Advanced Notices and Warnings Handling
 
-**Warnings** and **Notices** are not caught by default. If you wish your application to display an error page when they happen, you will need to implement code similar to the following `index.php`.
+**Warnings** and **Notices** are not caught by default. 
+If you wish your application to display an error page when they happen, you will need to implement code similar to the following `index.php`.
 
 ```php
 <?php
+
 use MyApp\Handlers\HttpErrorHandler;
 use MyApp\Handlers\ShutdownHandler;
 use Slim\Exception\HttpInternalServerErrorException;
@@ -146,8 +148,10 @@ class HttpErrorHandler extends ErrorHandler
 ```
 
 ## Advanced Shutdown Handler
+
 ```php
 <?php
+
 namespace MyApp\Handlers;
 
 use MyApp\Handlers\HttpErrorHandler;

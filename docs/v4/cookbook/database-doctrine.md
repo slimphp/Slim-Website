@@ -12,24 +12,22 @@ The first step is importing the Doctrine ORM into your project using [composer](
 composer require doctrine/orm symfony/cache
 ```
 
-Note that on April 30th 2021 Doctrine officially deprecated `doctrine/cache` when it released version v2.0.0, which
-deleted all cache implementations from that library.
+Note that on April 30th 2021 Doctrine officially deprecated `doctrine/cache` when it released version v2.0.0, which deleted all cache implementations from that library.
 Since then they recommend using `symfony/cache` instead, a PSR-6 compliant implementation.
 You only need it if you want to cache Doctrine metadata in production but there's no downside to do it, so we'll show how to set it up.
 
-If you have not yet migrated to PHP8 or simply want to continue using traditional PHPDoc comments to annotate your entities you'll also need to import
-the `doctrine/annotations` package, which used to be a dependency of `doctrine/orm` but since 2.10.0 is optional:
+If you have not yet migrated to PHP8 or simply want to continue using traditional PHPDoc comments to annotate your entities you'll also need to import the `doctrine/annotations` package, which used to be a dependency of `doctrine/orm` but since 2.10.0 is optional:
+
 ```bash
 composer require doctrine/annotations
 ```
-
 
 ## Define your first Entity
 
 You can skip this step and use your actual Doctrine entities instead.
 The following is just an example.
 
-Note that it uses PHP8 attributes, convert them to PHPDoc annotations if you need to.
+Note that it uses PHP 8 attributes, convert them to PHPDoc annotations if you need to.
 
 <figure markdown="1">
 ```php
@@ -81,9 +79,7 @@ final class User
 <figcaption>Figure 1: A sample Doctrine entity.</figcaption>
 </figure>
 
-
 ## Provide database credentials
-
 
 Next, add the Doctrine settings alongside your Slim configuration.
 
@@ -154,14 +150,10 @@ Slim 4 requires that you provide your own PSR-11 container implementation.
 This example uses [`uma/dic`](https://github.com/1ma/dic), a simple and concise PSR-11 container.
 Adapt this to your own choice of container.
 
-Traditionally the annotation metadata reader was the most popular, but starting from `doctrine/orm` 2.10.0 they
-made the dependency on `doctrine/annotations` optional, hinting that the project prefers users to migrate to
-the modern PHP8 attribute notation.
+Traditionally the annotation metadata reader was the most popular, but starting from `doctrine/orm` 2.10.0 they made the dependency on `doctrine/annotations` optional, hinting that the project prefers users to migrate to the modern PHP8 attribute notation.
 
 Here we show how to configure the metadata reader with PHP8 attributes.
-If you have not yet migrated to PHP8 or want to use traditional PHPDoc annotations you'll need to
-explicitly require `doctrine/annotations` with Composer and call `Setup::createAnnotationMetadataConfiguration(...)` instead
-of `Setup::createAttributeMetadataConfiguration(...)` as in the following example.
+If you have not yet migrated to PHP8 or want to use traditional PHPDoc annotations you'll need to explicitly require `doctrine/annotations` with Composer and call `Setup::createAnnotationMetadataConfiguration(...)` instead of `Setup::createAttributeMetadataConfiguration(...)` as in the following example.
 
 <figure markdown="1">
 ```php
@@ -208,15 +200,12 @@ return $container;
 
 ## Create the Doctrine console
 
-To run database migrations, validate class annotations and so on you will use the `doctrine` CLI application that is
-already present at `vendor/bin`. But in order to work this script needs a [`cli-config.php`](http://docs.doctrine-project.org/en/latest/reference/configuration.html#setting-up-the-commandline-tool)
-file at the root of the project telling it how to find the `EntityManager` we just set up.
+To run database migrations, validate class annotations and so on you will use the `doctrine` CLI application that is already present at `vendor/bin`. 
+But in order to work this script needs a [`cli-config.php`](http://docs.doctrine-project.org/en/latest/reference/configuration.html#setting-up-the-commandline-tool) file at the root of the project telling it how to find the `EntityManager` we just set up.
 
-Our `cli-config.php` only needs to retrieve the EntityManager service we just defined in our container and
-pass it to `ConsoleRunner::createHelperSet()`.
+Our `cli-config.php` only needs to retrieve the EntityManager service we just defined in our container and pass it to `ConsoleRunner::createHelperSet()`.
 
 <figure markdown="1">
-
 ```php
 <?php
 
@@ -235,8 +224,8 @@ return ConsoleRunner::createHelperSet($container->get(EntityManager::class));
 <figcaption>Figure 4: Enabling Doctrine's console app.</figcaption>
 </figure>
 
-Take a moment to verify that the console app works. When properly configured, its output will look more or less like this:
-
+Take a moment to verify that the console app works. 
+When properly configured, its output will look more or less like this:
 
 <figure markdown="1">
 ```bash
@@ -289,7 +278,8 @@ At this point you can initialize the database and load the schema by running `ph
 
 ## Using the EntityManager in our own code
 
-Congratulations! You can now manage your database from the command line and use the `EntityManager` wherever you need it in your code.
+Congratulations! 
+You can now manage your database from the command line and use the `EntityManager` wherever you need it in your code.
 
 <figure markdown="1">
 ```php

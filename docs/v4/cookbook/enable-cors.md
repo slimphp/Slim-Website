@@ -168,8 +168,7 @@ $app->run();
 
 ## Access-Control-Allow-Credentials
 
-If the request contains credentials (cookies, authorization headers or TLS client certificates), 
-you might need to add an `Access-Control-Allow-Credentials` header to the response object.
+If the request contains credentials (cookies, authorization headers or TLS client certificates), you might need to add an `Access-Control-Allow-Credentials` header to the response object.
 
 ```php
 $response = $response->withHeader('Access-Control-Allow-Credentials', 'true');
