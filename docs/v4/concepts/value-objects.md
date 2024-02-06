@@ -2,31 +2,26 @@
 title: PSR-7 and Value Objects
 ---
 
-Slim supports [PSR-7](https://github.com/php-fig/http-message) interfaces for
-its Request and Response objects. This makes Slim flexible because it can
-use _any_ PSR-7 implementation. For example, you could return an instance of 
-`GuzzleHttp\Psr7\CachingStream` or any instance
-returned by the `GuzzleHttp\Psr7\stream_for()` function.
+Slim supports [PSR-7](https://github.com/php-fig/http-message) interfaces for its Request and Response objects. 
+This makes Slim flexible because it can use _any_ PSR-7 implementation. 
+For example, you could return an instance of `GuzzleHttp\Psr7\CachingStream` or any instance returned by the `GuzzleHttp\Psr7\stream_for()` function.
 
 Slim provides its own PSR-7 implementation. 
-However, you are free to 
-[install a third-party implementation](/docs/v4/start/installation.html).
+However, you are free to [install a third-party implementation](/docs/v4/start/installation.html).
 
 ## Value objects
 
 Request and Response objects are [_immutable value objects_](http://en.wikipedia.org/wiki/Value_object).
-They can be "changed" only by requesting a cloned version that has updated
-property values. Value objects have a nominal overhead because they must be
-cloned when their properties are updated. This overhead does not affect
-performance in any meaningful way.
+They can be "changed" only by requesting a cloned version that has updated property values. 
+Value objects have a nominal overhead because they must be cloned when their properties are updated. 
+This overhead does not affect performance in any meaningful way.
 
-You can request a copy of a value object by invoking any of its PSR-7
-interface methods (these methods typically have a `with` prefix). For example,
-a PSR-7 Response object has a `withHeader($name, $value)` method that returns a
-cloned value object with the new HTTP header.
+You can request a copy of a value object by invoking any of its PSR-7 interface methods (these methods typically have a `with` prefix). 
+For example, a PSR-7 Response object has a `withHeader($name, $value)` method that returns a cloned value object with the new HTTP header.
 
 ```php
 <?php
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -44,8 +39,7 @@ $app->get('/foo', function (Request $request, Response $response, array $args) {
 $app->run();
 ```
 
-The PSR-7 interface provides these methods to transform Request and Response
-objects:
+The PSR-7 interface provides these methods to transform Request and Response objects:
 
 * `withProtocolVersion($version)`
 * `withHeader($name, $value)`

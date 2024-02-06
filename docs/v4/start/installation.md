@@ -9,14 +9,14 @@ title: Installation
 
 ## Step 1: Install Composer
 
-Don't have Composer? It's easy to install by following the instructions on their [download](https://getcomposer.org/download/) page.
+Don't have Composer? 
+It's easy to install by following the instructions on their [download](https://getcomposer.org/download/) page.
 
 ## Step 2: Install Slim
 
 We recommend you install Slim with [Composer](https://getcomposer.org/).
-Navigate into your project's root directory and execute the bash command
-shown below. This command downloads the Slim Framework and its third-party
-dependencies into your project's `vendor/` directory.
+Navigate into your project's root directory and execute the bash command shown below. 
+This command downloads the Slim Framework and its third-party dependencies into your project's `vendor/` directory.
 
 ```bash
 composer require slim/slim:"4.*"
@@ -28,28 +28,34 @@ Before you can get up and running with Slim you will need to choose a PSR-7 impl
 In order for auto-detection to work and enable you to use `AppFactory::create()` and `App::run()` without having to manually create a `ServerRequest` you need to install one of the following implementations:
 
 ### [Slim PSR-7](https://github.com/slimphp/Slim-Psr7)
+
 ```bash
 composer require slim/psr7
 ```
 
 ### [Nyholm PSR-7](https://github.com/Nyholm/psr7) and [Nyholm PSR-7 Server](https://github.com/Nyholm/psr7-server)
+
 ```bash
 composer require nyholm/psr7 nyholm/psr7-server
 ```
 
 ### [Guzzle PSR-7](https://github.com/guzzle/psr7)
+
 #### For usage with Guzzle PSR-7 version 2:
+
 ```bash
 composer require guzzlehttp/psr7 "^2"
 ```
 
 #### For usage with Guzzle PSR-7 version 1:
+
 ```bash
 composer require guzzlehttp/psr7 "^1"
 composer require sapphirecat/slim4-http-interop-adapter
 ```
 
 ### [Laminas Diactoros](https://github.com/laminas/laminas-diactoros)
+
 ```bash
 composer require laminas/laminas-diactoros
 ```

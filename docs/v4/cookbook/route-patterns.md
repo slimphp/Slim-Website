@@ -2,14 +2,17 @@
 title: Trailing / in route patterns
 ---
 
-Slim treats a URL pattern with a trailing slash as different to one without. That is, `/user` and `/user/` are different and so can have different callbacks attached.
+Slim treats a URL pattern with a trailing slash as different to one without. 
+That is, `/user` and `/user/` are different and so can have different callbacks attached.
 
-For GET requests a permanent redirect is fine, but for other request methods like POST or PUT the browser will send the second request with the GET method. To avoid this you simply need to remove the trailing slash and pass the manipulated url to the next middleware.
+For GET requests a permanent redirect is fine, but for other request methods like POST or PUT the browser will send the second request with the GET method. 
+To avoid this you simply need to remove the trailing slash and pass the manipulated url to the next middleware.
 
 If you want to redirect/rewrite all URLs that end in a `/` to the non-trailing `/` equivalent, then you can add this middleware:
 
 ```php
 <?php
+
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
