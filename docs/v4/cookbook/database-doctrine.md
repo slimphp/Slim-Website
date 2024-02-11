@@ -9,7 +9,7 @@ This cookbook entry describes how to integrate the widely used [Doctrine ORM](ht
 The first step is importing the Doctrine ORM into your project using [composer](https://getcomposer.org/).
 
 ```bash
-composer require doctrine/orm symfony/cache
+composer require doctrine/orm symfony/cache doctrine/cache
 ```
 
 Note that on April 30th 2021 Doctrine officially deprecated `doctrine/cache` when it released version v2.0.0, which deleted all cache implementations from that library.
