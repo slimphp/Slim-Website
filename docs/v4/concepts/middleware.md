@@ -193,10 +193,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
-<<<<<<< HEAD
-use Psr\Http\Message\ResponseInterface as Response;
-=======
->>>>>>> c9ce721 (Fix Response instantiation)
 
 require __DIR__ . '/../vendor/autoload.php';
 
