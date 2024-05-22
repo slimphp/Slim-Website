@@ -9,11 +9,11 @@ This cookbook entry describes how to integrate the widely used [Doctrine ORM](ht
 The first step is importing the Doctrine ORM into your project using [composer](https://getcomposer.org/).
 
 ```bash
-composer require doctrine/orm symfony/cache
+composer require doctrine/orm:^3.0 doctrine/dbal:^4.0 symfony/cache
 ```
 
 Note that on April 30th 2021 Doctrine officially deprecated `doctrine/cache` when it released version v2.0.0, which deleted all cache implementations from that library.
-Since then they recommend using `symfony/cache` instead, a PSR-6 compliant implementation.
+Since then, they recommend using `symfony/cache` instead, a PSR-6 compliant implementation.
 You only need it if you want to cache Doctrine metadata in production but there's no downside to do it, so we'll show how to set it up.
 
 If you have not yet migrated to PHP8 or simply want to continue using traditional PHPDoc comments to annotate your entities you'll also need to import the `doctrine/annotations` package, which used to be a dependency of `doctrine/orm` but since 2.10.0 is optional:
@@ -27,7 +27,7 @@ composer require doctrine/annotations
 You can skip this step and use your actual Doctrine entities instead.
 The following is just an example.
 
-Note that it uses PHP 8 attributes, convert them to PHPDoc annotations if you need to.
+Note that it uses PHP8 attributes, convert them to PHPDoc annotations if you need to.
 
 <figure markdown="1">
 ```php
@@ -48,7 +48,7 @@ final class User
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
-    #[Column(type: 'string', unique: true, nullable: false)]
+    #[Column(type: 'string', unique: true, nullable: false, options: ['collation' => 'NOCASE'])]
     private string $email;
 
     #[Column(name: 'registered_at', type: 'datetimetz_immutable', nullable: false)]
@@ -161,9 +161,9 @@ If you have not yet migrated to PHP8 or want to use traditional PHPDoc annotatio
 
 // bootstrap.php
 
-use Doctrine\Common\Cache\Psr6\DoctrineProvider;
+use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\ORMSetup;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
@@ -180,17 +180,19 @@ $container->set(EntityManager::class, static function (Container $c): EntityMana
     // Use the ArrayAdapter or the FilesystemAdapter depending on the value of the 'dev_mode' setting
     // You can substitute the FilesystemAdapter for any other cache you prefer from the symfony/cache library
     $cache = $settings['doctrine']['dev_mode'] ?
-        DoctrineProvider::wrap(new ArrayAdapter()) :
-        DoctrineProvider::wrap(new FilesystemAdapter(directory: $settings['doctrine']['cache_dir']));
+        new ArrayAdapter() :
+        new FilesystemAdapter(directory: $settings['doctrine']['cache_dir']);
 
-    $config = Setup::createAttributeMetadataConfiguration(
+    $config = ORMSetup::createAttributeMetadataConfiguration(
         $settings['doctrine']['metadata_dirs'],
         $settings['doctrine']['dev_mode'],
         null,
         $cache
     );
 
-    return EntityManager::create($settings['doctrine']['connection'], $config);
+    $connection = DriverManager::getConnection($settings['doctrine']['connection']);
+
+    return new EntityManager($connection, $config);
 });
 
 return $container;
@@ -200,25 +202,27 @@ return $container;
 
 ## Create the Doctrine console
 
-To run database migrations, validate class annotations and so on you will use the `doctrine` CLI application that is already present at `vendor/bin`. 
-But in order to work this script needs a [`cli-config.php`](http://docs.doctrine-project.org/en/latest/reference/configuration.html#setting-up-the-commandline-tool) file at the root of the project telling it how to find the `EntityManager` we just set up.
+To run database migrations, validate class annotations and so on you will create the `doctrine` CLI application.
+This file just needs to retrieve the EntityManager service we just defined in our container and pass it to `ConsoleRunner::run(new SingleManagerProvider($em))`.
 
-Our `cli-config.php` only needs to retrieve the EntityManager service we just defined in our container and pass it to `ConsoleRunner::createHelperSet()`.
+It is customary to create this file without the .php extension and make it executable.
+It can be placed at the root of the project or a `bin/` subdirectory.
+The file begins with `#!/usr/bin/env php` and can be made executable with the `chmod +x doctrine` command on Linux.
 
 <figure markdown="1">
 ```php
+#!/usr/bin/env php
 <?php
-
-// cli-config.php
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Slim\Container;
 
 /** @var Container $container */
 $container = require_once __DIR__ . '/bootstrap.php';
 
-return ConsoleRunner::createHelperSet($container->get(EntityManager::class));
+ConsoleRunner::run(new SingleManagerProvider($container->get(EntityManager::class)));
 ```
 
 <figcaption>Figure 4: Enabling Doctrine's console app.</figcaption>
@@ -229,8 +233,8 @@ When properly configured, its output will look more or less like this:
 
 <figure markdown="1">
 ```bash
-$ php vendor/bin/doctrine
-Doctrine Command Line Interface 2.11.0
+$ ./doctrine 
+Doctrine Command Line Interface 3.1.1.0
 
 Usage:
   command [options] [arguments]
@@ -248,7 +252,6 @@ Available commands:
   help                               Display help for a command
   list                               List commands
  dbal
-  dbal:reserved-words                Checks if the current database contains identifiers that are reserved.
   dbal:run-sql                       Executes arbitrary SQL directly from the command line.
  orm
   orm:clear-cache:metadata           Clear all metadata cache of the various cache drivers
@@ -257,12 +260,7 @@ Available commands:
   orm:clear-cache:region:entity      Clear a second-level cache entity region
   orm:clear-cache:region:query       Clear a second-level cache query region
   orm:clear-cache:result             Clear all result cache of the various cache drivers
-  orm:convert-d1-schema              [orm:convert:d1-schema] Converts Doctrine 1.x schema into a Doctrine 2.x schema
-  orm:convert-mapping                [orm:convert:mapping] Convert mapping information between supported formats
-  orm:ensure-production-settings     Verify that Doctrine is properly configured for a production environment
-  orm:generate-entities              [orm:generate:entities] Generate entity classes and method stubs from your mapping information
   orm:generate-proxies               [orm:generate:proxies] Generates proxy classes for entity classes
-  orm:generate-repositories          [orm:generate:repositories] Generate repository classes from your mapping information
   orm:info                           Show basic information about all mapped entities
   orm:mapping:describe               Display information about mapped objects
   orm:run-dql                        Executes arbitrary DQL directly from the command line
