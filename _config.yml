@@ -2,7 +2,7 @@ highlighter: rouge
 markdown: kramdown
 timezone: America/New_York
 title: Slim Framework
-url: http://www.slimframework.com
+url: https://www.slimframework.com
 slim_version: v4
 slim_docs_versions: v2, v3, v4
 slim_website_repo: https://github.com/slimphp/Slim-Website/tree/gh-pages/
@@ -83,6 +83,7 @@ defaults:
           items:
           - [/docs/v4/cookbook/route-patterns.md, Trailing / in routes]
           - [/docs/v4/cookbook/retrieving-current-route.md, Retrieving Current Route]
+          - [/docs/v4/cookbook/database-doctrine.md, Using Doctrine with Slim]
           - [/docs/v4/cookbook/enable-cors.md, Enabling CORS]
           - [/docs/v4/cookbook/uploading-files.md, Uploading Files using POST forms]
         - title: Add Ons

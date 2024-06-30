@@ -2,11 +2,17 @@
 title: Error Middleware
 ---
 
-Things go wrong. You can't predict errors, but you can anticipate them. Each Slim Framework application has an error handler that receives all uncaught PHP exceptions. This error handler also receives the current HTTP request and response objects, too. The error handler must prepare and return an appropriate Response object to be returned to the HTTP client.
+Things go wrong. 
+You can't predict errors, but you can anticipate them. 
+Each Slim Framework application has an error handler that receives all uncaught PHP exceptions. 
+This error handler also receives the current HTTP request and response objects, too. 
+The error handler must prepare and return an appropriate Response object to be returned to the HTTP client.
 
 ## Usage
+
 ```php
 <?php
+
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -38,13 +44,15 @@ $app->run();
 ```
 
 ## Adding Custom Error Handlers
+
 You can now map custom handlers for any type of Exception or Throwable.
+
 ```php
 <?php
+
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
-use Slim\Psr7\Response;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -62,7 +70,9 @@ $customErrorHandler = function (
     bool $logErrorDetails,
     ?LoggerInterface $logger = null
 ) use ($app) {
-    $logger->error($exception->getMessage());
+    if ($logger) {
+        $logger->error($exception->getMessage());
+    }
 
     $payload = ['error' => $exception->getMessage()];
 
@@ -105,6 +115,7 @@ class MyErrorHandler extends ErrorHandler
 
 ```php
 <?php
+
 use MyApp\Handlers\MyErrorHandler;
 use Slim\Factory\AppFactory;
 
@@ -127,12 +138,11 @@ $errorMiddleware->setDefaultErrorHandler($myErrorHandler);
 $app->run();
 ```
 
-With the second method, you can supply a logger that conforms to the
-[PSR-3 standard](https://www.php-fig.org/psr/psr-3/), such as one from the popular
-[Monolog](https://github.com/Seldaek/monolog/) library.
+With the second method, you can supply a logger that conforms to the [PSR-3 standard](https://www.php-fig.org/psr/psr-3/), such as one from the popular [Monolog](https://github.com/Seldaek/monolog/) library.
 
 ```php
 <?php
+
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use MyApp\Handlers\MyErrorHandler;
@@ -159,21 +169,24 @@ $app->run();
 ```
 
 ## Error Handling/Rendering
+
 The rendering is finally decoupled from the handling.
 It will still detect the content-type and render things appropriately with the help of `ErrorRenderers`.
 The core `ErrorHandler` extends the `AbstractErrorHandler` class which has been completely refactored.
-By default it will call the appropriate `ErrorRenderer` for the supported content types. The core
-`ErrorHandler` defines renderers for the following content types:
+By default it will call the appropriate `ErrorRenderer` for the supported content types. 
+The core `ErrorHandler` defines renderers for the following content types:
+
 - `application/json`
 - `application/xml` and `text/xml`
 - `text/html`
 - `text/plain`
 
-For any content type you can register your own error renderer. So first define a new error renderer
-that implements `\Slim\Interfaces\ErrorRendererInterface`.
+For any content type you can register your own error renderer. 
+So first define a new error renderer that implements `\Slim\Interfaces\ErrorRendererInterface`.
 
 ```php
 <?php
+
 use Slim\Interfaces\ErrorRendererInterface;
 use Throwable;
 
@@ -186,10 +199,12 @@ class MyCustomErrorRenderer implements ErrorRendererInterface
 }
 ```
 
-And then register that error renderer in the core error handler. In the example below we
-will register the renderer to be used for `text/html` content types.
+And then register that error renderer in the core error handler. 
+In the example below we will register the renderer to be used for `text/html` content types.
+
 ```php
 <?php
+
 use MyApp\Handlers\MyErrorHandler;
 use Slim\Factory\AppFactory;
 
@@ -213,8 +228,9 @@ $app->run();
 ```
 
 ### Force a specific content type for error rendering
-By default, the error handler tries to detect the error renderer using the `Accept` header of the
-request. If you need to force the error handler to use a specific error renderer you can 
+
+By default, the error handler tries to detect the error renderer using the `Accept` header of the request. 
+If you need to force the error handler to use a specific error renderer you can 
 write the following.
 
 ```php
@@ -222,9 +238,13 @@ $errorHandler->forceContentType('application/json');
 ```
 
 ## New HTTP Exceptions
-We have added named HTTP exceptions within the application. These exceptions work nicely with the native renderers. They can each have a `description` and `title` attribute as well to provide a bit more insight when the native HTML renderer is invoked. 
+
+We have added named HTTP exceptions within the application. 
+These exceptions work nicely with the native renderers. 
+They can each have a `description` and `title` attribute as well to provide a bit more insight when the native HTML renderer is invoked. 
 
 The base class `HttpSpecializedException` extends `Exception` and comes with the following sub classes:
+
 * HttpBadRequestException
 * HttpForbiddenException
 * HttpInternalServerErrorException
@@ -233,9 +253,11 @@ The base class `HttpSpecializedException` extends `Exception` and comes with the
 * HttpNotImplementedException
 * HttpUnauthorizedException
 
-You can extend the `HttpSpecializedException` class if they need any other response codes that we decide not to provide with the base repository. Example if you wanted a 504 gateway timeout exception that behaves like the native ones you would do the following:
+You can extend the `HttpSpecializedException` class if they need any other response codes that we decide not to provide with the base repository. 
+Example if you wanted a 504 gateway timeout exception that behaves like the native ones you would do the following:
+
 ```php
-class HttpForbiddenException extends HttpSpecializedException
+class HttpGatewayTimeoutException extends HttpSpecializedException
 {
     protected $code = 504;
     protected $message = 'Gateway Timeout.';

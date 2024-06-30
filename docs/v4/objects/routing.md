@@ -108,7 +108,7 @@ $app->any('/books/[{id}]', function ($request, $response, array $args) {
 });
 ```
 
-Note that the second parameter is a callback. You could specify a Class which implementes the `__invoke()` method instead of a Closure. You can then do the mapping somewhere else:
+Note that the second parameter is a callback. You could specify a Class which implements the `__invoke()` method instead of a Closure. You can then do the mapping somewhere else:
 
 ```php
 $app->any('/user', 'MyRestfulController');
@@ -138,7 +138,15 @@ Each routing method described above accepts a callback routine as its final argu
 
 ### Writing content to the response
 
-There are two ways you can write content to the HTTP response. First, you can simply `echo()` content from the route callback. This content will be appended to the current HTTP response object. Second, you can return a `Psr\Http\Message\ResponseInterface` object.
+There are two ways to write content to the HTTP response:
+
+1. Using the `$response->getBody()->write('my content');` method of the Response object.
+
+2. Simply `echo()` content from the route callback. 
+This content will be appended or prepended to the current HTTP response object 
+if you add the  [Output Buffering Middleware](/docs/v4/middleware/output-buffering.html).
+
+Please note that since Slim 4, you must return a `Psr\Http\Message\ResponseInterface` object.
 
 ### Closure binding
 
@@ -265,7 +273,7 @@ Multiple optional parameters are supported by nesting:
 
 ```php
 $app->get('/news[/{year}[/{month}]]', function ($request, $response, array $args) {
-    // reponds to `/news`, `/news/2016` and `/news/2016/03`
+    // responds to `/news`, `/news/2016` and `/news/2016/03`
     // ...
     
     return $response;
@@ -406,7 +414,7 @@ $app = AppFactory::create();
  * To generate the route cache data, you need to set the file to one that does not exist in a writable directory.
  * After the file is generated on first run, only read permissions for the file are required.
  *
- * You may need to generate this file in a development environment and comitting it to your project before deploying
+ * You may need to generate this file in a development environment and committing it to your project before deploying
  * if you don't have write permissions for the directory where the cache file resides on the server it is being deployed to
  */
 $routeCollector = $app->getRouteCollector();
@@ -444,7 +452,7 @@ $app->get('/', [\HomeController::class, 'home']);
 
 In this code above we are defining a `/` route and telling Slim to execute the `home()` method on the `HomeController` class.
 
-Slim first looks for an entry of `HomeController` in the container, if it's found it will use that instance otherwise it will call it's constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.
+Slim first looks for an entry of `HomeController` in the container, if it's found it will use that instance, otherwise it will call its constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.
 
 ### Registering a controller with the container
 
@@ -486,7 +494,7 @@ use Psr\Container\ContainerInterface;
 
 $container = $app->getContainer();
 
-$container->set('HomeController', function (ContainerInterface $container) {
+$container->set(\HomeController::class, function (ContainerInterface $container) {
     // retrieve the 'view' from the container
     $view = $container->get('view');
     

@@ -2,7 +2,7 @@
 title: 404 Not Found Handler
 ---
 
-If your Slim Framework application does not have a route that matches the current HTTP request URI, the application invokes its Not Found handler and returns a `HTTP/1.1 404 Not Found` response to the HTTP client.
+If your Slim Framework application does not have a route that matches the current HTTP request URI, the application invokes it's Not Found handler and returns a `HTTP/1.1 404 Not Found` response to the HTTP client.
 
 ## Default Not Found handler
 

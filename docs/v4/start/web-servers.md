@@ -2,38 +2,37 @@
 title: Web Servers
 ---
 
-It is typical to use the front-controller pattern to funnel appropriate HTTP
-requests received by your web server to a single PHP file. The instructions
-below explain how to tell your web server to send HTTP requests to your PHP
-front-controller file.
+It is typical to use [the Front-Controller pattern][front-controller-pattern-url] to funnel appropriate HTTP requests received by your web server to a single PHP file. 
+The instructions below explain how to tell your web server to send HTTP requests to your PHP front-controller file.
 
 ## PHP built-in server
 
-Run the following command in terminal to start localhost web server,
-assuming `./public/` is public-accessible directory with `index.php` file:
+Run the following command in terminal to start localhost web server, assuming *./public/* is public-accessible directory with *index.php* file:
 
 ```bash
 cd public/
 php -S localhost:8888
 ```
 
-If you are not using `index.php` as your entry point then change appropriately.
+If you are not using *index.php* as your entry point then change appropriately.
 
 > **Warning:** The built-in web server was designed to aid application development. 
-It may also be useful for testing purposes or for application demonstrations that are run in controlled environments. It is not intended to be a full-featured web server. It should not be used on a public network.
+It may also be useful for testing purposes or for application demonstrations that are run in controlled environments. 
+It is not intended to be a full-featured web server. 
+It should not be used on a public network.
 
 ## Apache configuration
 
 Ensure that the Apache `mod_rewrite` module is installed and enabled.
 In order to enable `mod_rewrite` you can type the following command in the terminal:
 
-```
+```bash
 sudo a2enmod rewrite
 sudo a2enmod actions
 ```
 
-Ensure your `.htaccess` and `index.php` files are in the same
-public-accessible directory. The `.htaccess` file should contain this code:
+Ensure your `.htaccess` and `index.php` files are in the same public-accessible directory. 
+The `.htaccess` file should contain this code:
 
 ```bash
 RewriteEngine On
@@ -42,11 +41,18 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
 ```
 
-This `.htaccess` file requires URL rewriting.
+To ensure that the `public/` directory does not appear in the URL, you should add a second `.htaccess` file above the `public/` directory with the following internal redirect rule:
 
-Make sure to enable Apache's `mod_rewrite` module and your virtual host is configured
-with the `AllowOverride` option so that the `.htaccess` rewrite rules can be used:
-To do this, the file `/etc/apache2/apache2.conf` must be opened in an editor with root privileges.
+```bash
+RewriteEngine on
+RewriteRule ^$ public/ [L]
+RewriteRule (.*) public/$1 [L]
+```
+
+These `.htaccess` files require URL rewriting.
+
+Make sure to enable Apache's `mod_rewrite` module and your virtual host is configured with the `AllowOverride` option so that the `.htaccess` rewrite rules can be used:
+To do this, the file */etc/apache2/apache2.conf* must be opened in an editor with root privileges.
 
 Change the `<Directory ...>` directive from `AllowOveride None` to `AllowOveride All`.
 
@@ -63,32 +69,28 @@ Change the `<Directory ...>` directive from `AllowOveride None` to `AllowOveride
 Finally, the configuration of Apache must be reloaded.
 To restart Apache web server, enter:
 
-```
+```bash
 sudo service apache2 restart
 ```
 
 This command works on most Debian/Ubuntu variants.
-For all other Linux distributions, please consult 
-the documentation of your specific Linux distribution 
-to find out how to restart Apache.
+For all other Linux distributions, please consult the documentation of your specific Linux distribution to find out how to restart Apache.
 
 **Running in a sub-directory**
 
 This example assumes that the front controller is located in `public/index.php`.
 
-To "redirect" the sub-directory to the front-controller create a second
-`.htaccess` file above the `public/` directory. 
+To "redirect" the sub-directory to the front-controller create a second `.htaccess` file above the `public/` directory. 
 
 The second `.htaccess` file should contain this code:
 
-```
+```bash
 RewriteEngine on
 RewriteRule ^$ public/ [L]
 RewriteRule (.*) public/$1 [L]
 ```
 
-You may also set the base path so that the router can 
-match the URL from the browser with the path set in the route registration.
+You may also set the base path so that the router can match the URL from the browser with the path set in the route registration.
 This is done with the `setBasePath()` method.
 
 ```php
@@ -103,11 +105,8 @@ $app->setBasePath('/myapp');
 ## Nginx configuration
 
 This is an example Nginx virtual host configuration for the domain `example.com`.
-It listens for inbound HTTP connections on port 80. It assumes a PHP-FPM server
-is running on port 9123. You should update the `server_name`, `error_log`,
-`access_log`, and `root` directives with your own values. The `root` directive
-is the path to your application's public document root directory; your Slim app's
-`index.php` front-controller file should be in this directory.
+It listens for inbound HTTP connections on port 80. It assumes a PHP-FPM server is running on port 9123. You should update the `server_name`, `error_log`, `access_log`, and `root` directives with your own values. 
+The `root` directive is the path to your application's public document root directory; your Slim app's `index.php` front-controller file should be in this directory.
 
 ```bash
 server {
@@ -134,30 +133,31 @@ server {
 }
 ```
 
-## HipHop Virtual Machine
+## Caddy
 
-Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the `SourceRoot` setting to point to your Slim app's document root directory.
+The Caddy configuration is located in `/etc/caddy/Caddyfile`. Caddy requires `php-fpm` and have the FPM server running.
+Assuming the FPM socket is at `/var/run/php/php-fpm.sock`, and your application is located in `/var/www`, the following configuration should work out of the box.
+
+### HTTP configuration listening for any request
 
 ```bash
-Server {
-    SourceRoot = /path/to/public/directory
+:80 {
+        # Set-up the FCGI location
+        php_fastcgi unix//var/run/php/php-fpm.sock
+        # Set this path to your site's directory.
+        root * /var/www/public
 }
+```
 
-ServerVariables {
-    SCRIPT_NAME = /index.php
-}
+### HTTPS configuration with self-signed certificate
 
-VirtualHost {
-    * {
-        Pattern = .*
-        RewriteRules {
-            * {
-                pattern = ^(.*)$
-                to = index.php/$1
-                qsa = true
-            }
-        }
-    }
+```bash
+:443 {
+        tls internal
+        # Set-up the FCGI location
+        php_fastcgi unix//var/run/php/php-fpm.sock
+        # Set this path to your site's directory.
+        root * /var/www/public
 }
 ```
 
@@ -196,16 +196,22 @@ url.rewrite-if-not-file = ("(.*)" => "/index.php/$0")
 This assumes that Slim's `index.php` is in the root folder of your project (www root).
 
 ## Run From a Sub-Directory
-If you want to run your Slim Application from a sub-directory in your Server's Root instead of creating a Virtual Host, you can configure ``$app->setBasePath('path-to-your-app')`` right after the ``AppFactory::create()``.
-Assuming that your Server's Root is ``/var/www/html/`` and path to your Slim Application is ``/var/www/html/my-slim-app`` you can set the base path to ``$app->setBasePath('/my-slim-app')``.
+
+If you want to run your Slim Application from a sub-directory in your Server's Root instead of creating a Virtual Host, you can configure `$app->setBasePath('/path-to-your-app');` right after the `AppFactory::create();`.
+Assuming that your Server's Root is `/var/www/html/` and path to your Slim Application is `/var/www/html/my-slim-app` you can set the base path to `$app->setBasePath('/my-slim-app');`.
 
 ```php
 <?php
+
 use Slim\Factory\AppFactory;
-use Slim\Middleware\OutputBufferingMiddleware;
 // ...
+
 $app = AppFactory::create();
 $app->setBasePath('/my-slim-app');
+
 // ...
+
 $app->run();
 ```
+
+[front-controller-pattern-url]: https://martinfowler.com/eaaCatalog/frontController.html
