@@ -11,14 +11,18 @@ Middleware is perfect for these scenarios.
 
 ## What is middleware?
 
-A middleware implements the [PSR-15 Middleware Interface](https://www.php-fig.org/psr/psr-15/):
+Middleware is a layer that sits between the client 
+request and the server response in a web application.
+It intercepts, processes, and potentially alters HTTP requests 
+and responses as they pass through the application pipeline. 
 
-1. `Psr\Http\Message\ServerRequestInterface` - The PSR-7 request object
-2. `Psr\Http\Server\RequestHandlerInterface` - The PSR-15 request handler object
+Middleware components can handle a variety of tasks such as authentication, 
+authorization, logging, request modification, response transformation, 
+error handling, and more. 
 
-It can do whatever is appropriate with these objects. 
-The only hard requirement is that a middleware **MUST** return an instance of  `Psr\Http\Message\ResponseInterface`.
-Each middleware **SHOULD** invoke the next middleware and pass it the Request object as argument.
+Each middleware performs its function and then passes control 
+to the next component in the chain, enabling a modular and reusable 
+approach to handling cross-cutting concerns in web applications.
 
 ## How does middleware work?
 
@@ -44,12 +48,13 @@ Here's a diagram that illustrates the middleware process flow:
 Middleware is a callable that accepts two arguments: a `Request` object and a `RequestHandler` object. 
 Each middleware **MUST** return an instance of  `Psr\Http\Message\ResponseInterface`.
 
-### Closure middleware example.
+### Closure middleware
 
 This example middleware is a Closure.
 
 ```php
 <?php
+
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
@@ -91,12 +96,13 @@ $app->add($afterMiddleware);
 $app->run();
 ```
 
-### Invokable class middleware example
+### Invokable class middleware
 
 This example middleware is an invokable class that implements the magic `__invoke()` method.
 
 ```php
 <?php
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -150,83 +156,90 @@ class ExampleAfterMiddleware
 }
 ```
 
-To use these classes as a middleware, you can use **add(new ExampleMiddleware());** function chain after the **$app** route mapping methods **get(), post(), put(), patch(), delete(), options(), any()**  or **group()**, as demonstrated in the code below.
+### PSR-15 middleware
+
+[PSR-15](https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface) 
+is a standard that defines common interfaces for HTTP server 
+request handlers and middleware components.
+
+Slim provides built-in support for PSR-15 middleware.
+
+**Key Interfaces**
+
+* `Psr\Http\Server\MiddlewareInterface`: This interface defines the **process** method that middleware must implement.
+* `Psr\Http\Server\RequestHandlerInterface`: An HTTP request handler that process an HTTP request in order to produce an HTTP response.
+
+To create a PSR-15 middleware class, you need to implement the `MiddlewareInterface`.
+
+Below is an example of a simple PSR-15 middleware:
 
 ```php
 <?php
 
-use Slim\Factory\AppFactory;
-
-require __DIR__ . '/../vendor/autoload.php';
-
-$app = AppFactory::create();
-
-// Add Middleware On App
-$app->add(new ExampleMiddleware());
-
-// Add Middleware On Route
-$app->get('/', function () { ... })->add(new ExampleMiddleware());
-
-// Add Middleware On Group
-$app->group('/', function () { ... })->add(new ExampleMiddleware());
-
-// ...
-
-$app->run();
-```
-
-## How do I add middleware?
-
-You may add middleware to a Slim application, to an individual Slim application route or to a route group. 
-All scenarios accept the same middleware and implement the same middleware interface.
-
-### Application middleware
-
-Application middleware is invoked for every **incoming** HTTP request. 
-Add application middleware with the Slim application instance's **add()** method. 
-This example adds the Closure middleware example above:
-
-```php
-<?php
+namespace App\Middleware;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
-use Slim\Factory\AppFactory;
 
-require __DIR__ . '/../vendor/autoload.php';
+class ExampleMiddleware implements MiddlewareInterface
+{
+    public function process(Request $request, RequestHandler $handler): Response
+    {
+        // Handle the incoming request
+        // ...
 
-$app = AppFactory::create();
+        // Invoke the next middleware and get response
+        $response = $handler->handle($request);
 
-$app->add(function (Request $request, RequestHandler $handler) use ($app) {
-    $response = $handler->handle($request);
-    $existingContent = (string) $response->getBody();
+        // Handle the outgoing response
+        // ...
 
-    $response = $app->getResponseFactory()->createResponse();
-    $response->getBody()->write('BEFORE ' . $existingContent);
+        return $response;
+    }
+}
 
-    return $response;
-});
-
-$app->add(function (Request $request, RequestHandler $handler) {
-    $response = $handler->handle($request);
-    $response->getBody()->write(' AFTER');
-    return $response;
-});
-
-$app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write('Hello World');
-    return $response;
-});
-
-$app->run();
 ```
 
-This would output this HTTP response body:
+Incoming requests can be authenticated, authorized, logged, validated, or modified. 
 
-```bash
-BEFORE Hello World AFTER
+Outgoing responses can be logged, transformed, compressed, or have additional headers added.
+
+### Registering middleware
+
+To use a middleware, you need to register each middleware on the Slim **$app**, a route or a route group.
+
+```php
+// Add middleware to the App
+$app->add(new ExampleMiddleware());
+
+// Add middleware to the App using dependency injection
+$app->add(ExampleMiddleware::class);
+
+// Add middleware to a route
+$app->get('/', function () { ... })->add(new ExampleMiddleware());
+
+// Add middleware to a route group
+$app->group('/', function () { ... })->add(new ExampleMiddleware());
+
 ```
+
+### Middleware execution order
+
+Slim processes middleware in a Last In, First Out (LIFO) order. 
+This means the last middleware added is the first one to be executed. 
+If you add multiple middleware components, 
+they will be executed in the reverse order of their addition.
+
+```php
+$app->add(new MiddlewareOne());
+$app->add(new MiddlewareTwo());
+$app->add(new MiddlewareThree());
+```
+
+In this case, `MiddlewareThree` will be executed first, 
+followed by `MiddlewareTwo`, and finally `MiddlewareOne`.
 
 ### Route middleware
 
