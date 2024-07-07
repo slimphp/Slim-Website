@@ -16,12 +16,12 @@ request and the server response in a web application.
 It intercepts, processes, and potentially alters HTTP requests 
 and responses as they pass through the application pipeline. 
 
-Middleware components can handle a variety of tasks such as authentication, 
+A middleware can handle a variety of tasks such as authentication, 
 authorization, logging, request modification, response transformation, 
 error handling, and more. 
 
 Each middleware performs its function and then passes control 
-to the next component in the chain, enabling a modular and reusable 
+to the next middleware in the chain, enabling a modular and reusable 
 approach to handling cross-cutting concerns in web applications.
 
 ## How does middleware work?
