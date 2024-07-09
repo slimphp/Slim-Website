@@ -590,3 +590,63 @@ $app->get('/', \HomeAction::class);
 Again, as with controllers, if you register the class name with the container, then you
 can create a factory and inject just the specific dependencies that you require into your
 action class.
+
+## Route Object
+
+Sometimes in middleware you require the parameter of your route.
+
+In this example we are checking first that the user is logged in and second that
+the user has permissions to view the particular video they are attempting to view.
+
+```php
+$app->get('/course/{id}', Video::class . ':watch')
+    ->add(PermissionMiddleware::class);
+```
+
+```php
+<?php
+
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+use Slim\Routing\RouteContext;
+
+class PermissionMiddleware
+{
+    public function __invoke(Request $request, RequestHandler $handler)
+    {
+        $routeContext = RouteContext::fromRequest($request);
+        $route = $routeContext->getRoute();
+        
+        $courseId = $route->getArgument('id');
+        
+        // do permission logic...
+        
+        return $handler->handle($request);
+    }
+}
+```
+
+## Obtain Base Path From Within Route
+
+To obtain the base path from within a route simply do the following:
+
+```php
+<?php
+
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
+use Slim\Routing\RouteContext;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$app = AppFactory::create();
+
+$app->get('/', function(Request $request, Response $response) {
+    $routeContext = RouteContext::fromRequest($request);
+    $basePath = $routeContext->getBasePath();
+    // ...
+    
+    return $response;
+});
+```
