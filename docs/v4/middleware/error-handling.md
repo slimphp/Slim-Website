@@ -50,6 +50,8 @@ You can now map custom handlers for any type of Exception or Throwable.
 ```php
 <?php
 
+use Monolog\Handler\RotatingFileHandler;
+use Monolog\Logger;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
@@ -61,15 +63,18 @@ $app = AppFactory::create();
 // Add Routing Middleware
 $app->addRoutingMiddleware();
 
+// Optional: Define custom error logger
+$logger = new Logger('error');
+$logger->pushHandler(new RotatingFileHandler('error.log'));
+
 // Define Custom Error Handler
 $customErrorHandler = function (
     ServerRequestInterface $request,
     Throwable $exception,
     bool $displayErrorDetails,
     bool $logErrors,
-    bool $logErrorDetails,
-    ?LoggerInterface $logger = null
-) use ($app) {
+    bool $logErrorDetails
+) use ($app, $logger) {
     if ($logger) {
         $logger->error($exception->getMessage());
     }
@@ -85,7 +90,7 @@ $customErrorHandler = function (
 };
 
 // Add Error Middleware
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
 $errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
 // ...
