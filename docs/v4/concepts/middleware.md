@@ -64,32 +64,33 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-/**
- * Example middleware closure
- *
- * @param  Request        $request PSR-7 request
- * @param  RequestHandler $handler PSR-15 request handler
- *
- * @return ResponseInterface
- */
 $beforeMiddleware = function (Request $request, RequestHandler $handler) use ($app) {
+    // Example: Check for a specific header before proceeding
+    $auth = $request->getHeaderLine('Authorization');
+    if (!$auth) {
+        // Short-circuit and return a response immediately
+        $response = $app->getResponseFactory()->createResponse();
+        $response->getBody()->write('Unauthorized');
+        
+        return $response->withStatus(401);
+    }
+
+    // Proceed with the next middleware
+    return $handler->handle($request);
+};
+
+$afterMiddleware = function (Request $request, RequestHandler $handler) {
+    // Proceed with the next middleware
     $response = $handler->handle($request);
-    $existingContent = (string) $response->getBody();
-
-    $response = $app->getResponseFactory()->createResponse();
-    $response->getBody()->write('BEFORE' . $existingContent);
-
+    
+    // Modify the response after the application has processed the request
+    $response = $response->withHeader('X-Added-Header', 'some-value');
+    
     return $response;
 };
 
-$afterMiddleware = function ($request, $handler) {
-    $response = $handler->handle($request);
-    $response->getBody()->write('AFTER');
-    return $response;
-};
-
-$app->add($beforeMiddleware);
 $app->add($afterMiddleware);
+$app->add($beforeMiddleware);
 
 // ...
 
@@ -109,23 +110,13 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class ExampleBeforeMiddleware
 {
-    /**
-     * Example middleware invokable class
-     *
-     * @param  Request        $request PSR-7 request
-     * @param  RequestHandler $handler PSR-15 request handler
-     *
-     * @return Response
-     */
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
-        $response = $handler->handle($request);
-        $existingContent = (string) $response->getBody();
-    
-        $response = new Response();
-        $response->getBody()->write('BEFORE' . $existingContent);
-    
-        return $response;
+        // Handle the incoming request
+        // ...
+
+        // Invoke the next middleware and return response
+        return $handler->handle($request);
     }
 }
 ```
@@ -139,18 +130,14 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
 class ExampleAfterMiddleware
 {
-    /**
-     * Example middleware invokable class
-     *
-     * @param  Request        $request PSR-7 request
-     * @param  RequestHandler $handler PSR-15 request handler
-     *
-     * @return Response
-     */
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
+        // Invoke the next middleware and get response
         $response = $handler->handle($request);
-        $response->getBody()->write('AFTER');
+
+        // Handle the outgoing response
+        // ...
+
         return $response;
     }
 }
@@ -187,13 +174,13 @@ class ExampleMiddleware implements MiddlewareInterface
 {
     public function process(Request $request, RequestHandler $handler): Response
     {
-        // Handle the incoming request
+        // Optional: Handle the incoming request
         // ...
 
         // Invoke the next middleware and get response
         $response = $handler->handle($request);
 
-        // Handle the outgoing response
+        // Optional: Handle the outgoing response
         // ...
 
         return $response;
@@ -205,6 +192,93 @@ class ExampleMiddleware implements MiddlewareInterface
 Incoming requests can be authenticated, authorized, logged, validated, or modified. 
 
 Outgoing responses can be logged, transformed, compressed, or have additional headers added.
+
+#### Creating a new response in a PSR-15 middleware
+
+To create a new response, use the `Psr\Http\Message\ResponseFactoryInterface`, 
+which provides a `createResponse()` method to create a new response object.
+
+Here is an example of a PSR-15 middleware class that creates a new response:
+
+```php
+<?php
+
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+
+class ExampleMiddleware implements MiddlewareInterface
+{
+    private ResponseFactoryInterface $responseFactory;
+
+    public function __construct(ResponseFactoryInterface $responseFactory)
+    {
+        $this->responseFactory = $responseFactory;
+    }
+
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        // Check some condition to determine if a new response should be created
+        if (true) {
+            // Create a new response using the response factory
+            $response = $this->responseFactory->createResponse();
+            $response->getBody()->write('New response created by middleware');
+            
+            return $response;
+        }
+
+        // Proceed with the next middleware
+        return $handler->handle($request);
+    }
+}
+```
+
+The response is created with a `200` OK status code by default.
+To change the HTTP status code, you can pass the desired status 
+code as an argument to the `createResponse` method.
+
+```php
+$response = $this->responseFactory->createResponse(201);
+```
+
+Note that the response factory is a dependency that must 
+be injected into a middleware. Make sure that the Slim  
+DI container (e.g. PHP-DI) is properly configured to provide an instance of
+`Psr\Http\Message\ResponseFactoryInterface`.
+
+**Example:** PHP-DI definition using the `slim\psr7` package
+
+```php
+use Psr\Container\ContainerInterface;
+use Slim\Psr7\Factory\ResponseFactory;
+// ...
+
+return [
+    // ...
+    ResponseFactoryInterface::class => function (ContainerInterface $container) {
+        return $container->get(ResponseFactory::class);
+    },
+];
+
+```
+
+**Example:** PHP-DI definition using the `nyholm/psr7` package
+
+```php
+use Nyholm\Psr7\Factory\Psr17Factory;
+use Psr\Container\ContainerInterface;
+// ...
+
+return [
+    // ...
+    ResponseFactoryInterface::class => function (ContainerInterface $container) {
+        return $container->get(Psr17Factory::class);
+    },
+];
+
+```
 
 ### Registering middleware
 
@@ -261,18 +335,18 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$mw = function (Request $request, RequestHandler $handler) {
+$middleware = function (Request $request, RequestHandler $handler) {
     $response = $handler->handle($request);
     $response->getBody()->write('World');
 
     return $response;
 };
 
-$app->get('/', function (Request $request, Response $response, $args) {
+$app->get('/', function (Request $request, Response $response) {
     $response->getBody()->write('Hello ');
 
     return $response;
-})->add($mw);
+})->add($middleware);
 
 $app->run();
 ```
@@ -351,6 +425,7 @@ Hello World
 ```
 
 ### Passing variables from middleware
+
 The easiest way to pass attributes from middleware is to use the request's attributes.
 
 Setting the variable in the middleware:
@@ -370,5 +445,5 @@ $foo = $request->getAttribute('foo');
 You may find a PSR-15 Middleware class already written that will satisfy your needs. 
 Here are a few unofficial lists to search.
 
-* [Middleware for Slim Framework v4.x wiki](https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v4.x)
+* [Github PSR-15: HTTP Server Request Handlers](https://github.com/topics/psr-15)
 * [middlewares/awesome-psr15-middlewares](https://github.com/middlewares/awesome-psr15-middlewares)
