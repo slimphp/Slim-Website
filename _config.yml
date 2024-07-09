@@ -30,9 +30,9 @@ defaults:
           items:
           - [/docs/v4, Home]
           - [/docs/v4/start/installation.md, Installation]
-          - [/docs/v4/start/upgrade.md, Upgrade Guide]
           - [/docs/v4/start/web-servers.md, Web Servers]
           - [/docs/v4/deployment/deployment.md, Deployment]
+          - [/docs/v4/start/upgrade.md, Upgrade Guide]
         - title: Concepts
           items:
           - [/docs/v4/concepts/life-cycle.md, Application Life Cycle]
