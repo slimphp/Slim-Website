@@ -55,8 +55,7 @@ Create a template file within the templates directory: `templates/hello.php`
     <title>Slim Example</title>
 </head>
 <body>
-    <h1>Hello, <?=$name?>!</h1>
-    <p>This is a minimal HTML5 document.</p>
+    <h1>Hello, <?= htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')?>!</h1>
 </body>
 </html>
 ```
