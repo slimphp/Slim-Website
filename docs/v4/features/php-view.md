@@ -55,7 +55,7 @@ Create a template file within the templates directory: `templates/hello.php`
     <title>Slim Example</title>
 </head>
 <body>
-    <h1>Hello, <?= htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')?>!</h1>
+    <h1>Hello, <?= htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></h1>
 </body>
 </html>
 ```
@@ -63,7 +63,7 @@ Create a template file within the templates directory: `templates/hello.php`
 Output:
 
 ```
-Hello John!
+Hello John
 ```
 
 **Security note:** It's important to ensure that the dynamic

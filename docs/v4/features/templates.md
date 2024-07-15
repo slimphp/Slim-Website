@@ -8,7 +8,8 @@ Each Slim application route is responsible for preparing and returning an approp
 
 > Slim's "view" is the HTTP response.
 
-That being said, the Slim project provides the [Twig-View](twig-view.html) and [PHP-View](php-view.html) components to help you render templates to a PSR7 Response object.
+That being said, the Slim project provides the [Twig-View](twig-view.html) and [PHP-View](php-view.html) components 
+to help you render templates to a PSR-7 Response object.
 
 ## Other template systems
 
