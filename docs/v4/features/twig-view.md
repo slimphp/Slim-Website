@@ -10,9 +10,9 @@ This component is available on Packagist, and it's easy to install with Composer
 [twigview]: https://github.com/slimphp/Twig-View
 [twig]: https://twig.symfony.com/
 
-### Installation
+## Installation
 
-```bash
+```
 composer require slim/twig-view
 ```
 
