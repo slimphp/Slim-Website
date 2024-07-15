@@ -27,7 +27,7 @@ require __DIR__ . '/../vendor/autoload.php';
 // Create App
 $app = AppFactory::create();
 
-$app->get('/hello/{name}', function ($request, $response) {
+$app->get('/hello', function ($request, $response) {
     $renderer = new PhpRenderer(__DIR__ . '/../templates');
     
     $viewData = [

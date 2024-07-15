@@ -47,11 +47,11 @@ Now you can use the `slim/twig-view` component service inside
 an app route to render a template and write it to a PSR-7 Response object like this:
 
 ```php
-$app->get('/hello/{name}', function ($request, $response) {
+$app->get('/hello', function ($request, $response) {
     $view = Twig::fromRequest($request);
     
     return $view->render($response, 'profile.html', [
-        'name' => $args['name']
+        'name' => 'John',
     ]);
 })->setName('profile');
 
