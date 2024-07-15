@@ -89,6 +89,8 @@ defaults:
         - title: Add Ons
           items:
             - [/docs/v4/features/templates.md, Templates]
+            - [/docs/v4/features/twig-view.md, Twig Templates]
+            - [/docs/v4/features/php-view.md, PHP Templates]
         - title: Contributing
           items:
           - [/docs/v4/contributors/strategy.md, Branching Strategy]
