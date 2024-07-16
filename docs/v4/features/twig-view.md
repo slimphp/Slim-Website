@@ -75,7 +75,7 @@ Create a Twig template file within the templates directory: `templates/home.html
     <title>Welcome to Slim!</title>
 </head>
 <body>
-<h1>Hello {{name}}</h1>
+<h1>Hello {{ name }}</h1>
 </body>
 </html>
 {% endraw %}
