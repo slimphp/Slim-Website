@@ -101,4 +101,5 @@ This is an example Twig template that draws a link URL for the "profile" named r
 
 ## Read more
 
-* [PHP-View documentation](https://github.com/slimphp/PHP-View)
+* [Twig-View documentation](https://github.com/slimphp/Twig-View)
+* [Twig documentation](https://twig.symfony.com/)

@@ -69,3 +69,6 @@ Hello John
 **Security note:** It's important to ensure that the dynamic
 output is properly [escaped](https://github.com/slimphp/PHP-View?tab=readme-ov-file#escaping-values).
 
+## Read more
+
+* [PHP-View documentation](https://github.com/slimphp/PHP-View)
