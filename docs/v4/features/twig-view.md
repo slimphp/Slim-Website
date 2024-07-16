@@ -33,7 +33,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $app = AppFactory::create();
 
 // Create Twig
-$twig = Twig::create('path/to/templates', ['cache' => false]);
+$twig = Twig::create(__DIR__ . '/../templates', ['cache' => false]);
 
 // Add Twig-View Middleware
 $app->add(TwigMiddleware::create($app, $twig));
@@ -47,13 +47,13 @@ Now you can use the `slim/twig-view` component service inside
 an app route to render a template and write it to a PSR-7 Response object like this:
 
 ```php
-$app->get('/hello', function ($request, $response) {
+$app->get('/', function ($request, $response) {
     $view = Twig::fromRequest($request);
     
-    return $view->render($response, 'profile.html', [
+    return $view->render($response, 'home.html.twig', [
         'name' => 'John',
     ]);
-})->setName('profile');
+});
 
 // Run app
 $app->run();
@@ -62,6 +62,24 @@ $app->run();
 In this example, `$view` invoked inside the route callback is a reference to the `\Slim\Views\Twig` instance returned by the `fromRequest` method.
 The `\Slim\Views\Twig` instance's `render()` method accepts a PSR-7 Response object as its first argument, the Twig template path as its second argument, and an array of template variables as its final argument.
 The `render()` method returns a new PSR-7 Response object whose body is the rendered Twig template.
+
+Create a directory in your project root: `templates/`
+
+Create a Twig template file within the templates directory: `templates/home.html.twig`
+
+```html
+{% raw %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Slim!</title>
+</head>
+<body>
+<h1>Hello {{ name }}</h1>
+</body>
+</html>
+{% endraw %}
+```
 
 ### The url_for() method
 
@@ -77,13 +95,10 @@ This is an example Twig template that draws a link URL for the "profile" named r
 
 ```html
 {% raw %}
-{% extends "layout.html" %}
-
-{% block body %}
-<h1>User List</h1>
-<ul>
-    <li><a href="{{ url_for('profile', { 'name': 'josh' }) }}">Josh</a></li>
-</ul>
-{% endblock %}
+<a href="{{ url_for('profile', { 'name': 'josh' }) }}">Josh</a></li>
 {% endraw %}
 ```
+
+## Read more
+
+* [PHP-View documentation](https://github.com/slimphp/PHP-View)
