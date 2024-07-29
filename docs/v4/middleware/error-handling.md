@@ -270,3 +270,15 @@ class HttpGatewayTimeoutException extends HttpSpecializedException
     protected $description = 'Timed out before receiving response from the upstream server.';
 }
 ```
+
+To throw HTTP exceptions, use the following code:
+
+```php
+use Slim\Exception\HttpNotFoundException;
+// ...
+
+throw new HttpNotFoundException($request);
+```
+
+Ensure you pass the `$request` object when throwing the exception.
+
