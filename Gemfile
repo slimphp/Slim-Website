@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'github-pages'
-gem 'activesupport', '~> 7.2'
+gem 'activesupport', '~> 8.0'
 
 # Jekyll Plugins
 group :jekyll_plugins do
