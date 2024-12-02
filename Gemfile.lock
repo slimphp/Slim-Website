@@ -291,7 +291,7 @@ GEM
     uri (0.13.1)
     verbal_expressions (0.1.5)
     wdm (0.2.0)
-    webrick (1.9.0)
+    webrick (1.9.1)
 
 PLATFORMS
   ruby
