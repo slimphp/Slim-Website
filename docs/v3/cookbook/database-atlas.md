@@ -12,8 +12,8 @@ Install Atlas using Composer. The ORM and CLI packages are delivered separately,
 since you are likely to need the command line tooling only in development:
 
 ```
-composer require atlas/orm ~3.0
-composer require --dev atlas/cli ~2.0
+composer require atlas/orm "~3.0"
+composer require --dev atlas/cli "~2.0"
 ```
 
 > **Note:**
