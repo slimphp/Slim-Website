@@ -1,15 +1,15 @@
 ---
-title: PHP Templates
+title: Blade Templates
 ---
 
-## The slim/php-view component
+## The caiquebispo/blade-slim
 
-The [PHP-View](https://github.com/slimphp/PHP-View) PHP component helps you render PHP templates.
+The [PHP-View](https://packagist.org/packages/caiquebispo/blade-slim) PHP component helps you render Blade templates.
 
 ## Installation
 
 ```
-composer require slim/php-view
+composer require caiquebispo/blade-slim
 ```
 
 ## Usage
@@ -21,54 +21,62 @@ You can use it with Slim like this:
 
 use Slim\Factory\AppFactory;
 use Slim\Views\PhpRenderer;
+use  BladeSlim\Blade;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 // Create App
 $app = AppFactory::create();
 
-$app->get('/hello', function ($request, $response) {
-    $renderer = new PhpRenderer(__DIR__ . '/../templates');
-    
-    $viewData = [
-        'name' => 'John',
-    ];
-    
-    return $renderer->render($response, 'hello.php', $viewData);
-})->setName('profile');
+// Configuração do Blade 
+$blade = new Blade(
+    __DIR__ . '/../resources/views', // Views directory
+    __DIR__ . '/../storage/cache',   // Cache directory
+    $app->getResponseFactory()->createResponse()
+);
 
+$app->get('/', function () {
+    return view('index', [
+        'title' => 'Home Page',
+        'appName' => 'My Slim App'
+    ]);
+});
 $app->run();
 ```
 
-Create a directory in your project root: `templates/`
+Create a directory in your project root: `resources/views/`
 
-Create a template file within the templates directory: `templates/hello.php`
+Create a template file within the templates directory: `resources/views/index.blade.php`
 
 **Template content:**
 
 ```php
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slim Example</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> {{ $title }} </title>​​
 </head>
+
 <body>
-    <h1>Hello, <?= htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></h1>
+    <h1> Bem-vindo( a ) ao {{ $appName }} ! </h1>
 </body>
+
 </html>
 ```
 
 Output:
 
 ```
-Hello John
+Bem-vindo( a ) ao My Slim App !
 ```
 
 **Security note:** It's important to ensure that the dynamic
-output is properly [escaped](https://github.com/slimphp/PHP-View?tab=readme-ov-file#escaping-values).
+output is properly [escaped](https://packagist.org/packages/caiquebispo/blade-slim).
 
 ## Read more
 
-* [PHP-View documentation](https://github.com/slimphp/PHP-View)
+* [Blade Slim documentation](https://packagist.org/packages/caiquebispo/blade-slim)
