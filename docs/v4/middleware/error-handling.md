@@ -252,10 +252,12 @@ The base class `HttpSpecializedException` extends `Exception` and comes with the
 
 * HttpBadRequestException
 * HttpForbiddenException
+* HttpGoneException
 * HttpInternalServerErrorException
 * HttpMethodNotAllowedException
 * HttpNotFoundException
 * HttpNotImplementedException
+* HttpTooManyRequestsException
 * HttpUnauthorizedException
 
 You can extend the `HttpSpecializedException` class if they need any other response codes that we decide not to provide with the base repository. 
