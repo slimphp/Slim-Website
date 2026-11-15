@@ -2,16 +2,17 @@
 layout: blank
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>{{ site.title }} Blog</title>
         <link>{{ site.url }}/blog/</link>
         <description></description>
         <language>en-us</language>
-        <copyright>Copyright Josh Lockhart</copyright>
+        <copyright>Copyright Slim Framework contributors, Josh Lockhart</copyright>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
-        <managingEditor>hello@joshlockhart.com</managingEditor>
-        <webMaster>hello@joshlockhart.com</webMaster>
+        <managingEditor>hello@slimframework.com (Slim Framework)</managingEditor>
+        <webMaster>hello@slimframework.com (Slim Framework)</webMaster>
+        <atom:link href="{{ site.url }}/blog/feed.rss" rel="self" type="application/rss+xml" />
         {% for post in site.posts limit:10 %}
         <item>
             <title>{{ post.title | xml_escape }}</title>
