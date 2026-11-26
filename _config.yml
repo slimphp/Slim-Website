@@ -86,6 +86,7 @@ defaults:
           - [/docs/v4/cookbook/database-doctrine.md, Using Doctrine with Slim]
           - [/docs/v4/cookbook/enable-cors.md, Enabling CORS]
           - [/docs/v4/cookbook/uploading-files.md, Uploading Files using POST forms]
+          - [/docs/v4/cookbook/openapi.md, Documenting routes with OpenAPI]
         - title: Add Ons
           items:
             - [/docs/v4/features/templates.md, Templates]
